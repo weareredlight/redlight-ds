@@ -1,3 +1,5 @@
+import { StorybookConfig } from "@storybook/react-vite"
+
 const path = require('path')
 
 module.exports = {
@@ -16,3 +18,10 @@ module.exports = {
     "builder": "webpack5"
   },
 }
+const config: StorybookConfig = {
+  framework: '@storybook/react-vite',
+  stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
+  staticDirs: ['../public', '../static'],
+};
+
+export default config;

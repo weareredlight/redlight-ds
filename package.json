@@ -31,6 +31,7 @@
     "@stitches/react": "^1.2.8",
     "@storybook/addon-links": "6.5.16",
     "@storybook/core": "^6.4.19",
+    "@storybook/react-vite": "^7.0.23",
     "@storybook/theming": "^6.4.19",
     "@tanstack/react-table": "^8.9.2",
     "dayjs": "^1.11.8",

@@ -29,5 +29,5 @@ export default create({
   inputBorderRadius: 4,
 
   brandTitle: 'RedLight Design System',
-  brandTitle: '<img src="logo_system.svg" style="max-width: 184px; width: 100%"/>'
+  brandTitle: '<img src="/assets/logo_system.svg" style="max-width: 184px; width: 100%"/>'
 });
