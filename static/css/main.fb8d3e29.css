@@ -3,6 +3,21 @@
   outline: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: "SFProRegular";
+  src: url(../../33f10fab709ca4b26da5.woff);
+}
+
+@font-face {
+  font-family: "SFProMedium";
+  src: url(../../aee5ed0ef4ecd4aab3b3.woff);
+}
+
+@font-face {
+  font-family: "SFProSemiBold";
+  src: url(../../7c680f1c36763c9cc208.woff);
+}
 :root {
   --toastify-color-light: #fff;
   --toastify-color-dark: #121212;
@@ -1105,4 +1120,4 @@
 
 /*# sourceMappingURL=ReactToastify.css.map */
 
-/*# sourceMappingURL=main.5cd338ee.css.map*/
+/*# sourceMappingURL=main.fb8d3e29.css.map*/
