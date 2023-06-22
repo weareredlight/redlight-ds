@@ -1,0 +1,38 @@
+import { Meta } from '@storybook/addon-docs';
+
+import {
+  StyledDocument,
+  StyledHeader,
+  StyledBody,
+  StyledCode,
+} from '../../../styles/Document.styles';
+
+import Flex from 'elements/Flex'
+import ColorStyles from './ColorStyles.tsx'
+
+<Meta title='Style Guides/Colors' />
+
+<StyledDocument>
+  <StyledHeader style={{background: '#FFA83D'}}>
+    <h2>Color Scheme</h2>
+    <p>ver 1.0.0 | Last updated: 18/07/2023</p>
+  </StyledHeader>
+  <StyledBody>
+    <ColorStyles
+      variant='primary'
+      description='This is the colour that identifies the brand of the product being designed. It is typically used to create a sense of balance and stability within the design.'
+    />
+    <ColorStyles
+      variant='neutral'
+      description='This colour is intended to create a grey color scheme. Its variations start with a very light tone, close to white. This can be used, for example, in the background of a document or a component. They end in a tone close to black that will be used mainly in the main titles.'
+    />
+    <ColorStyles
+      variant='success'
+      description='This colour is a result of green tones as it refers us to positive or affirmative actions. The use of this colour helps represent the successful achievement of specific objectives or needs.'
+    />
+    <ColorStyles
+      variant='danger'
+      description='The term "danger" is associated with the application of these colours to elements that indicate a potentially risky or destructive action, e.g., altering or deleting data.'
+    />
+  </StyledBody>
+</StyledDocument>

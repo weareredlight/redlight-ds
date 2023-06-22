@@ -1,0 +1,22 @@
+import { Meta } from '@storybook/addon-docs';
+
+import {
+  StyledDocument,
+  StyledHeader,
+  StyledBody,
+  StyledCode,
+} from '../../../styles/Document.styles';
+
+import TextStyles from './TextStyles.tsx'
+
+<Meta title='Style Guides/Typography' />
+
+<StyledDocument>
+  <StyledHeader style={{background: '#493DB2'}}>
+    <h2>Typography</h2>
+    <p>ver 1.0.0 | Last updated: 18/07/2023</p>
+  </StyledHeader>
+  <StyledBody>
+    <TextStyles />
+  </StyledBody>
+</StyledDocument>

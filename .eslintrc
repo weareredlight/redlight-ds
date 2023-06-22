@@ -1,0 +1,214 @@
+{
+  "parser": "@typescript-eslint/parser",
+  "plugins": [
+    "@typescript-eslint",
+    "react",
+    "babel",
+    "eslint-comments",
+    "jsx-a11y",
+    "import",
+    "react-hooks"
+  ],
+  "extends": [
+    "plugin:@typescript-eslint/recommended",
+    "airbnb"
+  ],
+  "env": {
+    "browser": true,
+    "jest": true
+  },
+  "rules": {
+    "global-require": "off",
+    "no-underscore-dangle": "off",
+    "no-use-before-define": "off",
+    "no-shadow": "off",
+    "func-names": "off",
+    "no-nested-ternary": "off",
+    "no-confusing-arrow": "off",
+    "no-console": "off",
+    "prefer-destructuring": "off",
+    "eqeqeq": [
+      "error",
+      "smart"
+    ],
+    "no-unused-expressions": "off",
+    "no-multiple-empty-lines": "error",
+    "consistent-return": "warn",
+    "arrow-parens": [
+      "error",
+      "as-needed"
+    ],
+    "default-case": "off",
+    "semi": "off",
+    "space-before-function-paren": [
+      "error",
+      {
+        "anonymous": "never",
+        "named": "never",
+        "asyncArrow": "always"
+      }
+    ],
+    "linebreak-style": [
+      "error",
+      "unix"
+    ],
+    "comma-dangle": [
+      "error",
+      "only-multiline"
+    ],
+    "eol-last": [
+      "error",
+      "always"
+    ],
+    "eslint-comments/no-unused-disable": "warn",
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default": "off",
+    "import/order": [
+      "error",
+      {
+        "groups": [
+          "builtin",
+          "external",
+          "type",
+          "parent",
+          "sibling",
+          "index",
+          "object"
+        ],
+        "newlines-between": "always",
+        "alphabetize": {
+          "order": "asc", /* sort in ascending order. Options: ["ignore", "asc", "desc"] */
+          "caseInsensitive": true /* ignore case. Options: [true, false] */
+        }
+      }
+    ],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        // "devDependencies": [
+        //   "**/*.stories.*",
+        //   "**/.storybook/**/*.*"
+        // ],
+        "devDependencies": true,
+        "peerDependencies": true
+      }
+    ],
+    "import/extensions": [
+      "error",
+      "ignorePackages",
+      {
+        "js": "never",
+        "jsx": "never",
+        "ts": "never",
+        "tsx": "never"
+      }
+    ],
+    "react/prop-types": "off",
+    "react/destructuring-assignment": "off",
+    "react/jsx-filename-extension": [
+      "warn",
+      {
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".tsx"
+        ]
+      }
+    ],
+    "react/require-default-props": "off",
+    "react/jsx-first-prop-new-line": [
+      "error",
+      "multiline"
+    ],
+    "react/state-in-constructor": [
+      "warn",
+      "never"
+    ],
+    "react/static-property-placement": [
+      "warn",
+      "static public field"
+    ],
+    "react/jsx-props-no-spreading": "off",
+    "react/sort-comp": "off",
+    "react/forbid-foreign-prop-types": "error",
+    "react/function-component-definition": [
+      2,
+      {
+        "namedComponents": "arrow-function"
+      }
+    ],
+    "react-hooks/rules-of-hooks": "error",
+    "react-hooks/exhaustive-deps": "error",
+    "react/jsx-indent": [
+      "error",
+      2
+    ],
+    "jsx-quotes": [
+      "error",
+      "prefer-single"
+    ],
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": [
+      "error",
+      {
+        "varsIgnorePattern": "^_",
+        "argsIgnorePattern": "^_"
+      }
+    ],
+    "@typescript-eslint/semi": [
+      2,
+      "never"
+    ],
+    "jsx-a11y/label-has-associated-control": [
+      "error",
+      {
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        }
+      }
+    ],
+    "jsx-a11y/label-has-for": [
+      "error",
+      {
+        "required": {
+          "some": [
+            "nesting",
+            "id"
+          ]
+        }
+      }
+    ]
+  },
+  "globals": {
+    "fetch": "readonly",
+    "navigator": "readonly",
+    "FormData": "readonly",
+    "Headers": "readonly",
+    "Blob": "readonly",
+    "__DEV__": true
+  },
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [
+        ".ts",
+        ".tsx"
+      ]
+    },
+    "import/resolver": {
+      "node": {
+        "paths": [
+          "src"
+        ],
+        "extensions": [
+          ".js",
+          ".jsx",
+          ".ts",
+          ".tsx"
+        ]
+      }
+    }
+  }
+}
