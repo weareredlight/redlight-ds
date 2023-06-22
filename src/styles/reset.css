@@ -5,16 +5,16 @@
 }
 
 @font-face {
-  font-family: SFProRegular;
+  font-family: "SFProRegular";
   src: url("./SFProText-Regular.woff");
 }
 
 @font-face {
-  font-family: SFProMedium;
+  font-family: "SFProMedium";
   src: url("./SFProText-Medium.woff");
 }
 
 @font-face {
-  font-family: SFProSemiBold;
+  font-family: "SFProSemiBold";
   src: url("./SFProText-Semibold.woff");
 }
