@@ -3,3 +3,18 @@
   outline: 0;
   box-sizing: border-box;
 }
+
+@font-face {
+  font-family: SFProRegular;
+  src: url("./SFProText-Regular.woff");
+}
+
+@font-face {
+  font-family: SFProMedium;
+  src: url("./SFProText-Medium.woff");
+}
+
+@font-face {
+  font-family: SFProSemiBold;
+  src: url("./SFProText-Semibold.woff");
+}

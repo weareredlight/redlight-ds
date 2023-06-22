@@ -1,30 +1,7 @@
-import { createStitches, globalCss } from '@stitches/react'
+import { createStitches } from '@stitches/react'
 import { mixins } from 'stitches-mixins'
 
 import { themeColors } from 'theme'
-
-const globalStyles = globalCss({
-  '@font-face': [
-    {
-      fontFamily: 'SFProRegular',
-      src: 'url("./fonts/SFProText-Regular.woff")',
-    },
-    {
-      fontFamily: 'SFProMedium',
-      src: 'url("./fonts/SFProText-Medium.woff")',
-    },
-    {
-      fontFamily: 'SFProSemiBold',
-      src: 'url("./fonts/SFProText-Semibold.woff")',
-    },
-  ],
-  '*': {
-    margin: 0,
-    padding: 0,
-    boxSizing: 'border-box'
-  }
-})
-globalStyles()
 
 export const { styled, theme } = createStitches({
   theme: {
