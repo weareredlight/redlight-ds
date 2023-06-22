@@ -28,6 +28,6 @@ export default create({
   inputTextColor: 'black',
   inputBorderRadius: 4,
 
-  brandTitle: 'RedLight Design System',
-  brandTitle: '<img src="/assets/logo_system.svg" style="max-width: 184px; width: 100%"/>'
+  // brandTitle: 'RedLight Design System',
+  brandTitle: '<img src="https://drive.google.com/uc?export=view&id=1HzgjbQ1eJ9wP_sM_1lv5osQSAzrXiSBC" style="max-width: 184px; width: 100%"/>',
 });
