@@ -1,8 +1,6 @@
-import React from 'react'
-
+import type { ColorType } from '../../stitches'
 import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
-import type { ColorType } from 'stitches.config'
 
 import { StyledText } from './styles'
 

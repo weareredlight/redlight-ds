@@ -1,4 +1,4 @@
-export const themeColors: Record<string, string> = {
+export const colors = {
   black: '#000000',
   white: '#FFFFFF',
   // primary colors
@@ -13,16 +13,16 @@ export const themeColors: Record<string, string> = {
   primary800: '#142966', // 60% shade
   primary900: '#0A1433', // 80% shade
   // // accent colors
-  // accent100: '#', // 90% tint
-  // accent200: '#', // 80% tint
-  // accent300: '#', // 60% tint
-  // accent400: '#', // 40% tint
-  // accent500: '#', // 20% tint
-  // accent: '#', // base
-  // accent600: '#', // 20% shade
-  // accent700: '#', // 40% shade
-  // accent800: '#', // 60% shade
-  // accent900: '#', // 80% shade
+  accent100: '', // 90% tint
+  accent200: '', // 80% tint
+  accent300: '', // 60% tint
+  accent400: '', // 40% tint
+  accent500: '', // 20% tint
+  accent: '', // base
+  accent600: '', // 20% shade
+  accent700: '', // 40% shade
+  accent800: '', // 60% shade
+  accent900: '', // 80% shade
   // neutral colors
   neutral100: '#F4F4F7', // 80% tint
   neutral200: '#E9EAF0', // 60% tint
@@ -50,5 +50,4 @@ export const themeColors: Record<string, string> = {
   danger: '#D14343', // base
   danger500: '#A73636', // 20% shade
   danger600: '#7D2828', // 40% shade
-  // transparent colors
 }

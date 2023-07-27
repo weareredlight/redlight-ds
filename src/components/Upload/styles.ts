@@ -1,7 +1,7 @@
+import { styled } from '../../stitches'
 import { keyframes } from '@stitches/react'
 
-import { StyledLabel } from 'components/shared/Label/styles'
-import { styled } from 'stitches.config'
+import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledUploadInput = styled('input', {
   width: '100%',

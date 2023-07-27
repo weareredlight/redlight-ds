@@ -1,9 +1,11 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
+import Flex from '../../elements/Flex'
 import Button from '../Button'
+import Label from '../shared/Label'
 import Text from '../Text'
 
 import {
@@ -13,16 +15,13 @@ import {
   StyledWrapper,
 } from './styles'
 
-import Label from 'components/shared/Label'
-import Flex from 'elements/Flex'
-
 export type Props = {
   id: string
   type: string
   name?: string
   label?: string
   value?: string
-  placeholder: string
+  placeholder?: string
   description?: string
   iconComponent?: React.FC
   errorMsg?: string
@@ -33,9 +32,10 @@ export type Props = {
   css?: Stitches.CSS
   onClickIcon?: () => void
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
+  inputRef?: React.RefObject<HTMLInputElement>
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-const Input = forwardRef<HTMLInputElement, Props>(({
+const Input = ({
   id,
   type,
   name,
@@ -52,8 +52,9 @@ const Input = forwardRef<HTMLInputElement, Props>(({
   css,
   variant,
   required = false,
+  inputRef,
   ...props
-}: Props, ref) => {
+}: Props) => {
   const renderIcon = () => {
     if (!iconComponent) return null
     if (onClickIcon) {
@@ -86,7 +87,7 @@ const Input = forwardRef<HTMLInputElement, Props>(({
         ) : null}
         <StyledInputField
           id={id}
-          ref={ref}
+          ref={inputRef}
           css={css}
           name={name}
           value={value}
@@ -118,6 +119,6 @@ const Input = forwardRef<HTMLInputElement, Props>(({
       )}
     </StyledWrapper>
   )
-})
+}
 
 export default Input

@@ -1,12 +1,11 @@
 import { CheckCircledIcon, InfoCircledIcon, CrossCircledIcon } from '@radix-ui/react-icons'
-import React from 'react'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast as toastOG, Slide } from 'react-toastify'
 
 import type { ToastOptions } from 'react-toastify'
 
-import Text from 'components/Text'
-import Flex from 'elements/Flex'
+import Flex from '../../elements/Flex'
+import Text from '../Text'
 
 export { ToastContainer } from 'react-toastify'
 
@@ -138,3 +137,4 @@ export const alert = {
     { ...infoOptions, ...options, type: 'info' }
   ),
 }
+export default alert

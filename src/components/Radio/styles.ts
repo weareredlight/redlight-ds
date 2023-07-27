@@ -1,4 +1,4 @@
-import { styled } from '../../stitches.config'
+import { styled } from '../../stitches'
 import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledRadio = styled('div', {

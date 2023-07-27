@@ -1,5 +1,3 @@
-import React from 'react'
-
 import type * as Stitches from '@stitches/react'
 
 import { StyledLabel } from './styles'

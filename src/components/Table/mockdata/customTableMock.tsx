@@ -1,5 +1,4 @@
 import { createColumnHelper } from '@tanstack/react-table'
-import React from 'react'
 
 import type { TableMockType } from './tableMockType'
 import type { ColumnDef, ColumnSort } from '@tanstack/react-table'

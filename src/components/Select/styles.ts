@@ -1,7 +1,7 @@
 import * as SelectInput from '@radix-ui/react-select'
 
-import { StyledLabel } from 'components/shared/Label/styles'
-import { styled } from 'stitches.config'
+import { styled } from '../../stitches'
+import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledSelect = styled('div', {
   width: 'fit-content',

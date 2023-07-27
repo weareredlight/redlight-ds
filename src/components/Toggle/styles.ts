@@ -1,7 +1,7 @@
 import * as Switch from '@radix-ui/react-switch'
 
-import { StyledLabel } from 'components/shared/Label/styles'
-import { styled } from 'stitches.config'
+import { styled } from '../../stitches'
+import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledToggle = styled('div', {
   width: 'fit-content',

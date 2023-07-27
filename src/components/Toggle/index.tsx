@@ -1,13 +1,12 @@
-import React, { forwardRef } from 'react'
+import { forwardRef } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent, Ref } from 'react'
 
+import Label from '../shared/Label'
 import Text from '../Text'
 
 import { StyledToggle, StyledTrigger, StyledThumb } from './styles'
-
-import Label from 'components/shared/Label'
 
 export type Props = {
   id: string

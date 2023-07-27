@@ -1,6 +1,5 @@
 // import { action } from '@storybook/addon-actions'
 import { Meta, Story } from '@storybook/react'
-import React from 'react'
 
 import Tag, { Props } from 'components/Tag'
 

@@ -1,20 +1,18 @@
+import { styled } from '../../stitches'
 import { StyledButton } from '../Button/styles'
-
-import { StyledLabel } from 'components/shared/Label/styles'
-import { styled } from 'stitches.config'
+import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledWrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
+  minWidth: '256px',
+  maxWidth: '100%',
 })
 
 export const StyledIconWrapper = styled('div', {
   position: 'absolute',
   bottom: '$xxxsm',
-  display: 'flex',
-  minWidth: '256px',
-  maxWidth: '100%',
-  pointerEvents: 'none',
+  right: 0,
 
   [`& ${StyledButton}`]: {
     pointerEvents: 'all',
@@ -51,8 +49,7 @@ export const StyledIconWrapper = styled('div', {
 export const StyledInputField = styled('input', {
   position: 'relative',
   height: '32px',
-  minWidth: '256px',
-  maxWidth: '100%',
+  width: '100%',
   padding: '$xxsm',
   marginBottom: '$xxxsm',
   borderRadius: '$xsm',
@@ -120,7 +117,7 @@ export const StyledInputField = styled('input', {
 })
 
 export const StyledInput = styled('div', {
-  width: 'fit-content',
+  width: '100%',
   display: 'inline-block',
   position: 'relative',
 

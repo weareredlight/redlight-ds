@@ -1,7 +1,7 @@
 import * as Popover from '@radix-ui/react-popover'
 import { keyframes } from '@stitches/react'
 
-import { styled } from 'stitches.config'
+import { styled } from '../../stitches'
 
 export const PopoverClose = styled(Popover.Close, {
   all: 'unset',

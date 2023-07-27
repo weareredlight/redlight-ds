@@ -1,10 +1,11 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as SelectInput from '@radix-ui/react-select'
-import React, { useState } from 'react'
+import { useState } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
+import Label from '../shared/Label'
 import Text from '../Text'
 
 import {
@@ -19,8 +20,6 @@ import {
   StyledScrollDownButton,
   StyledViewport,
 } from './styles'
-
-import Label from 'components/shared/Label'
 
 export type Props<T> = {
   id: string

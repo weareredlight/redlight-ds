@@ -14,16 +14,16 @@ import {
   getSortedRowModel,
   useReactTable,
 } from '@tanstack/react-table'
-import React, { useState, ReactElement } from 'react'
+import { useState, ReactElement } from 'react'
 
 import type { ColumnDef, SortingState, ColumnSort } from '@tanstack/react-table'
 
+import Flex from '../../elements/Flex'
+import Input from '../Input'
+import Text from '../Text'
+
 import { StyledTable, StyledTableBody, StyledTableHead } from './styles'
 import { globalFilter, globalSort } from './utils'
-
-import Input from 'components/Input'
-import Text from 'components/Text'
-import Flex from 'elements/Flex'
 
 type Props<T> = {
   data: T[]
@@ -33,7 +33,7 @@ type Props<T> = {
   renderOptions?: (data: T) => ReactElement
 }
 
-export const Table = <T extends object>({
+const Table = <T extends object>({
   data,
   columns,
   sortees = [],
@@ -125,3 +125,5 @@ export const Table = <T extends object>({
     </StyledTable>
   )
 }
+
+export default Table

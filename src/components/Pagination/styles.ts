@@ -1,5 +1,5 @@
-import { StyledButton } from 'components/Button/styles'
-import { styled } from 'stitches.config'
+import { styled } from '../../stitches'
+import { StyledButton } from '../Button/styles'
 
 export const PaginationContainer = styled('div', {
   display: 'flex',

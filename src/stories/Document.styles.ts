@@ -1,6 +1,6 @@
 import LinkTo from '@storybook/addon-links/react'
 
-import { styled } from 'stitches.config'
+import { styled } from '../stitches'
 
 export const StyledDocument = styled('div', {
   backgroundColor: '$white',

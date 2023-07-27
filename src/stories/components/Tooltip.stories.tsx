@@ -1,7 +1,6 @@
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { Meta, Story } from '@storybook/react'
-import React from 'react'
 
 import { CenterOnCanvas } from '../decorators'
 

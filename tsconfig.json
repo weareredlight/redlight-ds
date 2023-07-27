@@ -1,17 +1,53 @@
 {
-  "compilerOptions": {
-    "strict": true,
-    "noImplicitAny": true,
-    "noImplicitThis": true,
-    "esModuleInterop": true,
-    "resolveJsonModule": true,
-    "baseUrl": "src",
-    "jsx": "react-jsx"
-  },
   "include": [
     "src"
   ],
   "exclude": [
-    "node_modules"
-  ]
+    "dist",
+    "node_modules",
+    "src/stories",
+  ],
+  "compilerOptions": {
+    "module": "esnext",
+    "lib": [
+      "dom",
+      "esnext"
+    ],
+    "importHelpers": true,
+    "declaration": true,
+    "sourceMap": true,
+    "rootDir": "./src",
+    "outDir": "./dist/esm",
+    "strict": true,
+    "noImplicitReturns": true,
+    "noFallthroughCasesInSwitch": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
+    "moduleResolution": "node",
+    "esModuleInterop": true,
+    "skipLibCheck": true,
+    "forceConsistentCasingInFileNames": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "resolveJsonModule": true,
+    "baseUrl": "src",
+    "jsx": "react-jsx"
+  }
 }
+// {
+//   "compilerOptions": {
+//     "strict": true,
+//     "noImplicitAny": true,
+//     "noImplicitThis": true,
+//     "esModuleInterop": true,
+//     "resolveJsonModule": true,
+//     "baseUrl": "src",
+//     "jsx": "react-jsx"
+//   },
+//   "include": [
+//     "src"
+//   ],
+//   "exclude": [
+//     "node_modules"
+//   ]
+// }

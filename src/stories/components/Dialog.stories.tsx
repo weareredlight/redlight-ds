@@ -1,7 +1,6 @@
 /* eslint-disable no-alert */
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
 import { Meta, Story } from '@storybook/react'
-import React from 'react'
 
 import Dialog, { Props } from 'components/Dialog'
 

@@ -1,12 +1,11 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
-import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
 
-import { StyledPill } from './styles'
+import Button from '../Button'
 
-import Button from 'components/Button'
+import { StyledPill } from './styles'
 
 export type Props = {
   children: ReactNode

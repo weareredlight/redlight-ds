@@ -1,6 +1,5 @@
 import { EyeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
 // import { EyeOpenIcon } from '@radix-ui/react-icons'
-import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
 

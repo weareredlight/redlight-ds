@@ -1,4 +1,4 @@
-import { styled } from 'stitches.config'
+import { styled } from '../../../stitches'
 
 export const StyledTextsGroup = styled('div', {
   display: 'flex',

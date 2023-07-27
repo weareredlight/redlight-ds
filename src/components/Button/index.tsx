@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
@@ -16,9 +16,10 @@ export type Props = {
   type?: 'submit' | 'button',
   disabled?: boolean,
   css?: Stitches.CSS
+  buttonRef?: React.RefObject<HTMLButtonElement>
 }
 
-export const Button = forwardRef<HTMLButtonElement, Props>(({
+const Button = ({
   children,
   iconComponent,
   variant,
@@ -28,8 +29,9 @@ export const Button = forwardRef<HTMLButtonElement, Props>(({
   type,
   disabled,
   css,
+  buttonRef,
   ...props
-}, ref) => {
+}: Props) => {
   const getIconAndText = () => {
     if (!iconComponent || !iconPosition) return children
     switch (iconPosition) {
@@ -59,10 +61,10 @@ export const Button = forwardRef<HTMLButtonElement, Props>(({
       fullWidth={fullWidth}
       css={{ ...css }}
       {...props}
-      ref={ref}
+      ref={buttonRef}
     >
       {getIconAndText()}
     </StyledButton>
   )
-})
+}
 export default Button

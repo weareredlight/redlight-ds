@@ -1,6 +1,5 @@
+import { styled } from '../../stitches'
 import { StyledInput } from '../Input/styles'
-
-import { styled } from 'stitches.config'
 
 export const StyledTable = styled('table', {
   width: '100%',

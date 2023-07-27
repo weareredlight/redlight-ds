@@ -1,4 +1,4 @@
-import { styled } from '../../stitches.config'
+import { styled } from '../../stitches'
 
 export const StyledButton = styled('button', {
   appearance: 'none',

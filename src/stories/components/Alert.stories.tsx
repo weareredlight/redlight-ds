@@ -1,5 +1,4 @@
 import { Meta, Story } from '@storybook/react'
-import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
 import { CenterOnCanvas } from '../decorators'

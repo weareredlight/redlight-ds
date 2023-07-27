@@ -1,6 +1,7 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import React from 'react'
 
+import Flex from '../../elements/Flex'
 import Button from '../Button'
 
 import {
@@ -9,8 +10,6 @@ import {
   DialogTitle,
   DialogDescription
 } from './styles'
-
-import Flex from 'elements/Flex'
 
 export type Props = {
   open: boolean

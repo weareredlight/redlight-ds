@@ -1,11 +1,10 @@
 /* eslint-disable max-len */
-import React from 'react'
+import { StyledCode } from '../../Document.styles'
 
 import { StyledTextsGroup, StyledTextType } from './styles'
 
 import Text from 'components/Text'
 import Flex from 'elements/Flex'
-import { StyledCode } from 'styles/Document.styles'
 
 const TextStyles = () => (
   <>

@@ -1,6 +1,5 @@
+import { styled } from '../../stitches'
 import { StyledButton } from '../Button/styles'
-
-import { styled } from 'stitches.config'
 
 export const StyledPill = styled('span', {
   include: 'microCopy',

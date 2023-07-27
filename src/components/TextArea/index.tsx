@@ -11,7 +11,7 @@ import {
   StyledWrapper,
 } from './styles'
 
-import Label from 'components/shared/Label'
+import Label from '../shared/Label'
 
 export type Props = {
   id: string

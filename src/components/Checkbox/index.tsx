@@ -1,11 +1,11 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import React from 'react'
 
+import Label from '../shared/Label'
+
 import {
   StyledCheckbox, StyledTrigger, StyledIndicator
 } from './styles'
-
-import Label from 'components/shared/Label'
 
 export type Props = {
   label?: string,

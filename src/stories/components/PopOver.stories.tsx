@@ -1,6 +1,5 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { Meta, Story } from '@storybook/react'
-import React from 'react'
 
 import { CenterOnCanvas } from '../decorators'
 

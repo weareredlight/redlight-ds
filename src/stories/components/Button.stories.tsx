@@ -1,5 +1,4 @@
 import { PlusIcon } from '@radix-ui/react-icons'
-import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
 

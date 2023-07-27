@@ -1,11 +1,10 @@
-import React from 'react'
+import { colors } from '../../../theme/colors'
+import { StyledCode } from '../../Document.styles'
 
 import { StyledColorsGroup, StyledColor, StyledIndicator } from './styles'
 
 import Text from 'components/Text'
 import Flex from 'elements/Flex'
-import { StyledCode } from 'styles/Document.styles'
-import { themeColors } from 'theme'
 import { capitalize } from 'utils'
 
 export type Props = {
@@ -22,13 +21,13 @@ const ColorStyles = ({
     <Text variant='h3' color='neutral800'>{`${capitalize(variant)} Color`}</Text>
     <Text variant='textBlock' color='neutral700'>{description}</Text>
     <Flex gap='xxsm' wrap>
-      {Object.keys(themeColors)
+      {Object.keys(colors)
         .filter(key => key.startsWith(variant))
         .map(key => (
           <StyledColor>
-            <StyledIndicator key={key} style={{ backgroundColor: themeColors[key] }} />
+            <StyledIndicator key={key} style={{ backgroundColor: colors[key] }} />
             <Flex direction='column' gap='xxxsm'>
-              <Text variant='h7' color='neutral700'>{themeColors[key]}</Text>
+              <Text variant='h7' color='neutral700'>{colors[key]}</Text>
               <StyledCode size='small'>
                 $
                 {key}

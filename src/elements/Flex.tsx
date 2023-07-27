@@ -1,4 +1,4 @@
-import { styled } from 'stitches.config'
+import { styled } from '../stitches'
 
 const Flex = styled('div', {
   display: 'flex',
