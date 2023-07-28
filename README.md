@@ -1,6 +1,6 @@
 # Welcome to RedLight's Design System 🚀
 
-![banner](https://drive.google.com/uc?export=view&id=1OQ3SB2QUmhRCWMIwqz46ZExeJ4A20FRQ)
+<img src="https://drive.google.com/uc?export=view&id=1OQ3SB2QUmhRCWMIwqz46ZExeJ4A20FRQ" width="100%" alt="banner"/>
 
 - Our Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.
 
