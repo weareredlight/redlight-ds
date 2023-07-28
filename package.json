@@ -1,8 +1,25 @@
 {
+  "description": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/weareredlight/redlight-ds.git"
+  },
+  "keywords": [
+    "design",
+    "system",
+    "redlight"
+  ],
+  "author": "redlightsoft",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "bugs": {
+    "url": "https://github.com/weareredlight/redlight-ds/issues"
+  },
+  "name": "@weareredlight/design-system",
   "homepage": "http://weareredlight.github.io/redlight-ds",
-  "name": "redlight-ds",
   "version": "0.1.0",
-  "private": true,
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -19,6 +36,10 @@
     "build:esm": "tsc",
     "build:cjs": "tsc --module commonjs --outDir dist/cjs",
     "prepare": "yarn build"
+  },
+  "peerDependencies": {
+    "react": ">=18.0.0",
+    "react-dom": ">=18.0.0"
   },
   "dependencies": {
     "@radix-ui/react-alert-dialog": "^1.0.4",
@@ -38,17 +59,11 @@
     "@storybook/theming": "^6.4.19",
     "@tanstack/react-table": "^8.9.2",
     "dayjs": "^1.11.8",
-    "i18n": "^0.15.1",
     "lodash.merge": "^4.6.2",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
     "react-icons": "^4.3.1",
-    "react-scripts": "5.0.1",
     "react-toastify": "^9.1.2",
     "stitches-mixins": "^1.0.0",
-    "storybook-addon-code-preview": "^0.0.9",
-    "ts-node": "^10.8.1",
-    "web-vitals": "^2.1.0"
+    "storybook-addon-code-preview": "^0.0.9"
   },
   "devDependencies": {
     "@babel/core": "^7.17.7",
