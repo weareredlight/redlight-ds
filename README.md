@@ -1,5 +1,7 @@
 # Welcome to RedLight's Design System 🚀
 
+![banner](https://drive.google.com/uc?export=view&id=1OQ3SB2QUmhRCWMIwqz46ZExeJ4A20FRQ)
+
 - Our Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.
 
 - It provides a unified framework for designers and developers to work together seamlessly, fostering collaboration, efficiency, and creativity.
@@ -52,18 +54,18 @@ import { Button } from '@weareredlight/design-system'
         <img src="https://avatars.githubusercontent.com/u/44748017?v=4" width="100px;" alt="Diogo Ribeiro"/>
         <br />
         <sub><b>Diogo Ribeiro</b></sub>
-        <br />
-        <sub>Principal designer & developer</sub>
       </a>
+      <br />
+      <sub>Principal designer & developer</sub>
     </td>
     <td style="text-align: center">
       <a href="https://github.com/samuthekid">
         <img src="https://avatars.githubusercontent.com/u/6068533?v=4" width="100px;" alt="Samuel Nunes"/>
         <br />
         <sub><b>Samuel Nunes</b></sub>
-        <br />
-        <sub>Developer & maintainer</sub>
       </a>
+      <br />
+      <sub>Developer & maintainer</sub>
     </td>
   </tr>
 </table>
