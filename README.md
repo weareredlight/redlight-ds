@@ -18,12 +18,17 @@ $ npm install --save @weareredlight/design-system
 
 # Setting up
 
-- Now it's time to start using the components.
+Now it's time to start using the components.
+
 - First import the component into the desired file:
 
 ```jsx
 import { Button } from '@weareredlight/design-system'
+```
 
+- Now the component is ready to use. Change its variants and properties so you can use it to your liking.
+
+```jsx
 () => {
   <Button
     variant='primary'
@@ -47,6 +52,7 @@ import { Button } from '@weareredlight/design-system'
         <img src="https://avatars.githubusercontent.com/u/44748017?v=4" width="100px;" alt="Diogo Ribeiro"/>
         <br />
         <sub><b>Diogo Ribeiro</b></sub>
+        <br />
         <sub>Principal designer & developer</sub>
       </a>
     </td>
@@ -55,6 +61,7 @@ import { Button } from '@weareredlight/design-system'
         <img src="https://avatars.githubusercontent.com/u/6068533?v=4" width="100px;" alt="Samuel Nunes"/>
         <br />
         <sub><b>Samuel Nunes</b></sub>
+        <br />
         <sub>Developer & maintainer</sub>
       </a>
     </td>
