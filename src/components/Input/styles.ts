@@ -3,16 +3,25 @@ import { StyledButton } from '../Button/styles'
 import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledWrapper = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
   minWidth: '256px',
   maxWidth: '100%',
+  width: 'fit-content',
+  display: 'flex',
+  flexDirection: 'column',
+
+  variants: {
+    variant: {
+      simple: {
+        width: '100%',
+      },
+      null: {}
+    }
+  }
 })
 
 export const StyledIconWrapper = styled('div', {
   position: 'absolute',
   bottom: '$xxxsm',
-  right: 0,
 
   [`& ${StyledButton}`]: {
     pointerEvents: 'all',
@@ -25,19 +34,14 @@ export const StyledIconWrapper = styled('div', {
   },
 
   variants: {
-    variant: {
-      simple: {
-        minWidth: '80px',
-        width: '100%',
-      },
-      null: {},
-    },
     iconPosition: {
       left: {
         justifyContent: 'flex-start',
+        left: 0,
       },
       right: {
         justifyContent: 'flex-end',
+        right: 0,
       },
       null: {
         display: 'none',
@@ -59,7 +63,6 @@ export const StyledInputField = styled('input', {
   backgroundColor: 'transparent',
   include: 'microCopy',
   outline: '1px solid $neutral400',
-  color: '$neutral800',
 
   display: 'inline-flex',
   alignItems: 'center',
@@ -68,13 +71,24 @@ export const StyledInputField = styled('input', {
   '&::placeholder': {
     color: '$neutral',
   },
+  '&::value': {
+    color: '$neutral800',
+  },
+
+  '&:hover': {
+    backgroundColor: '$neutral100',
+    outlineColor: '$neutral600',
+  },
+  '&:focus': {
+    outlineColor: '$primary',
+  },
 
   variants: {
     variant: {
       simple: {
         outline: 'none',
         minWidth: '80px',
-        width: '100%',
+        // width: '100%',
         borderBottom: '1px solid $neutral200',
 
         '&::placeholder': {
@@ -99,14 +113,13 @@ export const StyledInputField = styled('input', {
       dirty: {
         outlineColor: '$accent',
       },
-      null: {
-        '&:hover': {
-          outlineColor: '$neutral600',
-        },
-        '&:focus': {
-          outlineColor: '$primary',
-        },
+      disabled: {
+        backgroundColor: '$neutral200',
+        outlineColor: '$neutral200',
+        color: '$neutral',
+        pointerEvents: 'none',
       },
+      null: {},
     },
   },
 
@@ -123,6 +136,7 @@ export const StyledInput = styled('div', {
 
   [`& ${StyledLabel}`]: {
     paddingBottom: '$xxxsm',
+    pointerEvents: 'none',
   },
 
   variants: {

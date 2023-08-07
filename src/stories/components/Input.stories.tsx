@@ -1,9 +1,10 @@
 import { EyeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
 // import { EyeOpenIcon } from '@radix-ui/react-icons'
+import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
 
-import Input, { Props } from 'components/Input'
+import Input, { Props } from '../../components/Input'
 
 const meta: Meta = {
   title: 'Components/Data Input/Input',

@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
+import Tabs, { Props } from '../../components/Tabs'
+import Text from '../../components/Text'
+import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
-
-import Tabs, { Props } from 'components/Tabs'
-import Text from 'components/Text'
-import Flex from 'elements/Flex'
 
 const meta: Meta = {
   title: 'Components/Navigation/Tabs',

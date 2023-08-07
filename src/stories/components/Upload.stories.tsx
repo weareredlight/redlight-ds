@@ -1,6 +1,8 @@
+import React from 'react'
+
 import type { Meta, Story } from '@storybook/react'
 
-import Upload, { Props } from 'components/Upload'
+import Upload, { Props } from '../../components/Upload'
 
 const meta: Meta = {
   title: 'Components/Data Input/Upload',

@@ -1,10 +1,10 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 import { ToastContainer } from 'react-toastify'
 
+import { alert } from '../../components/Alert'
+import Button from '../../components/Button'
 import { CenterOnCanvas } from '../decorators'
-
-import { alert } from 'components/Alert'
-import Button from 'components/Button'
 
 const meta: Meta = {
   title: 'Components/Overlays/Alert',

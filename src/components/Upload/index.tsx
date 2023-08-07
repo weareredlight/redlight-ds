@@ -4,12 +4,12 @@ import { useState, useRef, useCallback } from 'react'
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
+import Button from '../Button'
+import Label from '../shared/Label'
+
 import {
   StyledUpload, StyledUploadInput, StyledFile, StyledTrigger
 } from './styles'
-
-import Button from '../Button'
-import Label from '../shared/Label'
 
 export type Props = {
   id: string

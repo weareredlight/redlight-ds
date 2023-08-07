@@ -1,6 +1,5 @@
+import { styled } from '../../stitches'
 import { StyledButton } from '../Button/styles'
-
-import { styled } from 'stitches'
 
 export const StyledTag = styled('span', {
   include: 'microCopy',

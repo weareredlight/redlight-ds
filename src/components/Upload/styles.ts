@@ -1,6 +1,6 @@
-import { styled } from '../../stitches'
 import { keyframes } from '@stitches/react'
 
+import { styled } from '../../stitches'
 import { StyledLabel } from '../shared/Label/styles'
 
 export const StyledUploadInput = styled('input', {

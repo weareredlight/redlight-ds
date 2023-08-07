@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
-import TextArea, { Props } from 'components/TextArea'
+import TextArea, { Props } from '../../components/TextArea'
 
 const meta: Meta = {
   title: 'Components/Data Input/Text Area',

@@ -1,11 +1,10 @@
-import React from 'react'
 import { Story, Meta } from '@storybook/react'
+import React from 'react'
 
 import Table from '../../components/Table'
-
-import { tableCustomColumns, tableCustomSortees } from 'components/Table/mockdata/customTableMock'
-import { tableDefaultColumns } from 'components/Table/mockdata/defaultTableMock'
-import { tableInteractiveColumns, tableInteractiveSortees } from 'components/Table/mockdata/interactiveTableMock'
+import { tableCustomColumns, tableCustomSortees } from '../../components/Table/mockdata/customTableMock'
+import { tableDefaultColumns } from '../../components/Table/mockdata/defaultTableMock'
+import { tableInteractiveColumns, tableInteractiveSortees } from '../../components/Table/mockdata/interactiveTableMock'
 
 export default {
   title: 'Components/Displays/Table',

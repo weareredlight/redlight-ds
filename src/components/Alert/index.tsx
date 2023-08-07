@@ -21,7 +21,7 @@ const defaultOptions: ToastOptions = {
   style: {
     position: 'relative',
     borderRadius: 'var(--radii-sm)',
-    padding: 'var(--space-xxsm) var(--space-lg)',
+    padding: 'var(--space-xxsm) var(--space-xxxlg) var(--space-xxsm) var(--space-lg)',
     display: 'flex',
     flexDirection: 'column',
     gap: 'var(--space-xxsm)',

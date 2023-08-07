@@ -3,10 +3,9 @@ import { createColumnHelper } from '@tanstack/react-table'
 import type { TableMockType } from './tableMockType'
 import type { ColumnDef, ColumnSort } from '@tanstack/react-table'
 
+import Flex from '../../../elements/Flex'
+import Avatar from '../../Avatar'
 import { defaultColumnOptions } from '../utils'
-
-import Avatar from 'components/Avatar'
-import Flex from 'elements/Flex'
 
 const columnHelper = createColumnHelper<TableMockType>()
 

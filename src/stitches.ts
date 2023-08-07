@@ -18,6 +18,19 @@ let { styled, theme } = createStitches({
   utils: { include: mixins }
 })
 
+const globalStyles = globalCss({
+  '@import': [
+    'url(\'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap\')',
+  ],
+  '*': {
+    margin: 0,
+    padding: 0,
+    boxSizing: 'border-box',
+    fontFamily: 'Roboto',
+  }
+})
+globalStyles()
+
 export const setupTheme = ({
   userColors,
   userSizes,
@@ -34,13 +47,7 @@ export const setupTheme = ({
   fontFamily?: string
 }) => {
   const globalStyles = globalCss({
-    '@import': [
-      'url(\'https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap\')',
-    ],
     '*': {
-      margin: 0,
-      padding: 0,
-      boxSizing: 'border-box',
       fontFamily
     }
   })

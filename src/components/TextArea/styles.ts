@@ -1,15 +1,9 @@
 import { styled } from '../../stitches'
 import { StyledLabel } from '../shared/Label/styles'
 
-export const StyledWrapper = styled('div', {
-  display: 'flex',
-  flexDirection: 'column',
-})
-
 export const StyledTextAreaField = styled('textarea', {
+  width: '100%',
   position: 'relative',
-  minWidth: '256px',
-  maxWidth: '100%',
   padding: '$xxsm',
   marginBottom: '$xxxsm',
   borderRadius: '$xsm',
@@ -19,7 +13,6 @@ export const StyledTextAreaField = styled('textarea', {
   backgroundColor: 'transparent',
   include: 'microCopy',
   outline: '1px solid $neutral400',
-  color: '$neutral800',
 
   display: 'inline-flex',
   alignItems: 'center',
@@ -30,6 +23,9 @@ export const StyledTextAreaField = styled('textarea', {
   '&::placeholder': {
     color: '$neutral',
   },
+  '&::value': {
+    color: '$neutral800',
+  },
 
   variants: {
     state: {
@@ -39,8 +35,15 @@ export const StyledTextAreaField = styled('textarea', {
       dirty: {
         outlineColor: '$accent',
       },
+      disabled: {
+        backgroundColor: '$neutral200',
+        outlineColor: '$neutral200',
+        color: '$neutral',
+        pointerEvents: 'none',
+      },
       null: {
         '&:hover': {
+          backgroundColor: '$neutral100',
           outlineColor: '$neutral600',
         },
         '&:focus': {
@@ -56,12 +59,15 @@ export const StyledTextAreaField = styled('textarea', {
 })
 
 export const StyledTextArea = styled('div', {
+  minWidth: '256px',
+  maxWidth: '100%',
   width: 'fit-content',
   display: 'inline-block',
   position: 'relative',
 
   [`& ${StyledLabel}`]: {
     paddingBottom: '$xxxsm',
+    pointerEvents: 'none',
   },
 
   variants: {
@@ -77,6 +83,26 @@ export const StyledTextArea = styled('div', {
         },
       },
       null: {},
+    },
+  },
+})
+
+export const StyledWrapper = styled('div', {
+  width: 'fit-content',
+  display: 'flex',
+  flexDirection: 'column',
+
+  variants: {
+    fullWidth: {
+      true: {
+        width: '100%',
+        [`& ${StyledTextArea}`]: {
+          width: '100%',
+          [`& ${StyledTextAreaField}`]: {
+            width: '100%',
+          },
+        },
+      },
     },
   },
 })

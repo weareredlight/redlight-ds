@@ -1,9 +1,10 @@
 import { PlusIcon } from '@radix-ui/react-icons'
+import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
 
-import Button, { Props } from 'components/Button'
-import Flex from 'elements/Flex'
+import Button, { Props } from '../../components/Button'
+import Flex from '../../elements/Flex'
 
 const meta: Meta = {
   title: 'Components/General/Button',

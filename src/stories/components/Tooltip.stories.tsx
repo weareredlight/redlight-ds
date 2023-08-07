@@ -1,11 +1,11 @@
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons'
 import { TooltipProvider } from '@radix-ui/react-tooltip'
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
+import Button from '../../components/Button'
+import Tooltip, { Props } from '../../components/Tooltip'
 import { CenterOnCanvas } from '../decorators'
-
-import Button from 'components/Button'
-import Tooltip, { Props } from 'components/Tooltip'
 
 const meta: Meta = {
   title: 'Components/Overlays/Tooltip',

@@ -1,7 +1,7 @@
-import { styled } from '../../stitches'
 import * as Tooltip from '@radix-ui/react-tooltip'
 import { keyframes } from '@stitches/react'
 
+import { styled } from '../../stitches'
 import { StyledText } from '../Text/styles'
 
 const slideUpAndFade = keyframes({

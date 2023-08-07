@@ -1,8 +1,9 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
+import Label from '../shared/Label'
 import Text from '../Text'
 
 import {
@@ -10,8 +11,6 @@ import {
   StyledTextAreaField,
   StyledWrapper,
 } from './styles'
-
-import Label from '../shared/Label'
 
 export type Props = {
   id: string
@@ -21,15 +20,17 @@ export type Props = {
   placeholder?: string
   description?: string
   state?: Stitches.VariantProps<typeof StyledTextAreaField>['state']
+  fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
   errorMsg?: string
   rows?: number
   required?: boolean
   maxLength?: number
   css?: Stitches.CSS
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
+  textAreaRef?: React.RefObject<HTMLTextAreaElement>
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
-const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
+const TextArea = ({
   id,
   name,
   value,
@@ -37,16 +38,18 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
   placeholder,
   description,
   state,
+  fullWidth,
   errorMsg,
   rows = 5,
   required = false,
   maxLength,
   css,
   onChange,
+  textAreaRef,
   ...props
-}: Props, ref) => (
-  <StyledWrapper>
-    <StyledTextArea state={state}>
+}: Props) => (
+  <StyledWrapper fullWidth={fullWidth}>
+    <StyledTextArea>
       {label || description ? (
         <Label
           id={id}
@@ -56,7 +59,7 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
       ) : null}
       <StyledTextAreaField
         id={id}
-        ref={ref}
+        ref={textAreaRef}
         name={name}
         value={value}
         placeholder={placeholder}
@@ -75,6 +78,6 @@ const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
       </Text>
     )}
   </StyledWrapper>
-))
+)
 
 export default TextArea

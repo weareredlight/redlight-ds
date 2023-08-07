@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
-import Avatar, { Props } from 'components/Avatar'
+import Avatar, { Props } from '../../components/Avatar'
 
 const meta: Meta = {
   title: 'Components/General/Avatar',

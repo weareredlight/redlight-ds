@@ -1,7 +1,10 @@
-import type { Meta, Story } from '@storybook/react'
-import type { Props } from 'components/Toggle'
+import React from 'react'
 
-import Toggle from 'components/Toggle'
+import type { Meta, Story } from '@storybook/react'
+
+// import type { Props } from '../../components/Toggle'
+
+import Toggle, { Props } from '../../components/Toggle'
 
 const meta: Meta = {
   title: 'Components/Data Input/Toggle',

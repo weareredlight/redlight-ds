@@ -1,8 +1,8 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
+import Link, { Props } from '../../components/Link'
 import { darkBackgroundCanvas } from '../decorators'
-
-import Link, { Props } from 'components/Link'
 
 const meta: Meta = {
   title: 'Components/General/Link',

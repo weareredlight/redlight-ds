@@ -1,5 +1,4 @@
 {
-  "description": "",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/weareredlight/redlight-ds.git"
@@ -18,8 +17,9 @@
     "url": "https://github.com/weareredlight/redlight-ds/issues"
   },
   "name": "@weareredlight/design-system",
+  "description": "RedLight's Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.",
   "homepage": "http://weareredlight.github.io/redlight-ds",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
@@ -61,6 +61,7 @@
     "dayjs": "^1.11.8",
     "lodash.merge": "^4.6.2",
     "react-icons": "^4.3.1",
+    "react-scripts": "^5.0.1",
     "react-toastify": "^9.1.2",
     "stitches-mixins": "^1.0.0",
     "storybook-addon-code-preview": "^0.0.9"

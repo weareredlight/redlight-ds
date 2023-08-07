@@ -1,11 +1,12 @@
+import React from 'react'
+
+import Text from '../../../components/Text'
+import Flex from '../../../elements/Flex'
 import { colors } from '../../../theme/colors'
+import { capitalize } from '../../../utils'
 import { StyledCode } from '../../Document.styles'
 
 import { StyledColorsGroup, StyledColor, StyledIndicator } from './styles'
-
-import Text from 'components/Text'
-import Flex from 'elements/Flex'
-import { capitalize } from 'utils'
 
 export type Props = {
   variant: string

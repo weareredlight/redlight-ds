@@ -1,4 +1,4 @@
-import alert from './components/Alert'
+import alert, { ToastContainer } from './components/Alert'
 import Avatar from './components/Avatar'
 import Button from './components/Button'
 import Checkbox from './components/Checkbox'
@@ -46,6 +46,7 @@ export {
   Table,
   Tabs,
   TextArea,
+  ToastContainer,
   Toggle,
   Tooltip,
   Upload,

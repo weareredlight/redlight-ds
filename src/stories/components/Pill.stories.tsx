@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
-import Pill, { Props } from 'components/Pill'
+import Pill, { Props } from '../../components/Pill'
 
 const meta: Meta = {
   title: 'Components/Displays/Pill',

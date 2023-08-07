@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { useRef } from 'react'
+import React, { useRef } from 'react'
 
 export const RestrictedWidth = (Story: any, context: any) => {
   const firstRender = useRef(true)

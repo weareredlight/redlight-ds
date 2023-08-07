@@ -1,12 +1,12 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
+import Button from '../../components/Button'
+import PopOver, { Props } from '../../components/PopOver'
+import Text from '../../components/Text'
+import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
-
-import Button from 'components/Button'
-import PopOver, { Props } from 'components/PopOver'
-import Text from 'components/Text'
-import Flex from 'elements/Flex'
 
 const meta: Meta = {
   title: 'Components/Overlays/PopOver',

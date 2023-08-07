@@ -95,6 +95,19 @@ export const StyledButton = styled('button', {
           borderColor: '$primary200',
         },
       },
+      teriary: {
+        backgroundColor: '$accent',
+        color: '$white',
+        '&:hover': {
+          backgroundColor: '$accent600',
+        },
+        '&:active': {
+          backgroundColor: '$accent700',
+        },
+        '&:disabled': {
+          backgroundColor: '$accent200',
+        },
+      },
       textOnly: {
         border: '1px solid transparent',
         backgroundColor: 'transparent',

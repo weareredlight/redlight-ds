@@ -1,7 +1,7 @@
 import { Meta, Story } from '@storybook/react'
 import { useState } from 'react'
 
-import Select, { Props } from 'components/Select'
+import Select, { Props } from '../../components/Select'
 
 // Define a separate type for your options
 type Option = {

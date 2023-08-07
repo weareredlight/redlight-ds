@@ -1,6 +1,7 @@
 import { Meta, Story } from '@storybook/react'
+import React from 'react'
 
-import Checkbox, { Props } from 'components/Checkbox'
+import Checkbox, { Props } from '../../components/Checkbox'
 
 const meta: Meta = {
   title: 'Components/Data Input/Checkbox',

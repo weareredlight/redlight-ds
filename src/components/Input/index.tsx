@@ -76,8 +76,8 @@ const Input = ({
   const iconPos = iconComponent ? iconPosition : 'null'
 
   return (
-    <StyledWrapper>
-      <StyledInput state={state} iconPosition={iconPos}>
+    <StyledWrapper variant={variant} {...props}>
+      <StyledInput iconPosition={iconPos}>
         {label || description ? (
           <Label
             id={id}
@@ -105,9 +105,8 @@ const Input = ({
             const event = { target } as ChangeEvent<HTMLInputElement>
             onChange(event)
           }}
-          {...props}
         />
-        <StyledIconWrapper variant={variant} iconPosition={iconPos}>
+        <StyledIconWrapper iconPosition={iconPos}>
           {iconComponent && iconPos === 'left' && renderIcon()}
           {iconComponent && iconPos === 'right' && renderIcon()}
         </StyledIconWrapper>
