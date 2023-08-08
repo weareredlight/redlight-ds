@@ -95,7 +95,7 @@ export const StyledButton = styled('button', {
           borderColor: '$primary200',
         },
       },
-      teriary: {
+      tertiary: {
         backgroundColor: '$accent',
         color: '$white',
         '&:hover': {

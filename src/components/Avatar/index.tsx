@@ -13,17 +13,24 @@ export type Props = {
   description?: string,
   online?: boolean,
   url?: string
+  width?: string
 }
 
 const Avatar = ({
-  size, name, displayLabel, description, online, url,
+  size,
+  name,
+  displayLabel,
+  description,
+  online,
+  url,
+  width,
   ...props
 }: Props) => {
   const initials = name.split(' ').map(text => text.charAt(0)).join('')
 
   return (
     <StyledAvatar {...props}>
-      <StyledPlaceHolder size={size}>
+      <StyledPlaceHolder size={size} css={{ width, height: width }}>
         {url ? <img src={url} alt={name} /> : initials}
         {online && <StyledStatus />}
       </StyledPlaceHolder>

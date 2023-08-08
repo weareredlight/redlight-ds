@@ -22,7 +22,12 @@ import Flex from '../../elements/Flex'
 import Input from '../Input'
 import Text from '../Text'
 
-import { StyledTable, StyledTableBody, StyledTableHead } from './styles'
+import {
+  StyledTable,
+  StyledTableBody,
+  StyledTableHead,
+  StyledEmptyRow,
+} from './styles'
 import { globalFilter, globalSort } from './utils'
 
 type Props<T> = {
@@ -57,6 +62,8 @@ const Table = <T extends object>({
     sortDescFirst: false,
     sortingFns: { globalSort: globalSort<T> },
   })
+
+  console.log(table.getRowModel().rows)
 
   return (
     <StyledTable>
@@ -107,20 +114,28 @@ const Table = <T extends object>({
         ))}
       </StyledTableHead>
       <StyledTableBody>
-        {table.getRowModel().rows.map(row => (
-          <tr key={row.id}>
-            {row.getVisibleCells().map(cell => {
-              const data = cell.row.original
-              let toRender
-              if (renderOptions && cell.column.id === 'actions') {
-                toRender = <Flex>{renderOptions(data)}</Flex>
-              } else {
-                toRender = flexRender(cell.column.columnDef.cell, cell.getContext())
-              }
-              return (<td key={cell.id}>{toRender}</td>)
-            })}
-          </tr>
-        ))}
+        {table.getRowModel().rows.length ? (
+          table.getRowModel().rows.map(row => (
+            <tr key={row.id}>
+              {row.getVisibleCells().map(cell => {
+                const data = cell.row.original
+                let toRender
+                if (renderOptions && cell.column.id === 'actions') {
+                  toRender = <Flex>{renderOptions(data)}</Flex>
+                } else {
+                  toRender = flexRender(cell.column.columnDef.cell, cell.getContext())
+                }
+                return <td key={cell.id}>{toRender}</td>
+              })}
+            </tr>
+          ))
+        ) : (
+          <StyledEmptyRow colSpan={1000}>
+            <Text variant='textBlock' color='neutral'>
+              Nothing was found...
+            </Text>
+          </StyledEmptyRow>
+        )}
       </StyledTableBody>
     </StyledTable>
   )
