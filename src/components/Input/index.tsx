@@ -33,6 +33,7 @@ export type Props = {
   onClickIcon?: () => void
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   inputRef?: React.RefObject<HTMLInputElement>
+  containerProps?: React.HTMLAttributes<HTMLDivElement>
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 const Input = ({
@@ -52,6 +53,7 @@ const Input = ({
   css,
   variant,
   required = false,
+  containerProps,
   ...props
 }: Props) => {
   const renderIcon = () => {
@@ -75,7 +77,7 @@ const Input = ({
   const iconPos = iconComponent ? iconPosition : 'null'
 
   return (
-    <StyledWrapper variant={variant} {...props}>
+    <StyledWrapper variant={variant} {...containerProps}>
       <StyledInput iconPosition={iconPos}>
         {label || description ? (
           <Label
@@ -103,6 +105,7 @@ const Input = ({
             const event = { target } as ChangeEvent<HTMLInputElement>
             onChange(event)
           }}
+          {...props}
         />
         <StyledIconWrapper iconPosition={iconPos}>
           {iconComponent && iconPos === 'left' && renderIcon()}
