@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
@@ -36,7 +36,7 @@ export type Props = {
   containerProps?: React.HTMLAttributes<HTMLDivElement>
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-const Input = ({
+export const Input = forwardRef<HTMLInputElement, Props>(({
   id,
   type,
   name,
@@ -55,7 +55,7 @@ const Input = ({
   required = false,
   containerProps,
   ...props
-}: Props) => {
+}, ref) => {
   const renderIcon = () => {
     if (!iconComponent) return null
     if (onClickIcon) {
@@ -88,6 +88,7 @@ const Input = ({
         ) : null}
         <StyledInputField
           id={id}
+          ref={ref}
           css={css}
           name={name}
           value={value}
@@ -119,6 +120,6 @@ const Input = ({
       )}
     </StyledWrapper>
   )
-}
+})
 
 export default Input
