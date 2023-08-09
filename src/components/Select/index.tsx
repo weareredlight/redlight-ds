@@ -38,6 +38,7 @@ export type Props<T> = {
   getValue: (option: T) => string
   css?: Stitches.CSS
   variant?: Stitches.VariantProps<typeof StyledTrigger>['variant']
+  fullWidth?: Stitches.VariantProps<typeof StyledSelect>['fullWidth']
 }
 
 const Select = <T extends object>({
@@ -57,6 +58,7 @@ const Select = <T extends object>({
   emptyOption,
   variant,
   css,
+  fullWidth = false,
   ...props
 }: Props<T>) => {
   const [viewContent, setViewContent] = useState(false)
@@ -64,7 +66,7 @@ const Select = <T extends object>({
   const ChevronToShow = viewContent ? ChevronUpIcon : ChevronDownIcon
 
   return (
-    <StyledSelect css={css}>
+    <StyledSelect css={css} fullWidth={fullWidth}>
       {label || description ? (
         <Label id={id} label={label} description={description} />
       ) : null}

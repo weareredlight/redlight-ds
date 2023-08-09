@@ -14,6 +14,7 @@ import {
 export type Props = {
   id: string
   size?: Stitches.VariantProps<typeof StyledUpload>['size']
+  fullWidth?: Stitches.VariantProps<typeof StyledUpload>['fullWidth']
   placeholder: string,
   description?: string,
   buttonText?: string,
@@ -26,6 +27,7 @@ const isImage = (ext: string) => ext === 'png' || ext === 'jpg' || ext === 'jpeg
 const Upload = ({
   id,
   size,
+  fullWidth = false,
   placeholder,
   description,
   buttonText,
@@ -75,7 +77,7 @@ const Upload = ({
   }, [onUpload])
 
   return (
-    <StyledUpload disabled={disabled} size={size} {...props}>
+    <StyledUpload disabled={disabled} size={size} fullWidth={fullWidth} {...props}>
       <StyledUploadInput type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
       <StyledFile>
         {fileUrl && isImage(fileExtension) ? (

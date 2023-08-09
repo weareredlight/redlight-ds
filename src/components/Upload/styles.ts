@@ -62,6 +62,7 @@ export const StyledTrigger = styled('label', {
 
   button: {
     backgroundColor: '$white',
+    height: '34px',
 
     '& svg': {
       animation: `${rotateIcon} 2s infinite linear`,
@@ -76,6 +77,7 @@ export const StyledUpload = styled('div', {
   padding: '$xxxsm',
   display: 'flex',
   alignItems: 'center',
+  marginBottom: '$xxxsm',
 
   variants: {
     size: {
@@ -129,6 +131,11 @@ export const StyledUpload = styled('div', {
             height: '16px'
           },
         }
+      }
+    },
+    fullWidth: {
+      true: {
+        width: '100%',
       }
     },
     disabled: {

@@ -3,14 +3,6 @@ import * as SelectInput from '@radix-ui/react-select'
 import { styled } from '../../stitches'
 import { StyledLabel } from '../shared/Label/styles'
 
-export const StyledSelect = styled('div', {
-  width: 'fit-content',
-
-  [`& ${StyledLabel}`]: {
-    paddingBottom: '$xxxsm',
-  },
-})
-
 export const StyledPortal = styled(SelectInput.Portal, {
   zIndex: 1001,
   maxWidth: '500px',
@@ -74,6 +66,26 @@ export const StyledTrigger = styled(SelectInput.SelectTrigger, {
         '& svg': {
           color: '$primary',
         },
+      }
+    }
+  }
+})
+
+export const StyledSelect = styled('div', {
+  [`& ${StyledLabel}`]: {
+    paddingBottom: '$xxxsm',
+  },
+
+  variants: {
+    fullWidth: {
+      true: {
+        width: '100%',
+        [`& ${StyledTrigger}`]: {
+          width: '100%',
+        },
+      },
+      false: {
+        width: 'fit-content',
       }
     }
   }

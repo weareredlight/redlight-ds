@@ -52,7 +52,6 @@ const Input = ({
   css,
   variant,
   required = false,
-  inputRef,
   ...props
 }: Props) => {
   const renderIcon = () => {
@@ -87,7 +86,6 @@ const Input = ({
         ) : null}
         <StyledInputField
           id={id}
-          ref={inputRef}
           css={css}
           name={name}
           value={value}
