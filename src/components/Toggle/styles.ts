@@ -8,8 +8,38 @@ export const StyledToggle = styled('div', {
   display: 'flex',
   gap: '$xxsm',
 
+  '*': {
+    cursor: 'pointer',
+  },
+
   [`& ${StyledLabel}`]: {
     padding: 0,
+    marginTop: 1.5,
+  },
+
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+        '*': {
+          cursor: 'default',
+        },
+      },
+    }
+  },
+})
+
+export const StyledThumb = styled(Switch.Thumb, {
+  display: 'block',
+  width: '12px',
+  height: '12px',
+  backgroundColor: '$white',
+  borderRadius: '$full',
+  transition: 'transform 100ms',
+  transform: 'translateX(2px)',
+  willChange: 'transform',
+  '&[data-state="checked"]': {
+    transform: 'translateX(14px)'
   },
 })
 
@@ -49,20 +79,17 @@ export const StyledTrigger = styled(Switch.Root, {
         outlineColor: '$accent',
       },
       null: {}
+    },
+    disabled: {
+      true: {
+        backgroundColor: '$neutral300',
+        [`& ${StyledThumb}`]: {
+          backgroundColor: '$neutral400',
+        },
+        '&[data-state="checked"]': {
+          backgroundColor: '$neutral300',
+        },
+      },
     }
-  }
-})
-
-export const StyledThumb = styled(Switch.Thumb, {
-  display: 'block',
-  width: '12px',
-  height: '12px',
-  backgroundColor: '$white',
-  borderRadius: '$full',
-  transition: 'transform 100ms',
-  transform: 'translateX(2px)',
-  willChange: 'transform',
-  '&[data-state="checked"]': {
-    transform: 'translateX(14px)'
   },
 })

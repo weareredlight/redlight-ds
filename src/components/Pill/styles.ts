@@ -46,22 +46,6 @@ export const StyledPill = styled('span', {
         },
       }
     },
-
-    closable: {
-      true: {
-        [`& ${StyledButton}`]: {
-          padding: 0,
-          width: '14px',
-          height: '14px',
-          '&:hover': {
-            background: 'transparent',
-          },
-          '&:focus': {
-            boxShadow: 'none',
-          },
-        },
-      }
-    },
   },
   defaultVariants: {
     variant: 'default',

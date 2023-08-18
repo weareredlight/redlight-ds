@@ -164,6 +164,31 @@ eFullWidth.story = {
   name: 'Full Width',
 }
 
+export const fLoading = Template.bind({})
+fLoading.args = {
+  variant: 'primary',
+  isLoading: true
+}
+fLoading.parameters = {
+  docs: {
+    storyDescription: 'This button provides a loading animation while the action is being processed.',
+    source: {
+      code: `
+<Button
+  variant='primary'
+  isLoading
+  onClick={() => {}}
+>
+  Button
+</Button>
+`
+    }
+  }
+}
+fLoading.story = {
+  name: 'Loading',
+}
+
 export const zAllVariants = () => (
   <Flex direction='column' align='start' gap='lg' wrap>
     <Flex gap='xxsm' justify='start'>

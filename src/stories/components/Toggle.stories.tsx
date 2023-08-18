@@ -2,8 +2,6 @@ import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
 
-// import type { Props } from '../../components/Toggle'
-
 import Toggle, { Props } from '../../components/Toggle'
 
 const meta: Meta = {
@@ -27,6 +25,9 @@ const meta: Meta = {
       control: { type: 'select' },
       options: ['left', 'right']
     },
+    disabled: {
+      control: 'boolean'
+    }
   }
 }
 export default meta

@@ -1,5 +1,4 @@
 import { EyeClosedIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
-// import { EyeOpenIcon } from '@radix-ui/react-icons'
 import React from 'react'
 
 import type { Meta, Story } from '@storybook/react'
@@ -34,7 +33,7 @@ const meta: Meta = {
     },
     state: {
       control: { type: 'radio' },
-      options: [null, 'error', 'dirty']
+      options: [null, 'error', 'dirty', 'disabled']
     },
     iconPosition: {
       control: { type: 'select' },

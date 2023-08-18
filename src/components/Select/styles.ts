@@ -33,9 +33,19 @@ export const StyledTrigger = styled(SelectInput.SelectTrigger, {
   alignItems: 'center',
   justifyContent: 'space-between',
 
+  '.placeholder': {
+    color: '$neutral',
+  },
+
   '&:hover': {
     backgroundColor: '$neutral100',
     borderColor: '$neutral600',
+    '& svg': {
+      color: '$neutral600',
+    },
+  },
+  '&:focus': {
+    borderColor: '$primary',
     '& svg': {
       color: '$neutral600',
     },
@@ -61,14 +71,27 @@ export const StyledTrigger = styled(SelectInput.SelectTrigger, {
           color: '$secondary',
         },
       },
-      null: {
-        borderColor: '$primary',
+      disabled: {
+        backgroundColor: '$neutral200',
+        borderColor: '$neutral200',
+        color: '$neutral',
+        pointerEvents: 'none',
         '& svg': {
-          color: '$primary',
+          color: '$neutral',
+        },
+      },
+      null: {
+        borderColor: '$neutral400',
+        '& svg': {
+          color: '$neutral400',
         },
       }
     }
-  }
+  },
+  defaultVariants: {
+    variant: 'null',
+    state: 'null',
+  },
 })
 
 export const StyledSelect = styled('div', {

@@ -16,8 +16,8 @@ import {
 } from './styles'
 
 export type Props = {
-  id: string
-  type: string
+  id?: string
+  type?: string
   name?: string
   label?: string
   value?: string
@@ -38,7 +38,7 @@ export type Props = {
 
 export const Input = forwardRef<HTMLInputElement, Props>(({
   id,
-  type,
+  type = 'text',
   name,
   label,
   value,
@@ -81,13 +81,13 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
       <StyledInput iconPosition={iconPos}>
         {label || description ? (
           <Label
-            id={id}
+            id={id || name}
             label={label}
             description={description}
           />
         ) : null}
         <StyledInputField
-          id={id}
+          id={id || name}
           ref={ref}
           css={css}
           name={name}

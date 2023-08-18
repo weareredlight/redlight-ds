@@ -1,4 +1,11 @@
+import { keyframes } from '@stitches/react'
+
 import { styled } from '../../stitches'
+
+export const rotateIcon = keyframes({
+  '0%': { transform: 'rotate(0deg)' },
+  '100%': { transform: 'rotate(359deg)' },
+})
 
 export const StyledButton = styled('button', {
   appearance: 'none',
@@ -171,6 +178,19 @@ export const StyledButton = styled('button', {
         padding: '$xxsm $lg',
       },
     },
+    isLoading: {
+      true: {
+        color: 'transparent !important',
+        position: 'relative',
+        pointerEvents: 'none',
+        userSelect: 'none',
+
+        svg: {
+          position: 'absolute',
+          animation: `${rotateIcon} 2s infinite linear`,
+        }
+      }
+    },
   },
 
   compoundVariants: [
@@ -196,6 +216,69 @@ export const StyledButton = styled('button', {
         width: '42px',
         height: '42px',
       },
+    },
+    {
+      isLoading: 'true',
+      variant: 'neutral',
+      css: {
+        svg: {
+          color: '$neutral700',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'primary',
+      css: {
+        svg: {
+          color: '$white',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'secondary',
+      css: {
+        svg: {
+          color: '$primary',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'tertiary',
+      css: {
+        svg: {
+          color: '$white',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'danger',
+      css: {
+        svg: {
+          color: '$white',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'success',
+      css: {
+        svg: {
+          color: '$white',
+        }
+      }
+    },
+    {
+      isLoading: 'true',
+      variant: 'textOnly',
+      css: {
+        svg: {
+          color: '$neutral700',
+        }
+      }
     },
   ],
 

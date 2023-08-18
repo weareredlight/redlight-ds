@@ -20,10 +20,6 @@ const meta: Meta = {
         options: ['default', 'error', 'success']
       }
     },
-    closable: {
-      control: 'boolean',
-      defaultValue: false
-    },
   }
 }
 export default meta
@@ -31,9 +27,6 @@ export default meta
 const Template: Story<Props> = args => <Pill {...args}>Pill Example</Pill>
 
 export const aDefault = Template.bind({})
-aDefault.story = {
-  name: 'Default',
-}
 aDefault.story = {
   name: 'Default',
 }
@@ -85,7 +78,6 @@ cError.story = {
 export const dClosable = Template.bind({})
 dClosable.args = {
   variant: 'default',
-  closable: true,
   // eslint-disable-next-line no-alert
   onClose: () => alert('Are you sure you want to remove?')
 }
@@ -95,7 +87,6 @@ dClosable.parameters = {
     source: {
       code: `
 <Pill
-  closable
   onClose={updatePills()}
 >
   Pill Example

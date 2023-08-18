@@ -9,6 +9,10 @@ export const StyledWrapper = styled('div', {
   display: 'flex',
   flexDirection: 'column',
 
+  span: {
+    marginTop: '$xxxsm',
+  },
+
   variants: {
     variant: {
       simple: {
@@ -21,7 +25,7 @@ export const StyledWrapper = styled('div', {
 
 export const StyledIconWrapper = styled('div', {
   position: 'absolute',
-  bottom: '$xxxsm',
+  bottom: 0,
 
   [`& ${StyledButton}`]: {
     pointerEvents: 'all',
@@ -55,14 +59,13 @@ export const StyledInputField = styled('input', {
   height: '32px',
   width: '100%',
   padding: '$xxsm',
-  marginBottom: '$xxxsm',
   borderRadius: '$xsm',
 
   appearance: 'none',
-  border: 'none',
+  outline: 'none',
   backgroundColor: 'transparent',
   include: 'microCopy',
-  outline: '1px solid $neutral400',
+  border: '1px solid $neutral400',
 
   display: 'inline-flex',
   alignItems: 'center',
@@ -77,18 +80,17 @@ export const StyledInputField = styled('input', {
 
   '&:hover': {
     backgroundColor: '$neutral100',
-    outlineColor: '$neutral600',
+    borderColor: '$neutral600',
   },
   '&:focus': {
-    outlineColor: '$primary',
+    borderColor: '$primary',
   },
 
   variants: {
     variant: {
       simple: {
-        outline: 'none',
         minWidth: '80px',
-        // width: '100%',
+        border: 'none',
         borderBottom: '1px solid $neutral200',
 
         '&::placeholder': {
@@ -108,14 +110,18 @@ export const StyledInputField = styled('input', {
     },
     state: {
       error: {
-        outlineColor: '$danger',
+        borderColor: '$danger',
+
+        '&:focus': {
+          borderColor: '$danger',
+        },
       },
       dirty: {
-        outlineColor: '$accent',
+        borderColor: '$accent',
       },
       disabled: {
         backgroundColor: '$neutral200',
-        outlineColor: '$neutral200',
+        borderColor: '$neutral200',
         color: '$neutral',
         pointerEvents: 'none',
       },

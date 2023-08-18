@@ -10,6 +10,24 @@ export const StyledTag = styled('span', {
   gap: '$xxsm',
   borderRadius: '$xsm',
 
+  '&.closable': {
+    '&:hover': {
+      background: '$neutral400',
+    },
+    [`& ${StyledButton}`]: {
+      padding: 0,
+      width: '14px',
+      height: '14px',
+      cursor: 'pointer',
+      '&:hover': {
+        background: 'transparent',
+      },
+      '&:focus': {
+        boxShadow: 'none',
+      },
+    },
+  },
+
   variants: {
     variant: {
       default: {
@@ -19,26 +37,6 @@ export const StyledTag = styled('span', {
       error: {
         background: '$danger100',
         color: '$danger500'
-      }
-    },
-
-    closable: {
-      true: {
-        cursor: 'pointer',
-        '&:hover': {
-          background: '$neutral400',
-        },
-        [`& ${StyledButton}`]: {
-          padding: 0,
-          width: '14px',
-          height: '14px',
-          '&:hover': {
-            background: 'transparent',
-          },
-          '&:focus': {
-            boxShadow: 'none',
-          },
-        },
       }
     },
 

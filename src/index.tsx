@@ -14,6 +14,7 @@ import Select from './components/Select'
 import Label from './components/shared/Label'
 import Table from './components/Table'
 import Tabs from './components/Tabs'
+import Tag from './components/Tag'
 import Text from './components/Text'
 import TextArea from './components/TextArea'
 import Toggle from './components/Toggle'
@@ -45,6 +46,7 @@ export {
   Select,
   Table,
   Tabs,
+  Tag,
   TextArea,
   ToastContainer,
   Toggle,

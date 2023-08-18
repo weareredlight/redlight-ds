@@ -7,9 +7,25 @@ export const StyledRadio = styled('div', {
   gap: '$xxsm',
   cursor: 'pointer',
 
+  '*': {
+    cursor: 'pointer',
+  },
+
   [`& ${StyledLabel}`]: {
     padding: 0,
+    marginTop: 1.5,
   },
+
+  variants: {
+    disabled: {
+      true: {
+        pointerEvents: 'none',
+        '*': {
+          cursor: 'default',
+        },
+      },
+    }
+  }
 })
 
 export const StyledTrigger = styled('input', {
@@ -49,7 +65,24 @@ export const StyledTrigger = styled('input', {
         backgroundColor: '$primary700',
       },
     }
-  }
+  },
+
+  variants: {
+    disabled: {
+      true: {
+        '+ label': {
+          backgroundColor: '$neutral300',
+          borderColor: '$neutral300',
+        },
+        '&:checked': {
+          '+ label': {
+            backgroundColor: '$neutral300',
+            borderColor: '$neutral300',
+          },
+        }
+      },
+    }
+  },
 })
 
 export const StyledIndicator = styled('label', {

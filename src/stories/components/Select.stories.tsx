@@ -27,6 +27,10 @@ const meta: Meta = {
       },
     },
   },
+  state: {
+    control: { type: 'radio' },
+    options: [null, 'error', 'dirty', 'disabled']
+  },
   argTypes: {},
 }
 export default meta

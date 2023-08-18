@@ -23,6 +23,9 @@ const meta: Meta = {
     checked: {
       control: 'boolean'
     },
+    disabled: {
+      control: 'boolean'
+    },
   }
 }
 export default meta

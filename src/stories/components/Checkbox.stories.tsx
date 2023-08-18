@@ -20,6 +20,9 @@ const meta: Meta = {
         options: ['left', 'right']
       }
     },
+    disabled: {
+      control: 'boolean'
+    },
     checked: {
       control: 'boolean'
     },

@@ -1,3 +1,4 @@
+import { SymbolIcon } from '@radix-ui/react-icons'
 import React from 'react'
 
 import type * as Stitches from '@stitches/react'
@@ -13,6 +14,7 @@ export type Props = {
   size?: Stitches.VariantProps<typeof StyledButton>['size']
   fullWidth?: Stitches.VariantProps<typeof StyledButton>['fullWidth']
   iconPosition?: Stitches.VariantProps<typeof StyledButton>['iconPosition']
+  isLoading?: Stitches.VariantProps<typeof StyledButton>['isLoading']
   type?: 'submit' | 'button',
   disabled?: boolean,
   css?: Stitches.CSS
@@ -26,6 +28,7 @@ const Button = ({
   size,
   fullWidth,
   iconPosition = 'right',
+  isLoading,
   type,
   disabled,
   css,
@@ -57,13 +60,15 @@ const Button = ({
       iconPosition={(iconComponent && !children) ? 'iconOnly' : (iconComponent && iconPosition) || 'null'}
       type={type || 'button'}
       disabled={disabled}
+      isLoading={isLoading}
       size={size}
       fullWidth={fullWidth}
       css={{ ...css }}
-      {...props}
       ref={buttonRef}
+      {...props}
     >
       {getIconAndText()}
+      {isLoading && <SymbolIcon />}
     </StyledButton>
   )
 }

@@ -15,7 +15,7 @@ export type Props = {
   value?: boolean
   description?: string
   errorMsg?: string
-  disabled?: boolean
+  disabled?: Stitches.VariantProps<typeof StyledToggle | typeof StyledTrigger>['disabled']
   state?: Stitches.VariantProps<typeof StyledTrigger>['state']
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   labelPosition?: 'left' | 'right'
@@ -35,7 +35,7 @@ const Toggle = forwardRef<HTMLInputElement, Props>(({
   ...props
 }, ref) => (
   <>
-    <StyledToggle>
+    <StyledToggle disabled={disabled}>
       {labelPosition === 'left' && (label || description) ? (
         <Label
           id={id}

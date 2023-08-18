@@ -94,7 +94,7 @@ const Select = <T extends object>({
           <SelectInput.Value
             key={selectedOption ? getValue(selectedOption) : emptyOption ? '-1' : ''}
           >
-            {selectedOption ? getLabel(selectedOption) : emptyOption || placeholder}
+            {selectedOption ? getLabel(selectedOption) : emptyOption || <span className='placeholder'>{placeholder}</span>}
           </SelectInput.Value>
           <StyledChevron>
             <ChevronToShow />
