@@ -140,7 +140,7 @@ const Select = <T extends object>({
       {state === 'error' && errorMsg && (
         <>
           <br />
-          <Text color='danger' variant='subHeadingSmall'>
+          <Text color='danger' variant='microCopy'>
             {errorMsg}
           </Text>
         </>

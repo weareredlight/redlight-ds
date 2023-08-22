@@ -97,6 +97,7 @@ export const StyledTrigger = styled(SelectInput.SelectTrigger, {
 export const StyledSelect = styled('div', {
   [`& ${StyledLabel}`]: {
     paddingBottom: '$xxxsm',
+    pointerEvents: 'none',
   },
 
   variants: {

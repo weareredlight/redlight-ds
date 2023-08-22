@@ -39,7 +39,7 @@ const Template: Story = () => {
     // Use the function alert() then provide the type of the alert
     // alert.type(title: string, description?: string)
     alert.info(
-      'Info Alert',
+      'Info Alert asd asd asdasdasd asdasdasd asdasdas dasjiadsjda asd',
       'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere urna ha.',
     )
   }

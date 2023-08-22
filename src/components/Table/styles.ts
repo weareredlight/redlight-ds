@@ -73,7 +73,7 @@ export const StyledTableBody = styled('tbody', {
   },
 })
 
-export const StyledEmptyRow = styled('td', {
+export const StyledEmptyRow = styled('th', {
   width: '100%',
   textAlign: 'center',
   background: '$white',

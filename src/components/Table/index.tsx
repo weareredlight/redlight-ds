@@ -63,8 +63,6 @@ const Table = <T extends object>({
     sortingFns: { globalSort: globalSort<T> },
   })
 
-  console.log(table.getRowModel().rows)
-
   return (
     <StyledTable>
       <StyledTableHead>
