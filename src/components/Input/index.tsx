@@ -34,6 +34,7 @@ export type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   inputRef?: React.RefObject<HTMLInputElement>
   containerProps?: React.HTMLAttributes<HTMLDivElement>
+  fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 export const Input = forwardRef<HTMLInputElement, Props>(({
@@ -54,6 +55,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
   variant,
   required = false,
   containerProps,
+  fullWidth = false,
   ...props
 }, ref) => {
   const renderIcon = () => {
@@ -77,7 +79,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
   const iconPos = iconComponent ? iconPosition : 'null'
 
   return (
-    <StyledWrapper variant={variant} {...containerProps}>
+    <StyledWrapper variant={variant} fullWidth={fullWidth} {...containerProps}>
       <StyledInput iconPosition={iconPos}>
         {label || description ? (
           <Label

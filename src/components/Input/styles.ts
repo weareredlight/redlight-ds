@@ -19,6 +19,18 @@ export const StyledWrapper = styled('div', {
         width: '100%',
       },
       null: {}
+    },
+    fullWidth: {
+      true: {
+        width: '100%',
+      },
+      false: {
+        width: 'fit-content',
+
+        input: {
+          minWidth: '256px',
+        }
+      }
     }
   }
 })
