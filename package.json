@@ -25,7 +25,7 @@
   "name": "@weareredlight/design-system",
   "description": "RedLight's Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.",
   "homepage": "http://weareredlight.github.io/redlight-ds",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
