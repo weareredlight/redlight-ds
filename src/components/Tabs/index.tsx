@@ -4,7 +4,7 @@ import React from 'react'
 import {
   TabsContent,
   TabsList,
-  TabsRoot,
+  StyledTabs,
   TabsTrigger
 } from './styles'
 
@@ -14,7 +14,7 @@ export type Props = {
 }
 
 const Tabs = ({ tabs, children }: Props) => (
-  <TabsRoot defaultValue='tab0'>
+  <StyledTabs defaultValue='tab0'>
     <TabsList aria-label='Manage your account'>
       {tabs.map((tab, index) => (
         <TabsTrigger key={`tab${index}`} value={`tab${index}`}>
@@ -27,7 +27,7 @@ const Tabs = ({ tabs, children }: Props) => (
         {child}
       </TabsContent>
     ))}
-  </TabsRoot>
+  </StyledTabs>
 )
 
 export default Tabs

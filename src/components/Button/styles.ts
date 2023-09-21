@@ -111,6 +111,9 @@ export const StyledButton = styled('button', {
         '&:active': {
           backgroundColor: '$accent700',
         },
+        '&:focus': {
+          $$shadowColor: '$colors$accent200',
+        },
         '&:disabled': {
           backgroundColor: '$accent200',
         },

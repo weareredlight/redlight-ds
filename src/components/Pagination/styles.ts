@@ -1,7 +1,7 @@
 import { styled } from '../../stitches'
 import { StyledButton } from '../Button/styles'
 
-export const PaginationContainer = styled('div', {
+export const StyledPagination = styled('div', {
   display: 'flex',
   alignItems: 'center',
   fontSize: '$sm',

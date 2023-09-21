@@ -5,13 +5,13 @@ import type * as Stitches from '@stitches/react'
 
 import Button from '../Button'
 
-import { PaginationContainer } from './styles'
+import { StyledPagination } from './styles'
 
 type PaginationProps = {
   currentPage?: number
   totalPages: number
   onPageChange: (page: number) => void
-  variant?: Stitches.VariantProps<typeof PaginationContainer>['variant']
+  variant?: Stitches.VariantProps<typeof StyledPagination>['variant']
 }
 
 const LeftArrow = () => <ChevronLeftIcon />
@@ -87,7 +87,7 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <PaginationContainer>
+    <StyledPagination>
       <Button
         variant='textOnly'
         // href='#'
@@ -107,7 +107,7 @@ const Pagination: React.FC<PaginationProps> = ({
         iconPosition='iconOnly'
         disabled={currentPage >= totalPages}
       />
-    </PaginationContainer>
+    </StyledPagination>
   )
 }
 

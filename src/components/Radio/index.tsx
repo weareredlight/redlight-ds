@@ -11,6 +11,7 @@ import {
 export type Props = {
   label?: string,
   description?: string,
+  name?: string,
   id: string,
   value?: string
   checked?: boolean,
@@ -21,6 +22,7 @@ export type Props = {
 
 const Radio = ({
   id,
+  name,
   value,
   label,
   description,
@@ -40,6 +42,7 @@ const Radio = ({
         />
         <StyledTrigger
           type='radio'
+          name={name}
           id={id}
           value={value}
           checked={checked}
@@ -52,6 +55,7 @@ const Radio = ({
       <>
         <StyledTrigger
           type='radio'
+          name={name}
           id={id}
           value={value}
           checked={checked}

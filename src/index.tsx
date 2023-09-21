@@ -30,6 +30,24 @@ import {
   getColor,
 } from './stitches'
 
+import { StyledAvatar } from 'components/Avatar/styles'
+import { StyledButton } from 'components/Button/styles'
+import { StyledCheckbox } from 'components/Checkbox/styles'
+import { StyledInput } from 'components/Input/styles'
+import { StyledLink } from 'components/Link/styles'
+import { StyledPagination } from 'components/Pagination/styles'
+import { StyledPill } from 'components/Pill/styles'
+import { StyledRadio } from 'components/Radio/styles'
+import { StyledSelect } from 'components/Select/styles'
+import { StyledLabel } from 'components/shared/Label/styles'
+import { StyledTable } from 'components/Table/styles'
+import { StyledTabs } from 'components/Tabs/styles'
+import { StyledTag } from 'components/Tag/styles'
+import { StyledText } from 'components/Text/styles'
+import { StyledTextArea } from 'components/TextArea/styles'
+import { StyledToggle } from 'components/Toggle/styles'
+import { StyledUpload } from 'components/Upload/styles'
+
 export {
   alert,
   Avatar,
@@ -61,4 +79,24 @@ export {
   ColorType,
   colorOptions,
   getColor,
+}
+
+export {
+  StyledAvatar,
+  StyledButton,
+  StyledCheckbox,
+  StyledInput,
+  StyledLink,
+  StyledPagination,
+  StyledPill,
+  StyledRadio,
+  StyledSelect,
+  StyledLabel,
+  StyledTable,
+  StyledTabs,
+  StyledTag,
+  StyledText,
+  StyledTextArea,
+  StyledToggle,
+  StyledUpload,
 }
