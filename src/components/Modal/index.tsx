@@ -19,6 +19,7 @@ export type Props = {
   description?: string
   children?: React.ReactNode
   css?: CSS
+  extraClasses?: string
 }
 
 const Modal = ({
@@ -29,12 +30,13 @@ const Modal = ({
   description,
   children,
   css,
+  extraClasses,
 }: Props) => (
   <RadixDialog.Root open={open}>
     <RadixDialog.Trigger asChild>
       {renderTrigger && renderTrigger()}
     </RadixDialog.Trigger>
-    <RadixDialog.Portal>
+    <RadixDialog.Portal className={extraClasses}>
       <DialogOverlay />
       <DialogContent
         css={css}
