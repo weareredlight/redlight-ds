@@ -8,7 +8,7 @@ import { shadows } from './theme/shadows'
 import { sizes } from './theme/sizes'
 
 // eslint-disable-next-line import/no-mutable-exports
-let { styled, theme } = createStitches({
+let { styled, theme, css } = createStitches({
   theme: {
     colors,
     ...sizes,
@@ -83,9 +83,10 @@ export const setupTheme = ({
   // @ts-expect-error: diff styles between first setup
   styled = newSetup.styled
   theme = newSetup.theme
+  css = newSetup.css
 }
 
-export { styled, theme }
+export { styled, theme, css }
 
 export type ColorType = keyof typeof theme.colors
 export const colorOptions = Object.keys(theme.colors) as ColorType[]
