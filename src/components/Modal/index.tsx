@@ -19,7 +19,8 @@ export type Props = {
   description?: string
   children?: React.ReactNode
   css?: CSS
-  extraClasses?: string
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  extraClasses?: any
 }
 
 const Modal = ({
@@ -36,12 +37,13 @@ const Modal = ({
     <RadixDialog.Trigger asChild>
       {renderTrigger && renderTrigger()}
     </RadixDialog.Trigger>
-    <RadixDialog.Portal className={extraClasses}>
+    <RadixDialog.Portal>
       <DialogOverlay />
       <DialogContent
         css={css}
         onEscapeKeyDown={closeFn}
         onInteractOutside={closeFn}
+        className={extraClasses}
       >
         {title && (
           <DialogTitle>
