@@ -121,8 +121,7 @@ export const StyledContent = styled(SelectInput.Content, {
   backgroundColor: '$white',
   borderRadius: '$xsm',
   filter: 'drop-shadow(0px 4px 20px rgba(149, 157, 165, 0.15))',
-  minWidth: '224px',
-  maxWidth: '100%'
+  width: '100%'
 })
 
 export const StyledChevron = styled(SelectInput.SelectIcon, {
