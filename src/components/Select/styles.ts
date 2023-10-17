@@ -11,6 +11,7 @@ export const StyledPortal = styled(SelectInput.Portal, {
 export const StyledViewport = styled(SelectInput.Viewport, {
   background: '$white',
   boxShadow: '$greySmall',
+  width: '100%',
 })
 
 export const StyledTrigger = styled(SelectInput.SelectTrigger, {
