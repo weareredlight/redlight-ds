@@ -14,7 +14,8 @@ import {
 export type Props = {
   open: boolean
   variant?: 'confirm' | 'success' | 'danger'
-  actionText?: string
+  primaryActionText?: string
+  secondaryActionText?: string
   closeFn: () => void
   title: string
   description?: string
@@ -25,7 +26,8 @@ export type Props = {
 const Dialog = ({
   open,
   variant = 'confirm',
-  actionText,
+  primaryActionText,
+  secondaryActionText,
   closeFn,
   title,
   description,
@@ -53,14 +55,16 @@ const Dialog = ({
           {children}
           <Flex justify='end' gap='xxsm'>
             <AlertDialog.Cancel asChild>
-              <Button variant='neutral' onClick={closeFn}>Cancel</Button>
+              <Button variant='neutral' onClick={closeFn}>
+                {secondaryActionText || 'Cancel'}
+              </Button>
             </AlertDialog.Cancel>
             <AlertDialog.Action asChild>
               <Button
                 variant={variant === 'success' ? 'success' : variant === 'danger' ? 'danger' : 'primary'}
                 onClick={handleConfirm}
               >
-                {actionText || 'Confirm'}
+                {primaryActionText || 'Confirm'}
               </Button>
             </AlertDialog.Action>
           </Flex>
