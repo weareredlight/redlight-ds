@@ -14,6 +14,7 @@ export type Props = {
   defaultOpen?: boolean
   side?: 'top' | 'right' | 'bottom' | 'left'
   sideOffset?: number
+  rootElement?: HTMLElement
 }
 
 const Popover = ({
@@ -22,12 +23,13 @@ const Popover = ({
   defaultOpen,
   side = 'bottom',
   sideOffset = 5,
+  rootElement,
 }: Props) => (
   <PopoverRadix.Root defaultOpen={defaultOpen}>
     <PopoverRadix.Trigger asChild>
       {trigger}
     </PopoverRadix.Trigger>
-    <PopoverRadix.Portal>
+    <PopoverRadix.Portal container={rootElement}>
       <PopoverContent sideOffset={sideOffset} side={side}>
         {children}
         <PopoverClose aria-label='Close'>
