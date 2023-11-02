@@ -24,7 +24,7 @@ const PopOver = ({
       {trigger}
     </Popover.Trigger>
     <Popover.Portal>
-      <PopoverContent side={side}>
+      <PopoverContent side={side} onOpenAutoFocus={event => event.preventDefault()}>
         {children}
         <PopoverClose aria-label='Close'>
           <Cross2Icon />

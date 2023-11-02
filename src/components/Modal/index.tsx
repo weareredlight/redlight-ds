@@ -44,6 +44,7 @@ const Modal = ({
         onEscapeKeyDown={closeFn}
         onInteractOutside={closeFn}
         className={extraClasses}
+        onOpenAutoFocus={event => event.preventDefault()}
       >
         {title && (
           <DialogTitle>

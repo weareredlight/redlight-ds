@@ -43,7 +43,7 @@ const Dialog = ({
     <AlertDialog.Root open={open}>
       <AlertDialog.Portal>
         <DialogOverlay />
-        <DialogContent>
+        <DialogContent onOpenAutoFocus={event => event.preventDefault()}>
           <DialogTitle>
             {title}
           </DialogTitle>
