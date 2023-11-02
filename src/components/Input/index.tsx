@@ -103,7 +103,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
             let finalValue: string | null = e.target.value
             if (type === 'number') finalValue = Number(finalValue) as unknown as string
             const target = {
-              value: finalValue, name: name || id
+              value: finalValue === '' ? null : finalValue, name: name || id
             } as (EventTarget & HTMLInputElement)
             const event = { target } as ChangeEvent<HTMLInputElement>
             onChange(event)
