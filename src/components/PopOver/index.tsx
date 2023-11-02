@@ -1,5 +1,5 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
-import * as PopoverRadix from '@radix-ui/react-popover'
+import * as Popover from '@radix-ui/react-popover'
 import React from 'react'
 
 import {
@@ -9,34 +9,30 @@ import {
 } from './styles'
 
 export type Props = {
-  trigger: React.ReactNode
+  trigger?: React.ReactNode
   children: React.ReactNode
-  defaultOpen?: boolean
   side?: 'top' | 'right' | 'bottom' | 'left'
-  sideOffset?: number
 }
 
-const Popover = ({
+const PopOver = ({
   trigger,
   children,
-  defaultOpen,
-  side = 'bottom',
-  sideOffset = 5,
+  side = 'right'
 }: Props) => (
-  <PopoverRadix.Root defaultOpen={defaultOpen}>
-    <PopoverRadix.Trigger asChild className='PopoverTrigger'>
+  <Popover.Root>
+    <Popover.Trigger>
       {trigger}
-    </PopoverRadix.Trigger>
-    <PopoverRadix.Portal>
-      <PopoverContent sideOffset={sideOffset} side={side} className='PopoverContent'>
+    </Popover.Trigger>
+    <Popover.Portal>
+      <PopoverContent side={side}>
         {children}
-        <PopoverClose aria-label='Close' className='PopoverArrow'>
+        <PopoverClose aria-label='Close'>
           <Cross2Icon />
         </PopoverClose>
         <PopoverArrow />
       </PopoverContent>
-    </PopoverRadix.Portal>
-  </PopoverRadix.Root>
+    </Popover.Portal>
+  </Popover.Root>
 )
 
-export default Popover
+export default PopOver
