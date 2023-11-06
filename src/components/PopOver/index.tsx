@@ -3,6 +3,7 @@ import * as Popover from '@radix-ui/react-popover'
 import React from 'react'
 
 import {
+  StyledPopOver,
   PopoverArrow,
   PopoverClose,
   PopoverContent,
@@ -19,7 +20,7 @@ const PopOver = ({
   children,
   side = 'right'
 }: Props) => (
-  <Popover.Root>
+  <StyledPopOver>
     <Popover.Trigger>
       {trigger}
     </Popover.Trigger>
@@ -32,7 +33,7 @@ const PopOver = ({
         <PopoverArrow />
       </PopoverContent>
     </Popover.Portal>
-  </Popover.Root>
+  </StyledPopOver>
 )
 
 export default PopOver

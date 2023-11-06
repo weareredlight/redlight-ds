@@ -16,6 +16,7 @@ import { StyledPagination } from './components/Pagination/styles'
 import Pill from './components/Pill'
 import { StyledPill } from './components/Pill/styles'
 import PopOver from './components/PopOver'
+import { StyledPopOver } from './components/PopOver/styles'
 import Radio from './components/Radio'
 import { StyledRadio } from './components/Radio/styles'
 import Select from './components/Select'
@@ -90,6 +91,7 @@ export {
   StyledLink,
   StyledPagination,
   StyledPill,
+  StyledPopOver,
   StyledRadio,
   StyledSelect,
   StyledLabel,

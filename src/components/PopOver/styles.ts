@@ -3,6 +3,9 @@ import { keyframes } from '@stitches/react'
 
 import { styled } from '../../stitches'
 
+export const StyledPopOver = styled(Popover.Root, {
+})
+
 export const PopoverClose = styled(Popover.Close, {
   all: 'unset',
   fontFamily: 'inherit',
