@@ -13,19 +13,21 @@ export type Props = {
   trigger?: React.ReactNode
   children: React.ReactNode
   side?: 'top' | 'right' | 'bottom' | 'left'
+  align?: 'start' | 'center' | 'end'
 }
 
 const PopOver = ({
   trigger,
   children,
-  side = 'right'
+  side = 'right',
+  align = 'center'
 }: Props) => (
   <StyledPopOver>
     <Popover.Trigger>
       {trigger}
     </Popover.Trigger>
     <Popover.Portal>
-      <PopoverContent side={side} onOpenAutoFocus={event => event.preventDefault()}>
+      <PopoverContent side={side} align={align} onOpenAutoFocus={event => event.preventDefault()}>
         {children}
         <PopoverClose aria-label='Close'>
           <Cross2Icon />
