@@ -60,22 +60,26 @@ export const StyledTabs = styled(Tabs.Root, {
           alignSelf: 'flex-start',
         },
         [`& ${TabsContent}`]: {
-          boxShadow: '$cardShadow'
+          boxShadow: '$cardShadow',
+          borderTopRightRadius: '$sm',
         }
       },
       right: {
-        width: 'fit-content',
         [`& ${TabsList}`]: {
+          width: 'fit-content',
           alignSelf: 'flex-end',
         },
         [`& ${TabsContent}`]: {
-          boxShadow: '$cardShadow'
+          boxShadow: '$cardShadow',
+          borderTopLeftRadius: '$sm',
         }
       },
       null: {
-        width: '100%',
         [`& ${TabsList}`]: {
+          width: '100%',
           alignSelf: 'unset',
+          borderTopRightRadius: 'none',
+          borderTopLeftRadius: 'none',
         },
         [`& ${TabsContent}`]: {
           boxShadow: 'none'
