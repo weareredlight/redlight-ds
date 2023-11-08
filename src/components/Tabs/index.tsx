@@ -1,6 +1,8 @@
 /* eslint-disable react/no-array-index-key */
 import React from 'react'
 
+import type * as Stitches from '@stitches/react'
+
 import {
   TabsContent,
   TabsList,
@@ -10,11 +12,12 @@ import {
 
 export type Props = {
   tabs: { label: string }[],
-  children: React.ReactNode | React.ReactNode[]
+  children: React.ReactNode | React.ReactNode[],
+  align: Stitches.VariantProps<typeof StyledTabs>['align']
 }
 
-const Tabs = ({ tabs, children }: Props) => (
-  <StyledTabs defaultValue='tab0'>
+const Tabs = ({ tabs, children, align }: Props) => (
+  <StyledTabs defaultValue='tab0' align={align}>
     <TabsList aria-label='Manage your account'>
       {tabs.map((tab, index) => (
         <TabsTrigger key={`tab${index}`} value={`tab${index}`}>

@@ -2,14 +2,9 @@ import * as Tabs from '@radix-ui/react-tabs'
 
 import { styled } from '../../stitches'
 
-export const StyledTabs = styled(Tabs.Root, {
-  display: 'flex',
-  flexGrow: 1,
-  flexDirection: 'column',
-})
-
 export const TabsList = styled(Tabs.List, {
   display: 'flex',
+  zIndex: 1,
 })
 
 export const TabsTrigger = styled(Tabs.Trigger, {
@@ -26,6 +21,7 @@ export const TabsTrigger = styled(Tabs.Trigger, {
   userSelect: 'none',
   cursor: 'pointer',
   borderBottom: '1px solid transparent',
+  textWrap: 'nowrap',
 
   '&:first-child': { borderTopLeftRadius: '$sm' },
   '&:last-child': { borderTopRightRadius: '$sm' },
@@ -48,4 +44,32 @@ export const TabsContent = styled(Tabs.Content, {
   borderBottomLeftRadius: '$sm',
   borderBottomRightRadius: '$sm',
   outline: 'none',
+})
+
+export const StyledTabs = styled(Tabs.Root, {
+  width: '100%',
+  display: 'flex',
+  flexGrow: 1,
+  flexDirection: 'column',
+
+  variants: {
+    align: {
+      left: {
+        [`& ${TabsContent}`]: {
+          alignSelf: 'flex-start',
+        },
+        [`& ${TabsList}`]: {
+          boxShadow: '$cardShadow'
+        }
+      },
+      right: {
+        [`& ${TabsList}`]: {
+          alignSelf: 'flex-end',
+        },
+        [`& ${TabsList}`]: {
+          boxShadow: '$cardShadow'
+        }
+      },
+    }
+  }
 })
