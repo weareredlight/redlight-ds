@@ -13,7 +13,7 @@ import {
 export type Props = {
   tabs: { label: string }[],
   children: React.ReactNode | React.ReactNode[],
-  align: Stitches.VariantProps<typeof StyledTabs>['align']
+  align?: Stitches.VariantProps<typeof StyledTabs>['align']
 }
 
 const Tabs = ({ tabs, children, align }: Props) => (

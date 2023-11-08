@@ -55,21 +55,32 @@ export const StyledTabs = styled(Tabs.Root, {
   variants: {
     align: {
       left: {
-        [`& ${TabsContent}`]: {
+        [`& ${TabsList}`]: {
+          width: 'fit-content',
           alignSelf: 'flex-start',
         },
-        [`& ${TabsList}`]: {
+        [`& ${TabsContent}`]: {
           boxShadow: '$cardShadow'
         }
       },
       right: {
+        width: 'fit-content',
         [`& ${TabsList}`]: {
           alignSelf: 'flex-end',
         },
-        [`& ${TabsList}`]: {
+        [`& ${TabsContent}`]: {
           boxShadow: '$cardShadow'
         }
       },
+      null: {
+        width: '100%',
+        [`& ${TabsList}`]: {
+          alignSelf: 'unset',
+        },
+        [`& ${TabsContent}`]: {
+          boxShadow: 'none'
+        }
+      }
     }
   }
 })
