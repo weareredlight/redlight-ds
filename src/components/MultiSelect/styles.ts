@@ -1,6 +1,7 @@
 import { css } from '../../stitches'
-import { colors } from '../../theme/colors'
-import { sizes } from '../../theme/sizes'
+
+import { colors } from 'theme/colors'
+import { sizes } from 'theme/sizes'
 
 export const selectStyles = {
   valueContainer: (styles: object) => ({

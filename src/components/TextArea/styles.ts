@@ -5,7 +5,6 @@ export const StyledTextAreaField = styled('textarea', {
   width: '100%',
   position: 'relative',
   padding: '$xxsm',
-  marginBottom: '$xxxsm',
   borderRadius: '$xsm',
 
   appearance: 'none',

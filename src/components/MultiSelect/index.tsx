@@ -73,7 +73,7 @@ const MultiSelect = ({
       direction='column'
       align='start'
       gap='xxxsm'
-      css={{ width: fullWidth ? '100%' : 'auto' }}
+      css={{ width: fullWidth ? '100%' : 'fit-content' }}
     >
       {label && <Label id={name} label={label} />}
       <div className={selectWrapper()}>
