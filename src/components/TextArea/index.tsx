@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
@@ -30,7 +30,7 @@ export type Props = {
   textAreaRef?: React.RefObject<HTMLTextAreaElement>
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
-const TextArea = ({
+export const TextArea = forwardRef<HTMLTextAreaElement, Props>(({
   id,
   name,
   value,
@@ -45,9 +45,8 @@ const TextArea = ({
   maxLength,
   css,
   onChange,
-  textAreaRef,
   ...props
-}: Props) => (
+}, ref) => (
   <StyledWrapper fullWidth={fullWidth}>
     <StyledTextArea>
       {label || description ? (
@@ -59,7 +58,7 @@ const TextArea = ({
       ) : null}
       <StyledTextAreaField
         id={id}
-        ref={textAreaRef}
+        ref={ref}
         name={name}
         value={value}
         placeholder={placeholder}
@@ -78,6 +77,5 @@ const TextArea = ({
       </Text>
     )}
   </StyledWrapper>
-)
-
+))
 export default TextArea

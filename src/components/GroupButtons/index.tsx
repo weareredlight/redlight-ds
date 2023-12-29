@@ -2,11 +2,9 @@ import Button from '../Button'
 
 import { StyledGroupButtons } from './styles'
 
+type OptionType = { label: string; value: string }
 type ButtonGroupProps = {
-  buttons: {
-    label: string
-    value: string
-  }[]
+  buttons: OptionType[]
   selectedButton: string
   onButtonSelect: (button: string) => void
 }
@@ -17,9 +15,9 @@ const GroupButtons = ({
   onButtonSelect,
 }: ButtonGroupProps) => (
   <StyledGroupButtons>
-    {buttons.map(button => (
+    {buttons.map((button, index) => (
       <Button
-        key={button.value}
+        key={button.value + Number(index)}
         onClick={() => onButtonSelect(button.value)}
         variant={button.value === selectedButton ? 'primary' : 'secondary'}
       >

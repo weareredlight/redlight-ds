@@ -5,12 +5,17 @@ import Button from './components/Button'
 import { StyledButton } from './components/Button/styles'
 import Checkbox from './components/Checkbox'
 import { StyledCheckbox } from './components/Checkbox/styles'
+import DatePicker from './components/DatePicker'
+import { StyledDatePicker } from './components/DatePicker/styles'
 import Dialog from './components/Dialog'
+import GroupButtons from './components/GroupButtons'
+import { StyledGroupButtons } from './components/GroupButtons/styles'
 import Input from './components/Input'
 import { StyledInput } from './components/Input/styles'
 import Link from './components/Link'
 import { StyledLink } from './components/Link/styles'
 import Modal from './components/Modal'
+import MultiSelect from './components/MultiSelect'
 import Pagination from './components/Pagination'
 import { StyledPagination } from './components/Pagination/styles'
 import Pill from './components/Pill'
@@ -33,6 +38,8 @@ import Text from './components/Text'
 import { StyledText } from './components/Text/styles'
 import TextArea from './components/TextArea'
 import { StyledTextArea } from './components/TextArea/styles'
+import TimePicker from './components/TimePicker'
+import { StyledTimePicker } from './components/TimePicker/styles'
 import Toggle from './components/Toggle'
 import { StyledToggle } from './components/Toggle/styles'
 import Tooltip from './components/Tooltip'
@@ -54,10 +61,13 @@ export {
   Avatar,
   Button,
   Checkbox,
+  DatePicker,
   Dialog,
+  GroupButtons,
   Input,
   Link,
   Modal,
+  MultiSelect,
   Pagination,
   Pill,
   PopOver,
@@ -67,6 +77,7 @@ export {
   Tabs,
   Tag,
   TextArea,
+  TimePicker,
   ToastContainer,
   Toggle,
   Tooltip,
@@ -87,6 +98,8 @@ export {
   StyledAvatar,
   StyledButton,
   StyledCheckbox,
+  StyledDatePicker,
+  StyledGroupButtons,
   StyledInput,
   StyledLink,
   StyledPagination,
@@ -100,6 +113,7 @@ export {
   StyledTag,
   StyledText,
   StyledTextArea,
+  StyledTimePicker,
   StyledToggle,
   StyledUpload,
 }
