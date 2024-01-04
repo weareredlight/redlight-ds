@@ -17,6 +17,8 @@ type DatePickerProps = {
   onChange: (value: string) => void
   isWeekSelector?: boolean
   localeString?: string
+  disabled?: boolean
+  fullWidth?: boolean
 }
 
 export const DatePicker = ({
@@ -27,8 +29,14 @@ export const DatePicker = ({
   onChange,
   isWeekSelector = false,
   localeString = 'en-US',
+  disabled = false,
+  fullWidth = false,
 }: DatePickerProps) => (
-  <StyledDatePicker hasError={Boolean(error)}>
+  <StyledDatePicker
+    hasError={Boolean(error)}
+    fullWidth={fullWidth}
+    disabled={disabled}
+  >
     {label && <Label id={name} label={label} />}
     <Calendar.DatePicker
       name={name}
@@ -39,7 +47,7 @@ export const DatePicker = ({
       locale={localeString}
       inputRef={null}
       calendarIcon={<CalendarIcon />}
-      clearIcon={false}
+      clearIcon={null}
       formatMonthYear={(_, date) => date.toLocaleDateString(localeString, {
         month: 'long',
         year: 'numeric',

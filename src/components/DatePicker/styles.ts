@@ -7,7 +7,6 @@ export const StyledDatePicker = styled('div', {
   gap: '$xxxsm',
 
   '.react-date-picker': {
-    width: '100%',
     '> div': {
       width: '100%',
       height: '$xxxlg',
@@ -187,6 +186,27 @@ export const StyledDatePicker = styled('div', {
           borderColor: '$danger',
         }
       },
-    }
+    },
+    fullWidth: {
+      true: {
+        '.react-date-picker': {
+          width: '100%',
+        }
+      },
+    },
+    disabled: {
+      true: {
+        '.react-date-picker > div': {
+          backgroundColor: '$neutral200',
+          borderColor: '$neutral300',
+          color: '$neutral400',
+          pointerEvents: 'none',
+
+          input: {
+            color: '$neutral !important',
+          }
+        }
+      },
+    },
   },
 })
