@@ -16,6 +16,7 @@ type DatePickerProps = {
   value?: string
   onChange: (value: string) => void
   isWeekSelector?: boolean
+  localeString?: string
   disabled?: boolean
   fullWidth?: boolean
 }
@@ -27,6 +28,7 @@ export const DatePicker = ({
   value,
   onChange,
   isWeekSelector = false,
+  localeString = 'en-US',
   disabled = false,
   fullWidth = false,
 }: DatePickerProps) => (
@@ -39,15 +41,23 @@ export const DatePicker = ({
     <Calendar.DatePicker
       name={name}
       onChange={date => {
-        onChange(date ? new Date(date as Date).toISOString() : '')
+        onChange(date ? dayjs(date as Date).format('YYYY-MM-DD') : '')
       }}
       value={value}
       inputRef={null}
       calendarIcon={<CalendarIcon />}
       clearIcon={null}
-      formatMonthYear={(_, date) => date.toLocaleDateString('en-US', { month: 'long', year: 'numeric' })}
-      formatShortWeekday={(_, date) => date.toLocaleDateString('en-US', { weekday: 'short' })}
-      formatMonth={(_, date) => date.toLocaleDateString('en-US', { month: 'long' })}
+      locale={localeString}
+      formatMonthYear={(_, date) => date.toLocaleDateString(localeString, {
+        month: 'long',
+        year: 'numeric',
+      })}
+      formatShortWeekday={(_, date) => date.toLocaleDateString(localeString, {
+        weekday: 'short'
+      })}
+      formatMonth={(_, date) => date.toLocaleDateString(localeString, {
+        month: 'long'
+      })}
       calendarType={`${isWeekSelector ? 'hebrew' : 'iso8601'}`}
       tileClassName={({ date, view }) => {
         const isSameWeek = dayjs(date).isSame(value || new Date(), 'week')
@@ -56,6 +66,7 @@ export const DatePicker = ({
           : ''
       }}
     />
+
     {error && (
       <Text color='danger' variant='microCopy'>
         {String(error)}

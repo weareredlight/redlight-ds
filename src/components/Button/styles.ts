@@ -2,6 +2,8 @@ import { keyframes } from '@stitches/react'
 
 import { styled } from '../../stitches'
 
+import { colors } from 'theme/colors'
+
 export const rotateIcon = keyframes({
   '0%': { transform: 'rotate(0deg)' },
   '100%': { transform: 'rotate(359deg)' },
@@ -103,19 +105,19 @@ export const StyledButton = styled('button', {
         },
       },
       tertiary: {
-        backgroundColor: '$accent',
+        backgroundColor: colors.accent ? '$accent' : '$neutral',
         color: '$white',
         '&:hover': {
-          backgroundColor: '$accent600',
+          backgroundColor: colors.accent ? '$accent600' : '$neutral600',
         },
         '&:active': {
-          backgroundColor: '$accent700',
+          backgroundColor: colors.accent ? '$accent700' : '$neutral700',
         },
         '&:focus': {
-          $$shadowColor: '$colors$accent200',
+          $$shadowColor: colors.accent ? '$colors$accent200' : '$colors$neutral200',
         },
         '&:disabled': {
-          backgroundColor: '$accent200',
+          backgroundColor: colors.accent ? '$accent200' : '$neutral200',
         },
       },
       textOnly: {

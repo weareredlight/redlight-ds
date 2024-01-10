@@ -95,7 +95,7 @@ export const selectWrapper = css({
     transform: 'translateY(-50%)',
     width: 18,
     height: 18,
-    backgroundColor: '$accent',
+    backgroundColor: colors.accent ? '$accent' : '$primary',
     borderRadius: '$full',
   },
 })

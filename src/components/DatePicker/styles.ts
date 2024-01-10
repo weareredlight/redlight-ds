@@ -1,5 +1,7 @@
 import { styled } from '../../stitches'
 
+import { colors } from 'theme/colors'
+
 export const StyledDatePicker = styled('div', {
   display: 'flex',
   flexDirection: 'column',
@@ -107,7 +109,7 @@ export const StyledDatePicker = styled('div', {
 
           abbr: {
             textDecoration: 'none',
-            color: '$accent',
+            color: colors.accent ? '$accent' : '$neutral',
           }
         }
       },
@@ -143,23 +145,23 @@ export const StyledDatePicker = styled('div', {
           },
 
           '&--now': {
-            backgroundColor: '$accent !important',
+            backgroundColor: colors.accent ? '$accent !important' : '$neutral',
             color: '$white',
             '&:hover': {
-              backgroundColor: '$accent600',
+              backgroundColor: colors.accent ? '$accent600' : '$neutral600',
             },
             '&:active': {
-              backgroundColor: '$accent700',
+              backgroundColor: colors.accent ? '$accent700' : '$neutral700',
             },
 
             '&--now': {
-              backgroundColor: '$accent',
+              backgroundColor: colors.accent ? '$accent' : '$neutral',
               color: '$white',
               '&:hover': {
-                backgroundColor: '$accent600',
+                backgroundColor: colors.accent ? '$accent600' : '$neutral600',
               },
               '&:active': {
-                backgroundColor: '$accent700',
+                backgroundColor: colors.accent ? '$accent700' : '$neutral700',
               },
             },
           },
