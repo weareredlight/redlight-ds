@@ -65,7 +65,6 @@ const errorOptions: ToastOptions = {
     background: 'var(--colors-danger)'
   },
 }
-
 const infoOptions: ToastOptions = {
   ...defaultOptions,
   style: {
@@ -83,9 +82,11 @@ const infoOptions: ToastOptions = {
 
 export const alert = {
   success: (title: string, description?: string, options?: ToastOptions) => toastOG(
-    <Flex direction='column' justify='start' align='start' gap='xxsm'>
-      <Text variant='h6' color='success500'>{title}</Text>
-      <Text variant='microCopy' color='success'>{description}</Text>
+    <>
+      <Flex direction='column' justify='start' align='start' gap='xxsm'>
+        <Text variant='h6' color='success500'>{title}</Text>
+        <Text variant='microCopy' color='success'>{description}</Text>
+      </Flex>
       <CheckCircledIcon
         style={{
           color: 'var(--colors-success500)',
@@ -97,13 +98,15 @@ export const alert = {
           height: 16,
         }}
       />
-    </Flex>,
+    </>,
     { ...successOptions, ...options, type: 'success' }
   ),
   error: (title: string, description?: string, options?: ToastOptions) => toastOG(
-    <Flex direction='column' justify='start' align='start' gap='xxsm'>
-      <Text variant='h6' color='danger500'>{title}</Text>
-      <Text variant='microCopy' color='danger'>{description}</Text>
+    <>
+      <Flex direction='column' justify='start' align='start' gap='xxsm'>
+        <Text variant='h6' color='danger500'>{title}</Text>
+        <Text variant='microCopy' color='danger'>{description}</Text>
+      </Flex>
       <CrossCircledIcon
         style={{
           color: 'var(--colors-danger500)',
@@ -115,13 +118,15 @@ export const alert = {
           height: 16,
         }}
       />
-    </Flex>,
+    </>,
     { ...errorOptions, ...options, type: 'error' }
   ),
   info: (title: string, description?: string, options?: ToastOptions) => toastOG(
-    <Flex direction='column' justify='start' align='start' gap='xxsm'>
-      <Text variant='h6' color='primary600'>{title}</Text>
-      <Text variant='microCopy' color='primary'>{description}</Text>
+    <>
+      <Flex direction='column' justify='start' align='start' gap='xxsm'>
+        <Text variant='h6' color='primary600'>{title}</Text>
+        <Text variant='microCopy' color='primary'>{description}</Text>
+      </Flex>
       <InfoCircledIcon
         style={{
           color: 'var(--colors-primary600)',
@@ -133,7 +138,7 @@ export const alert = {
           height: 16,
         }}
       />
-    </Flex>,
+    </>,
     { ...infoOptions, ...options, type: 'info' }
   ),
 }

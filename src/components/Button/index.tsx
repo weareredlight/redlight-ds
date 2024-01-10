@@ -1,5 +1,5 @@
 import { SymbolIcon } from '@radix-ui/react-icons'
-import React from 'react'
+import React, { forwardRef } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
@@ -18,10 +18,9 @@ export type Props = {
   type?: 'submit' | 'button',
   disabled?: boolean,
   css?: Stitches.CSS
-  buttonRef?: React.RefObject<HTMLButtonElement>
 }
 
-const Button = ({
+const Button = forwardRef<HTMLButtonElement, Props>(({
   children,
   iconComponent,
   variant,
@@ -32,9 +31,8 @@ const Button = ({
   type,
   disabled,
   css,
-  buttonRef,
   ...props
-}: Props) => {
+}, ref) => {
   const getIconAndText = () => {
     if (!iconComponent || !iconPosition) return children
     switch (iconPosition) {
@@ -64,12 +62,13 @@ const Button = ({
       size={size}
       fullWidth={fullWidth}
       css={{ ...css }}
-      ref={buttonRef}
+      ref={ref}
       {...props}
     >
       {getIconAndText()}
       {isLoading && <SymbolIcon />}
     </StyledButton>
   )
-}
+})
+
 export default Button

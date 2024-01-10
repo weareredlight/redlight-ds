@@ -32,7 +32,6 @@ export type Props = {
   css?: Stitches.CSS
   onClickIcon?: () => void
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
-  inputRef?: React.RefObject<HTMLInputElement>
   containerProps?: React.HTMLAttributes<HTMLDivElement>
   fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
 } & React.InputHTMLAttributes<HTMLInputElement>
