@@ -9,14 +9,15 @@ import { StyledDatePicker } from './styles'
 
 import 'react-date-picker/dist/DatePicker.css'
 
+type ValuePiece = Date | null
+
 type DatePickerProps = {
   name?: string
   label?: string
   error?: string | null
   value?: string
-  onChange: (value: string) => void
+  onChange: (value: ValuePiece | [ValuePiece, ValuePiece]) => void
   isWeekSelector?: boolean
-  localeString?: string
   disabled?: boolean
   fullWidth?: boolean
 }
@@ -28,7 +29,6 @@ export const DatePicker = ({
   value,
   onChange,
   isWeekSelector = false,
-  localeString = 'en-US',
   disabled = false,
   fullWidth = false,
 }: DatePickerProps) => (
@@ -40,24 +40,11 @@ export const DatePicker = ({
     {label && <Label id={name} label={label} />}
     <Calendar.DatePicker
       name={name}
-      onChange={date => {
-        onChange(date ? dayjs(date as Date).format('YYYY-MM-DD') : '')
-      }}
-      value={value}
+      value={dayjs(value).format('YYYY-MM-DDTHH:mm:ss')}
+      onChange={onChange}
       inputRef={null}
       calendarIcon={<CalendarIcon />}
       clearIcon={null}
-      locale={localeString}
-      formatMonthYear={(_, date) => date.toLocaleDateString(localeString, {
-        month: 'long',
-        year: 'numeric',
-      })}
-      formatShortWeekday={(_, date) => date.toLocaleDateString(localeString, {
-        weekday: 'short'
-      })}
-      formatMonth={(_, date) => date.toLocaleDateString(localeString, {
-        month: 'long'
-      })}
       calendarType={`${isWeekSelector ? 'hebrew' : 'iso8601'}`}
       tileClassName={({ date, view }) => {
         const isSameWeek = dayjs(date).isSame(value || new Date(), 'week')
