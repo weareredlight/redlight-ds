@@ -17,9 +17,9 @@ const Link = ({
   href,
   children,
   openInNewTab = true,
-  size,
-  danger,
-  darkBackground,
+  size = 'regular',
+  danger = false,
+  darkBackground = false,
   ...props
 }: Props) => (
   <StyledLink

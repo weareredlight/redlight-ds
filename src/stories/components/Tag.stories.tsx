@@ -1,11 +1,12 @@
-import { Meta, Story } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
 import Tag, { Props } from '../../components/Tag'
 
-const meta: Meta = {
+export default {
   title: 'Components/Displays/Tag',
   component: Tag,
+  render: (args: Props) => <Tag {...args}>Tag Example</Tag>,
   parameters: {
     docs: {
       description: {
@@ -15,95 +16,79 @@ const meta: Meta = {
   },
   argTypes: {
     variant: {
-      control: {
-        type: 'radio',
-        options: ['default', 'error']
-      }
-    },
-    closable: {
-      control: 'boolean'
+      control: 'radio',
+      options: ['default', 'error']
     },
     disabled: {
       control: 'boolean'
     },
   }
-}
-export default meta
+} satisfies Meta<typeof Tag>
 
-const Template: Story<Props> = args => <Tag {...args}>Tag Example</Tag>
+type Story = StoryObj<typeof Tag>
 
-export const aDefault = Template.bind({})
-aDefault.args = {
-  variant: 'default',
-  closable: false,
-  disabled: false,
-}
-aDefault.parameters = {
-  docs: {
-    source: {
-      code: `
-<Tag>Tag Example</Tag>
-`
+export const Default: Story = {
+  args: {
+    variant: 'default',
+    onClose: undefined,
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <Tag>Tag Example</Tag>
+  `
+      }
     }
-  }
-}
-aDefault.story = {
-  name: 'Default',
+  },
+  storyName: 'Default',
 }
 
-export const bClosable = Template.bind({})
-bClosable.args = {
-  closable: true,
-  // eslint-disable-next-line no-alert
-  onClose: () => alert('Are you sure you want to remove?')
-}
-bClosable.parameters = {
-  docs: {
-    storyDescription: 'When you have a group of tags you can delete them by pressing the cross button.',
-    source: {
-      code: `
-<Tag closable onClose={updateTags()}>Tag Example</Tag>
-`
+export const Closable: Story = {
+  args: {
+    // eslint-disable-next-line no-alert
+    onClose: () => alert('Are you sure you want to remove?')
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <Tag closable onClose={updateTags()}>Tag Example</Tag>
+  `
+      }
     }
-  }
-}
-bClosable.story = {
-  name: 'Closable',
+  },
+  storyName: 'Closable',
 }
 
-export const cError = Template.bind({})
-cError.args = {
-  variant: 'error',
-}
-cError.parameters = {
-  docs: {
-    storyDescription: 'Tags can also be used to indicate potential errors or dangerous actions.',
-    source: {
-      code: `
-<Tag variant='error'>Tag Example</Tag>
-`
+export const Error: Story = {
+  args: {
+    variant: 'error',
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <Tag variant='error'>Tag Example</Tag>
+  `
+      }
     }
-  }
-}
-cError.story = {
-  name: 'Error',
+  },
+  storyName: 'Error',
 }
 
-export const dDisabled = Template.bind({})
-dDisabled.args = {
-  disabled: true,
-  closable: true
-}
-dDisabled.parameters = {
-  docs: {
-    storyDescription: 'You can prevent the user from deleting tags.',
-    source: {
-      code: `
-<Tag closable disabled>Tag Example</Tag>
-`
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      source: {
+        code: `
+  <Tag disabled>Tag Example</Tag>
+  `
+      }
     }
-  }
-}
-dDisabled.story = {
-  name: 'Disabled',
+  },
+  storyName: 'Disabled',
 }

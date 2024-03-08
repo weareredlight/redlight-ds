@@ -15,6 +15,10 @@ export const StyledTextsGroup = styled('div', {
 
   '> ul': {
     marginLeft: '$lg'
+  },
+
+  '.font-preview': {
+    color: '$neutral900 !important',
   }
 })
 

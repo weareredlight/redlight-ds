@@ -1,23 +1,32 @@
-// import { StorybookConfig } from "@storybook/react-vite"
+import type { StorybookConfig } from '@storybook/react-webpack5';
 
-module.exports = {
-  stories: [
-    "../src/**/*.stories.@(js|jsx|ts|tsx)"
-  ],
-  addons: [
-    "@storybook/addon-links",
-    "@storybook/addon-essentials",
-    "@storybook/addon-interactions",
-    "@storybook/preset-create-react-app",
-  ],
-  framework: "@storybook/react",
-  core: {
-    "builder": "webpack5"
+const config: StorybookConfig = {
+  framework: {
+    name: '@storybook/react-webpack5',
+    options: {
+      fastRefresh: true,
+    },
   },
-}
-// const config: StorybookConfig = {
-//   framework: '@storybook/react-vite',
-//   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|ts|tsx)'],
-// };
-
-// export default config;
+  stories: ["../src/**/*.mdx", "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)"],
+  typescript: {
+    reactDocgen: 'react-docgen',
+    skipBabel: true,
+    check: false,
+  },
+  addons: [
+    '@storybook/addon-docs',
+    '@storybook/addon-essentials',
+    '@storybook/addon-interactions',
+    '@storybook/addon-links',
+    '@storybook/preset-create-react-app',
+    '@storybook/blocks'
+  ],
+  docs: {
+    autodocs: true,
+    defaultName: 'How to use',
+  },
+  features: {
+    storyStoreV7: false
+  }
+};
+export default config;

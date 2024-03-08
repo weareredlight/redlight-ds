@@ -1,15 +1,14 @@
-import { Meta, Story } from '@storybook/react'
-import React from 'react'
+import { Meta, StoryObj } from '@storybook/react'
 
-import Avatar, { Props } from '../../components/Avatar'
+import Avatar from '../../components/Avatar'
 
-const meta: Meta = {
+export default {
   title: 'Components/General/Avatar',
   component: Avatar,
   parameters: {
     docs: {
       description: {
-        component: 'An avatar is a visual representation of a user or entity.'
+        component: 'An avatar is a visual representation of a user or entity.',
       },
     },
   },
@@ -17,96 +16,115 @@ const meta: Meta = {
     size: {
       control: {
         type: 'radio',
-        options: ['normal', 'small']
-      }
+        options: ['normal', 'small'],
+      },
     },
     displayLabel: {
-      control: 'boolean'
+      control: 'boolean',
     },
     online: {
-      control: 'boolean'
+      control: 'boolean',
+    },
+  },
+} satisfies Meta<typeof Avatar>
+
+type Story = StoryObj<typeof Avatar>
+
+export const Default: Story = {
+  args: {
+    name: 'Diogo Ribeiro',
+    url: 'https://picsum.photos/300/300',
+    displayLabel: true,
+    description: 'Desginer',
+    online: true,
+  },
+}
+
+export const Small: Story = {
+  args: {
+    size: 'small',
+    name: 'Diogo Ribeiro',
+    url: 'https://picsum.photos/300/300',
+    displayLabel: false,
+    online: false,
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'Represents the user/organization in a smaller scale.',
+      }
     },
   },
 }
-export default meta
 
-const Template: Story<Props> = args => <Avatar {...args} />
+export const Initials: Story = {
+  args: {
+    size: 'normal',
+    name: 'Diogo Ribeiro',
+    displayLabel: false,
+    online: false,
+  },
 
-export const Default = Template.bind({})
-Default.args = {
-  size: 'normal',
-  name: 'Diogo Ribeiro',
-  url: 'https://picsum.photos/300/300',
-  displayLabel: true,
-  description: 'Desginer',
-  online: true,
-}
-
-export const Small = Template.bind({})
-Small.args = {
-  size: 'small',
-  name: 'Diogo Ribeiro',
-  url: 'https://picsum.photos/300/300',
-  displayLabel: false,
-  online: false,
-}
-Small.parameters = {
-  docs: {
-    storyDescription: 'Represents the user/organization in a smaller scale.',
+  parameters: {
+    docs: {
+      description: {
+        story: 'If you dont specify any image url it will display name initials.'
+      }
+    },
   },
 }
 
-export const Initials = Template.bind({})
-Initials.args = {
-  size: 'normal',
-  name: 'Diogo Ribeiro',
-  displayLabel: false,
-  online: false,
-}
-Initials.parameters = {
-  docs: {
-    storyDescription: 'If you dont specify any image url it will display name initials.',
+export const Label: Story = {
+  args: {
+    size: 'normal',
+    name: 'Diogo Ribeiro',
+    url: 'https://picsum.photos/300/300',
+    displayLabel: true,
+    online: false,
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'First name can be displayed if "displayLabel" is set to true.'
+      }
+    },
   },
 }
 
-export const Label = Template.bind({})
-Label.args = {
-  size: 'normal',
-  name: 'Diogo Ribeiro',
-  url: 'https://picsum.photos/300/300',
-  displayLabel: true,
-  online: false,
-}
-Label.parameters = {
-  docs: {
-    storyDescription: 'First name can be displayed if "displayLabel" is set to true.',
+export const Description: Story = {
+  args: {
+    size: 'normal',
+    name: 'Diogo Ribeiro',
+    url: 'https://picsum.photos/300/300',
+    description: 'Designer',
+    displayLabel: true,
+    online: false,
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can also add a description to it.'
+      }
+    },
   },
 }
 
-export const Description = Template.bind({})
-Description.args = {
-  size: 'normal',
-  name: 'Diogo Ribeiro',
-  url: 'https://picsum.photos/300/300',
-  description: 'Designer',
-  displayLabel: true,
-  online: false,
-}
-Description.parameters = {
-  docs: {
-    storyDescription: 'You can also add a description to it.',
+export const Status: Story = {
+  args: {
+    size: 'normal',
+    name: 'Diogo Ribeiro',
+    url: 'https://picsum.photos/300/300',
+    online: true,
   },
-}
 
-export const Status = Template.bind({})
-Status.args = {
-  size: 'normal',
-  name: 'Diogo Ribeiro',
-  url: 'https://picsum.photos/300/300',
-  online: true,
-}
-Status.parameters = {
-  docs: {
-    storyDescription: 'The user status can be online.',
+  parameters: {
+    docs: {
+      description: {
+        story: 'The user status can be online.'
+      }
+    },
   },
 }

@@ -11,7 +11,7 @@ export type Props = {
   children?: string | ReactNode
 }
 
-const Text = ({
+export const Text = ({
   color = 'primary',
   children,
   css,

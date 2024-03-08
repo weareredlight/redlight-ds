@@ -1,5 +1,5 @@
 import { FontStyleIcon, ColorWheelIcon, Component1Icon } from '@radix-ui/react-icons'
-import LinkTo from '@storybook/addon-links/react'
+import { Meta } from '@storybook/blocks'
 
 import {
   StyledDocument,
@@ -8,97 +8,78 @@ import {
   StyledCode,
   StyledCard,
   StyledSeparator,
-} from '../Document.styles'
+} from './document.styles'
 
 import { Flex } from '../../elements/Flex'
-import { Button } from '../../components/Button'
-import { Link } from '../../components/Link'
-import { Text } from '../../components/Text'
+import Button from '../../components/Button'
+
+import { BtnImport, BtnUse, Installation } from '../utils'
 
 <Meta title='Get Started' />
-
-export const btnImport = `import { Button } from 'redlight-ds'`
-
-export const btnUse = `() => {
-  <Button
-    variant='primary'
-    size='large'
-    onCick={yourFunction()}
-  >
-    Button Text
-  </Button>
-}
-`
 
 <StyledDocument>
   <StyledHeader>
     <h2>Get Started</h2>
     <p>ver 1.0.0 | Last updated: 20/06/2023</p>
   </StyledHeader>
+
   <StyledBody>
-    <Text variant='h3' color='neutral800'>Welcome to RedLight's Design System</Text>
-    <Text variant='textBlock' color='neutral700'>
+    <h3>Welcome to RedLight's Design System</h3>
+    <p>
       Our Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.
-      <br/><br/>
+      <br />
       It provides a unified framework for designers and developers to work together seamlessly, fostering collaboration, efficiency, and creativity.
-    </Text>
-    <br/>
-    <Text variant='subHeading' color='primary'>Learn more</Text>
-    <Flex gap='xlg'>
-      <StyledCard kind='style-guides-typography--page'>
+    </p>
+    <br />
+    <span className="sub-heading">Learn more</span>
+    <Flex gap="xlg">
+      <StyledCard kind="style-guides-typography--page">
         <FontStyleIcon width={32} height={32} />
-        <Text variant='h5' color='700'>Text Styles</Text>
+        <h5>Text Styles</h5>
       </StyledCard>
-      <StyledCard kind='style-guides-colors--page'>
+      <StyledCard kind="style-guides-colors--page">
         <ColorWheelIcon width={32} height={32} />
-        <Text variant='h5' color='neutral700'>Color Styles</Text>
+        <h5>Color Styles</h5>
       </StyledCard>
-      <StyledCard kind='components-general-button--a-default'>
+      <StyledCard kind="components-general-button--a-default">
         <Component1Icon width={32} height={32} />
-        <Text variant='h5' color='neutral700'>Components List</Text>
+        <h5>Components List</h5>
       </StyledCard>
     </Flex>
     <br />
     <StyledSeparator />
     <br />
-    <Text variant='h4' color='neutral800'>If you are a Developer 👨🏻‍💻</Text>
-    <Text variant='textBlock' color='neutral700'>
+    <h4>If you are a Developer 👨🏻‍💻</h4>
+    <p>
       The Storybook is an online library that houses all the code resources and components needed to bring our design system to life.
-      <br/><br/>
+      <br />
       It allows developers to interact with and explore different components, view their variations, and access comprehensive documentation and code examples.
-    </Text>
-    <br/>
-    <Text variant='subHeading' color='primary'>Configure</Text>
-    <Text variant='textBlock' color='neutral700'>Install the Design System on+ your project root:</Text>
-    <StyledCode style={{width: '100%'}}>$ yarn add redlight-ds</StyledCode>
-    <br/>
-    <Text variant='textBlock' color='neutral700'>Now it's time to start using the components.</Text>
-    <Text variant='textBlock' color='neutral700'>First import the component into the desired file:</Text>
-    <StyledCode style={{width: '100%'}}>{btnImport}</StyledCode>
-    <br/>
-    <Text variant='textBlock' color='neutral700'>Now the component is ready to use. Change its variants and properties so you can use it to your liking.</Text>
-    <Flex gap='sm' style={{alignItems: 'stretch'}}>
-      <StyledCode style={{width: '50%'}}>{btnUse}</StyledCode>
+    </p>
+    <br />
+    <span className="sub-heading">Configure</span>
+    <p>Install the Design System on your project root:</p>
+    <StyledCode style={{width: '100%'}}>{Installation}</StyledCode>
+    <br />
+    <p>Now it's time to start using the components.</p>
+    <p>First import the component into the desired file:</p>
+    <StyledCode style={{width: '100%'}}>{BtnImport}</StyledCode>
+    <br />
+    <p>Now the component is ready to use. Change its variants and properties so you can use it to your liking.</p>
+    <Flex gap="sm" style={{alignItems: 'stretch'}}>
+      <StyledCode style={{width: '50%'}}>{BtnUse}</StyledCode>
       <Flex style={{width: '50%', backgroundColor: '#F4F4F7', borderRadius: '4px'}}>
-        <Button size='large'>
-          Button Text
-        </Button>
+        <Button size="large" variant="primary">Button Text</Button>
       </Flex>
     </Flex>
     <br />
     <StyledSeparator />
     <br />
-    <Text variant='h4' color='neutral800'>If you are a Designer 👨🏻‍🎨</Text>
-    <Text variant='textBlock' color='neutral700'>
-      The <a href='/'>Figma file</a> contains all the design assets, visual guidelines, and components that make up our design system.
-      <br/><br/>
+    <h4>If you are a Designer 👨🏻‍🎨</h4>
+    <p>
+      The <a href="/">Figma file</a> contains all the design assets, visual guidelines, and components that make up our design system.
+      <br />
       Designers can leverage this file to create stunning visual experiences, access design patterns, and collaborate effectively with other team members.
-    </Text>
-    <iframe
-      style={{border: '1px solid rgba(0, 0, 0, 0.1)', width: '100%'}}
-      height={450}
-      src='https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FrkRWOtSBgEd6wdfInQU2Oi%2FDesign-System%3Ftype%3Ddesign%26node-id%3D238%253A4773%26t%3DkCzoHDeJSbHSIlt3-1'
-      allowfullscreen
-    />
+    </p>
+    <iframe style={{border: '1px solid rgba(0, 0, 0, 0.1)', width: '100%'}} height={450} src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FrkRWOtSBgEd6wdfInQU2Oi%2FDesign-System%3Ftype%3Ddesign%26node-id%3D238%253A4773%26t%3DkCzoHDeJSbHSIlt3-1" allowfullscreen />
   </StyledBody>
 </StyledDocument>

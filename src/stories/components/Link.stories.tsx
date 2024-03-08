@@ -1,105 +1,104 @@
-import { Meta, Story } from '@storybook/react'
-import React from 'react'
+import { Meta, StoryObj } from '@storybook/react'
 
-import Link, { Props } from '../../components/Link'
+import Link from '../../components/Link'
 import { darkBackgroundCanvas } from '../decorators'
 
-const meta: Meta = {
+export default {
   title: 'Components/General/Link',
   component: Link,
   parameters: {
     docs: {
       description: {
-        component: 'The "Link" component is a clickable element used to navigate the user to another page or section of the website. Links are styled differently from regular text, and should be easy to identify and consistent in style throughout the website. Links are an important part of website navigation and accessibility.'
+        component:
+          'The "Link" component is a clickable element used to navigate the user to another page or section of the website. Links are styled differently from regular text, and should be easy to identify and consistent in style throughout the website. Links are an important part of website navigation and accessibility.',
       },
     },
   },
+  args: {
+    children: 'Text Link',
+    danger: false,
+    darkBackground: false,
+  },
   argTypes: {
+    children: {
+      control: 'text',
+    },
     danger: {
       control: 'boolean',
-      defaultValue: false
+      defaultValue: false,
     },
     darkBackground: {
       control: 'boolean',
-      defaultValue: true
+      defaultValue: true,
     },
     size: {
-      control: {
-        type: 'radio',
-        options: ['regular', 'small']
-      }
+      control: 'radio',
+      options: ['regular', 'small'],
     },
-  }
-}
-export default meta
+    openInNewTab: {
+      control: 'boolean',
+      defaultValue: true,
+    },
+  },
+} satisfies Meta<typeof Link>
 
-const Template: Story<Props> = args => <Link {...args}>Text Link</Link>
+type Story = StoryObj<typeof Link>
 
-export const aRegular = Template.bind({})
-aRegular.args = {
-  href: 'redlight.dev',
-  danger: false,
-  darkBackground: false,
-}
-aRegular.story = {
-  name: 'Regular',
-}
-
-export const bSmall = Template.bind({})
-bSmall.args = {
-  href: 'redlight.dev',
-  size: 'small',
-}
-bSmall.parameters = {
-  docs: {
-    storyDescription: 'You can use smaller links for more subtle actions.',
-    source: {
-      code: `
-<Link href='redlight.dev' size='small'>Text Link</Link>
-`
-    }
-  }
-}
-bSmall.story = {
-  name: 'Small',
+export const Default: Story = {
+  args: {
+    href: 'redlight.dev',
+  },
 }
 
-export const dDanger = Template.bind({})
-dDanger.args = {
-  href: '/',
-  danger: true,
-  darkBackground: false,
-}
-dDanger.parameters = {
-  docs: {
-    storyDescription: 'Danger links can be used for actions that can result in potentially dangerous actions.',
-    source: {
-      code: `
-<Link href='/' danger>Text Link</Link>
-`
-    }
-  }
-}
-dDanger.story = {
-  name: 'Danger',
+export const Small: Story = {
+  args: {
+    href: 'redlight.dev',
+    size: 'small',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can use smaller links for more subtle actions.'
+      },
+      source: {
+        code: "<Link href='redlight.dev' size='small'>Text Link</Link>"
+      },
+    },
+  },
 }
 
-export const eDarkBackground = Template.bind({})
-eDarkBackground.args = {
-  href: 'redlight.dev',
-  darkBackground: true,
+export const Danger: Story = {
+  args: {
+    href: '/',
+    danger: true,
+    darkBackground: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Danger links can be used for actions that can result in potentially dangerous actions.'
+      },
+      source: {
+        code: "<Link href='/' danger>Text Link</Link>"
+      },
+    },
+  },
 }
-eDarkBackground.parameters = {
-  docs: {
-    storyDescription: 'If the background of the parent container is dark you can use the "darkBackground" property for better readability.',
-    source: {
-      code: `
-<Link href='redlight.dev' darkBackground>Text Link</Link>
-`
-    }
-  }
-}
-eDarkBackground.story = {
-  name: 'Dark Background',
+
+export const DarkBackground: Story = {
+  args: {
+    href: 'redlight.dev',
+    darkBackground: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'If the background of the parent container is dark you can use the "darkBackground" property for better readability.'
+      },
+      source: {
+        code: "<Link href='redlight.dev' darkBackground>Text Link</Link>",
+      },
+    },
+  },
   decorators: [darkBackgroundCanvas],
 }

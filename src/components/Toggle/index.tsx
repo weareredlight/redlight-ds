@@ -1,4 +1,4 @@
-import { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent, Ref } from 'react'
@@ -21,7 +21,7 @@ export type Props = {
   labelPosition?: 'left' | 'right'
 }
 
-const Toggle = forwardRef<HTMLInputElement, Props>(({
+const Toggle = React.forwardRef(({
   id,
   name,
   label,
@@ -33,7 +33,7 @@ const Toggle = forwardRef<HTMLInputElement, Props>(({
   onChange,
   labelPosition = 'right',
   ...props
-}, ref) => (
+}: Props, ref: React.Ref<HTMLInputElement>) => (
   <>
     <StyledToggle disabled={disabled}>
       {labelPosition === 'left' && (label || description) ? (

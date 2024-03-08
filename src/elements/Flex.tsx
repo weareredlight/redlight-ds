@@ -1,6 +1,6 @@
 import { styled } from '../stitches'
 
-const Flex = styled('div', {
+export const Flex = styled('div', {
   display: 'flex',
   flexWrap: 'nowrap',
   padding: 0,

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
@@ -36,7 +36,7 @@ export type Props = {
   fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-export const Input = forwardRef<HTMLInputElement, Props>(({
+const Input = React.forwardRef(({
   id,
   type = 'text',
   name,
@@ -56,7 +56,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
   containerProps,
   fullWidth = false,
   ...props
-}, ref) => {
+}: Props, ref: React.Ref<HTMLInputElement>) => {
   const renderIcon = () => {
     if (!iconComponent) return null
     if (onClickIcon) {

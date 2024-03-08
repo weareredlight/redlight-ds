@@ -17,11 +17,11 @@ export type Props = {
 }
 
 const Avatar = ({
-  size,
+  size = 'normal',
   name,
-  displayLabel,
+  displayLabel = false,
   description,
-  online,
+  online = false,
   url,
   width,
   ...props

@@ -1,8 +1,7 @@
 import { keyframes } from '@stitches/react'
 
 import { styled } from '../../stitches'
-
-import { colors } from 'theme/colors'
+import { colors } from '../../theme/colors'
 
 export const rotateIcon = keyframes({
   '0%': { transform: 'rotate(0deg)' },
@@ -51,7 +50,7 @@ export const StyledButton = styled('button', {
     },
     fullWidth: {
       true: {
-        width: '100%'
+        width: '100%',
       }
     },
     variant: {
@@ -189,16 +188,23 @@ export const StyledButton = styled('button', {
         position: 'relative',
         pointerEvents: 'none',
         userSelect: 'none',
+        textAlign: 'center',
 
-        svg: {
+        '.loading-icon': {
           position: 'absolute',
+          transform: 'translate(-50%, -50%)',
           animation: `${rotateIcon} 2s infinite linear`,
+        },
+
+        'svg:not(.loading-icon)': {
+          color: 'transparent'
         }
       }
     },
   },
 
   compoundVariants: [
+    // Sizes with icon position
     {
       size: 'large',
       iconPosition: 'left',
@@ -222,6 +228,7 @@ export const StyledButton = styled('button', {
         height: '42px',
       },
     },
+    // Loading with variants
     {
       isLoading: 'true',
       variant: 'neutral',
@@ -284,6 +291,25 @@ export const StyledButton = styled('button', {
           color: '$neutral700',
         }
       }
+    },
+    // Loading with icon position
+    {
+      isLoading: 'true',
+      iconPosition: 'left',
+      css: {
+        '.loading-icon': {
+          marginLeft: '$xxsm',
+        },
+      },
+    },
+    {
+      isLoading: 'true',
+      iconPosition: 'right',
+      css: {
+        '.loading-icon': {
+          marginRight: '$xxsm',
+        },
+      },
     },
   ],
 

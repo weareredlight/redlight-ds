@@ -26,7 +26,7 @@ const Tag = ({
   <StyledTag
     variant={variant}
     disabled={disabled}
-    className={onClose ? 'closable' : ''}
+    className={(onClose && variant !== 'error') ? 'closable' : ''}
     {...props}
   >
     {children}
