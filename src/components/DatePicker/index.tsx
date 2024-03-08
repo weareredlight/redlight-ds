@@ -40,7 +40,7 @@ export const DatePicker = ({
     {label && <Label id={name} label={label} />}
     <Calendar.DatePicker
       name={name}
-      value={dayjs(value).format('YYYY-MM-DDTHH:mm:ss')}
+      value={value ? dayjs(value).format('YYYY-MM-DDTHH:mm:ss') : null}
       onChange={onChange}
       inputRef={null}
       calendarIcon={<CalendarIcon />}
