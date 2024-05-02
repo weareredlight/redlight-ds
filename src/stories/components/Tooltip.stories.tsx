@@ -55,10 +55,10 @@ export const Default = {
     docs: {
       source: {
         code: `
-  <Tooltip content='Hello world' side='right' delay={50}>
-    //Provide a trigger inside the Tooltip. It can be whatever you want.
-    <Button />
-  </Tooltip>
+<Tooltip content='Hello world' side='right' delay={50}>
+  //Provide a trigger inside the Tooltip. It can be whatever you want.
+  <Button />
+</Tooltip>
   `,
       },
     },

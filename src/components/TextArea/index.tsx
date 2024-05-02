@@ -13,7 +13,7 @@ import {
 } from './styles'
 
 export type Props = {
-  id: string
+  id?: string
   name?: string
   value?: string
   label?: string

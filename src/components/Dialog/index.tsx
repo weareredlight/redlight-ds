@@ -24,7 +24,7 @@ export type Props = {
 }
 
 const Dialog = ({
-  open,
+  open = false,
   variant = 'confirm',
   confirmButtonText,
   cancelButtonText,

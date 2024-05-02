@@ -23,7 +23,7 @@ const PopOver = ({
   align = 'center'
 }: Props) => (
   <StyledPopOver>
-    <Popover.Trigger>
+    <Popover.Trigger asChild>
       {trigger}
     </Popover.Trigger>
     <Popover.Portal>

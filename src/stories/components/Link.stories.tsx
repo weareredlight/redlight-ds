@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 
 import Link from '../../components/Link'
-import { darkBackgroundCanvas } from '../decorators'
+import { DarkBackgroundCanvas } from '../decorators'
 
 export default {
   title: 'Components/General/Link',
@@ -100,5 +100,5 @@ export const DarkBackground: Story = {
       },
     },
   },
-  decorators: [darkBackgroundCanvas],
+  decorators: [DarkBackgroundCanvas],
 }

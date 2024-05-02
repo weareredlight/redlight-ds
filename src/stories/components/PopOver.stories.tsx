@@ -2,13 +2,15 @@ import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 
+import type { Props } from '../../components/PopOver'
+
 import Button from '../../components/Button'
-import PopOver, { Props } from '../../components/PopOver'
+import PopOver from '../../components/PopOver'
 import Text from '../../components/Text'
 import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
 
-const meta: Meta = {
+export default {
   title: 'Components/Overlays/PopOver',
   component: PopOver,
   parameters: {
@@ -37,8 +39,7 @@ const meta: Meta = {
       },
     },
   },
-}
-export default meta
+} as Meta<typeof PopOver>
 
 const DotsIcon = () => <DotsVerticalIcon width={14} height={14} />
 
@@ -64,9 +65,8 @@ const Template: StoryFn<Props> = args => (
 
 export const Default = {
   render: Template,
-
   args: {
-    defaultOpen: true,
+    align: 'center',
     side: 'bottom',
     sideOffset: 5,
   },
@@ -75,11 +75,11 @@ export const Default = {
     docs: {
       source: {
         code: `
-  //Provide a trigger for the Popover. It can be whatever you want.
-  <PopOver trigger={<Button />} side='bottom' sideOffset={5}>
-    ... Your content goes here
-  </PopOver>
-  `,
+//Provide a trigger for the Popover. It can be whatever you want.
+<PopOver trigger={<Button />} side='bottom' sideOffset={5}>
+  ... Your content goes here
+</PopOver>
+`,
       },
     },
   },

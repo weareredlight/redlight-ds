@@ -24,7 +24,7 @@ export type Props = {
 }
 
 const Modal = ({
-  open,
+  open = false,
   closeFn,
   renderTrigger,
   title,
