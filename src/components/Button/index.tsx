@@ -1,12 +1,12 @@
 import { SymbolIcon } from '@radix-ui/react-icons'
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
 
 import { StyledButton } from './styles'
 
-export type Props = {
+export type ButtonProps = {
   children?: ReactNode
   iconComponent?: React.FC
   onClick?: () => void
@@ -20,19 +20,19 @@ export type Props = {
   css?: Stitches.CSS
 }
 
-const Button = forwardRef<HTMLButtonElement, Props>(({
+const Button = React.forwardRef(({
   children,
   iconComponent,
-  variant,
-  size,
-  fullWidth,
+  variant = 'primary',
+  size = 'normal',
+  fullWidth = false,
   iconPosition = 'right',
-  isLoading,
-  type,
-  disabled,
+  isLoading = false,
+  type = 'button',
+  disabled = false,
   css,
   ...props
-}, ref) => {
+}: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
   const getIconAndText = () => {
     if (!iconComponent || !iconPosition) return children
     switch (iconPosition) {
@@ -66,7 +66,7 @@ const Button = forwardRef<HTMLButtonElement, Props>(({
       {...props}
     >
       {getIconAndText()}
-      {isLoading && <SymbolIcon />}
+      {isLoading && <SymbolIcon className='loading-icon' />}
     </StyledButton>
   )
 })

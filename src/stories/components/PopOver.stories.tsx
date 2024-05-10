@@ -1,20 +1,23 @@
 import { DotsVerticalIcon } from '@radix-ui/react-icons'
-import { Meta, Story } from '@storybook/react'
+import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 
+import type { PopOverProps } from '../../components/PopOver'
+
 import Button from '../../components/Button'
-import PopOver, { Props } from '../../components/PopOver'
+import PopOver from '../../components/PopOver'
 import Text from '../../components/Text'
 import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
 
-const meta: Meta = {
+export default {
   title: 'Components/Overlays/PopOver',
   component: PopOver,
   parameters: {
     docs: {
       description: {
-        component: 'Popover enhances usability by offering supplementary details and allowing user input, making it an effective tool for presenting information and gathering input in a compact and focused manner.'
+        component:
+          'Popover enhances usability by offering supplementary details and allowing user input, making it an effective tool for presenting information and gathering input in a compact and focused manner.',
       },
     },
     backgrounds: {
@@ -25,33 +28,34 @@ const meta: Meta = {
           value: '#F4F4F7',
         },
       ],
-    }
+    },
   },
   decorators: [CenterOnCanvas],
   argTypes: {
     side: {
       control: {
         type: 'radio',
-        options: ['left', 'top', 'right', 'bottom']
-      }
+        options: ['left', 'top', 'right', 'bottom'],
+      },
     },
-  }
-}
-export default meta
+  },
+} as Meta<typeof PopOver>
 
 const DotsIcon = () => <DotsVerticalIcon width={14} height={14} />
 
-const Template: Story<Props> = args => (
+const Template: StoryFn<PopOverProps> = args => (
   <PopOver
     {...args}
-    trigger={(
-      <Button
-        variant='textOnly'
-        iconComponent={DotsIcon}
-        iconPosition='iconOnly'
-        css={{ borderRadius: '100%' }}
-      />
-    )}
+    trigger={
+      (
+        <Button
+          variant='textOnly'
+          iconComponent={DotsIcon}
+          iconPosition='iconOnly'
+          css={{ borderRadius: '100%' }}
+        />
+      )
+    }
   >
     <Flex direction='column' css={{ padding: '1rem' }}>
       <Text variant='textBlock'>Your content...</Text>
@@ -59,21 +63,24 @@ const Template: Story<Props> = args => (
   </PopOver>
 )
 
-export const Default = Template.bind({})
-Default.args = {
-  defaultOpen: true,
-  side: 'bottom',
-  sideOffset: 5
-}
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
+export const Default = {
+  render: Template,
+  args: {
+    align: 'center',
+    side: 'bottom',
+    sideOffset: 5,
+  },
+
+  parameters: {
+    docs: {
+      source: {
+        code: `
 //Provide a trigger for the Popover. It can be whatever you want.
 <PopOver trigger={<Button />} side='bottom' sideOffset={5}>
   ... Your content goes here
 </PopOver>
-`
-    }
-  }
+`,
+      },
+    },
+  },
 }

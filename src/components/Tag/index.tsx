@@ -7,7 +7,7 @@ import Button from '../Button'
 
 import { StyledTag } from './styles'
 
-export type Props = {
+export type TagProps = {
   children: ReactNode
   variant?: Stitches.VariantProps<typeof StyledTag>['variant']
   disabled?: Stitches.VariantProps<typeof StyledTag>['disabled']
@@ -20,13 +20,13 @@ const Tag = ({
   children,
   variant,
   onClose,
-  disabled,
+  disabled = false,
   ...props
-}: Props) => (
+}: TagProps) => (
   <StyledTag
     variant={variant}
     disabled={disabled}
-    className={onClose ? 'closable' : ''}
+    className={(onClose && variant !== 'error') ? 'closable' : ''}
     {...props}
   >
     {children}

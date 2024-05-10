@@ -11,7 +11,7 @@ import {
   DialogDescription
 } from './styles'
 
-export type Props = {
+export type DialogProps = {
   open: boolean
   variant?: 'confirm' | 'success' | 'danger'
   confirmButtonText?: string
@@ -24,7 +24,7 @@ export type Props = {
 }
 
 const Dialog = ({
-  open,
+  open = false,
   variant = 'confirm',
   confirmButtonText,
   cancelButtonText,
@@ -33,7 +33,7 @@ const Dialog = ({
   description,
   children,
   onConfirm,
-}: Props) => {
+}: DialogProps) => {
   const handleConfirm = () => {
     onConfirm()
     closeFn()

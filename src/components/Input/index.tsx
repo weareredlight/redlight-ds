@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react'
+import React from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
@@ -15,7 +15,7 @@ import {
   StyledWrapper,
 } from './styles'
 
-export type Props = {
+export type InputProps = {
   id?: string
   type?: string
   name?: string
@@ -34,9 +34,10 @@ export type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   containerProps?: React.HTMLAttributes<HTMLDivElement>
   fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
+  disabled?: boolean,
 } & React.InputHTMLAttributes<HTMLInputElement>
 
-export const Input = forwardRef<HTMLInputElement, Props>(({
+const Input = React.forwardRef(({
   id,
   type = 'text',
   name,
@@ -46,17 +47,18 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
   description,
   iconComponent,
   errorMsg,
-  state,
+  state = 'null',
   iconPosition = 'right',
   onClickIcon,
   onChange,
   css,
-  variant,
+  variant = 'null',
   required = false,
   containerProps,
   fullWidth = false,
+  disabled = false,
   ...props
-}, ref) => {
+}: InputProps, ref: React.Ref<HTMLInputElement>) => {
   const renderIcon = () => {
     if (!iconComponent) return null
     if (onClickIcon) {
@@ -98,6 +100,7 @@ export const Input = forwardRef<HTMLInputElement, Props>(({
           variant={variant}
           placeholder={placeholder}
           required={required}
+          disabled={disabled}
           onChange={e => {
             let finalValue: string | null = e.target.value
             if (type === 'number') finalValue = Number(finalValue) as unknown as string

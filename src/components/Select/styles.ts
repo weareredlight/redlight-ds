@@ -34,6 +34,8 @@ export const StyledTrigger = styled(SelectInput.SelectTrigger, {
   alignItems: 'center',
   justifyContent: 'space-between',
 
+  cursor: 'pointer',
+
   '.placeholder': {
     color: '$neutral',
   },

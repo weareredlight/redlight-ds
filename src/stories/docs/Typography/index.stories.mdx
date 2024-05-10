@@ -1,13 +1,16 @@
-import { Meta } from '@storybook/addon-docs';
+import { Meta } from '@storybook/blocks';
 
 import {
   StyledDocument,
   StyledHeader,
   StyledBody,
   StyledCode,
-} from '../../Document.styles';
+  StyledSeparator
+} from '../document.styles';
 
-import TextStyles from './TextStyles.tsx'
+import TextStyles from './TextStyles'
+
+import { TextComponent, TextStitches } from '../../utils'
 
 <Meta title='Style Guides/Typography' />
 
@@ -16,7 +19,18 @@ import TextStyles from './TextStyles.tsx'
     <h2>Typography</h2>
     <p>ver 1.0.0 | Last updated: 18/07/2023</p>
   </StyledHeader>
+
   <StyledBody>
+    <p>Typography is the art and technique of organising "type" to make written language legible and appealing when displayed. The choice of typography is fundamental not only to the appearance of a product or service, but also to the impact of what it is intended to communicate. By carefully considering this process, we ensure consistency and clarity in communicating information to users.</p>
+    <br />
+    <span className="sub-heading">How to Use</span>
+    <p>You can use the existing text hierarchy as a component:</p>
+    <StyledCode style={{width: '100%'}}>{TextComponent}</StyledCode>
+    <p>Or you can use it in the stitches style files using mixins:</p>
+    <StyledCode style={{width: '100%'}}>{TextStitches}</StyledCode>
+    <br />
+    <StyledSeparator />
+    <br />
     <TextStyles />
   </StyledBody>
 </StyledDocument>

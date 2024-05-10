@@ -4,19 +4,19 @@ import type { ReactNode } from 'react'
 
 import { StyledText } from './styles'
 
-export type Props = {
+export type TextProps = {
   variant?: Stitches.VariantProps<typeof StyledText>['variant']
   color?: ColorType
   css?: Stitches.CSS
   children?: string | ReactNode
 }
 
-const Text = ({
+export const Text = ({
   color = 'primary',
   children,
   css,
   ...props
-}: Props) => (
+}: TextProps) => (
   <StyledText css={{ color: `$${color}`, ...css }} {...props}>
     {children}
   </StyledText>

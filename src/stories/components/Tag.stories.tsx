@@ -1,9 +1,8 @@
-import { Meta, Story } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Tag, { Props } from '../../components/Tag'
+import Tag from '../../components/Tag'
 
-const meta: Meta = {
+const meta = {
   title: 'Components/Displays/Tag',
   component: Tag,
   parameters: {
@@ -13,97 +12,72 @@ const meta: Meta = {
       },
     },
   },
+  args: {
+    children: 'Tag Example',
+  },
   argTypes: {
     variant: {
-      control: {
-        type: 'radio',
-        options: ['default', 'error']
-      }
-    },
-    closable: {
-      control: 'boolean'
+      control: 'radio',
+      options: ['default', 'error']
     },
     disabled: {
       control: 'boolean'
     },
   }
-}
+} satisfies Meta<typeof Tag>
+
 export default meta
+type Story = StoryObj<typeof meta>
 
-const Template: Story<Props> = args => <Tag {...args}>Tag Example</Tag>
-
-export const aDefault = Template.bind({})
-aDefault.args = {
-  variant: 'default',
-  closable: false,
-  disabled: false,
-}
-aDefault.parameters = {
-  docs: {
-    source: {
-      code: `
-<Tag>Tag Example</Tag>
-`
+export const Primary: Story = {
+  args: {
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This is the default tag.'
+      }
     }
   }
 }
-aDefault.story = {
-  name: 'Default',
-}
 
-export const bClosable = Template.bind({})
-bClosable.args = {
-  closable: true,
-  // eslint-disable-next-line no-alert
-  onClose: () => alert('Are you sure you want to remove?')
-}
-bClosable.parameters = {
-  docs: {
-    storyDescription: 'When you have a group of tags you can delete them by pressing the cross button.',
-    source: {
-      code: `
-<Tag closable onClose={updateTags()}>Tag Example</Tag>
-`
+export const Closable: Story = {
+  args: {
+    // eslint-disable-next-line no-alert
+    onClose: () => alert('Are you sure you want to remove this tag?')
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When you have a group of tags you can delete them by pressing the cross button.'
+      }
     }
   }
 }
-bClosable.story = {
-  name: 'Closable',
-}
 
-export const cError = Template.bind({})
-cError.args = {
-  variant: 'error',
-}
-cError.parameters = {
-  docs: {
-    storyDescription: 'Tags can also be used to indicate potential errors or dangerous actions.',
-    source: {
-      code: `
-<Tag variant='error'>Tag Example</Tag>
-`
+export const Error: Story = {
+  args: {
+    variant: 'error',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Tags can also be used to indicate potential errors or dangerous actions.'
+      }
     }
   }
 }
-cError.story = {
-  name: 'Error',
-}
 
-export const dDisabled = Template.bind({})
-dDisabled.args = {
-  disabled: true,
-  closable: true
-}
-dDisabled.parameters = {
-  docs: {
-    storyDescription: 'You can prevent the user from deleting tags.',
-    source: {
-      code: `
-<Tag closable disabled>Tag Example</Tag>
-`
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can prevent the user from deleting tags.'
+      }
     }
   }
-}
-dDisabled.story = {
-  name: 'Disabled',
 }

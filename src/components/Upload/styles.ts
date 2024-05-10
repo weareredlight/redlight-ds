@@ -120,7 +120,8 @@ export const StyledUpload = styled('div', {
             padding: '$xxxsm',
             top: 0,
             left: 0,
-            borderRadius: '$sm'
+            borderRadius: '$sm',
+            pointerEvents: 'none',
           },
         },
         [`& ${StyledTrigger}`]: {
@@ -130,6 +131,14 @@ export const StyledUpload = styled('div', {
             width: '16px',
             height: '16px'
           },
+        },
+
+        '&:hover': {
+          [`& ${StyledFile}`]: {
+            img: {
+              opacity: '0.5',
+            },
+          }
         }
       }
     },

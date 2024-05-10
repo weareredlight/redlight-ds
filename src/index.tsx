@@ -1,3 +1,35 @@
+import type { AvatarProps } from './components/Avatar'
+import type { ButtonProps } from './components/Button'
+import type { CheckboxProps } from './components/Checkbox'
+import type { DatePickerProps } from './components/DatePicker'
+import type { DialogProps } from './components/Dialog'
+import type { GroupButtonsProps } from './components/GroupButtons'
+import type { InputProps } from './components/Input'
+import type { LinkProps } from './components/Link'
+import type { ModalProps } from './components/Modal'
+import type { MultiSelectProps } from './components/MultiSelect'
+import type { PaginationProps } from './components/Pagination'
+import type { PillProps } from './components/Pill'
+import type { PopOverProps } from './components/PopOver'
+import type { RadioProps } from './components/Radio'
+import type { SelectProps } from './components/Select'
+import type { LabelProps } from './components/shared/Label'
+import type {
+  TableProps,
+  ColumnDef,
+  SortingState,
+  ColumnSort,
+} from './components/Table'
+import type { TabsProps } from './components/Tabs'
+import type { TagProps } from './components/Tag'
+import type { TextProps } from './components/Text'
+import type { TextAreaProps } from './components/TextArea'
+import type { TimePickerProps } from './components/TimePicker'
+import type { ToggleProps } from './components/Toggle'
+import type { TooltipProps } from './components/Tooltip'
+import type { UploadProps } from './components/Upload'
+import type { ColorType } from './stitches'
+
 import alert, { ToastContainer } from './components/Alert'
 import Avatar from './components/Avatar'
 import { StyledAvatar } from './components/Avatar/styles'
@@ -28,7 +60,15 @@ import Select from './components/Select'
 import { StyledSelect } from './components/Select/styles'
 import Label from './components/shared/Label'
 import { StyledLabel } from './components/shared/Label/styles'
-import Table from './components/Table'
+import Table, {
+  defaultColumnOptions,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+  createColumnHelper,
+} from './components/Table'
 import { StyledTable } from './components/Table/styles'
 import Tabs from './components/Tabs'
 import { StyledTabs } from './components/Tabs/styles'
@@ -51,13 +91,53 @@ import {
   styled,
   theme,
   css,
-  ColorType,
   colorOptions,
   getColor,
 } from './stitches'
 
+export type {
+  AvatarProps,
+  ButtonProps,
+  CheckboxProps,
+  DatePickerProps,
+  DialogProps,
+  GroupButtonsProps,
+  InputProps,
+  LinkProps,
+  ModalProps,
+  MultiSelectProps,
+  PaginationProps,
+  PillProps,
+  PopOverProps,
+  RadioProps,
+  SelectProps,
+  LabelProps,
+  TableProps,
+  TabsProps,
+  TagProps,
+  TextProps,
+  TextAreaProps,
+  TimePickerProps,
+  ToggleProps,
+  TooltipProps,
+  UploadProps,
+  ColorType,
+}
+
 export {
+  setupTheme,
+  styled,
+  theme,
+  css,
+  colorOptions,
+  getColor,
+}
+
+export {
+  // Alert imports
   alert,
+  ToastContainer,
+  // Components imports
   Avatar,
   Button,
   Checkbox,
@@ -73,25 +153,29 @@ export {
   PopOver,
   Radio,
   Select,
+  // Table imports
   Table,
+  defaultColumnOptions,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+  createColumnHelper,
+  ColumnDef,
+  SortingState,
+  ColumnSort,
+  //
   Tabs,
   Tag,
   TextArea,
   TimePicker,
-  ToastContainer,
   Toggle,
   Tooltip,
   Upload,
   Text,
   Label,
   Flex,
-  setupTheme,
-  styled,
-  theme,
-  css,
-  ColorType,
-  colorOptions,
-  getColor,
 }
 
 export {

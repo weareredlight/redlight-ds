@@ -8,7 +8,7 @@ import {
   StyledRadio, StyledTrigger, StyledIndicator
 } from './styles'
 
-export type Props = {
+export type RadioProps = {
   label?: string,
   description?: string,
   name?: string,
@@ -27,11 +27,11 @@ const Radio = ({
   label,
   description,
   checked,
-  disabled,
+  disabled = false,
   labelPosition = 'right',
   onChange,
   ...props
-}: Props) => (
+}: RadioProps) => (
   <StyledRadio disabled={disabled} {...props}>
     {labelPosition === 'left' ? (
       <>

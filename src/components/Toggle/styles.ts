@@ -52,6 +52,7 @@ export const StyledTrigger = styled(Switch.Root, {
   position: 'relative',
   WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
   outline: '1px solid transparent',
+  cursor: 'pointer',
 
   '&:hover': {
     backgroundColor: '$neutral600',
@@ -78,10 +79,7 @@ export const StyledTrigger = styled(Switch.Root, {
       dirty: {
         outlineColor: '$accent',
       },
-      null: {}
-    },
-    disabled: {
-      true: {
+      disabled: {
         backgroundColor: '$neutral300',
         [`& ${StyledThumb}`]: {
           backgroundColor: '$neutral400',
@@ -90,6 +88,7 @@ export const StyledTrigger = styled(Switch.Root, {
           backgroundColor: '$neutral300',
         },
       },
+      null: {},
     }
   },
 })

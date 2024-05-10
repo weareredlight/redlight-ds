@@ -7,7 +7,7 @@ import Button from '../Button'
 
 import { StyledPill } from './styles'
 
-export type Props = {
+export type PillProps = {
   children: ReactNode
   variant?: Stitches.VariantProps<typeof StyledPill>['variant']
   onClose?: () => void
@@ -18,11 +18,11 @@ const CloseIcon = () => <Cross2Icon />
 
 const Pill = ({
   children,
-  variant,
+  variant = 'default',
   onClose,
   css,
   ...props
-}: Props) => (
+}: PillProps) => (
   <StyledPill
     variant={variant}
     css={{ ...css }}
@@ -39,9 +39,5 @@ const Pill = ({
     )}
   </StyledPill>
 )
-
-Pill.defaultProps = {
-  onClose: null
-}
 
 export default Pill

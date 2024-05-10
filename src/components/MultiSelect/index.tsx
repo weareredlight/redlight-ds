@@ -1,6 +1,7 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import Select, { components } from 'react-select'
 
+import type * as Stitches from '@stitches/react'
 import type {
   DropdownIndicatorProps,
   MultiValue,
@@ -12,10 +13,10 @@ import Pill from '../Pill'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import { selectStyles, selectWrapper } from './styles'
+import { selectStyles, SelectWrapper } from './styles'
 
 type OptionType = { label: string; value: string }
-type MultiSelectProps = {
+export type MultiSelectProps = {
   name: string
   label?: string
   value: string[]
@@ -24,6 +25,7 @@ type MultiSelectProps = {
   placeholder?: string
   hasPills?: boolean
   getLabel: (value: string) => string
+  state?: Stitches.VariantProps<typeof SelectWrapper>['state']
   errorMsg?: string
   fullWidth?: boolean
 }
@@ -56,6 +58,7 @@ const MultiSelect = ({
   placeholder,
   hasPills = false,
   getLabel,
+  state = 'null',
   errorMsg,
   fullWidth = false,
 }: MultiSelectProps) => {
@@ -76,7 +79,7 @@ const MultiSelect = ({
       css={{ width: fullWidth ? '100%' : 'fit-content' }}
     >
       {label && <Label id={name} label={label} />}
-      <div className={selectWrapper()}>
+      <SelectWrapper state={state}>
         <Select
           id={name}
           value={
@@ -98,6 +101,7 @@ const MultiSelect = ({
           hideSelectedOptions={false}
           isClearable={false}
           styles={selectStyles}
+          isDisabled={state === 'disabled'}
           components={{
             DropdownIndicator,
             Option: props => CustomOption(props),
@@ -110,8 +114,8 @@ const MultiSelect = ({
             </Text>
           </Flex>
         )}
-      </div>
-      {errorMsg && (
+      </SelectWrapper>
+      {(state === 'error' && errorMsg) && (
         <Text color='danger' variant='microCopy'>
           {errorMsg}
         </Text>

@@ -1,3 +1,4 @@
+/* eslint-disable no-plusplus */
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import React, { useState } from 'react'
 
@@ -7,7 +8,7 @@ import Button from '../Button'
 
 import { StyledPagination } from './styles'
 
-type PaginationProps = {
+export type PaginationProps = {
   currentPage?: number
   totalPages: number
   onPageChange: (page: number) => void
@@ -40,8 +41,7 @@ const Pagination: React.FC<PaginationProps> = ({
     }
 
     // Generate the page numbers
-    // eslint-disable-next-line no-plusplus, semi-spacing
-    for (let i = start;i <= end;i++) {
+    for (let i = start; i <= end; i++) {
       pageNumbers.push(i)
     }
 

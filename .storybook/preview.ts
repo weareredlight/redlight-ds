@@ -1,28 +1,34 @@
+import type { Preview } from "@storybook/react";
+
 import RedTheme from './theme'
 
-export const parameters = {
-  actions: { argTypesRegex: "^on[A-Z].*" },
-  options: {
-    storySort: {
-      order: [
-        'Get Started',
-        'Style Guides', ['Typography', 'Colors'],
-        'Components'
-      ],
+const preview: Preview = {
+  parameters: {
+    actions: { argTypesRegex: "^on[A-Z].*" },
+    options: {
+      storySort: {
+        order: [
+          'Get Started',
+          'Style Guides', ['Typography', 'Colors'],
+          'Components'
+        ],
+      },
     },
-  },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
+    controls: {
+      matchers: {
+        color: /(background|color)$/i,
+        date: /Date$/,
+      },
     },
-  },
-  docs: {
-    theme: RedTheme,
-    previewSource: 'open',
-  },
-  viewMode: 'docs'
+    docs: {
+      theme: RedTheme,
+      previewSource: 'open',
+    },
+    viewMode: 'docs'
+  }
 }
+
+export default preview
 
 export const globalTypes = {
   containerSize: {

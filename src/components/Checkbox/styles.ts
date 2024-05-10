@@ -61,6 +61,19 @@ export const StyledTrigger = styled('input', {
   },
 
   variants: {
+    state: {
+      error: {
+        '+ label': {
+          borderColor: '$danger',
+        }
+      },
+      dirty: {
+        '+ label': {
+          borderColor: '$accent',
+        }
+      },
+      null: {}
+    },
     disabled: {
       true: {
         '+ label': {

@@ -16,14 +16,14 @@ export enum PickerTypes {
   TIME = 'time',
 }
 
-type TimePickerProps = {
+export type TimePickerProps = {
   name?: string
   label?: string
   description?: string
   value?: string
   onChange: (time: ChangeEvent<HTMLInputElement> | string) => void
   error?: string | null
-  type?: PickerTypes
+  type?: PickerTypes | 'time' | 'duration'
   disabled?: boolean
   fullWidth?: boolean
 }
@@ -39,7 +39,7 @@ const TimePicker = ({
   disabled = false,
   fullWidth = false,
 }: TimePickerProps) => (
-  <StyledTimePicker hasError={Boolean(error)} fullWidth={fullWidth}>
+  <StyledTimePicker hasError={Boolean(error)} fullWidth={fullWidth} disabled={disabled}>
     {label && <Label id={name} label={label} description={description} />}
     {type === PickerTypes.TIME ? (
       <ReactTimePicker
@@ -49,7 +49,6 @@ const TimePicker = ({
         clearIcon={false}
         className='timePickerMain'
         clockIcon={<ClockIcon />}
-        disabled={disabled}
       />
     ) : (
       <StyledDurationPicker
@@ -66,8 +65,7 @@ const TimePicker = ({
           const isMinAllowed = Number(time[1]) ? Number(time[1]) < 60 : true
           return isHoursAllowed && isMinAllowed
         }}
-        hasError={Boolean(error)}
-        disabled={disabled}
+        fullWidth={fullWidth}
       />
     )}
     {error && (

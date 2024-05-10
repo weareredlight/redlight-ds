@@ -1,130 +1,100 @@
-import { Meta, Story } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Pill, { Props } from '../../components/Pill'
+import Pill from '../../components/Pill'
 
-const meta: Meta = {
+const meta = {
   title: 'Components/Displays/Pill',
   component: Pill,
   parameters: {
     docs: {
       description: {
-        component: 'Small, fully rounded rectangle that can be used to visually display and select different options or categories. It is typically used to represent discrete values, such as different statuses or types of content. Each pill is typically labeled with a text label, can be removed by clicking on the cross icon to the right.'
+        component:
+          'Small, fully rounded rectangle that can be used to visually display and select different options or categories. It is typically used to represent discrete values, such as different statuses or types of content. Each pill is typically labeled with a text label, can be removed by clicking on the cross icon to the right.',
       },
     },
   },
+  args: {
+    children: 'Pill Example',
+  },
   argTypes: {
     variant: {
-      control: {
-        type: 'radio',
-        options: ['default', 'error', 'success']
-      }
+      control: 'radio',
+      options: ['default', 'error', 'success'],
     },
-  }
-}
+  },
+} satisfies Meta<typeof Pill>
+
 export default meta
+type Story = StoryObj<typeof meta>
 
-const Template: Story<Props> = args => <Pill {...args}>Pill Example</Pill>
-
-export const aDefault = Template.bind({})
-aDefault.story = {
-  name: 'Default',
-}
-
-export const bSuccess = Template.bind({})
-bSuccess.args = {
-  variant: 'success',
-}
-bSuccess.parameters = {
-  docs: {
-    storyDescription: 'This variation can label successful outcomes.',
-    source: {
-      code: `
-<Pill
-  variant='success'
->
-  Pill Example
-</Pill>
-`
+export const Default: Story = {
+  args: {
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This is the default pill.'
+      }
     }
   }
 }
-bSuccess.story = {
-  name: 'Success',
+
+export const Success: Story = {
+  args: {
+    variant: 'success',
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This variation can label successful outcomes.'
+      }
+    }
+  }
 }
 
-export const cError = Template.bind({})
-cError.args = {
-  variant: 'error',
-}
-cError.parameters = {
-  docs: {
-    storyDescription: 'This variation can label error outcomes.',
-    source: {
-      code: `
-<Pill
-  variant='error'
->
-  Pill Example
-</Pill>
-`
+export const Error: Story = {
+  args: {
+    variant: 'error',
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This variation can label errors.'
+      }
     }
   }
-}
-cError.story = {
-  name: 'Error',
 }
 
-export const dClosable = Template.bind({})
-dClosable.args = {
-  variant: 'default',
-  // eslint-disable-next-line no-alert
-  onClose: () => alert('Are you sure you want to remove?')
-}
-dClosable.parameters = {
-  docs: {
-    storyDescription: 'When you have a group of pills you can delete them by pressing the cross button.',
-    source: {
-      code: `
-<Pill
-  onClose={updatePills()}
->
-  Pill Example
-</Pill>
-`
+export const Closable: Story = {
+  args: {
+    // eslint-disable-next-line no-alert
+    onClose: () => alert('Are you sure you want to remove?'),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When you have a group of pills you can delete them by pressing the cross button.'
+      }
     }
   }
-}
-dClosable.story = {
-  name: 'Closable',
 }
 
-export const eCustomColors = Template.bind({})
-eCustomColors.args = {
-  css: {
-    backgroundColor: 'yellow',
-    color: 'green'
-  }
-}
-eCustomColors.parameters = {
-  docs: {
-    storyDescription: 'You can add custom CSS to your pill in order to create your own variations.',
-    source: {
-      code: `
-<Pill
-  css={
-    {
-      backgroundColor:'yellow',
-      color:'green'
+export const customCSS: Story = {
+  args: {
+    css: {
+      backgroundColor: 'yellow',
+      color: 'green'
+    },
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can add custom CSS to your pill in order to create your own variations.'
+      }
     }
   }
->
-  Pill Example
-</Pill>
-`
-    }
-  }
-}
-eCustomColors.story = {
-  name: 'Custom Colors',
 }

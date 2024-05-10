@@ -9,25 +9,32 @@ import {
   PopoverContent,
 } from './styles'
 
-export type Props = {
+export type PopOverProps = {
   trigger?: React.ReactNode
   children: React.ReactNode
   side?: 'top' | 'right' | 'bottom' | 'left'
   align?: 'start' | 'center' | 'end'
+  sideOffset?: number
 }
 
 const PopOver = ({
   trigger,
   children,
   side = 'right',
-  align = 'center'
-}: Props) => (
+  align = 'center',
+  sideOffset = 5,
+}: PopOverProps) => (
   <StyledPopOver>
-    <Popover.Trigger>
+    <Popover.Trigger asChild>
       {trigger}
     </Popover.Trigger>
     <Popover.Portal>
-      <PopoverContent side={side} align={align} onOpenAutoFocus={event => event.preventDefault()}>
+      <PopoverContent
+        side={side}
+        sideOffset={sideOffset}
+        align={align}
+        onOpenAutoFocus={event => event.preventDefault()}
+      >
         {children}
         <PopoverClose aria-label='Close'>
           <Cross2Icon />

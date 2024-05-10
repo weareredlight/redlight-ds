@@ -1,0 +1,208 @@
+🔎 checking possible migrations..
+
+🔎 found a 'new-frameworks' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   We've detected your project is not fully setup with Storybook's 7 new framework format.             │
+│                                                                                                       │
+│   Storybook 7 introduced the concept of frameworks, which abstracts configuration for renderers       │
+│   (e.g. React, Vue), builders (e.g. Webpack, Vite) and defaults to make integrations easier.          │
+│                                                                                                       │
+│   Your project should be updated to use Storybook's framework: @storybook/react-vite. We can          │
+│   attempt to do this for you automatically.                                                           │
+│                                                                                                       │
+│   Here are the steps this migration will do to migrate your project:                                  │
+│   - Update or specify the framework field in .storybook/main.ts with the value of                     │
+│   "@storybook/react-vite".                                                                            │
+│   - Move the core.builder.options field in .storybook/main.ts to framework.options.builder            │
+│   - Remove the core.builder field in .storybook/main.ts.                                              │
+│                                                                                                       │
+│                                                                                                       │
+│   To learn more about the new framework format, see:                                                  │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#new-framework-api                   │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'new-frameworks' migration on your project? › (Y/n)✔ Do you want to run the 'new-frameworks' migration on your project? … yes
+✅ Updating main.js
+✅ Updating "framework" field
+✅ Removing "core.builder" field
+✅ Moving "core.builder.options" into "framework.options.builder"
+✅ Removing "core" field
+✅ ran new-frameworks migration
+
+🔎 found a 'viteConfigFile' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Storybook 8.0.0 no longer ships with a Vite config build-in.                                        │
+│   Please add a vite.config.js file to your project root.                                              │
+│                                                                                                       │
+│   You can find more information on how to do this here:                                               │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#framework-specific-vite-plugins-h   │
+│   ave-to-be-explicitly-added                                                                          │
+│                                                                                                       │
+│   This change was necessary to support newer versions of Vite.                                        │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'viteConfigFile' migration on your project? › (Y/n)✔ Do you want to run the 'viteConfigFile' migration on your project? … yes
+❌ error when running viteConfigFile migration
+Error: Invariant failed: run method should be available in fix.
+    at invariant (/Users/diogoribeiro/.npm/_npx/eb8bf615e50a412a/node_modules/tiny-invariant/dist/tiny-invariant.cjs.js:14:11)
+    at runFixes (/Users/diogoribeiro/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:544:1595)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async automigrate (/Users/diogoribeiro/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:542:1403)
+    at async Command.<anonymous> (/Users/diogoribeiro/.npm/_npx/eb8bf615e50a412a/node_modules/@storybook/cli/dist/generate.js:642:2803)
+
+Unable to find .eslintrc config file, skipping
+
+🔎 found a 'remove-argtypes-regex' migration:
+╭ Manual migration detected ────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Attention: We've detected that you're using argTypesRegex:                                          │
+│                                                                                                       │
+│   .storybook/preview.js                                                                               │
+│   2 |                                                                                                 │
+│   3 | export const parameters = {                                                                     │
+│   > 4 |   actions: { argTypesRegex: "^on[A-Z].*" },                                                   │
+│   |              ^^^^^^^^^^^^^                                                                        │
+│   5 |   options: {                                                                                    │
+│   6 |     storySort: {                                                                                │
+│   7 |       order: [                                                                                  │
+│                                                                                                       │
+│   In Storybook 8, we recommend removing this regex.                                                   │
+│   Assign explicit spies with the fn function instead:                                                 │
+│                                                                                                       │
+│   1 | import { fn } from '@storybook/test';                                                           │
+│   2 | export default {                                                                                │
+│   > 3 |   args: { onClick: fn() }, // will log to the action panel when clicked                       │
+│   |                    ^^                                                                             │
+│   4 | };                                                                                              │
+│                                                                                                       │
+│   The above pattern is needed when using spies in the play function, even if you keep using           │
+│   argTypesRegex.                                                                                      │
+│   Implicit spies (based on a combination of argTypesRegex and docgen) is not supported in Storybook   │
+│   8.                                                                                                  │
+│                                                                                                       │
+│   Use the following command to check for spy usages in your play functions:                           │
+│   npx storybook migrate find-implicit-spies --glob="**/*.stories.@(js|jsx|ts|tsx)"                    │
+│                                                                                                       │
+│   Make sure to assign an explicit fn to your args for those usages.                                   │
+│                                                                                                       │
+│   For more information please visit our migration guide:                                              │
+│   https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#implicit-actions-can-not-be-used-   │
+│   during-rendering-for-example-in-the-play-function                                                   │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+? Select continue once you have made the required changes, or quit to exit the migration process › quit / continue✔ Select continue once you have made the required changes, or quit to exit the migration process … quit / continue
+
+🔎 found a 'remove-jest-testing-library' migration:
+╭ Manual migration detected ────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Attention: We've detected that you're using the following packages which are known to be            │
+│   incompatible with Storybook 8:                                                                      │
+│                                                                                                       │
+│   - @storybook/testing-library                                                                        │
+│                                                                                                       │
+│   Install the replacement for those packages: @storybook/test                                         │
+│                                                                                                       │
+│   And run the following codemod:                                                                      │
+│   npx storybook migrate migrate-to-test-package --glob="**/*.stories.@(js|jsx|ts|tsx)"                │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+? Select continue once you have made the required changes, or quit to exit the migration process › quit / continue✔ Select continue once you have made the required changes, or quit to exit the migration process … quit / continue
+
+🔎 found a 'mdx1to2' migration:
+╭ Automigration detected ───────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   We've found 3 '.stories.mdx' files in your project.                                                 │
+│                                                                                                       │
+│   Storybook has upgraded to MDX2 (https://mdxjs.com/blog/v2/), which contains breaking changes from   │
+│   MDX1.                                                                                               │
+│   We can try to automatically upgrade your MDX files to MDX2 format using some common patterns.       │
+│                                                                                                       │
+│   After this install completes, and before you start Storybook, we strongly recommend reading the     │
+│   MDX2 section                                                                                        │
+│   of the 7.0 migration guide. It contains useful tools for detecting and fixing any remaining         │
+│   issues.                                                                                             │
+│                                                                                                       │
+│   https://storybook.js.org/migration-guides/7.0                                                       │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+? Do you want to run the 'mdx1to2' migration on your project? › (Y/n)✔ Do you want to run the 'mdx1to2' migration on your project? … yes
+🆗 Unmodified index.stories.mdx
+🆗 Unmodified index.stories.mdx
+🆗 Unmodified Intro.stories.mdx
+✅ ran mdx1to2 migration
+
+╭ Migration check ran with failures ────────────────────────────────────────────────────────────────────╮
+│                                                                                                       │
+│   Successful migrations:                                                                              │
+│                                                                                                       │
+│   new-frameworks, mdx1to2                                                                             │
+│                                                                                                       │
+│   Failed migrations:                                                                                  │
+│                                                                                                       │
+│   viteConfigFile:                                                                                     │
+│   Invariant failed: run method should be available in fix.                                            │
+│                                                                                                       │
+│   You can find the full logs in /Users/diogoribeiro/redlight/redlight-ds/migration-storybook.log      │
+│                                                                                                       │
+│   Manual migrations:                                                                                  │
+│                                                                                                       │
+│   remove-argtypes-regex, remove-jest-testing-library                                                  │
+│                                                                                                       │
+│   ─────────────────────────────────────────────────                                                   │
+│                                                                                                       │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook@next             │
+│   automigrate'                                                                                        │
+│                                                                                                       │
+│   The automigrations try to migrate common patterns in your project, but might not contain            │
+│   everything needed to migrate to the latest version of Storybook.                                    │
+│                                                                                                       │
+│   Please check the changelog and migration guide for manual migrations and more information:          │
+│   https://storybook.js.org/migration-guides/7.0                                                       │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                             │
+│                                                                                                       │
+│   ─────────────────────────────────────────────────                                                   │
+│                                                                                                       │
+│   Critical: The following dependencies are duplicated and WILL cause unexpected behavior:             │
+│                                                                                                       │
+│   @storybook/core-events:                                                                             │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│   @storybook/core-server:                                                                             │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│   @storybook/core-common:                                                                             │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│   Attention: The following dependencies are duplicated which might cause unexpected behavior:         │
+│                                                                                                       │
+│   @storybook/channels:                                                                                │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│   @storybook/csf-tools:                                                                               │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│   @storybook/node-logger:                                                                             │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│   @storybook/telemetry:                                                                               │
+│   7.6.17, 6.5.16                                                                                      │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│   You can find more information for a given dependency by running yarn why <package-name>             │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│                                                                                                       │
+│   Please try de-duplicating these dependencies by running yarn dedupe                                 │
+│                                                                                                       │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────╯
+

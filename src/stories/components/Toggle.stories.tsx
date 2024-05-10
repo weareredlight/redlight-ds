@@ -1,56 +1,74 @@
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import type { Meta, Story } from '@storybook/react'
+import Toggle from '../../components/Toggle'
 
-import Toggle, { Props } from '../../components/Toggle'
-
-const meta: Meta = {
+export default {
   title: 'Components/Data Input/Toggle',
   component: Toggle,
   parameters: {
     docs: {
       description: {
-        component: 'Toggle is a control that is used to quickly switch between two possible states. Toggles are only used for these binary actions that occur immediately after the user “flips the switch”. They are commonly used for “on/off” switches.'
+        component:
+          'Toggle is a control that is used to quickly switch between two possible states. Toggles are only used for these binary actions that occur immediately after the user “flips the switch”. They are commonly used for “on/off” switches.',
       },
     },
   },
   argTypes: {
     label: {
-      control: { type: 'text' }
+      control: 'text',
     },
     description: {
-      control: { type: 'text' }
+      control: 'text',
     },
     labelPosition: {
-      control: { type: 'select' },
-      options: ['left', 'right']
+      control: 'radio',
+      options: ['left', 'right'],
     },
-    disabled: {
-      control: 'boolean'
+    state: {
+      control: { type: 'radio' },
+      options: ['null', 'error', 'dirty', 'disabled'],
     }
-  }
-}
-export default meta
+  },
+} satisfies Meta<typeof Toggle>
 
-const Template: Story<Props> = args => <Toggle {...args} />
+type Story = StoryObj<typeof Toggle>
 
-export const Default = Template.bind({})
-Default.args = {
-  id: 'toggle-example',
-  label: 'This is the label',
-  description: 'This is the description',
-  labelPosition: 'right'
+export const Default: Story = {
+  args: {
+    id: 'toggle-example',
+    label: 'This is the label',
+    description: 'This is the description',
+  },
 }
 
-export const Error = Template.bind({})
-Error.args = {
-  id: 'toggle-example',
-  label: 'This is the label',
-  state: 'error',
-  errorMsg: 'don\'t forget to toggle this option'
+export const labelPosition: Story = {
+  args: {
+    id: 'toggle-left',
+    label: 'This is the label',
+    labelPosition: 'left',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Using the "labelPosition" prop, you can change the position of the label.',
+      },
+    },
+  },
 }
-Error.parameters = {
-  docs: {
-    storyDescription: 'If there is an error, it will turn red and may also show a custom error message',
-  }
+
+export const Error: Story = {
+  args: {
+    id: 'toggle-error-example',
+    label: 'This is the label',
+    state: 'error',
+    errorMsg: "Don't forget to toggle this option",
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'If there is an error, it will turn red and may also show a custom error message'
+      }
+    },
+  },
 }

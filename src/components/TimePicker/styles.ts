@@ -57,6 +57,20 @@ export const StyledTimePicker = styled('div', {
         },
       },
     },
+    disabled: {
+      true: {
+        '.timePickerMain > div': {
+          backgroundColor: '$neutral200',
+          borderColor: '$neutral200',
+          color: '$neutral',
+          pointerEvents: 'none',
+
+          '.react-time-picker__inputGroup__input:valid': {
+            color: '$neutral',
+          },
+        },
+      },
+    },
     fullWidth: {
       true: {
         width: '100%',
@@ -69,7 +83,6 @@ export const StyledTimePicker = styled('div', {
 })
 
 export const StyledDurationPicker = styled(PatternFormat, {
-  width: '100%',
   height: '$xxxlg',
   padding: '$xxsm $xsm $xxsm $xxsm',
   borderRadius: '$xsm',

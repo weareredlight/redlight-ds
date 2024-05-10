@@ -6,7 +6,7 @@ import {
   StyledAvatar, StyledPlaceHolder, StyledStatus
 } from './styles'
 
-export type Props = {
+export type AvatarProps = {
   size?: Stitches.VariantProps<typeof StyledPlaceHolder>['size'],
   name: string,
   displayLabel?: boolean,
@@ -17,15 +17,15 @@ export type Props = {
 }
 
 const Avatar = ({
-  size,
+  size = 'normal',
   name,
-  displayLabel,
+  displayLabel = false,
   description,
-  online,
+  online = false,
   url,
   width,
   ...props
-}: Props) => {
+}: AvatarProps) => {
   const initials = name.split(' ').map(text => text.charAt(0)).join('')
 
   return (

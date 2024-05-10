@@ -5,7 +5,7 @@ import Text from '../Text'
 
 import { TooltipArrow, TooltipContent, TooltipTrigger } from './styles'
 
-export type Props = {
+export type TooltipProps = {
   children: React.ReactNode
   content: string
   side?: 'top' | 'right' | 'bottom' | 'left'
@@ -17,7 +17,7 @@ const Tooltip = ({
   content,
   side = 'right',
   delay = 50,
-}: Props) => (
+}: TooltipProps) => (
   <RadixTooltip.Provider delayDuration={delay}>
     <RadixTooltip.Root>
       <TooltipTrigger>

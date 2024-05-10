@@ -26,14 +26,14 @@ const defaultOptions: ToastOptions = {
     flexDirection: 'column',
     gap: 'var(--space-xxsm)',
     maxHeight: 'unset',
-    backdropFilter: 'blur(5px)',
+    backdropFilter: 'blur(2px)',
   },
   bodyStyle: {
     position: 'relative',
     paddingRight: 'var(--space-xxxlg)',
   },
   progressStyle: {
-    height: '2px'
+    height: '5px'
   },
 }
 

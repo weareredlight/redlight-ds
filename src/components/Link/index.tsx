@@ -4,7 +4,7 @@ import type * as Stitches from '@stitches/react'
 
 import { StyledLink } from './styles'
 
-export type Props = {
+export type LinkProps = {
   href: string,
   children: ReactNode,
   openInNewTab?: boolean
@@ -17,11 +17,11 @@ const Link = ({
   href,
   children,
   openInNewTab = true,
-  size,
-  danger,
-  darkBackground,
+  size = 'regular',
+  danger = false,
+  darkBackground = false,
   ...props
-}: Props) => (
+}: LinkProps) => (
   <StyledLink
     href={href}
     target={openInNewTab ? '_blank' : ''}

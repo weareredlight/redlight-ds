@@ -89,13 +89,18 @@ export const StyledInputField = styled('input', {
   '&::value': {
     color: '$neutral800',
   },
-
   '&:hover': {
     backgroundColor: '$neutral100',
     borderColor: '$neutral600',
   },
   '&:focus': {
     borderColor: '$primary',
+  },
+  '&:disabled': {
+    backgroundColor: '$neutral200',
+    borderColor: '$neutral200',
+    color: '$neutral',
+    pointerEvents: 'none',
   },
 
   variants: {

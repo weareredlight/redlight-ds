@@ -31,8 +31,7 @@ export const CenterOnCanvas = (Story: any) => {
   )
 }
 
-export const darkBackgroundCanvas = (Story: any) => {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
+export const DarkBackgroundCanvas = (Story: any) => {
   const firstRender = useRef(true)
 
   firstRender.current = false

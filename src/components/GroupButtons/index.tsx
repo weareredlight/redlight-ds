@@ -3,7 +3,8 @@ import Button from '../Button'
 import { StyledGroupButtons } from './styles'
 
 type OptionType = { label: string; value: string }
-type ButtonGroupProps = {
+
+export type GroupButtonsProps = {
   buttons: OptionType[]
   selectedButton: string
   onButtonSelect: (button: string) => void
@@ -13,7 +14,7 @@ const GroupButtons = ({
   buttons,
   selectedButton,
   onButtonSelect,
-}: ButtonGroupProps) => (
+}: GroupButtonsProps) => (
   <StyledGroupButtons>
     {buttons.map((button, index) => (
       <Button

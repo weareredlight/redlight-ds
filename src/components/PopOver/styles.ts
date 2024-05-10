@@ -4,6 +4,11 @@ import { keyframes } from '@stitches/react'
 import { styled } from '../../stitches'
 
 export const StyledPopOver = styled(Popover.Root, {
+  '>button': {
+    all: 'unset',
+    fontFamily: 'inherit',
+    cursor: 'pointer',
+  },
 })
 
 export const PopoverClose = styled(Popover.Close, {

@@ -1,12 +1,11 @@
-import { PlusIcon } from '@radix-ui/react-icons'
+import { ChevronRightIcon, ChevronLeftIcon, PlusIcon } from '@radix-ui/react-icons'
+import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import type { Meta, Story } from '@storybook/react'
-
-import Button, { Props } from '../../components/Button'
+import Button from '../../components/Button'
 import Flex from '../../elements/Flex'
 
-const meta: Meta = {
+export default {
   title: 'Components/General/Button',
   component: Button,
   parameters: {
@@ -16,207 +15,184 @@ const meta: Meta = {
       },
     },
   },
+  args: {
+    children: 'Button',
+    fullWidth: false,
+    disabled: false,
+    isLoading: false,
+    iconComponent: undefined,
+  },
   argTypes: {
-    variant: {
-      control: { type: 'radio' },
-      options: ['primary', 'secondary', 'neutral', 'textOnly', 'danger', 'success']
+    children: {
+      control: 'text',
     },
-    iconPosition: {
-      control: { type: 'radio' },
-      options: ['left', 'right', 'iconOnly']
+    variant: {
+      control: 'select',
+      options: ['primary', 'secondary', 'neutral', 'textOnly', 'danger', 'success'],
     },
     type: {
-      control: { type: 'select' },
-      options: ['submit', 'button']
-    },
-    disabled: {
-      control: 'boolean'
+      control: 'radio',
+      options: ['submit', 'button'],
     },
     size: {
-      control: {
-        type: 'radio',
-        options: ['normal', 'large']
+      control: 'radio',
+      options: ['normal', 'large']
+    },
+    onClick: {
+      control: false,
+    },
+    css: {
+      table: {
+        disable: true,
       }
     },
+    // booleans
+    disabled: {
+      control: 'boolean',
+    },
+    isLoading: {
+      control: 'boolean',
+    },
     fullWidth: {
-      control: 'boolean'
+      control: 'boolean',
+    },
+    // icon
+    iconComponent: {
+      table: {
+        disable: true,
+      },
+    },
+    iconPosition: {
+      if: { arg: 'iconComponent', exists: true },
+      control: 'radio',
+      options: ['left', 'right', 'iconOnly']
     },
   },
-}
-export default meta
+} satisfies Meta<typeof Button>
 
-const Icon = () => <PlusIcon />
-const children = 'Button'
+type Story = StoryObj<typeof Button>
 
-const Template: Story<Props> = args => <Button {...args}>{children}</Button>
-
-export const aDefault = Template.bind({})
-aDefault.args = {
-  variant: 'primary',
-  fullWidth: false,
-  disabled: false
-}
-aDefault.story = {
-  name: 'Default',
-}
-
-export const bWithIcon = Template.bind({})
-bWithIcon.args = {
-  variant: 'primary',
-  iconComponent: Icon,
-}
-bWithIcon.parameters = {
-  docs: {
-    storyDescription: 'The icon can be loaded as a custom component.',
-    source: {
-      code: `
+export const Default: Story = {}
+export const WithIcon: Story = {
+  args: {
+    iconComponent: () => <ChevronRightIcon />,
+    iconPosition: 'right'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The icon can be loaded as a custom component.'
+      },
+      source: {
+        code: `
 <Button
-  variant='primary'
-  iconComponent={() => <IconPackage />}
-  onClick={() => {}}
+  iconComponent={() => <IconFromPackage />}
 >
   Button
 </Button>
-`
+  `
+      }
     }
   }
 }
-bWithIcon.story = {
-  name: 'With Icon',
-}
 
-export const cWithIconLeft = Template.bind({})
-cWithIconLeft.args = {
-  variant: 'primary',
-  iconComponent: Icon,
-  iconPosition: 'left'
-}
-cWithIconLeft.parameters = {
-  docs: {
-    storyDescription: 'You can change the position of the icon.',
-    source: {
-      code: `
+export const WithIconLeft: Story = {
+  args: {
+    iconComponent: () => <ChevronLeftIcon />,
+    iconPosition: 'left'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can change the position of the icon.'
+      },
+      source: {
+        code: `
 <Button
-  variant='primary'
-  iconComponent={() => <IconPackage />}
+  iconComponent={() => <IconFromPackage />}
   iconPosition='left'
-  onClick={() => {}}
 >
   Button
 </Button>
-`
+  `
+      }
     }
   }
 }
-cWithIconLeft.story = {
-  name: 'With Icon Left',
-}
 
-export const dWithIconOnly = Template.bind({})
-dWithIconOnly.args = {
-  variant: 'primary',
-  iconComponent: Icon,
-  iconPosition: 'iconOnly'
-}
-dWithIconOnly.parameters = {
-  docs: {
-    storyDescription: 'You can have just the icon.',
-    source: {
-      code: `
+export const WithIconOnly: Story = {
+  args: {
+    iconComponent: () => <PlusIcon />,
+    iconPosition: 'iconOnly'
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'You can have just the icon.'
+      },
+      source: {
+        code: `
 <Button
-  variant='primary'
-  iconComponent={() => <IconPackage />}
-  iconPosition='left'
-  onClick={() => {}}
->
-  Button
-</Button>
-`
+  iconComponent={() => <IconFromPackage />}
+  iconPosition='iconOnly'
+/>
+  `
+      }
     }
   }
 }
-dWithIconOnly.story = {
-  name: 'With Icon Only',
-}
 
-export const eFullWidth = Template.bind({})
-eFullWidth.args = {
-  variant: 'primary',
-  fullWidth: true
-}
-eFullWidth.parameters = {
-  docs: {
-    storyDescription: 'The button can occupy the full width of the parent container.',
-    source: {
-      code: `
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The button can occupy the full width of the parent container.'
+      },
+      source: {
+        code: `
 <Button
-  variant='primary'
   fullWidth
-  onClick={() => {}}
 >
   Button
 </Button>
-`
+  `
+      }
     }
   }
-}
-eFullWidth.story = {
-  name: 'Full Width',
 }
 
-export const fLoading = Template.bind({})
-fLoading.args = {
-  variant: 'primary',
-  isLoading: true
-}
-fLoading.parameters = {
-  docs: {
-    storyDescription: 'This button provides a loading animation while the action is being processed.',
-    source: {
-      code: `
-<Button
-  variant='primary'
-  isLoading
-  onClick={() => {}}
->
-  Button
-</Button>
-`
-    }
-  }
-}
-fLoading.story = {
-  name: 'Loading',
-}
-
-export const zAllVariants = () => (
-  <Flex direction='column' align='start' gap='lg' wrap>
-    <Flex gap='xxsm' justify='start'>
-      <Button variant='primary'>Button</Button>
-      <Button variant='secondary'>Button</Button>
-      <Button variant='neutral'>Button</Button>
-      <Button variant='danger'>Button</Button>
-      <Button variant='success'>Button</Button>
-      <Button variant='textOnly'>Button</Button>
+export const AllVariants: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'These are all the available variants.'
+      },
+      source: {
+        code: null
+      }
+    },
+  },
+  render: () => (
+    <Flex direction='column' align='start' gap='lg' wrap>
+      <Flex gap='xxsm' justify='start'>
+        <Button variant='primary'>Button</Button>
+        <Button variant='secondary'>Button</Button>
+        <Button variant='neutral'>Button</Button>
+        <Button variant='danger'>Button</Button>
+        <Button variant='success'>Button</Button>
+        <Button variant='textOnly'>Button</Button>
+      </Flex>
+      <Flex gap='xxsm'>
+        <Button variant='primary' size='large'>Button</Button>
+        <Button variant='secondary' size='large'>Button</Button>
+        <Button variant='neutral' size='large'>Button</Button>
+        <Button variant='danger' size='large'>Button</Button>
+        <Button variant='success' size='large'>Button</Button>
+        <Button variant='textOnly' size='large'>Button</Button>
+      </Flex>
     </Flex>
-    <Flex gap='xxsm'>
-      <Button variant='primary' size='large'>Button</Button>
-      <Button variant='secondary' size='large'>Button</Button>
-      <Button variant='neutral' size='large'>Button</Button>
-      <Button variant='danger' size='large'>Button</Button>
-      <Button variant='success' size='large'>Button</Button>
-      <Button variant='textOnly' size='large'>Button</Button>
-    </Flex>
-  </Flex>
-)
-zAllVariants.parameters = {
-  docs: {
-    storyDescription: 'These are all the available variants.',
-    source: {
-      code: null
-    }
-  }
-}
-zAllVariants.story = {
-  name: 'All Variants',
+  )
 }

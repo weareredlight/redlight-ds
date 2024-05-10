@@ -13,10 +13,15 @@ import {
   getFilteredRowModel,
   getSortedRowModel,
   useReactTable,
+  createColumnHelper
 } from '@tanstack/react-table'
 import { useState, ReactElement } from 'react'
 
-import type { ColumnDef, SortingState, ColumnSort } from '@tanstack/react-table'
+import type {
+  ColumnDef,
+  SortingState,
+  ColumnSort,
+} from '@tanstack/react-table'
 
 import Flex from '../../elements/Flex'
 import Input from '../Input'
@@ -28,9 +33,9 @@ import {
   StyledTableHead,
   StyledEmptyRow,
 } from './styles'
-import { globalFilter, globalSort } from './utils'
+import { defaultColumnOptions, globalFilter, globalSort } from './utils'
 
-type Props<T> = {
+export type TableProps<T> = {
   data: T[]
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   columns: ColumnDef<T, any>[]
@@ -43,7 +48,7 @@ const Table = <T extends object>({
   columns,
   sortees = [],
   renderOptions,
-}: Props<T>) => {
+}: TableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>(sortees)
 
   const table = useReactTable({
@@ -103,6 +108,7 @@ const Table = <T extends object>({
                       iconPosition='left'
                       iconComponent={() => <MagnifyingGlassIcon />}
                       onChange={({ target: { value } }) => column.setFilterValue(value)}
+                      fullWidth
                     />
                   ) : null}
                 </th>
@@ -140,3 +146,17 @@ const Table = <T extends object>({
 }
 
 export default Table
+export {
+  defaultColumnOptions,
+  flexRender,
+  getCoreRowModel,
+  getFilteredRowModel,
+  getSortedRowModel,
+  useReactTable,
+  createColumnHelper
+}
+export type {
+  ColumnDef,
+  SortingState,
+  ColumnSort,
+}
