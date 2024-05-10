@@ -12,7 +12,7 @@ import {
   StyledWrapper,
 } from './styles'
 
-export type Props = {
+export type TextAreaProps = {
   id?: string
   name?: string
   value?: string
@@ -45,7 +45,7 @@ const TextArea = React.forwardRef(({
   css,
   onChange,
   ...props
-}: Props, ref: React.Ref<HTMLTextAreaElement>) => (
+}: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => (
   <StyledWrapper fullWidth={fullWidth}>
     <StyledTextArea>
       {label || description ? (

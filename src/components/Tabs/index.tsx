@@ -10,13 +10,13 @@ import {
   TabsTrigger
 } from './styles'
 
-export type Props = {
+export type TabsProps = {
   tabs: { label: string }[],
   children: React.ReactNode | React.ReactNode[],
   align?: Stitches.VariantProps<typeof StyledTabs>['align']
 }
 
-const Tabs = ({ tabs, children, align }: Props) => (
+const Tabs = ({ tabs, children, align }: TabsProps) => (
   <StyledTabs defaultValue='tab0' align={align}>
     <TabsList aria-label='Manage your account'>
       {tabs.map((tab, index) => (

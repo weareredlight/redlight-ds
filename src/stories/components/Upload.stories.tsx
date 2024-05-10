@@ -28,7 +28,7 @@ export default meta
 
 export const Normal = {
   args: {
-    size: 'normal',
+    id: 'upload-example',
     placeholder: 'Upload file',
     buttonText: 'Browse',
     disabled: false,
@@ -38,6 +38,7 @@ export const Normal = {
 export const Large = {
   args: {
     size: 'large',
+    id: 'large-upload-example',
     placeholder: 'Upload file',
     buttonText: 'Browse',
     disabled: false,

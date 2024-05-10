@@ -52,6 +52,7 @@ export const StyledTrigger = styled(Switch.Root, {
   position: 'relative',
   WebkitTapHighlightColor: 'rgba(0, 0, 0, 0)',
   outline: '1px solid transparent',
+  cursor: 'pointer',
 
   '&:hover': {
     backgroundColor: '$neutral600',

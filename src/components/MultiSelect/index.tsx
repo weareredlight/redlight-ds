@@ -16,7 +16,7 @@ import Text from '../Text'
 import { selectStyles, SelectWrapper } from './styles'
 
 type OptionType = { label: string; value: string }
-export type Props = {
+export type MultiSelectProps = {
   name: string
   label?: string
   value: string[]
@@ -61,7 +61,7 @@ const MultiSelect = ({
   state = 'null',
   errorMsg,
   fullWidth = false,
-}: Props) => {
+}: MultiSelectProps) => {
   const handleRemoveOption = (
     removedValue: string,
     value: string[],

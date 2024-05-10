@@ -1,7 +1,7 @@
 import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 
-import Tabs, { Props } from '../../components/Tabs'
+import Tabs, { TabsProps } from '../../components/Tabs'
 import Text from '../../components/Text'
 import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
@@ -31,7 +31,7 @@ const meta: Meta = {
 }
 export default meta
 
-const Template: StoryFn<Props> = () => (
+const Template: StoryFn<TabsProps> = () => (
   <Tabs tabs={[{ label: 'Tab 1' }, { label: 'Tab 2' }]}>
     <Flex direction='column' css={{ padding: '2rem' }}>
       <Text variant='textBlock'>Tab 1 Content...</Text>

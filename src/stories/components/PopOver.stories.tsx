@@ -2,7 +2,7 @@ import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 
-import type { Props } from '../../components/PopOver'
+import type { PopOverProps } from '../../components/PopOver'
 
 import Button from '../../components/Button'
 import PopOver from '../../components/PopOver'
@@ -43,7 +43,7 @@ export default {
 
 const DotsIcon = () => <DotsVerticalIcon width={14} height={14} />
 
-const Template: StoryFn<Props> = args => (
+const Template: StoryFn<PopOverProps> = args => (
   <PopOver
     {...args}
     trigger={

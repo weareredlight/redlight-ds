@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
-import DatePicker, { Props } from '../../components/DatePicker'
+import DatePicker, { DatePickerProps } from '../../components/DatePicker'
 
 const meta = {
   title: 'Components/Data Input/Date Picker',
@@ -28,7 +28,7 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-const Template = (args: Props) => {
+const Template = (args: DatePickerProps) => {
   const [date, setDate] = useState<string | undefined>(new Date().toISOString().split('T')[0])
   return (
     <DatePicker

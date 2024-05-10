@@ -108,6 +108,7 @@ Default.parameters = {
         title='${Default.args.title}'
         description='${Default.args.description}'
         closeFn={() => setOpenDialog(false)}
+        onConfirm={() => {}}
       />
     </>
   )
@@ -137,6 +138,7 @@ Success.parameters = {
   title='${Success.args.title}'
   description='${Success.args.description}'
   closeFn={() => setOpenDialog(false)}
+  onConfirm={() => {}}
 />
       `
     }
@@ -163,6 +165,7 @@ Danger.parameters = {
   title='${Danger.args.title}'
   description='${Danger.args.description}'
   closeFn={() => setOpenDialog(false)}
+  onConfirm={() => {}}
 />
       `
     }
@@ -195,6 +198,7 @@ CustomContent.parameters = {
   title='${CustomContent.args.title}'
   description=''
   closeFn={() => setOpenDialog(false)}
+  onConfirm={() => {}}
 >
   {/* Add custom content inside the dialog */}
   <Icon />
@@ -226,6 +230,7 @@ CustomControls.parameters = {
   confirmButtonText='${CustomControls.args.confirmButtonText}'
   cancelButtonText='${CustomControls.args.cancelButtonText}'
   closeFn={() => setOpenDialog(false)}
+  onConfirm={() => {}}
 />
       `
     }

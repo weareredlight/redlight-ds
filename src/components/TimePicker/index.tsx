@@ -23,7 +23,7 @@ export type TimePickerProps = {
   value?: string
   onChange: (time: ChangeEvent<HTMLInputElement> | string) => void
   error?: string | null
-  type?: PickerTypes
+  type?: PickerTypes | 'time' | 'duration'
   disabled?: boolean
   fullWidth?: boolean
 }

@@ -1,9 +1,7 @@
 // import necessay table types
 import type { TableMockType } from './tableMockType'
-import type { ColumnSort } from '../../../../components/Table'
 
-// import necessary table components
-import { createColumnHelper, defaultColumnOptions } from '../../../../components/Table'
+import { createColumnHelper, defaultColumnOptions, ColumnSort } from '../../../../components/Table'
 
 // Custom default sorting
 export const mockSortees: ColumnSort[] = [

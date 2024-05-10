@@ -2,7 +2,7 @@ import type * as Stitches from '@stitches/react'
 
 import { StyledLabel } from './styles'
 
-export type Props = {
+export type LabelProps = {
   id?: string
   label?: string
   description?: string
@@ -17,7 +17,7 @@ const Label = ({
   optional,
   align = 'left',
   ...props
-}: Props) => (
+}: LabelProps) => (
   <StyledLabel
     htmlFor={id}
     align={align}

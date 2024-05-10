@@ -6,7 +6,7 @@ import type { ReactNode } from 'react'
 
 import { StyledButton } from './styles'
 
-export type Props = {
+export type ButtonProps = {
   children?: ReactNode
   iconComponent?: React.FC
   onClick?: () => void
@@ -32,7 +32,7 @@ const Button = React.forwardRef(({
   disabled = false,
   css,
   ...props
-}: Props, ref: React.Ref<HTMLButtonElement>) => {
+}: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
   const getIconAndText = () => {
     if (!iconComponent || !iconPosition) return children
     switch (iconPosition) {

@@ -4,7 +4,7 @@ import { Meta, StoryFn } from '@storybook/react'
 import React from 'react'
 
 import Button from '../../components/Button'
-import Tooltip, { Props } from '../../components/Tooltip'
+import Tooltip, { TooltipProps } from '../../components/Tooltip'
 import { CenterOnCanvas } from '../decorators'
 
 const meta: Meta = {
@@ -32,7 +32,7 @@ export default meta
 
 const questionIcon = () => <QuestionMarkCircledIcon width='18' height='18' />
 
-const Template: StoryFn<Props> = args => (
+const Template: StoryFn<TooltipProps> = args => (
   <TooltipProvider>
     <Tooltip {...args}>
       <Button variant='textOnly' iconComponent={questionIcon} iconPosition='right'>

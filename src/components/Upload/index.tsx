@@ -11,7 +11,7 @@ import {
   StyledUpload, StyledUploadInput, StyledFile, StyledTrigger
 } from './styles'
 
-export type Props = {
+export type UploadProps = {
   id: string
   size?: Stitches.VariantProps<typeof StyledUpload>['size']
   fullWidth?: Stitches.VariantProps<typeof StyledUpload>['fullWidth']
@@ -27,7 +27,7 @@ const isImage = (ext: string) => ext === 'png' || ext === 'jpg' || ext === 'jpeg
 
 const Upload = ({
   id,
-  size,
+  size = 'normal',
   fullWidth = false,
   placeholder,
   description,
@@ -36,7 +36,7 @@ const Upload = ({
   onUpload,
   disabled,
   ...props
-}: Props) => {
+}: UploadProps) => {
   const [fileName, setFileName] = useState<string>(defaultFile ? defaultFile.name : '')
   const [fileUrl, setFileUrl] = useState<string | null | undefined>(defaultFile ? URL.createObjectURL(defaultFile) : '')
   const [fileExtension, setFileExtension] = useState<string>(defaultFile ? defaultFile.name.split('.').pop() || '' : '')

@@ -11,7 +11,7 @@ import {
   DialogTitle,
 } from './styles'
 
-export type Props = {
+export type ModalProps = {
   open: boolean
   closeFn: () => void
   renderTrigger?: () => ReactElement
@@ -32,7 +32,7 @@ const Modal = ({
   children,
   css,
   extraClasses,
-}: Props) => (
+}: ModalProps) => (
   <RadixDialog.Root open={open}>
     <RadixDialog.Trigger asChild>
       {renderTrigger && renderTrigger()}

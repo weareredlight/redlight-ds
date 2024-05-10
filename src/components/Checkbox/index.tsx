@@ -10,7 +10,7 @@ import {
   StyledCheckbox, StyledTrigger, StyledIndicator
 } from './styles'
 
-export type Props = {
+export type CheckboxProps = {
   label?: string
   description?: string
   id: string
@@ -35,7 +35,7 @@ const Checkbox = ({
   labelPosition = 'right',
   onChange,
   ...props
-}: Props) => (
+}: CheckboxProps) => (
   <>
     <StyledCheckbox disabled={disabled}>
       {labelPosition === 'left' ? (

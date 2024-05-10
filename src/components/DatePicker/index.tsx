@@ -9,7 +9,7 @@ import { StyledDatePicker } from './styles'
 
 import 'react-date-picker/dist/DatePicker.css'
 
-export type Props = {
+export type DatePickerProps = {
   name?: string
   label?: string
   error?: string | null
@@ -31,7 +31,7 @@ export const DatePicker = ({
   localeString = 'en-US',
   disabled = false,
   fullWidth = false,
-}: Props) => (
+}: DatePickerProps) => (
   <StyledDatePicker
     hasError={Boolean(error)}
     fullWidth={fullWidth}

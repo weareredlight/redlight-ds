@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import React, { useState } from 'react'
 
-import Select, { Props } from '../../components/Select'
+import Select, { SelectProps } from '../../components/Select'
 
 type Option = {
   value: string
@@ -49,7 +49,7 @@ const SelectWrapper = (args: Story['args']) => {
     placeholder,
     getLabel,
     getValue,
-  } = args as Props<Option>
+  } = args as SelectProps<Option>
 
   return (
     <Select
@@ -83,24 +83,28 @@ Default.parameters = {
   docs: {
     source: {
       code: `
-() => {
-  const [selectedVal, setSelectedVal] = useState('')
+const myOptions = [
+  { value: 'option1', label: 'Option 1' },
+  { value: 'option2', label: 'Option 2' },
+  ...
+]
 
-  return(
-    <Select
-      id='select'
-      name='select'
-      label='This is the label'
-      description='This is the description'
-      placeholder='Please select an option'
-      onChange={e => setSelectedVal(e.target.value)}
-      value={selectedVal}
-      getLabel={option => option.name}
-      getValue={option => option.id}
-      options={myData}
-    />
-  )
-}
+const [selectedVal, setSelectedVal] = useState('')
+
+return(
+  <Select
+    id='select'
+    name='select'
+    label='This is the label'
+    description='This is the description'
+    placeholder='Please select an option'
+    onChange={e => setSelectedVal(e.target.value)}
+    value={selectedVal}
+    getLabel={option => option.label}
+    getValue={option => option.value}
+    options={myOptions}
+  />
+)
   `,
     },
   },

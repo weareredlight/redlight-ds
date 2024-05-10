@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react'
 import React from 'react'
 
-import Table, { Props } from '../../../components/Table'
+import Table, { TableProps } from '../../../components/Table'
 
 import { customTableColumns } from './mockdata/customTableMock'
 import { defaultTableColumns } from './mockdata/defaultTableMock'
@@ -34,7 +34,7 @@ type Story = StoryObj<typeof meta>
 /* ------------------------------DEFAULT TABLE------------------------------------ */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const DefaultTemplate = (args: Props<any>) => (
+const DefaultTemplate = (args: TableProps<any>) => (
   <Table
     {...args}
     data={mockData}
@@ -56,7 +56,7 @@ export const Default: Story = {
 /* ------------------------------INTERACTIVE TABLE------------------------------------ */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const InteractiveTemplate = (args: Props<any>) => (
+const InteractiveTemplate = (args: TableProps<any>) => (
   <Table
     {...args}
     data={mockData}
@@ -78,7 +78,7 @@ export const InteractiveHeaders: Story = {
 /* ------------------------------DEFAULT SORT------------------------------------ */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const SortTemplate = (args: Props<any>) => (
+const SortTemplate = (args: TableProps<any>) => (
   <Table
     {...args}
     data={mockData}
@@ -101,7 +101,7 @@ export const DefaultSort: Story = {
 /* ------------------------------CUSTOM TABLE------------------------------------ */
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomTemplate = (args: Props<any>) => (
+const CustomTemplate = (args: TableProps<any>) => (
   <Table
     {...args}
     data={mockData}

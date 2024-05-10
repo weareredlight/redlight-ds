@@ -8,7 +8,7 @@ import Text from '../Text'
 
 import { StyledToggle, StyledTrigger, StyledThumb } from './styles'
 
-export type Props = {
+export type ToggleProps = {
   id: string
   name?: string
   label?: string
@@ -31,7 +31,7 @@ const Toggle = React.forwardRef(({
   onChange,
   labelPosition = 'right',
   ...props
-}: Props, ref: React.Ref<HTMLInputElement>) => (
+}: ToggleProps, ref: React.Ref<HTMLInputElement>) => (
   <>
     <StyledToggle disabled={Boolean(state === 'disabled')}>
       {labelPosition === 'left' && (label || description) ? (

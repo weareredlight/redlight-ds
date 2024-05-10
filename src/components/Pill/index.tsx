@@ -7,7 +7,7 @@ import Button from '../Button'
 
 import { StyledPill } from './styles'
 
-export type Props = {
+export type PillProps = {
   children: ReactNode
   variant?: Stitches.VariantProps<typeof StyledPill>['variant']
   onClose?: () => void
@@ -22,7 +22,7 @@ const Pill = ({
   onClose,
   css,
   ...props
-}: Props) => (
+}: PillProps) => (
   <StyledPill
     variant={variant}
     css={{ ...css }}

@@ -15,7 +15,7 @@ import {
   StyledWrapper,
 } from './styles'
 
-export type Props = {
+export type InputProps = {
   id?: string
   type?: string
   name?: string
@@ -58,7 +58,7 @@ const Input = React.forwardRef(({
   fullWidth = false,
   disabled = false,
   ...props
-}: Props, ref: React.Ref<HTMLInputElement>) => {
+}: InputProps, ref: React.Ref<HTMLInputElement>) => {
   const renderIcon = () => {
     if (!iconComponent) return null
     if (onClickIcon) {

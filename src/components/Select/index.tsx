@@ -21,7 +21,7 @@ import {
   StyledViewport,
 } from './styles'
 
-export type Props<T> = {
+export type SelectProps<T> = {
   id: string
   name?: string
   label?: string
@@ -60,7 +60,7 @@ const Select = <T extends object>({
   css,
   fullWidth = false,
   ...props
-}: Props<T>) => {
+}: SelectProps<T>) => {
   const [viewContent, setViewContent] = useState(false)
   const selectedOption = options.find(o => getValue(o) === value)
   const ChevronToShow = viewContent ? ChevronUpIcon : ChevronDownIcon
