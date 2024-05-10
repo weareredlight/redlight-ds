@@ -1,6 +1,5 @@
 import { styled } from '../../stitches'
-
-import { colors } from 'theme/colors'
+import { colors } from '../../theme/colors'
 
 export const StyledDatePicker = styled('div', {
   display: 'flex',
@@ -200,7 +199,7 @@ export const StyledDatePicker = styled('div', {
       true: {
         '.react-date-picker > div': {
           backgroundColor: '$neutral200',
-          borderColor: '$neutral300',
+          borderColor: '$neutral200',
           color: '$neutral400',
           pointerEvents: 'none',
 

@@ -1,9 +1,8 @@
-import { Meta, StoryFn } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Pill, { Props } from '../../components/Pill'
+import Pill from '../../components/Pill'
 
-const meta: Meta = {
+const meta = {
   title: 'Components/Displays/Pill',
   component: Pill,
   parameters: {
@@ -14,132 +13,88 @@ const meta: Meta = {
       },
     },
   },
+  args: {
+    children: 'Pill Example',
+  },
   argTypes: {
     variant: {
-      control: {
-        type: 'radio',
-        options: ['default', 'error', 'success'],
-      },
+      control: 'radio',
+      options: ['default', 'error', 'success'],
     },
   },
-}
+} satisfies Meta<typeof Pill>
+
 export default meta
+type Story = StoryObj<typeof meta>
 
-const Template: StoryFn<Props> = args => <Pill {...args}>Pill Example</Pill>
-
-export const aDefault = {
-  render: Template,
-  name: 'Default',
+export const Default: Story = {
+  args: {
+    onClose: undefined
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This is the default pill.'
+      }
+    }
+  }
 }
 
-export const bSuccess = {
-  render: Template,
-
+export const Success: Story = {
   args: {
     variant: 'success',
+    onClose: undefined
   },
-
   parameters: {
     docs: {
-      storyDescription: 'This variation can label successful outcomes.',
-      source: {
-        code: `
-  <Pill
-    variant='success'
-  >
-    Pill Example
-  </Pill>
-  `,
-      },
-    },
-  },
-
-  name: 'Success',
+      description: {
+        story: 'This variation can label successful outcomes.'
+      }
+    }
+  }
 }
 
-export const cError = {
-  render: Template,
-
+export const Error: Story = {
   args: {
     variant: 'error',
+    onClose: undefined
   },
-
   parameters: {
     docs: {
-      storyDescription: 'This variation can label error outcomes.',
-      source: {
-        code: `
-  <Pill
-    variant='error'
-  >
-    Pill Example
-  </Pill>
-  `,
-      },
-    },
-  },
-
-  name: 'Error',
+      description: {
+        story: 'This variation can label errors.'
+      }
+    }
+  }
 }
 
-export const dClosable = {
-  render: Template,
-
+export const Closable: Story = {
   args: {
-    variant: 'default',
     // eslint-disable-next-line no-alert
     onClose: () => alert('Are you sure you want to remove?'),
   },
-
   parameters: {
     docs: {
-      storyDescription:
-        'When you have a group of pills you can delete them by pressing the cross button.',
-      source: {
-        code: `
-  <Pill
-    onClose={updatePills()}
-  >
-    Pill Example
-  </Pill>
-  `,
-      },
-    },
-  },
-
-  name: 'Closable',
+      description: {
+        story: 'When you have a group of pills you can delete them by pressing the cross button.'
+      }
+    }
+  }
 }
 
-export const eCustomColors = {
-  render: Template,
-
+export const customCSS: Story = {
   args: {
     css: {
       backgroundColor: 'yellow',
-      color: 'green',
+      color: 'green'
     },
+    onClose: undefined
   },
-
   parameters: {
     docs: {
-      storyDescription:
-        'You can add custom CSS to your pill in order to create your own variations.',
-      source: {
-        code: `
-  <Pill
-    css={
-      {
-        backgroundColor:'yellow',
-        color:'green'
+      description: {
+        story: 'You can add custom CSS to your pill in order to create your own variations.'
       }
     }
-  >
-    Pill Example
-  </Pill>
-  `,
-      },
-    },
-  },
-
-  name: 'Custom Colors',
+  }
 }

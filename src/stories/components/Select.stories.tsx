@@ -1,9 +1,8 @@
-import { Meta, StoryFn } from '@storybook/react'
-import { useState } from 'react'
+import { Meta, StoryObj } from '@storybook/react'
+import React, { useState } from 'react'
 
 import Select, { Props } from '../../components/Select'
 
-// Define a separate type for your options
 type Option = {
   value: string
   label: string
@@ -28,19 +27,40 @@ const meta: Meta = {
       },
     },
   },
-  state: {
-    control: { type: 'radio' },
-    options: [null, 'error', 'dirty', 'disabled'],
+  argTypes: {
+    state: {
+      control: { type: 'radio' },
+      options: ['null', 'error', 'dirty', 'disabled'],
+    },
   },
-  argTypes: {},
-}
+} satisfies Meta<typeof Select>
 export default meta
 
-const Template: StoryFn<Props<Option>> = args => {
-  const [selectedVal, setSelectedVal] = useState('')
+type Story = StoryObj<typeof meta>
+
+const SelectWrapper = (args: Story['args']) => {
+  const [selectedVal, setSelectedVal] = useState<string>('')
+  const {
+    id,
+    name,
+    label,
+    state,
+    description,
+    placeholder,
+    getLabel,
+    getValue,
+  } = args as Props<Option>
+
   return (
     <Select
-      {...args}
+      id={id}
+      name={name}
+      label={label}
+      state={state}
+      description={description}
+      placeholder={placeholder}
+      getLabel={getLabel}
+      getValue={getValue}
       options={mockOptions}
       value={selectedVal}
       onChange={e => setSelectedVal(e.target.value)}
@@ -48,43 +68,40 @@ const Template: StoryFn<Props<Option>> = args => {
   )
 }
 
-export const Default = {
-  render: Template,
+export const Default: Story = SelectWrapper.bind({})
+Default.args = {
+  id: 'select',
+  name: 'select',
+  label: 'This is the label',
+  description: 'This is the description',
+  placeholder: 'Please select an option',
+  state: 'null',
+  getLabel: (option: Option) => option.label,
+  getValue: (option: Option) => option.value,
+}
+Default.parameters = {
+  docs: {
+    source: {
+      code: `
+() => {
+  const [selectedVal, setSelectedVal] = useState('')
 
-  args: {
-    id: 'select',
-    name: 'select',
-    label: 'This is the label',
-    description: 'This is the description',
-    placeholder: 'Please select an option',
-    getLabel: (option: Option) => option.label,
-    getValue: (option: Option) => option.value,
-  },
-
-  parameters: {
-    docs: {
-      source: {
-        code: `
-  () => {
-    const [selectedVal, setSelectedVal] = useState('')
-
-    return(
-      <Select
-        id='select'
-        name='select'
-        label='This is the label'
-        description='This is the description'
-        placeholder='Please select an option'
-        onChange={e => setSelectedVal(e.target.value)}
-        value={selectedVal}
-        getLabel={o => o.name}
-        getValue={o => o.id}
-        options={mockData}
-      />
-    )
-  }      
+  return(
+    <Select
+      id='select'
+      name='select'
+      label='This is the label'
+      description='This is the description'
+      placeholder='Please select an option'
+      onChange={e => setSelectedVal(e.target.value)}
+      value={selectedVal}
+      getLabel={option => option.name}
+      getValue={option => option.id}
+      options={myData}
+    />
+  )
+}
   `,
-      },
     },
   },
 }

@@ -5,6 +5,13 @@ import Upload from '../../components/Upload'
 const meta: Meta = {
   title: 'Components/Data Input/Upload',
   component: Upload,
+  parameters: {
+    docs: {
+      description: {
+        component: 'The Upload component allows users to upload files. It consists of a file input and a button to trigger the file input.'
+      },
+    }
+  },
   argTypes: {
     size: {
       control: {

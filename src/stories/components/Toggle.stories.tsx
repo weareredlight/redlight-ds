@@ -24,9 +24,10 @@ export default {
       control: 'radio',
       options: ['left', 'right'],
     },
-    disabled: {
-      control: 'boolean',
-    },
+    state: {
+      control: { type: 'radio' },
+      options: ['null', 'error', 'dirty', 'disabled'],
+    }
   },
 } satisfies Meta<typeof Toggle>
 

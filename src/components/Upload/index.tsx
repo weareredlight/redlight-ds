@@ -15,10 +15,11 @@ export type Props = {
   id: string
   size?: Stitches.VariantProps<typeof StyledUpload>['size']
   fullWidth?: Stitches.VariantProps<typeof StyledUpload>['fullWidth']
-  placeholder: string,
-  description?: string,
-  buttonText?: string,
-  onUpload?: (file: File) => void,
+  placeholder: string
+  description?: string
+  buttonText?: string
+  defaultFile?: File
+  onUpload?: (file: File) => void
   disabled?: boolean
 }
 
@@ -31,13 +32,14 @@ const Upload = ({
   placeholder,
   description,
   buttonText,
+  defaultFile,
   onUpload,
   disabled,
   ...props
 }: Props) => {
-  const [fileName, setFileName] = useState<string>('')
-  const [fileUrl, setFileUrl] = useState<string | null | undefined>('')
-  const [fileExtension, setFileExtension] = useState<string>('')
+  const [fileName, setFileName] = useState<string>(defaultFile ? defaultFile.name : '')
+  const [fileUrl, setFileUrl] = useState<string | null | undefined>(defaultFile ? URL.createObjectURL(defaultFile) : '')
+  const [fileExtension, setFileExtension] = useState<string>(defaultFile ? defaultFile.name.split('.').pop() || '' : '')
   const [loading, setLoading] = useState<boolean>(false)
 
   const fileInput = useRef<HTMLInputElement>(null)
@@ -46,10 +48,10 @@ const Upload = ({
   }
 
   const handleSelectedFile = useCallback((e: ChangeEvent<HTMLInputElement>) => {
-    if (!e.target.files) return
+    if (!e.target.files || e.target.files.length === 0) return
 
     const [file] = Array.from(e.target.files)
-    if (!file) throw new Error('No file selected')
+    if (!file) return
 
     let shortenFileName
 
@@ -77,7 +79,12 @@ const Upload = ({
   }, [onUpload])
 
   return (
-    <StyledUpload disabled={disabled} size={size} fullWidth={fullWidth} {...props}>
+    <StyledUpload
+      disabled={disabled}
+      size={size}
+      fullWidth={fullWidth}
+      {...props}
+    >
       <StyledUploadInput type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
       <StyledFile>
         {fileUrl && isImage(fileExtension) ? (

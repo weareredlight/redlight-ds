@@ -1,6 +1,6 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as SelectInput from '@radix-ui/react-select'
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 
 import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
@@ -50,7 +50,7 @@ const Select = <T extends object>({
   placeholder,
   description,
   errorMsg,
-  state,
+  state = 'null',
   onChange,
   options,
   getLabel,
@@ -65,6 +65,15 @@ const Select = <T extends object>({
   const selectedOption = options.find(o => getValue(o) === value)
   const ChevronToShow = viewContent ? ChevronUpIcon : ChevronDownIcon
 
+  const valueToDisplay = useMemo(() => {
+    if (selectedOption) {
+      return getLabel(selectedOption)
+    } if (emptyOption) {
+      return emptyOption
+    }
+    return placeholder
+  }, [selectedOption, emptyOption, getLabel, placeholder])
+
   return (
     <StyledSelect css={css} fullWidth={fullWidth}>
       {label || description ? (
@@ -74,7 +83,7 @@ const Select = <T extends object>({
       <SelectInput.Root
         {...props}
         name={name}
-        value={value || (emptyOption ? '-1' : '')}
+        value={value || valueToDisplay}
         onOpenChange={() => setViewContent(!viewContent)}
         onValueChange={value => {
           let finalValue: string | null = value
@@ -91,10 +100,8 @@ const Select = <T extends object>({
         }}
       >
         <StyledTrigger id={id} state={state} variant={variant}>
-          <SelectInput.Value
-            key={selectedOption ? getValue(selectedOption) : emptyOption ? '-1' : ''}
-          >
-            {selectedOption ? getLabel(selectedOption) : emptyOption || <span className='placeholder'>{placeholder}</span>}
+          <SelectInput.Value>
+            {valueToDisplay}
           </SelectInput.Value>
           <StyledChevron>
             <ChevronToShow />

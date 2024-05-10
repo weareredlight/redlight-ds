@@ -18,7 +18,7 @@ const CloseIcon = () => <Cross2Icon />
 
 const Pill = ({
   children,
-  variant,
+  variant = 'default',
   onClose,
   css,
   ...props
@@ -39,9 +39,5 @@ const Pill = ({
     )}
   </StyledPill>
 )
-
-Pill.defaultProps = {
-  onClose: null
-}
 
 export default Pill

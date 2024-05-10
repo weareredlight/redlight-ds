@@ -34,6 +34,7 @@ export type Props = {
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   containerProps?: React.HTMLAttributes<HTMLDivElement>
   fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
+  disabled?: boolean,
 } & React.InputHTMLAttributes<HTMLInputElement>
 
 const Input = React.forwardRef(({
@@ -46,15 +47,16 @@ const Input = React.forwardRef(({
   description,
   iconComponent,
   errorMsg,
-  state,
+  state = 'null',
   iconPosition = 'right',
   onClickIcon,
   onChange,
   css,
-  variant,
+  variant = 'null',
   required = false,
   containerProps,
   fullWidth = false,
+  disabled = false,
   ...props
 }: Props, ref: React.Ref<HTMLInputElement>) => {
   const renderIcon = () => {
@@ -98,6 +100,7 @@ const Input = React.forwardRef(({
           variant={variant}
           placeholder={placeholder}
           required={required}
+          disabled={disabled}
           onChange={e => {
             let finalValue: string | null = e.target.value
             if (type === 'number') finalValue = Number(finalValue) as unknown as string

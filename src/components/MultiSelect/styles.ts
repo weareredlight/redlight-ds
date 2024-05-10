@@ -1,7 +1,6 @@
-import { css } from '../../stitches'
-
-import { colors } from 'theme/colors'
-import { sizes } from 'theme/sizes'
+import { styled } from '../../stitches'
+import { colors } from '../../theme/colors'
+import { sizes } from '../../theme/sizes'
 
 export const selectStyles = {
   valueContainer: (styles: object) => ({
@@ -27,6 +26,7 @@ export const selectStyles = {
     ...styles,
     margin: 0,
     padding: 0,
+    cursor: 'pointer',
   }),
   menu: (styles: object) => ({
     ...styles,
@@ -82,7 +82,7 @@ export const selectStyles = {
   }),
 }
 
-export const selectWrapper = css({
+export const SelectWrapper = styled('div', {
   position: 'relative',
   width: '100%',
   '.options-count': {
@@ -97,5 +97,56 @@ export const selectWrapper = css({
     height: 18,
     backgroundColor: colors.accent ? '$accent' : '$primary',
     borderRadius: '$full',
+  },
+
+  variants: {
+    state: {
+      error: {
+        '#multi-select': {
+          '> div': {
+            borderColor: '$danger',
+            '& svg': {
+              color: '$danger',
+            },
+          }
+        }
+      },
+      dirty: {
+        '#multi-select': {
+          '> div': {
+            borderColor: '$secondary',
+            '& svg': {
+              color: '$secondary',
+            },
+          }
+        }
+      },
+      disabled: {
+        '#multi-select': {
+          '> div': {
+            backgroundColor: '$neutral200',
+            borderColor: '$neutral200',
+            color: '$neutral',
+            pointerEvents: 'none',
+            '& svg': {
+              color: '$neutral',
+            },
+          }
+        }
+      },
+      null: {
+        '#multi-select': {
+          '> div': {
+            borderColor: '$neutral400',
+            '& svg': {
+              color: '$neutral400',
+            },
+          }
+        }
+      }
+    }
+  },
+  defaultVariants: {
+    state: 'null',
   },
 })

@@ -35,7 +35,6 @@ const Template: StoryFn = () => {
   const handlePageChange = (page: React.SetStateAction<number>) => {
     setCurrentPage(page)
   }
-
   return (
     <Pagination currentPage={currentPage} totalPages={totalPages} onPageChange={handlePageChange} />
   )
@@ -43,11 +42,37 @@ const Template: StoryFn = () => {
 
 export const Default = {
   render: Template,
-
   args: {
     variant: 'default',
     currentPage: 1,
   },
+  parameters: {
+    docs: {
+      description: {
+        story: 'This is the default pagination component.'
+      },
+      source: {
+        code: `
+() => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  const handlePageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page)
+  }
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+    />
+  )
+}
+`
+      }
+    }
+  }
 }
 
 export const Minimal: StoryObj = {
@@ -59,7 +84,6 @@ export const Minimal: StoryObj = {
     const handlePageChange = (page: React.SetStateAction<number>) => {
       setCurrentPage(page)
     }
-
     return (
       <Pagination
         currentPage={currentPage}
@@ -69,10 +93,32 @@ export const Minimal: StoryObj = {
       />
     )
   },
-
   parameters: {
     docs: {
-      storyDescription: 'This variation works for secondary pagination.',
+      description: {
+        story: 'This variation works for secondary pagination.'
+      },
+      source: {
+        code: `
+() => {
+  const [currentPage, setCurrentPage] = useState(1)
+  const totalPages = 10
+
+  const handlePageChange = (page: React.SetStateAction<number>) => {
+    setCurrentPage(page)
+  }
+
+  return (
+    <Pagination
+      currentPage={currentPage}
+      totalPages={totalPages}
+      onPageChange={handlePageChange}
+      variant='minimal'
+    />
+  )
+}
+`
+      }
     },
   },
 }

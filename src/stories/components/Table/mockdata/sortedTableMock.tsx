@@ -1,32 +1,36 @@
-import { createColumnHelper } from '@tanstack/react-table'
-
+// import necessay table types
 import type { TableMockType } from './tableMockType'
-import type { ColumnDef } from '@tanstack/react-table'
+import type { ColumnSort } from '../../../../components/Table'
 
-import { defaultColumnOptions } from '../utils'
+// import necessary table components
+import { createColumnHelper, defaultColumnOptions } from '../../../../components/Table'
 
+// Custom default sorting
+export const mockSortees: ColumnSort[] = [
+  { id: 'user', desc: false },
+]
+
+// Specify the content and parameters for each column
 const columnHelper = createColumnHelper<TableMockType>()
-
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const tableDefaultColumns: ColumnDef<TableMockType, any>[] = [
+export const sortedTableColumns = [
   columnHelper.accessor('id', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'ID',
-    enableSorting: false,
+    enableSorting: true,
     enableColumnFilter: false,
     meta: { width: '10%' },
   }),
   columnHelper.accessor('user', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'User',
-    enableSorting: false,
+    enableSorting: true,
     enableColumnFilter: false,
     meta: { width: '45%' },
   }),
   columnHelper.accessor('role', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'Role',
-    enableSorting: false,
+    enableSorting: true,
     enableColumnFilter: false,
     meta: { width: '45%' },
   }),

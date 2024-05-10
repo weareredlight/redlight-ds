@@ -30,7 +30,7 @@ const Checkbox = ({
   description,
   checked,
   disabled = false,
-  state,
+  state = 'null',
   errorMsg,
   labelPosition = 'right',
   onChange,

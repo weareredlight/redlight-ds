@@ -20,7 +20,7 @@ const Tag = ({
   children,
   variant,
   onClose,
-  disabled,
+  disabled = false,
   ...props
 }: Props) => (
   <StyledTag

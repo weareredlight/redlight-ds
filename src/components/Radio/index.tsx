@@ -27,7 +27,7 @@ const Radio = ({
   label,
   description,
   checked,
-  disabled,
+  disabled = false,
   labelPosition = 'right',
   onChange,
   ...props

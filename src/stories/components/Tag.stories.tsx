@@ -1,18 +1,19 @@
-import { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
+import type { Meta, StoryObj } from '@storybook/react'
 
-import Tag, { Props } from '../../components/Tag'
+import Tag from '../../components/Tag'
 
-export default {
+const meta = {
   title: 'Components/Displays/Tag',
   component: Tag,
-  render: (args: Props) => <Tag {...args}>Tag Example</Tag>,
   parameters: {
     docs: {
       description: {
         component: 'Tags are similar to the pills, but they are typically used to represent more complex, multi-word labels or categories. Each tag is typically displayed as a small, rectangular element with a text label. Like the pills, tags can be removed.'
       },
     },
+  },
+  args: {
+    children: 'Tag Example',
   },
   argTypes: {
     variant: {
@@ -25,40 +26,34 @@ export default {
   }
 } satisfies Meta<typeof Tag>
 
-type Story = StoryObj<typeof Tag>
+export default meta
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
+export const Primary: Story = {
   args: {
-    variant: 'default',
-    onClose: undefined,
+    onClose: undefined
   },
   parameters: {
     docs: {
-      source: {
-        code: `
-  <Tag>Tag Example</Tag>
-  `
+      description: {
+        story: 'This is the default tag.'
       }
     }
-  },
-  storyName: 'Default',
+  }
 }
 
 export const Closable: Story = {
   args: {
     // eslint-disable-next-line no-alert
-    onClose: () => alert('Are you sure you want to remove?')
+    onClose: () => alert('Are you sure you want to remove this tag?')
   },
   parameters: {
     docs: {
-      source: {
-        code: `
-  <Tag closable onClose={updateTags()}>Tag Example</Tag>
-  `
+      description: {
+        story: 'When you have a group of tags you can delete them by pressing the cross button.'
       }
     }
-  },
-  storyName: 'Closable',
+  }
 }
 
 export const Error: Story = {
@@ -67,14 +62,11 @@ export const Error: Story = {
   },
   parameters: {
     docs: {
-      source: {
-        code: `
-  <Tag variant='error'>Tag Example</Tag>
-  `
+      description: {
+        story: 'Tags can also be used to indicate potential errors or dangerous actions.'
       }
     }
-  },
-  storyName: 'Error',
+  }
 }
 
 export const Disabled: Story = {
@@ -83,12 +75,9 @@ export const Disabled: Story = {
   },
   parameters: {
     docs: {
-      source: {
-        code: `
-  <Tag disabled>Tag Example</Tag>
-  `
+      description: {
+        story: 'You can prevent the user from deleting tags.'
       }
     }
-  },
-  storyName: 'Disabled',
+  }
 }

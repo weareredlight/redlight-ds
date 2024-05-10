@@ -78,10 +78,7 @@ export const StyledTrigger = styled(Switch.Root, {
       dirty: {
         outlineColor: '$accent',
       },
-      null: {}
-    },
-    disabled: {
-      true: {
+      disabled: {
         backgroundColor: '$neutral300',
         [`& ${StyledThumb}`]: {
           backgroundColor: '$neutral400',
@@ -90,6 +87,7 @@ export const StyledTrigger = styled(Switch.Root, {
           backgroundColor: '$neutral300',
         },
       },
+      null: {},
     }
   },
 })

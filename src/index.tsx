@@ -1,119 +1,137 @@
-import alert, { ToastContainer } from './components/Alert'
-import Avatar from './components/Avatar'
-import { StyledAvatar } from './components/Avatar/styles'
-import Button from './components/Button'
-import { StyledButton } from './components/Button/styles'
-import Checkbox from './components/Checkbox'
-import { StyledCheckbox } from './components/Checkbox/styles'
-import DatePicker from './components/DatePicker'
-import { StyledDatePicker } from './components/DatePicker/styles'
-import Dialog from './components/Dialog'
-import GroupButtons from './components/GroupButtons'
-import { StyledGroupButtons } from './components/GroupButtons/styles'
-import Input from './components/Input'
-import { StyledInput } from './components/Input/styles'
-import Link from './components/Link'
-import { StyledLink } from './components/Link/styles'
-import Modal from './components/Modal'
-import MultiSelect from './components/MultiSelect'
-import Pagination from './components/Pagination'
-import { StyledPagination } from './components/Pagination/styles'
-import Pill from './components/Pill'
-import { StyledPill } from './components/Pill/styles'
-import PopOver from './components/PopOver'
-import { StyledPopOver } from './components/PopOver/styles'
-import Radio from './components/Radio'
-import { StyledRadio } from './components/Radio/styles'
-import Select from './components/Select'
-import { StyledSelect } from './components/Select/styles'
-import Label from './components/shared/Label'
-import { StyledLabel } from './components/shared/Label/styles'
-import Table from './components/Table'
-import { StyledTable } from './components/Table/styles'
-import Tabs from './components/Tabs'
-import { StyledTabs } from './components/Tabs/styles'
-import Tag from './components/Tag'
-import { StyledTag } from './components/Tag/styles'
-import Text from './components/Text'
-import { StyledText } from './components/Text/styles'
-import TextArea from './components/TextArea'
-import { StyledTextArea } from './components/TextArea/styles'
-import TimePicker from './components/TimePicker'
-import { StyledTimePicker } from './components/TimePicker/styles'
-import Toggle from './components/Toggle'
-import { StyledToggle } from './components/Toggle/styles'
-import Tooltip from './components/Tooltip'
-import Upload from './components/Upload'
-import { StyledUpload } from './components/Upload/styles'
-import Flex from './elements/Flex'
-import {
-  setupTheme,
-  styled,
-  theme,
-  css,
-  ColorType,
-  colorOptions,
-  getColor,
-} from './stitches'
+// import alert, { ToastContainer } from './components/Alert'
+// import Avatar from './components/Avatar'
+// import { StyledAvatar } from './components/Avatar/styles'
+// import Button from './components/Button'
+// import { StyledButton } from './components/Button/styles'
+// import Checkbox from './components/Checkbox'
+// import { StyledCheckbox } from './components/Checkbox/styles'
+// import DatePicker from './components/DatePicker'
+// import { StyledDatePicker } from './components/DatePicker/styles'
+// import Dialog from './components/Dialog'
+// import GroupButtons from './components/GroupButtons'
+// import { StyledGroupButtons } from './components/GroupButtons/styles'
+// import Input from './components/Input'
+// import { StyledInput } from './components/Input/styles'
+// import Link from './components/Link'
+// import { StyledLink } from './components/Link/styles'
+// import Modal from './components/Modal'
+// import MultiSelect from './components/MultiSelect'
+// import Pagination from './components/Pagination'
+// import { StyledPagination } from './components/Pagination/styles'
+// import Pill from './components/Pill'
+// import { StyledPill } from './components/Pill/styles'
+// import PopOver from './components/PopOver'
+// import { StyledPopOver } from './components/PopOver/styles'
+// import Radio from './components/Radio'
+// import { StyledRadio } from './components/Radio/styles'
+// import Select from './components/Select'
+// import { StyledSelect } from './components/Select/styles'
+// import Label from './components/shared/Label'
+// import { StyledLabel } from './components/shared/Label/styles'
+// import Table from './components/Table'
+// import { StyledTable } from './components/Table/styles'
+// import Tabs from './components/Tabs'
+// import { StyledTabs } from './components/Tabs/styles'
+// import Tag from './components/Tag'
+// import { StyledTag } from './components/Tag/styles'
+// import Text from './components/Text'
+// import { StyledText } from './components/Text/styles'
+// import TextArea from './components/TextArea'
+// import { StyledTextArea } from './components/TextArea/styles'
+// import TimePicker from './components/TimePicker'
+// import { StyledTimePicker } from './components/TimePicker/styles'
+// import Toggle from './components/Toggle'
+// import { StyledToggle } from './components/Toggle/styles'
+// import Tooltip from './components/Tooltip'
+// import Upload from './components/Upload'
+// import { StyledUpload } from './components/Upload/styles'
+// import Flex from './elements/Flex'
+// import {
+//   setupTheme,
+//   styled,
+//   theme,
+//   css,
+//   ColorType,
+//   colorOptions,
+//   getColor,
+// } from './stitches'
 
-export {
-  alert,
-  Avatar,
-  Button,
-  Checkbox,
-  DatePicker,
-  Dialog,
-  GroupButtons,
-  Input,
-  Link,
-  Modal,
-  MultiSelect,
-  Pagination,
-  Pill,
-  PopOver,
-  Radio,
-  Select,
-  Table,
-  Tabs,
-  Tag,
-  TextArea,
-  TimePicker,
-  ToastContainer,
-  Toggle,
-  Tooltip,
-  Upload,
-  Text,
-  Label,
-  Flex,
-  setupTheme,
-  styled,
-  theme,
-  css,
-  ColorType,
-  colorOptions,
-  getColor,
-}
+// export {
+//   alert,
+//   Avatar,
+//   Button,
+//   Checkbox,
+//   DatePicker,
+//   Dialog,
+//   GroupButtons,
+//   Input,
+//   Link,
+//   Modal,
+//   MultiSelect,
+//   Pagination,
+//   Pill,
+//   PopOver,
+//   Radio,
+//   Select,
+//   Table,
+//   Tabs,
+//   Tag,
+//   TextArea,
+//   TimePicker,
+//   ToastContainer,
+//   Toggle,
+//   Tooltip,
+//   Upload,
+//   Text,
+//   Label,
+//   Flex,
+//   setupTheme,
+//   styled,
+//   theme,
+//   css,
+//   ColorType,
+//   colorOptions,
+//   getColor,
+// }
 
-export {
-  StyledAvatar,
-  StyledButton,
-  StyledCheckbox,
-  StyledDatePicker,
-  StyledGroupButtons,
-  StyledInput,
-  StyledLink,
-  StyledPagination,
-  StyledPill,
-  StyledPopOver,
-  StyledRadio,
-  StyledSelect,
-  StyledLabel,
-  StyledTable,
-  StyledTabs,
-  StyledTag,
-  StyledText,
-  StyledTextArea,
-  StyledTimePicker,
-  StyledToggle,
-  StyledUpload,
-}
+// export {
+//   StyledAvatar,
+//   StyledButton,
+//   StyledCheckbox,
+//   StyledDatePicker,
+//   StyledGroupButtons,
+//   StyledInput,
+//   StyledLink,
+//   StyledPagination,
+//   StyledPill,
+//   StyledPopOver,
+//   StyledRadio,
+//   StyledSelect,
+//   StyledLabel,
+//   StyledTable,
+//   StyledTabs,
+//   StyledTag,
+//   StyledText,
+//   StyledTextArea,
+//   StyledTimePicker,
+//   StyledToggle,
+//   StyledUpload,
+// }
+
+import React from 'react'
+import ReactDOM from 'react-dom/client'
+
+const rootElement = document.getElementById('root') || document.createElement('div')
+const root = ReactDOM.createRoot(rootElement)
+
+const App = () => (
+  <div>
+    <h1>My Table</h1>
+  </div>
+)
+
+root.render(
+  <React.StrictMode>
+    <App />
+  </React.StrictMode>
+)

@@ -16,7 +16,7 @@ export default {
   argTypes: {
     state: {
       control: 'radio',
-      options: ['error', 'dirty', null],
+      options: [null, 'error', 'dirty', 'disabled'],
     },
     rows: {
       control: 'number',

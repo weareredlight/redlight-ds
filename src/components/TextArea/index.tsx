@@ -36,7 +36,7 @@ const TextArea = React.forwardRef(({
   label,
   placeholder,
   description,
-  state,
+  state = 'null',
   fullWidth = false,
   errorMsg,
   rows = 5,

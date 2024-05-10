@@ -38,7 +38,7 @@ export default {
     },
     variant: {
       control: 'radio',
-      options: ['normal', 'simple'],
+      options: [null, 'simple'],
     },
     type: {
       control: 'select',
