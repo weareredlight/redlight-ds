@@ -1,7 +1,7 @@
 import { SymbolIcon } from '@radix-ui/react-icons'
+import * as Stitches from '@stitches/react'
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
 import type { ReactNode } from 'react'
 
 import { StyledButton } from './styles'
@@ -17,6 +17,7 @@ export type ButtonProps = {
   isLoading?: Stitches.VariantProps<typeof StyledButton>['isLoading']
   type?: 'submit' | 'button',
   disabled?: boolean,
+  extraClasses?: string
   css?: Stitches.CSS
 }
 
@@ -30,6 +31,7 @@ const Button = React.forwardRef(({
   isLoading = false,
   type = 'button',
   disabled = false,
+  extraClasses,
   css,
   ...props
 }: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
@@ -62,6 +64,7 @@ const Button = React.forwardRef(({
       size={size}
       fullWidth={fullWidth}
       css={{ ...css }}
+      className={extraClasses}
       ref={ref}
       {...props}
     >

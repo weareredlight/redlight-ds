@@ -19,7 +19,7 @@ export default meta
 type Story = StoryObj<typeof meta>
 
 const GroupButtonsWrapper = (args: Story['args']) => {
-  const [selectedOption, setSelectedOption] = useState<string | null>(null)
+  const [selectedOption, setSelectedOption] = useState<string | null>('option1')
   const { buttons } = args as { buttons: { label: string; value: string }[] }
   return (
     <GroupButtons

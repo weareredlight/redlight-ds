@@ -14,12 +14,13 @@ const meta: Meta = {
   },
   argTypes: {
     size: {
-      control: {
-        type: 'radio',
-        options: ['normal', 'large'],
-      },
+      control: 'radio',
+      options: ['normal', 'large'],
     },
     disabled: {
+      control: 'boolean',
+    },
+    clearBtn: {
       control: 'boolean',
     },
   },
@@ -32,6 +33,7 @@ export const Normal = {
     placeholder: 'Upload file',
     buttonText: 'Browse',
     disabled: false,
+    clearBtn: true,
   },
 }
 
@@ -43,5 +45,6 @@ export const Large = {
     buttonText: 'Browse',
     disabled: false,
     description: 'Max. 50mb',
+    clearBtn: false,
   },
 }

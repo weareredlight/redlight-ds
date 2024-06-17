@@ -79,11 +79,33 @@ export const StyledUpload = styled('div', {
   alignItems: 'center',
   marginBottom: '$xxxsm',
 
+  '.clear-btn': {
+    position: 'absolute',
+    borderRadius: '$full',
+    width: 18,
+    height: 18,
+    minWidth: 18,
+    minHeight: 18,
+    padding: 0,
+    zIndex: 1,
+
+    svg: {
+      width: '12px',
+      height: '12px',
+    }
+  },
+
   variants: {
     size: {
       normal: {
         height: '34px',
         border: '0.075rem solid $neutral400',
+
+        '.clear-btn': {
+          right: 80,
+          top: '50%',
+          transform: 'translateY(-50%)',
+        }
       },
       large: {
         height: '96px',
@@ -91,6 +113,12 @@ export const StyledUpload = styled('div', {
         flexDirection: 'column-reverse',
         justifyContent: 'center',
         gap: '$xxsm',
+
+        '.clear-btn': {
+          top: 2,
+          right: 2,
+          transform: 'translateX(50%) translateY(-50%)',
+        },
 
         '& span svg': {
           background: 'transparent',

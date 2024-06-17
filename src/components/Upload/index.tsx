@@ -1,4 +1,4 @@
-import { SymbolIcon, FileTextIcon } from '@radix-ui/react-icons'
+import { SymbolIcon, FileTextIcon, Cross2Icon } from '@radix-ui/react-icons'
 import { useState, useRef, useCallback } from 'react'
 
 import type * as Stitches from '@stitches/react'
@@ -8,7 +8,10 @@ import Button from '../Button'
 import Label from '../shared/Label'
 
 import {
-  StyledUpload, StyledUploadInput, StyledFile, StyledTrigger
+  StyledUpload,
+  StyledUploadInput,
+  StyledFile,
+  StyledTrigger,
 } from './styles'
 
 export type UploadProps = {
@@ -21,6 +24,7 @@ export type UploadProps = {
   defaultFile?: File
   onUpload?: (file: File) => void
   disabled?: boolean
+  clearBtn?: boolean
 }
 
 const isImage = (ext: string) => ext === 'png' || ext === 'jpg' || ext === 'jpeg'
@@ -35,6 +39,7 @@ const Upload = ({
   defaultFile,
   onUpload,
   disabled,
+  clearBtn = false,
   ...props
 }: UploadProps) => {
   const [fileName, setFileName] = useState<string>(defaultFile ? defaultFile.name : '')
@@ -86,6 +91,21 @@ const Upload = ({
       {...props}
     >
       <StyledUploadInput type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
+      {fileUrl && clearBtn && (
+        <Button
+          variant='danger'
+          // eslint-disable-next-line react/no-unstable-nested-components
+          iconComponent={() => <Cross2Icon />}
+          iconPosition='iconOnly'
+          onClick={() => {
+            setFileName('')
+            setFileUrl(null)
+          }}
+          extraClasses='clear-btn'
+        >
+          Clear
+        </Button>
+      )}
       <StyledFile>
         {fileUrl && isImage(fileExtension) ? (
           <img src={fileUrl} alt='file-preview' />

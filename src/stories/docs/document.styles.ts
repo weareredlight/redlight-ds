@@ -1,5 +1,3 @@
-import LinkTo from '@storybook/addon-links/react'
-
 import { styled } from '../../stitches'
 
 export const StyledDocument = styled('div', {
@@ -131,7 +129,7 @@ export const StyledCode = styled('code', {
   },
 })
 
-export const StyledCard = styled(LinkTo, {
+export const StyledCard = styled('a', {
   all: 'unset',
   backgroundColor: '$white',
   border: '1px solid transparent',
