@@ -14,8 +14,7 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
-  staticDirs: ['../public'],
-  docs: {
+docs: {
     autodocs: true,
     defaultName: 'How to use',
   },
