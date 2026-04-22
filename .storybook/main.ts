@@ -14,9 +14,13 @@ const config: StorybookConfig = {
     '@storybook/addon-essentials',
     '@storybook/addon-interactions',
   ],
-docs: {
+  docs: {
     autodocs: true,
     defaultName: 'How to use',
+  },
+  async viteFinal(config) {
+    config.publicDir = false
+    return config
   },
 }
 export default config
