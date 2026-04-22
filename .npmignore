@@ -1,11 +1,21 @@
 # dependencies
 /node_modules
 
+# dev tooling
+.claude/
+.eslintignore
+.eslintrc
+.github/
+.storybook/
+.vscode/
+tsconfig.storybook.json
+vite.config.ts
+yarn.lock
+
+# storybook
+src/stories/
+storybook-static/
+
 # misc
 .DS_Store
-
-npm-debug.log*
-yarn-debug.log*
-yarn-error.log*
-
-storybook-static
+*.log

@@ -45,7 +45,7 @@
     "ts-watch": "tsc --watch",
     "lint": "npx eslint src --max-warnings 0",
     "lint-fix": "npx eslint src --max-warnings 0 --fix",
-    "predeploy": "yarn build-storybook",
+    "predeploy-storybook": "yarn build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "build-storybook": "storybook build",
     "build": "yarn build:esm && yarn build:cjs",
