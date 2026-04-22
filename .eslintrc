@@ -39,7 +39,7 @@
       "as-needed"
     ],
     "default-case": "off",
-    "semi": "off",
+    "semi": [2, "never"],
     "space-before-function-paren": [
       "error",
       {
@@ -155,10 +155,6 @@
         "varsIgnorePattern": "^_",
         "argsIgnorePattern": "^_"
       }
-    ],
-    "@typescript-eslint/semi": [
-      2,
-      "never"
     ],
     "jsx-a11y/label-has-associated-control": [
       "error",
