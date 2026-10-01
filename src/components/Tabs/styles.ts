@@ -40,7 +40,7 @@ export const TabsTrigger = styled(Tabs.Trigger, {
 export const TabsContent = styled(Tabs.Content, {
   flexGrow: 1,
   padding: '$xxsm',
-  backgroundColor: 'white',
+  backgroundColor: '$white',
   borderBottomLeftRadius: '$sm',
   borderBottomRightRadius: '$sm',
   outline: 'none',
