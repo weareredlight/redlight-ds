@@ -1,44 +1,60 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 
-import type * as Stitches from '@stitches/react'
-import type { ReactNode } from 'react'
+import type { ReactNode, CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Button from '../Button'
 
-import { StyledTag } from './styles'
+import styles from './styles.module.scss'
 
 export type TagProps = {
   children: ReactNode
-  variant?: Stitches.VariantProps<typeof StyledTag>['variant']
-  disabled?: Stitches.VariantProps<typeof StyledTag>['disabled']
+  variant?: 'default' | 'error'
+  disabled?: boolean
   onClose?: () => void
+  className?: string
+  style?: CSSProperties
 }
 
 const CloseIcon = () => <Cross2Icon />
 
 const Tag = ({
   children,
-  variant,
+  variant = 'default',
   onClose,
   disabled = false,
+  className,
+  style,
   ...props
-}: TagProps) => (
-  <StyledTag
-    variant={variant}
-    disabled={disabled}
-    className={(onClose && variant !== 'error') ? 'closable' : ''}
-    {...props}
-  >
-    {children}
-    {(onClose && variant !== 'error') && (
-      <Button
-        onClick={onClose}
-        iconComponent={CloseIcon}
-        iconPosition='iconOnly'
-        variant='textOnly'
-      />
-    )}
-  </StyledTag>
-)
+}: TagProps) => {
+  const closable = onClose && variant !== 'error'
+
+  return (
+    <span
+      className={cx(
+        styles.tag,
+        styles[variant],
+        disabled && styles.disabled,
+        closable && styles.closable,
+        className,
+      )}
+      style={style}
+      {...props}
+    >
+      {children}
+      {closable && (
+        <Button
+          onClick={onClose}
+          iconComponent={CloseIcon}
+          iconPosition='iconOnly'
+          variant='textOnly'
+          className={styles.closeButton}
+        />
+      )}
+    </span>
+  )
+}
+
+export const tagSelector = `.${styles.tag}`
 
 export default Tag

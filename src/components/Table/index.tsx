@@ -22,17 +22,14 @@ import type {
   SortingState,
   ColumnSort,
 } from '@tanstack/react-table'
+import type { CSSProperties } from 'react'
 
 import Flex from '../../elements/Flex'
+import { cx } from '../../utils'
 import Input from '../Input'
 import Text from '../Text'
 
-import {
-  StyledTable,
-  StyledTableBody,
-  StyledTableHead,
-  StyledEmptyRow,
-} from './styles'
+import styles from './styles.module.scss'
 import { defaultColumnOptions, globalFilter, globalSort } from './utils'
 
 export type TableProps<T> = {
@@ -41,6 +38,8 @@ export type TableProps<T> = {
   columns: ColumnDef<T, any>[]
   sortees?: ColumnSort[]
   renderOptions?: (data: T) => ReactElement
+  className?: string
+  style?: CSSProperties
 }
 
 const Table = <T extends object>({
@@ -48,6 +47,8 @@ const Table = <T extends object>({
   columns,
   sortees = [],
   renderOptions,
+  className,
+  style,
 }: TableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>(sortees)
 
@@ -69,8 +70,8 @@ const Table = <T extends object>({
   })
 
   return (
-    <StyledTable>
-      <StyledTableHead>
+    <table className={cx(styles.table, className)} style={style}>
+      <thead className={styles.head}>
         {table.getHeaderGroups().map(headerGroup => (
           <tr key={headerGroup.id}>
             {headerGroup.headers.map(header => {
@@ -78,14 +79,16 @@ const Table = <T extends object>({
               const columnFilterValue = column.getFilterValue()
               const isSortable = column.getCanSort()
 
-              let className = 'column-header '
-              if (isSortable) className += 'cursor-pointer '
               const columnWidth = (column.columnDef.meta as { width?: string })?.width ?? 'auto'
 
               return (
-                <th key={header.id} style={{ width: columnWidth }} className={!isSortable ? 'disabled ' : ''}>
+                <th
+                  key={header.id}
+                  style={{ width: columnWidth }}
+                  className={cx(!isSortable && styles.disabled)}
+                >
                   <div
-                    className={className}
+                    className={cx(styles.columnHeader, isSortable && styles.sortable)}
                     // eslint-disable-next-line no-mixed-operators
                     onClick={isSortable && column.getToggleSortingHandler() || undefined}
                   >
@@ -116,8 +119,8 @@ const Table = <T extends object>({
             })}
           </tr>
         ))}
-      </StyledTableHead>
-      <StyledTableBody>
+      </thead>
+      <tbody className={styles.body}>
         {table.getRowModel().rows.length ? (
           table.getRowModel().rows.map(row => (
             <tr key={row.id}>
@@ -134,16 +137,18 @@ const Table = <T extends object>({
             </tr>
           ))
         ) : (
-          <StyledEmptyRow colSpan={1000}>
+          <th className={styles.emptyRow} colSpan={1000}>
             <Text variant='textBlock' color='neutral'>
               Nothing was found...
             </Text>
-          </StyledEmptyRow>
+          </th>
         )}
-      </StyledTableBody>
-    </StyledTable>
+      </tbody>
+    </table>
   )
 }
+
+export const tableSelector = `.${styles.table}`
 
 export default Table
 export {

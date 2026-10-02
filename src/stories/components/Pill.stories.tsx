@@ -84,7 +84,7 @@ export const Closable: Story = {
 
 export const customCSS: Story = {
   args: {
-    css: {
+    style: {
       backgroundColor: 'yellow',
       color: 'green'
     },
@@ -93,7 +93,7 @@ export const customCSS: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'You can add custom CSS to your pill in order to create your own variations.'
+        story: 'You can pass `style` or `className` to your pill in order to create your own variations.'
       }
     }
   }

@@ -1,12 +1,13 @@
+import * as Switch from '@radix-ui/react-switch'
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
-import type { ChangeEvent, Ref } from 'react'
+import type { ChangeEvent, Ref, CSSProperties } from 'react'
 
+import { capitalize, cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import { StyledToggle, StyledTrigger, StyledThumb } from './styles'
+import styles from './styles.module.scss'
 
 export type ToggleProps = {
   id: string
@@ -15,9 +16,11 @@ export type ToggleProps = {
   value?: boolean
   description?: string
   errorMsg?: string
-  state?: Stitches.VariantProps<typeof StyledTrigger>['state']
+  state?: 'error' | 'dirty' | 'disabled' | 'null'
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   labelPosition?: 'left' | 'right'
+  className?: string
+  style?: CSSProperties
 }
 
 const Toggle = React.forwardRef(({
@@ -30,25 +33,31 @@ const Toggle = React.forwardRef(({
   state,
   onChange,
   labelPosition = 'right',
+  className,
+  style,
   ...props
 }: ToggleProps, ref: React.Ref<HTMLInputElement>) => (
   <>
-    <StyledToggle disabled={Boolean(state === 'disabled')}>
+    <div
+      className={cx(styles.toggle, state === 'disabled' && styles.disabled, className)}
+      style={style}
+    >
       {labelPosition === 'left' && (label || description) ? (
         <Label
           id={id}
           label={label}
           description={description}
+          className={styles.label}
         />
       ) : null}
-      <StyledTrigger
+      <Switch.Root
+        className={cx(styles.trigger, state && state !== 'null' && styles[`state${capitalize(state)}`])}
         id={id}
         ref={ref as Ref<HTMLButtonElement>}
         name={name}
         value={undefined}
         checked={value}
         disabled={Boolean(state === 'disabled')}
-        state={state}
         onCheckedChange={checked => {
           const target = {
             value: checked, name: name || id
@@ -58,16 +67,17 @@ const Toggle = React.forwardRef(({
         }}
         {...props}
       >
-        <StyledThumb />
-      </StyledTrigger>
+        <Switch.Thumb className={styles.thumb} />
+      </Switch.Root>
       {labelPosition === 'right' && (label || description) ? (
         <Label
           id={id}
           label={label}
           description={description}
+          className={styles.label}
         />
       ) : null}
-    </StyledToggle>
+    </div>
     {state === 'error' && errorMsg && (
       <Text color='danger' variant='microCopy'>
         {errorMsg}
@@ -75,5 +85,7 @@ const Toggle = React.forwardRef(({
     )}
   </>
 ))
+
+export const toggleSelector = `.${styles.toggle}`
 
 export default Toggle

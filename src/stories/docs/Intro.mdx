@@ -2,13 +2,13 @@ import { FontStyleIcon, ColorWheelIcon, Component1Icon } from '@radix-ui/react-i
 import { Meta } from '@storybook/blocks'
 
 import {
-  StyledDocument,
-  StyledHeader,
-  StyledBody,
-  StyledCode,
-  StyledCard,
-  StyledSeparator,
-} from './document.styles'
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCode,
+  DocCard,
+  DocSeparator,
+} from './document'
 
 import { Flex } from '../../elements/Flex'
 import Button from '../../components/Button'
@@ -17,13 +17,13 @@ import { BtnImport, BtnUse, Installation } from '../utils'
 
 <Meta title='Get Started' />
 
-<StyledDocument>
-  <StyledHeader>
+<Doc>
+  <DocHeader>
     <h2>Get Started</h2>
     <p>ver 1.0.0 | Last updated: 20/06/2023</p>
-  </StyledHeader>
+  </DocHeader>
 
-  <StyledBody>
+  <DocBody>
     <h3>Welcome to RedLight's Design System</h3>
     <p>
       Our Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.
@@ -33,21 +33,21 @@ import { BtnImport, BtnUse, Installation } from '../utils'
     <br />
     <span className="sub-heading">Learn more</span>
     <Flex gap="xlg">
-      <StyledCard href="../?path=/docs/style-guides-typography--how-to-use">
+      <DocCard href="../?path=/docs/style-guides-typography--how-to-use">
         <FontStyleIcon width={32} height={32} />
         <h5>Text Styles</h5>
-      </StyledCard>
-      <StyledCard href="../?path=/docs/style-guides-colors--how-to-use">
+      </DocCard>
+      <DocCard href="../?path=/docs/style-guides-colors--how-to-use">
         <ColorWheelIcon width={32} height={32} />
         <h5>Color Styles</h5>
-      </StyledCard>
-      <StyledCard href="../?path=/docs/components-general-button--how-to-use">
+      </DocCard>
+      <DocCard href="../?path=/docs/components-general-button--how-to-use">
         <Component1Icon width={32} height={32} />
         <h5>Components List</h5>
-      </StyledCard>
+      </DocCard>
     </Flex>
     <br />
-    <StyledSeparator />
+    <DocSeparator />
     <br />
     <h4>If you are a Developer 👨🏻‍💻</h4>
     <p>
@@ -58,21 +58,21 @@ import { BtnImport, BtnUse, Installation } from '../utils'
     <br />
     <span className="sub-heading">Configure</span>
     <p>Install the Design System on your project root:</p>
-    <StyledCode style={{width: '100%'}}>{Installation}</StyledCode>
+    <DocCode style={{width: '100%'}}>{Installation}</DocCode>
     <br />
     <p>Now it's time to start using the components.</p>
     <p>First import the component into the desired file:</p>
-    <StyledCode style={{width: '100%'}}>{BtnImport}</StyledCode>
+    <DocCode style={{width: '100%'}}>{BtnImport}</DocCode>
     <br />
     <p>Now the component is ready to use. Change its variants and properties so you can use it to your liking.</p>
     <Flex gap="sm" style={{alignItems: 'stretch'}}>
-      <StyledCode style={{width: '50%'}}>{BtnUse}</StyledCode>
+      <DocCode style={{width: '50%'}}>{BtnUse}</DocCode>
       <Flex style={{width: '50%', backgroundColor: '#F4F4F7', borderRadius: '4px'}}>
         <Button size="large" variant="primary">Button Text</Button>
       </Flex>
     </Flex>
     <br />
-    <StyledSeparator />
+    <DocSeparator />
     <br />
     <h4>If you are a Designer 👨🏻‍🎨</h4>
     <p>
@@ -81,5 +81,5 @@ import { BtnImport, BtnUse, Installation } from '../utils'
       Designers can leverage this file to create stunning visual experiences, access design patterns, and collaborate effectively with other team members.
     </p>
     <iframe style={{border: '1px solid rgba(0, 0, 0, 0.1)', width: '100%'}} height={450} src="https://www.figma.com/embed?embed_host=share&url=https%3A%2F%2Fwww.figma.com%2Ffile%2FrkRWOtSBgEd6wdfInQU2Oi%2FDesign-System%3Ftype%3Ddesign%26node-id%3D238%253A4773%26t%3DkCzoHDeJSbHSIlt3-1" allowfullscreen />
-  </StyledBody>
-</StyledDocument>
+  </DocBody>
+</Doc>

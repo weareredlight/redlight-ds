@@ -2,14 +2,9 @@ import * as RadixDialog from '@radix-ui/react-dialog'
 import { Cross2Icon } from '@radix-ui/react-icons'
 import React, { ReactElement } from 'react'
 
-import type { CSS } from '@stitches/react'
+import { cx } from '../../utils'
 
-import {
-  DialogContent,
-  DialogDescription,
-  DialogOverlay,
-  DialogTitle,
-} from './styles'
+import styles from './styles.module.scss'
 
 export type ModalProps = {
   open: boolean
@@ -18,9 +13,8 @@ export type ModalProps = {
   title?: string
   description?: string
   children?: React.ReactNode
-  css?: CSS
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  extraClasses?: any
+  className?: string
+  style?: React.CSSProperties
 }
 
 const Modal = ({
@@ -30,37 +24,37 @@ const Modal = ({
   title,
   description,
   children,
-  css,
-  extraClasses,
+  className,
+  style,
 }: ModalProps) => (
   <RadixDialog.Root open={open}>
     <RadixDialog.Trigger asChild>
       {renderTrigger && renderTrigger()}
     </RadixDialog.Trigger>
     <RadixDialog.Portal>
-      <DialogOverlay />
-      <DialogContent
-        css={css}
+      <RadixDialog.Overlay className={styles.overlay} />
+      <RadixDialog.Content
+        style={style}
         onEscapeKeyDown={closeFn}
         onInteractOutside={closeFn}
-        className={extraClasses}
+        className={cx(styles.content, className)}
         onOpenAutoFocus={event => event.preventDefault()}
       >
         {title && (
-          <DialogTitle>
+          <RadixDialog.Title className={styles.title}>
             {title}
-          </DialogTitle>
+          </RadixDialog.Title>
         )}
         {description && (
-          <DialogDescription>
+          <RadixDialog.Description className={styles.description}>
             {description}
-          </DialogDescription>
+          </RadixDialog.Description>
         )}
         {children}
         <RadixDialog.Close asChild>
           <Cross2Icon onClick={closeFn} />
         </RadixDialog.Close>
-      </DialogContent>
+      </RadixDialog.Content>
     </RadixDialog.Portal>
   </RadixDialog.Root>
 )

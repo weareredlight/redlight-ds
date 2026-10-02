@@ -1,14 +1,13 @@
 import { CheckIcon } from '@radix-ui/react-icons'
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
+import { capitalize, cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import {
-  StyledCheckbox, StyledTrigger, StyledIndicator
-} from './styles'
+import styles from './styles.module.scss'
 
 export type CheckboxProps = {
   label?: string
@@ -16,11 +15,13 @@ export type CheckboxProps = {
   id: string
   value?: string
   checked?: boolean
-  disabled?: Stitches.VariantProps<typeof StyledCheckbox | typeof StyledTrigger>['disabled']
-  state?: Stitches.VariantProps<typeof StyledTrigger>['state']
+  disabled?: boolean
+  state?: 'error' | 'dirty' | 'null'
   errorMsg?: string
   labelPosition?: string
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+  className?: string
+  style?: CSSProperties
 }
 
 const Checkbox = ({
@@ -34,18 +35,22 @@ const Checkbox = ({
   errorMsg,
   labelPosition = 'right',
   onChange,
+  className,
+  style,
   ...props
 }: CheckboxProps) => (
   <>
-    <StyledCheckbox disabled={disabled}>
+    <div className={cx(styles.checkbox, disabled && styles.disabled, className)} style={style}>
       {labelPosition === 'left' ? (
         <>
           <Label
             id={id}
             label={label}
             description={description}
+            className={styles.label}
           />
-          <StyledTrigger
+          <input
+            className={cx(styles.trigger, disabled && styles.disabled)}
             type='checkbox'
             id={id}
             value={value}
@@ -54,33 +59,38 @@ const Checkbox = ({
             onChange={onChange}
             {...props}
           />
-          <StyledIndicator htmlFor={id}>
+          <label className={styles.indicator} htmlFor={id}>
             <CheckIcon />
-          </StyledIndicator>
+          </label>
         </>
       ) : (
         <>
-          <StyledTrigger
+          <input
+            className={cx(
+              styles.trigger,
+              state !== 'null' && styles[`state${capitalize(state)}`],
+              disabled && styles.disabled,
+            )}
             type='checkbox'
             id={id}
             value={value}
-            state={state}
             checked={checked}
             disabled={disabled}
             onChange={onChange}
             {...props}
           />
-          <StyledIndicator htmlFor={id}>
+          <label className={styles.indicator} htmlFor={id}>
             <CheckIcon />
-          </StyledIndicator>
+          </label>
           <Label
             id={id}
             label={label}
             description={description}
+            className={styles.label}
           />
         </>
       )}
-    </StyledCheckbox>
+    </div>
     {state === 'error' && errorMsg && (
       <Text color='danger' variant='microCopy'>
         {errorMsg}
@@ -88,5 +98,7 @@ const Checkbox = ({
     )}
   </>
 )
+
+export const checkboxSelector = `.${styles.checkbox}`
 
 export default Checkbox

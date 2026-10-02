@@ -1,13 +1,17 @@
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
-import { StyledLabel } from './styles'
+import { capitalize, cx } from '../../../utils'
+
+import styles from './styles.module.scss'
 
 export type LabelProps = {
   id?: string
   label?: string
   description?: string
   optional?: boolean
-  align?: Stitches.VariantProps<typeof StyledLabel>['align']
+  align?: 'left' | 'center' | 'right'
+  className?: string
+  style?: CSSProperties
 }
 
 const Label = ({
@@ -16,11 +20,14 @@ const Label = ({
   description,
   optional,
   align = 'left',
+  className,
+  style,
   ...props
 }: LabelProps) => (
-  <StyledLabel
+  <label
     htmlFor={id}
-    align={align}
+    className={cx(styles.label, styles[`align${capitalize(align)}`], className)}
+    style={style}
     {...props}
   >
     {label && (
@@ -30,7 +37,9 @@ const Label = ({
       </p>
     )}
     {description && <span>{description}</span>}
-  </StyledLabel>
+  </label>
 )
+
+export const labelSelector = `.${styles.label}`
 
 export default Label

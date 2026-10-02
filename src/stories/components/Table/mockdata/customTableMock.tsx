@@ -22,7 +22,7 @@ export const customTableColumns = [
     cell: data => {
       const user = data.getValue()
       return (
-        <Flex justify='start' css={{ gap: '$sm' }}>
+        <Flex justify='start' style={{ gap: 'var(--space-sm)' }}>
           <Avatar
             size='small'
             name={String(user)}

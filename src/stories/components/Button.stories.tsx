@@ -41,11 +41,6 @@ export default {
     onClick: {
       control: false,
     },
-    css: {
-      table: {
-        disable: true,
-      }
-    },
     // booleans
     disabled: {
       control: 'boolean',

@@ -1,0 +1,265 @@
+// =============================================================================
+// BUTTON
+// -----------------------------------------------------------------------------
+// Tokens are the CSS variables emitted by the theme (`--colors-*`, `--space-*`, ...),
+// so `setupTheme` and theme classes keep working.
+//
+// Modifiers are written as `:where(&).modifier` (compiles to `:where(.button).modifier`):
+// they only apply to the button but keep single-class specificity, so parent
+// components (Pill, Tag, Pagination, ...) can still override them.
+// =============================================================================
+
+@use '../../styles/typography';
+
+// Filled button: solid background that darkens on hover/active.
+@mixin filled($bg, $hover, $active, $disabled, $focus: null) {
+  background-color: $bg;
+  color: var(--colors-white);
+
+  &:hover { background-color: $hover; }
+  &:active { background-color: $active; }
+  &:disabled { background-color: $disabled; }
+
+  @if $focus {
+    &:focus { --button-shadow-color: #{$focus}; }
+  }
+}
+
+@keyframes rotateIcon {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(359deg); }
+}
+
+.button {
+  --button-shadow-color: var(--colors-primary300);
+
+  appearance: none;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  border-radius: var(--radii-xsm);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: var(--space-xxsm);
+  cursor: pointer;
+
+  &:focus { box-shadow: 0 0 0 2px var(--button-shadow-color); }
+  &:disabled { pointer-events: none; }
+
+  // No icon: default padding. Comes before SIZE so the size paddings win
+  // (large buttons get the wider padding).
+  :where(&).noIcon { padding: var(--space-xxsm) var(--space-lg); }
+
+  // ===========================================================================
+  // SIZE
+  // ===========================================================================
+
+  :where(&).normal {
+    @include typography.heading7;
+    padding: var(--space-xxsm) var(--space-lg);
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+
+  :where(&).large {
+    @include typography.heading5;
+    padding: var(--space-xxsm) var(--space-xxlg);
+    min-height: 42px;
+
+    svg {
+      width: 18px;
+      height: 18px;
+    }
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  // --- neutral ---------------------------------------------------------------
+  :where(&).neutral {
+    border: 1px solid var(--colors-neutral400);
+    background-color: transparent;
+    color: var(--colors-neutral700);
+
+    &:hover {
+      background-color: var(--colors-neutral100);
+      border-color: var(--colors-neutral700);
+      color: var(--colors-neutral700);
+    }
+
+    &:active {
+      border-color: var(--colors-neutral800);
+      color: var(--colors-neutral900);
+    }
+
+    &:disabled {
+      color: var(--colors-neutral300);
+      border-color: var(--colors-neutral400);
+    }
+  }
+
+  // --- primary ---------------------------------------------------------------
+  :where(&).primary {
+    @include filled(
+      $bg: var(--colors-primary),
+      $hover: var(--colors-primary600),
+      $active: var(--colors-primary700),
+      $disabled: var(--colors-primary200),
+    );
+  }
+
+  // --- secondary -------------------------------------------------------------
+  :where(&).secondary {
+    border: 1px solid var(--colors-primary);
+    background-color: transparent;
+    color: var(--colors-primary);
+
+    &:hover {
+      background-color: var(--colors-primary100);
+      border-color: var(--colors-primary600);
+      color: var(--colors-primary600);
+    }
+
+    &:active {
+      border-color: var(--colors-primary700);
+      color: var(--colors-primary700);
+    }
+
+    &:disabled {
+      color: var(--colors-primary200);
+      border-color: var(--colors-primary200);
+    }
+  }
+
+  // --- tertiary --------------------------------------------------------------
+  // Uses the accent palette when the default theme defines one, neutral otherwise.
+  :where(&).tertiary {
+    --tertiary: var(--colors-neutral);
+    --tertiary600: var(--colors-neutral600);
+    --tertiary700: var(--colors-neutral700);
+    --tertiary200: var(--colors-neutral200);
+
+    @include filled(
+      $bg: var(--tertiary),
+      $hover: var(--tertiary600),
+      $active: var(--tertiary700),
+      $disabled: var(--tertiary200),
+      $focus: var(--tertiary200),
+    );
+  }
+
+  :where(&).tertiaryAccent {
+    --tertiary: var(--colors-accent);
+    --tertiary600: var(--colors-accent600);
+    --tertiary700: var(--colors-accent700);
+    --tertiary200: var(--colors-accent200);
+  }
+
+  // --- textOnly --------------------------------------------------------------
+  :where(&).textOnly {
+    border: 1px solid transparent;
+    background-color: transparent;
+    color: var(--colors-neutral700);
+
+    &:hover { background-color: var(--colors-neutral200); }
+    &:active { background-color: var(--colors-neutral300); }
+    &:disabled { color: var(--colors-neutral400); }
+  }
+
+  // --- danger ----------------------------------------------------------------
+  :where(&).danger {
+    @include filled(
+      $bg: var(--colors-danger),
+      $hover: var(--colors-danger500),
+      $active: var(--colors-danger600),
+      $disabled: var(--colors-danger200),
+      $focus: var(--colors-danger200),
+    );
+  }
+
+  // --- success ---------------------------------------------------------------
+  :where(&).success {
+    @include filled(
+      $bg: var(--colors-success),
+      $hover: var(--colors-success500),
+      $active: var(--colors-success600),
+      $disabled: var(--colors-success200),
+      $focus: var(--colors-success200),
+    );
+  }
+
+  // ===========================================================================
+  // ICON POSITION
+  // ===========================================================================
+
+  :where(&).iconLeft { padding-left: var(--space-xxsm); }
+  :where(&).iconRight { padding-right: var(--space-xxsm); }
+
+  :where(&).iconOnly {
+    padding: var(--space-xxsm);
+    width: 32px;
+    height: 32px;
+  }
+
+  // ===========================================================================
+  // LOADING
+  // ===========================================================================
+
+  :where(&).loading {
+    color: transparent !important;
+    position: relative;
+    pointer-events: none;
+    user-select: none;
+    text-align: center;
+
+    :global(.loading-icon) {
+      position: absolute;
+      transform: translate(-50%, -50%);
+      animation: rotateIcon 2s infinite linear;
+    }
+
+    svg:not(:global(.loading-icon)) {
+      color: transparent;
+    }
+  }
+
+  // ===========================================================================
+  // COMBINATIONS
+  // `&:where(...)` keeps these at single-class specificity too.
+  // ===========================================================================
+
+  // --- large + icon ----------------------------------------------------------
+  :where(&).large {
+    &:where(.iconLeft) { padding-left: var(--space-lg); }
+    &:where(.iconRight) { padding-right: var(--space-lg); }
+
+    &:where(.iconOnly) {
+      padding: var(--space-xxsm) var(--space-xsm);
+      width: 42px;
+      height: 42px;
+    }
+  }
+
+  // --- loading + variant / icon ----------------------------------------------
+  :where(&).loading {
+    &:where(.neutral, .textOnly) svg { color: var(--colors-neutral700); }
+    &:where(.primary, .tertiary, .danger, .success) svg { color: var(--colors-white); }
+    &:where(.secondary) svg { color: var(--colors-primary); }
+
+    &:where(.iconLeft) :global(.loading-icon) { margin-left: var(--space-xxsm); }
+    &:where(.iconRight) :global(.loading-icon) { margin-right: var(--space-xxsm); }
+  }
+}

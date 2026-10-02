@@ -1,0 +1,46 @@
+// =============================================================================
+// LABEL
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../../styles/typography';
+
+.label {
+  display: flex;
+  flex-direction: column;
+
+  // ===========================================================================
+  // ALIGN
+  // ===========================================================================
+
+  :where(&).alignLeft {
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  :where(&).alignCenter {
+    align-items: center;
+    text-align: center;
+  }
+
+  :where(&).alignRight {
+    align-items: flex-end;
+    text-align: right;
+  }
+
+  // ===========================================================================
+  // CONTENT
+  // ===========================================================================
+
+  p {
+    @include typography.heading7;
+    user-select: none;
+  }
+
+  span {
+    @include typography.microCopy;
+    color: var(--colors-neutral);
+    user-select: none;
+  }
+}

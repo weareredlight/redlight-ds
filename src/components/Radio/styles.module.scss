@@ -1,0 +1,102 @@
+// =============================================================================
+// RADIO
+// -----------------------------------------------------------------------------
+// The native input is hidden; the `+ label` sibling (.indicator) is the visible circle.
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+.radio {
+  width: fit-content;
+  display: flex;
+  gap: var(--space-xxsm);
+  cursor: pointer;
+
+  * {
+    cursor: pointer;
+  }
+
+  .label {
+    padding: 0;
+    margin-top: 1.5px;
+  }
+
+  // ===========================================================================
+  // DISABLED
+  // ===========================================================================
+
+  :where(&).disabled {
+    pointer-events: none;
+
+    * {
+      cursor: default;
+    }
+  }
+}
+
+// =============================================================================
+// HIDDEN INPUT (drives the indicator styles)
+// =============================================================================
+
+.trigger {
+  display: none;
+
+  &:hover + label {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
+  }
+
+  &:focus + label {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral700);
+  }
+
+  &:checked + label {
+    background-color: var(--colors-primary);
+    border-color: var(--colors-primary);
+
+    // inner dot
+    &::after {
+      content: "";
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: var(--radii-full);
+      background: var(--colors-white);
+    }
+
+    &:hover { background-color: var(--colors-primary600); }
+    &:focus { background-color: var(--colors-primary700); }
+  }
+
+  // ===========================================================================
+  // DISABLED
+  // ===========================================================================
+
+  :where(&).disabled {
+    + label {
+      background-color: var(--colors-neutral300);
+      border-color: var(--colors-neutral300);
+    }
+
+    &:checked + label {
+      background-color: var(--colors-neutral300);
+      border-color: var(--colors-neutral300);
+    }
+  }
+}
+
+// =============================================================================
+// VISIBLE CIRCLE
+// =============================================================================
+
+.indicator {
+  width: 16px;
+  height: 16px;
+  border-radius: var(--radii-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  border: 1px solid var(--colors-neutral500);
+  background-color: transparent;
+}

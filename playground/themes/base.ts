@@ -10,7 +10,6 @@ export type PlaygroundTheme = {
   colors: Record<string, string>
   sizes: Record<string, Record<string, string | number>>
   shadows: Record<string, string>
-  media: Record<string, string>
 }
 
 export const baseSizes = {
@@ -55,11 +54,4 @@ export const baseSizes = {
     lg: '140%',
     xlg: '150%',
   },
-}
-
-export const baseMedia = {
-  sm: '(max-width: 620px)',
-  md: '(max-width: 960px)',
-  lg: '(max-width: 1600px)',
-  xlg: '(min-width: 1600px)',
 }

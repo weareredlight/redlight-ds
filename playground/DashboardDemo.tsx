@@ -2,6 +2,7 @@ import { MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons'
 import { useMemo, useState } from 'react'
 
 import type { Project, ProjectStatus } from './data'
+import type { CSSProperties } from 'react'
 
 import {
   Avatar,
@@ -33,15 +34,15 @@ const PAGE_SIZE = 5
 const AddIcon = () => <PlusIcon />
 const SearchIcon = () => <MagnifyingGlassIcon />
 
-const stack = { alignItems: 'stretch' }
+const stack: CSSProperties = { alignItems: 'stretch' }
 
-const cardCss = {
+const cardStyle: CSSProperties = {
   ...stack,
-  backgroundColor: '$white',
-  border: '1px solid $neutral200',
-  borderRadius: '$md',
-  boxShadow: '$cardShadow',
-  padding: '$xxlg',
+  backgroundColor: 'var(--colors-white)',
+  border: '1px solid var(--colors-neutral200)',
+  borderRadius: 'var(--radii-md)',
+  boxShadow: 'var(--shadows-cardShadow)',
+  padding: 'var(--space-xxlg)',
 }
 
 const statusVariant: Record<ProjectStatus, 'default' | 'error' | 'success'> = {
@@ -83,7 +84,7 @@ const columns = [
 ]
 
 const StatCard = ({ label, value, hint }: { label: string, value: string, hint: string }) => (
-  <Flex direction='column' gap='xxsm' css={{ ...cardCss, alignItems: 'flex-start', flex: '1 1 180px' }}>
+  <Flex direction='column' gap='xxsm' style={{ ...cardStyle, alignItems: 'flex-start', flex: '1 1 180px' }}>
     <Text variant='microCopy' color='neutral700'>{label}</Text>
     <Text variant='h2' color='primary'>{value}</Text>
     <Text variant='microCopy' color='neutral'>{hint}</Text>
@@ -119,8 +120,8 @@ const DashboardDemo = () => {
     <Flex
       direction='column'
       gap='xxlg'
-      css={{
-        ...stack, padding: '$xxxlg', maxWidth: 1200, margin: '0 auto'
+      style={{
+        ...stack, padding: 'var(--space-xxxlg)', maxWidth: 1200, margin: '0 auto'
       }}
     >
       {/* Header */}
@@ -142,7 +143,7 @@ const DashboardDemo = () => {
       </Flex>
 
       {/* Stats */}
-      <Flex justify='start' wrap gap='lg' css={stack}>
+      <Flex justify='start' wrap gap='lg' style={stack}>
         <StatCard label='Active projects' value={String(projects.filter(p => p.status !== 'Done').length)} hint='+2 since last month' />
         <StatCard label='At risk' value={String(projects.filter(p => p.status === 'At risk').length)} hint='Needs attention' />
         <StatCard label='Completed' value={String(projects.filter(p => p.status === 'Done').length)} hint='This quarter' />
@@ -155,7 +156,7 @@ const DashboardDemo = () => {
 
       <Tabs tabs={[{ label: 'Overview' }, { label: 'Team' }, { label: 'Settings' }]}>
         {/* Overview */}
-        <Flex direction='column' gap='lg' css={{ ...cardCss, marginTop: '$lg' }}>
+        <Flex direction='column' gap='lg' style={{ ...cardStyle, marginTop: 'var(--space-lg)' }}>
           <Flex justify='start' align='end' gap='lg' wrap>
             <Input
               label='Search'
@@ -175,7 +176,7 @@ const DashboardDemo = () => {
               onChange={e => { setStatus(e.target.value); setPage(1) }}
             />
           </Flex>
-          <Flex justify='start' align='start' css={{ overflowX: 'auto' }}>
+          <Flex justify='start' align='start' style={{ overflowX: 'auto' }}>
             <Table data={pageData} columns={columns} />
           </Flex>
           <Flex justify='spaceBetween' align='center' wrap gap='lg'>
@@ -187,7 +188,7 @@ const DashboardDemo = () => {
         </Flex>
 
         {/* Team */}
-        <Flex direction='column' gap='xxlg' css={{ ...cardCss, marginTop: '$lg' }}>
+        <Flex direction='column' gap='xxlg' style={{ ...cardStyle, marginTop: 'var(--space-lg)' }}>
           <Flex justify='start' wrap gap='xxlg'>
             {team.map(member => (
               <Avatar
@@ -214,8 +215,8 @@ const DashboardDemo = () => {
         <Flex
           direction='column'
           gap='xxlg'
-          css={{
-            ...cardCss, alignItems: 'flex-start', marginTop: '$lg', maxWidth: 520
+          style={{
+            ...cardStyle, alignItems: 'flex-start', marginTop: 'var(--space-lg)', maxWidth: 520
           }}
         >
           <Toggle
@@ -249,7 +250,7 @@ const DashboardDemo = () => {
         description='Give your project a name. You can change it later.'
         closeFn={() => setModalOpen(false)}
       >
-        <Flex direction='column' gap='lg' css={{ ...stack, marginTop: '$lg' }}>
+        <Flex direction='column' gap='lg' style={{ ...stack, marginTop: 'var(--space-lg)' }}>
           <Input
             label='Project name'
             placeholder='e.g. Marketing site'

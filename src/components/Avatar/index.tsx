@@ -1,19 +1,20 @@
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Label from '../shared/Label'
 
-import {
-  StyledAvatar, StyledPlaceHolder, StyledStatus
-} from './styles'
+import styles from './styles.module.scss'
 
 export type AvatarProps = {
-  size?: Stitches.VariantProps<typeof StyledPlaceHolder>['size'],
+  size?: 'normal' | 'small',
   name: string,
   displayLabel?: boolean,
   description?: string,
   online?: boolean,
   url?: string
   width?: string
+  className?: string
+  style?: CSSProperties
 }
 
 const Avatar = ({
@@ -24,25 +25,30 @@ const Avatar = ({
   online = false,
   url,
   width,
+  className,
+  style,
   ...props
 }: AvatarProps) => {
   const initials = name.split(' ').map(text => text.charAt(0)).join('')
 
   return (
-    <StyledAvatar {...props}>
-      <StyledPlaceHolder size={size} css={{ width, height: width }}>
+    <div className={cx(styles.avatar, className)} style={style} {...props}>
+      <div className={cx(styles.placeholder, styles[size])} style={{ width, height: width }}>
         {url ? <img src={url} alt={name} /> : initials}
-        {online && <StyledStatus />}
-      </StyledPlaceHolder>
+        {online && <div className={styles.status} />}
+      </div>
       {displayLabel
         && (
           <Label
             label={name}
             description={description}
+            className={styles.label}
           />
         )}
-    </StyledAvatar>
+    </div>
   )
 }
+
+export const avatarSelector = `.${styles.avatar}`
 
 export default Avatar

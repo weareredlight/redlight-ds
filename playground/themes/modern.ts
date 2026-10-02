@@ -1,7 +1,7 @@
 // Modern — clean SaaS look: indigo, cool slate, rounded corners, soft shadows.
 import type { PlaygroundTheme } from './base'
 
-import { baseMedia, baseSizes } from './base'
+import { baseSizes } from './base'
 
 const modern: PlaygroundTheme = {
   id: 'modern',
@@ -80,7 +80,6 @@ const modern: PlaygroundTheme = {
     cardShadow: '0px 1px 3px rgba(15, 23, 42, 0.06), 0px 1px 2px rgba(15, 23, 42, 0.04)',
   },
 
-  media: baseMedia,
 }
 
 export default modern

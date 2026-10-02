@@ -1,23 +1,18 @@
 import { SymbolIcon, FileTextIcon, Cross2Icon } from '@radix-ui/react-icons'
 import { useState, useRef, useCallback } from 'react'
 
-import type * as Stitches from '@stitches/react'
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Button from '../Button'
 import Label from '../shared/Label'
 
-import {
-  StyledUpload,
-  StyledUploadInput,
-  StyledFile,
-  StyledTrigger,
-} from './styles'
+import styles from './styles.module.scss'
 
 export type UploadProps = {
   id: string
-  size?: Stitches.VariantProps<typeof StyledUpload>['size']
-  fullWidth?: Stitches.VariantProps<typeof StyledUpload>['fullWidth']
+  size?: 'normal' | 'large'
+  fullWidth?: boolean
   placeholder: string
   description?: string
   buttonText?: string
@@ -25,6 +20,8 @@ export type UploadProps = {
   onUpload?: (file: File) => void
   disabled?: boolean
   clearBtn?: boolean
+  className?: string
+  style?: CSSProperties
 }
 
 const isImage = (ext: string) => ext === 'png' || ext === 'jpg' || ext === 'jpeg'
@@ -40,6 +37,8 @@ const Upload = ({
   onUpload,
   disabled,
   clearBtn = false,
+  className,
+  style,
   ...props
 }: UploadProps) => {
   const [fileName, setFileName] = useState<string>(defaultFile ? defaultFile.name : '')
@@ -84,13 +83,18 @@ const Upload = ({
   }, [onUpload])
 
   return (
-    <StyledUpload
-      disabled={disabled}
-      size={size}
-      fullWidth={fullWidth}
+    <div
+      className={cx(
+        styles.upload,
+        styles[size],
+        fullWidth && styles.fullWidth,
+        disabled && styles.disabled,
+        className,
+      )}
+      style={style}
       {...props}
     >
-      <StyledUploadInput type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
+      <input className={styles.uploadInput} type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
       {fileUrl && clearBtn && (
         <Button
           variant='danger'
@@ -101,12 +105,12 @@ const Upload = ({
             setFileName('')
             setFileUrl(null)
           }}
-          extraClasses='clear-btn'
+          className={styles.clearBtn}
         >
           Clear
         </Button>
       )}
-      <StyledFile>
+      <div className={styles.file}>
         {fileUrl && isImage(fileExtension) ? (
           <img src={fileUrl} alt='file-preview' />
         ) : !fileUrl ? null : <FileTextIcon />}
@@ -114,10 +118,10 @@ const Upload = ({
         {fileName ? (
           <span>{fileName}</span>
         ) : (
-          <Label id={id} label={placeholder} description={description} />
+          <Label id={id} label={placeholder} description={description} className={styles.label} />
         )}
-      </StyledFile>
-      <StyledTrigger htmlFor='file'>
+      </div>
+      <label className={styles.trigger} htmlFor='file'>
         {size === 'normal' ? (
           <Button
             variant='neutral'
@@ -128,9 +132,11 @@ const Upload = ({
             {loading ? <SymbolIcon /> : buttonText}
           </Button>
         ) : null}
-      </StyledTrigger>
-    </StyledUpload>
+      </label>
+    </div>
   )
 }
+
+export const uploadSelector = `.${styles.upload}`
 
 export default Upload

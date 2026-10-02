@@ -1,16 +1,12 @@
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
+import { capitalize, cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import {
-  StyledTextArea,
-  StyledTextAreaField,
-  StyledWrapper,
-} from './styles'
+import styles from './styles.module.scss'
 
 export type TextAreaProps = {
   id?: string
@@ -19,13 +15,12 @@ export type TextAreaProps = {
   label?: string
   placeholder?: string
   description?: string
-  state?: Stitches.VariantProps<typeof StyledTextAreaField>['state']
-  fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
+  state?: 'error' | 'dirty' | 'disabled' | 'null'
+  fullWidth?: boolean
   errorMsg?: string
   rows?: number
   required?: boolean
   maxLength?: number
-  css?: Stitches.CSS
   onChange: (event: ChangeEvent<HTMLTextAreaElement>) => void
 } & React.TextareaHTMLAttributes<HTMLTextAreaElement>
 
@@ -42,39 +37,41 @@ const TextArea = React.forwardRef(({
   rows = 5,
   required = false,
   maxLength = 0,
-  css,
+  className,
   onChange,
   ...props
 }: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => (
-  <StyledWrapper fullWidth={fullWidth}>
-    <StyledTextArea>
+  <div className={cx(styles.wrapper, fullWidth && styles.fullWidth)}>
+    <div className={styles.textArea}>
       {label || description ? (
         <Label
           id={id}
           label={label}
           description={description}
+          className={styles.label}
         />
       ) : null}
-      <StyledTextAreaField
+      <textarea
+        className={cx(styles.field, styles[`state${capitalize(state)}`], className)}
         id={id}
         ref={ref}
         name={name}
         value={value}
         placeholder={placeholder}
-        state={state}
         rows={rows}
         required={required}
         maxLength={maxLength}
-        css={css}
         onChange={onChange}
         {...props}
       />
-    </StyledTextArea>
+    </div>
     {state === 'error' && errorMsg && (
       <Text color='danger' variant='microCopy'>
         {errorMsg}
       </Text>
     )}
-  </StyledWrapper>
+  </div>
 ))
+export const textAreaSelector = `.${styles.textArea}`
+
 export default TextArea

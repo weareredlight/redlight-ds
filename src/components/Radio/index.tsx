@@ -1,12 +1,11 @@
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Label from '../shared/Label'
 
-import {
-  StyledRadio, StyledTrigger, StyledIndicator
-} from './styles'
+import styles from './styles.module.scss'
 
 export type RadioProps = {
   label?: string,
@@ -15,9 +14,11 @@ export type RadioProps = {
   id: string,
   value?: string
   checked?: boolean,
-  disabled?: Stitches.VariantProps<typeof StyledRadio | typeof StyledTrigger>['disabled']
+  disabled?: boolean
   labelPosition?: string,
   onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void,
+  className?: string
+  style?: CSSProperties
 }
 
 const Radio = ({
@@ -30,17 +31,25 @@ const Radio = ({
   disabled = false,
   labelPosition = 'right',
   onChange,
+  className,
+  style,
   ...props
 }: RadioProps) => (
-  <StyledRadio disabled={disabled} {...props}>
+  <div
+    className={cx(styles.radio, disabled && styles.disabled, className)}
+    style={style}
+    {...props}
+  >
     {labelPosition === 'left' ? (
       <>
         <Label
           label={label}
           description={description}
           id={id}
+          className={styles.label}
         />
-        <StyledTrigger
+        <input
+          className={cx(styles.trigger, disabled && styles.disabled)}
           type='radio'
           name={name}
           id={id}
@@ -49,11 +58,13 @@ const Radio = ({
           onChange={onChange}
           disabled={disabled}
         />
-        <StyledIndicator htmlFor={id} />
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
+        <label className={styles.indicator} htmlFor={id} />
       </>
     ) : (
       <>
-        <StyledTrigger
+        <input
+          className={cx(styles.trigger, disabled && styles.disabled)}
           type='radio'
           name={name}
           id={id}
@@ -62,15 +73,19 @@ const Radio = ({
           onChange={onChange}
           disabled={disabled}
         />
-        <StyledIndicator htmlFor={id} />
+        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
+        <label className={styles.indicator} htmlFor={id} />
         <Label
           label={label}
           description={description}
           id={id}
+          className={styles.label}
         />
       </>
     )}
-  </StyledRadio>
+  </div>
 )
+
+export const radioSelector = `.${styles.radio}`
 
 export default Radio

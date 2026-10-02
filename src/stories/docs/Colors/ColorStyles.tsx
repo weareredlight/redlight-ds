@@ -3,9 +3,9 @@ import React from 'react'
 import Flex from '../../../elements/Flex'
 import { colors } from '../../../theme/colors'
 import { capitalize } from '../../../utils'
-import { StyledCode } from '../document.styles'
+import { DocCode } from '../document'
 
-import { StyledColorsGroup, StyledColor, StyledIndicator } from './styles'
+import styles from './styles.module.scss'
 
 export type Props = {
   variant: string
@@ -17,26 +17,25 @@ export const ColorStyles = ({
   description,
   ...props
 }: Props) => (
-  <StyledColorsGroup {...props}>
+  <div className={styles.group} {...props}>
     <h3>{`${capitalize(variant)} Color`}</h3>
     <p>{description}</p>
     <Flex gap='xxsm' wrap>
       {Object.keys(colors)
         .filter(key => key.startsWith(variant))
         .map(key => (
-          <StyledColor>
-            <StyledIndicator key={key} style={{ backgroundColor: colors[key] }} />
+          <div className={styles.color}>
+            <span className={styles.swatch} key={key} style={{ backgroundColor: colors[key] }} />
             <Flex direction='column' gap='xxxsm'>
               <span className='h7'>{colors[key]}</span>
-              <StyledCode size='extraSmall'>
-                $
-                {key}
-              </StyledCode>
+              <DocCode size='extraSmall'>
+                {`--colors-${key}`}
+              </DocCode>
             </Flex>
-          </StyledColor>
+          </div>
         ))}
     </Flex>
-  </StyledColorsGroup>
+  </div>
 )
 
 export default ColorStyles

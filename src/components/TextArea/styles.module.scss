@@ -1,0 +1,105 @@
+// =============================================================================
+// TEXT AREA
+// -----------------------------------------------------------------------------
+// .wrapper > .textArea (label + field) + error message
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+// =============================================================================
+// FIELD
+// =============================================================================
+
+.field {
+  width: 100%;
+  position: relative;
+  padding: var(--space-xxsm);
+  border-radius: var(--radii-xsm);
+  appearance: none;
+  border: none;
+  background-color: transparent;
+  @include typography.microCopy;
+  outline: 1px solid var(--colors-neutral400);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  resize: vertical;
+
+  &::placeholder {
+    color: var(--colors-neutral);
+  }
+
+  // ===========================================================================
+  // STATE
+  // ===========================================================================
+
+  :where(&).stateError {
+    outline-color: var(--colors-danger);
+  }
+
+  :where(&).stateDirty {
+    outline-color: var(--colors-accent);
+  }
+
+  :where(&).stateDisabled {
+    background-color: var(--colors-neutral200);
+    outline-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+  }
+
+  :where(&).stateNull {
+    &:hover {
+      background-color: var(--colors-neutral100);
+      outline-color: var(--colors-neutral600);
+    }
+
+    &:focus {
+      outline-color: var(--colors-primary);
+    }
+  }
+}
+
+// =============================================================================
+// LABEL + FIELD
+// =============================================================================
+
+.textArea {
+  min-width: 256px;
+  max-width: 100%;
+  width: fit-content;
+  display: inline-block;
+  position: relative;
+
+  .label {
+    padding-bottom: var(--space-xxxsm);
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// WRAPPER
+// =============================================================================
+
+.wrapper {
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+
+    .textArea {
+      width: 100%;
+
+      .field {
+        width: 100%;
+      }
+    }
+  }
+}

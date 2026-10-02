@@ -33,10 +33,10 @@ export default meta
 
 const Template: StoryFn<TabsProps> = () => (
   <Tabs tabs={[{ label: 'Tab 1' }, { label: 'Tab 2' }]}>
-    <Flex direction='column' css={{ padding: '2rem' }}>
+    <Flex direction='column' style={{ padding: '2rem' }}>
       <Text variant='textBlock'>Tab 1 Content...</Text>
     </Flex>
-    <Flex direction='column' css={{ padding: '2rem' }}>
+    <Flex direction='column' style={{ padding: '2rem' }}>
       <Text variant='textBlock'>Tab 2 Content...</Text>
     </Flex>
   </Tabs>

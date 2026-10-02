@@ -1,0 +1,55 @@
+// =============================================================================
+// FLEX
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` (compiles to `:where(.flex).modifier`):
+// they only apply to the flex element but keep single-class specificity.
+// =============================================================================
+
+$gaps: xxxsm, xxsm, xsm, sm, lg, xlg, xxlg, xxxlg;
+
+.flex {
+  display: flex;
+  flex-wrap: nowrap;
+  padding: 0;
+
+  // ===========================================================================
+  // DIRECTION
+  // ===========================================================================
+
+  :where(&).directionRow { flex-direction: row; }
+  :where(&).directionColumn { flex-direction: column; }
+
+  // ===========================================================================
+  // ALIGN
+  // ===========================================================================
+
+  :where(&).alignStart { align-items: flex-start; }
+  :where(&).alignCenter { align-items: center; }
+  :where(&).alignEnd { align-items: flex-end; }
+  :where(&).alignBaseline { align-items: baseline; }
+
+  // ===========================================================================
+  // JUSTIFY
+  // ===========================================================================
+
+  :where(&).justifyStart { justify-content: flex-start; }
+  :where(&).justifyCenter { justify-content: center; }
+  :where(&).justifyEnd { justify-content: flex-end; }
+  :where(&).justifySpaceBetween { justify-content: space-between; }
+  :where(&).justifySpaceAround { justify-content: space-around; }
+  :where(&).justifySpaceEvenly { justify-content: space-evenly; }
+
+  // ===========================================================================
+  // WRAP
+  // ===========================================================================
+
+  :where(&).wrap { flex-wrap: wrap; }
+
+  // ===========================================================================
+  // GAP
+  // ===========================================================================
+
+  @each $gap in $gaps {
+    :where(&).gap-#{$gap} { gap: var(--space-#{$gap}); }
+  }
+}

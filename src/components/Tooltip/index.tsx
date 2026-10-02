@@ -1,15 +1,20 @@
 import * as RadixTooltip from '@radix-ui/react-tooltip'
 import React from 'react'
 
+import type { CSSProperties } from 'react'
+
+import { cx } from '../../utils'
 import Text from '../Text'
 
-import { TooltipArrow, TooltipContent, TooltipTrigger } from './styles'
+import styles from './styles.module.scss'
 
 export type TooltipProps = {
   children: React.ReactNode
   content: string
   side?: 'top' | 'right' | 'bottom' | 'left'
   delay?: number
+  className?: string
+  style?: CSSProperties
 }
 
 const Tooltip = ({
@@ -17,19 +22,27 @@ const Tooltip = ({
   content,
   side = 'right',
   delay = 50,
+  className,
+  style,
 }: TooltipProps) => (
   <RadixTooltip.Provider delayDuration={delay}>
     <RadixTooltip.Root>
-      <TooltipTrigger>
+      <RadixTooltip.Trigger className={styles.trigger}>
         {children}
-      </TooltipTrigger>
+      </RadixTooltip.Trigger>
       <RadixTooltip.Portal>
-        <TooltipContent side={side} align='center' sideOffset={5}>
-          <Text variant='microCopy' color='white'>
+        <RadixTooltip.Content
+          className={cx(styles.content, className)}
+          style={style}
+          side={side}
+          align='center'
+          sideOffset={5}
+        >
+          <Text variant='microCopy' color='white' className={styles.text}>
             {content}
           </Text>
-          <TooltipArrow width={11} height={5} />
-        </TooltipContent>
+          <RadixTooltip.Arrow className={styles.arrow} width={11} height={5} />
+        </RadixTooltip.Content>
       </RadixTooltip.Portal>
     </RadixTooltip.Root>
   </RadixTooltip.Provider>

@@ -1,17 +1,18 @@
 import { Cross2Icon } from '@radix-ui/react-icons'
 
-import type * as Stitches from '@stitches/react'
-import type { ReactNode } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
+import { cx } from '../../utils'
 import Button from '../Button'
 
-import { StyledPill } from './styles'
+import styles from './styles.module.scss'
 
 export type PillProps = {
   children: ReactNode
-  variant?: Stitches.VariantProps<typeof StyledPill>['variant']
+  variant?: 'default' | 'error' | 'success'
   onClose?: () => void
-  css?: Stitches.CSS
+  className?: string
+  style?: CSSProperties
 }
 
 const CloseIcon = () => <Cross2Icon />
@@ -20,14 +21,11 @@ const Pill = ({
   children,
   variant = 'default',
   onClose,
-  css,
+  className,
+  style,
   ...props
 }: PillProps) => (
-  <StyledPill
-    variant={variant}
-    css={{ ...css }}
-    {...props}
-  >
+  <span className={cx(styles.pill, styles[variant], className)} style={style} {...props}>
     {children}
     {onClose && (
       <Button
@@ -35,9 +33,12 @@ const Pill = ({
         iconComponent={CloseIcon}
         iconPosition='iconOnly'
         variant='textOnly'
+        className={styles.closeButton}
       />
     )}
-  </StyledPill>
+  </span>
 )
+
+export const pillSelector = `.${styles.pill}`
 
 export default Pill

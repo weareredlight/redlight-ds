@@ -2,7 +2,7 @@
 // between them by swapping the theme's class on <body>.
 import type { PlaygroundTheme } from './base'
 
-import { setupTheme, theme } from '../../src'
+import { setupTheme } from '../../src'
 
 import brutalist from './brutalist'
 import editorial from './editorial'
@@ -20,16 +20,14 @@ document.head.appendChild(fontStyles)
 
 const classNames: Record<string, string> = {}
 themes.forEach(t => {
-  setupTheme({
+  const { className } = setupTheme({
     fontFamily: t.fontFamily,
     userColors: t.colors,
     userSizes: t.sizes,
     userShadows: t.shadows,
-    userMedia: t.media,
   })
-  // Reading className also injects the theme's token CSS.
-  classNames[t.id] = theme.className
-  fontStyles.textContent += `.${theme.className}, .${theme.className} * { font-family: ${t.fontFamily}; }\n`
+  classNames[t.id] = className
+  fontStyles.textContent += `.${className}, .${className} * { font-family: ${t.fontFamily}; }\n`
 })
 
 export const getSavedThemeId = () => {

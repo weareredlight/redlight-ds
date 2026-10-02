@@ -2,7 +2,7 @@
 // square corners and hard offset shadows.
 import type { PlaygroundTheme } from './base'
 
-import { baseMedia, baseSizes } from './base'
+import { baseSizes } from './base'
 
 const brutalist: PlaygroundTheme = {
   id: 'brutalist',
@@ -81,7 +81,6 @@ const brutalist: PlaygroundTheme = {
     cardShadow: '4px 4px 0px $colors$black',
   },
 
-  media: baseMedia,
 }
 
 export default brutalist

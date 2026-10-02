@@ -2,13 +2,13 @@
 import React from 'react'
 
 import Flex from '../../../elements/Flex'
-import { StyledCode } from '../document.styles'
+import { DocCode } from '../document'
 
-import { StyledTextsGroup, StyledTextType } from './styles'
+import styles from './styles.module.scss'
 
 export const TextStyles = () => (
   <>
-    <StyledTextsGroup>
+    <div className={styles.group}>
       <h3>Headline</h3>
       <p>
         Headlines are important for establishing a visual hierarchy and guiding users through content.
@@ -17,7 +17,7 @@ export const TextStyles = () => (
         and support them with other design elements.
       </p>
       <Flex direction='column' gap='xxsm'>
-        <StyledTextType>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h1 className='font-preview'>We are RedLight</h1>
             <p>
@@ -37,15 +37,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h1\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h1\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading1\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading1</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h2 className='font-preview'>We are RedLight</h2>
             <p>
@@ -65,15 +65,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h2\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h2\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading2\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading2</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h3 className='font-preview'>We are RedLight</h3>
             <p>
@@ -93,15 +93,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h3\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h3\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading3\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading3</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h4 className='font-preview'>We are RedLight</h4>
             <p>
@@ -121,15 +121,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h4\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h4\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading4\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading4</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h5 className='font-preview'>We are RedLight</h5>
             <p>
@@ -149,15 +149,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h5\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h5\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading5\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading5</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <h6 className='font-preview'>We are RedLight</h6>
             <p>
@@ -177,15 +177,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h6\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h6\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading6\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading6</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <span className='h7 font-preview'>We are RedLight</span>
             <p>
@@ -205,18 +205,18 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'h7\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'h7\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'heading7\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.heading7</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
+        </div>
       </Flex>
-    </StyledTextsGroup>
+    </div>
     <br />
-    <StyledTextsGroup>
+    <div className={styles.group}>
       <h3>Sub Heading</h3>
       <p>
         Sub headings are additional levels of hierarchy that can be used to further break up content and guide users through the page.
@@ -224,7 +224,7 @@ export const TextStyles = () => (
         The small sub heading should be even smaller than the regular sub heading and can be used for tertiary headings or to add additional context to the content.
       </p>
       <Flex direction='column' gap='xxsm'>
-        <StyledTextType>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <span className='sub-heading font-preview'>We are RedLight</span>
             <p>
@@ -244,15 +244,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'subHeading\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'subHeading\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'subHeading\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.subHeading</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <span className='sub-heading-small font-preview'>We are RedLight</span>
             <p>
@@ -272,18 +272,18 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'subHeadingSmall\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'subHeadingSmall\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'subHeadingSmall\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.subHeadingSmall</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
+        </div>
       </Flex>
-    </StyledTextsGroup>
+    </div>
     <br />
-    <StyledTextsGroup>
+    <div className={styles.group}>
       <h3>Paragraph</h3>
       <ul>
         <li>
@@ -303,7 +303,7 @@ export const TextStyles = () => (
         </li>
       </ul>
       <Flex direction='column' gap='xxsm'>
-        <StyledTextType>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <p className='paragraph font-preview'>We are RedLight</p>
             <p>
@@ -323,15 +323,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'paragraph\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'paragraph\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'paragraph\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.paragraph</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <p className='font-preview'>We are RedLight</p>
             <p>
@@ -351,15 +351,15 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'textBlock\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'textBlock\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'textBlock\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.textBlock</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
-        <StyledTextType>
+        </div>
+        <div className={styles.textType}>
           <Flex direction='column' align='start'>
             <span className='micro-copy font-preview'>We are RedLight</span>
             <p>
@@ -379,16 +379,16 @@ export const TextStyles = () => (
           <Flex direction='column' gap='xxxsm' align='start'>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Text Component:</p>
-              <StyledCode size='small'>{'variant=\'microCopy\''}</StyledCode>
+              <DocCode size='small'>{'variant=\'microCopy\''}</DocCode>
             </Flex>
             <Flex gap='xxxsm' justify='end' style={{ width: '100%' }}>
               <p>Styles:</p>
-              <StyledCode size='small' style={{ width: '100%' }}>{'include: \'microCopy\''}</StyledCode>
+              <DocCode size='small' style={{ width: '100%' }}>@include typography.microCopy</DocCode>
             </Flex>
           </Flex>
-        </StyledTextType>
+        </div>
       </Flex>
-    </StyledTextsGroup>
+    </div>
   </>
 )
 

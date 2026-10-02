@@ -1,36 +1,36 @@
 import { Meta } from '@storybook/blocks';
 
 import {
-  StyledDocument,
-  StyledHeader,
-  StyledBody,
-  StyledCode,
-  StyledSeparator
-} from '../document.styles';
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCode,
+  DocSeparator
+} from '../document';
 
 import TextStyles from './TextStyles'
 
-import { TextComponent, TextStitches } from '../../utils'
+import { TextComponent, TextScss } from '../../utils'
 
 <Meta title='Style Guides/Typography' />
 
-<StyledDocument>
-  <StyledHeader style={{background: '#493DB2'}}>
+<Doc>
+  <DocHeader style={{background: '#493DB2'}}>
     <h2>Typography</h2>
     <p>ver 1.0.0 | Last updated: 18/07/2023</p>
-  </StyledHeader>
+  </DocHeader>
 
-  <StyledBody>
+  <DocBody>
     <p>Typography is the art and technique of organising "type" to make written language legible and appealing when displayed. The choice of typography is fundamental not only to the appearance of a product or service, but also to the impact of what it is intended to communicate. By carefully considering this process, we ensure consistency and clarity in communicating information to users.</p>
     <br />
     <span className="sub-heading">How to Use</span>
     <p>You can use the existing text hierarchy as a component:</p>
-    <StyledCode style={{width: '100%'}}>{TextComponent}</StyledCode>
-    <p>Or you can use it in the stitches style files using mixins:</p>
-    <StyledCode style={{width: '100%'}}>{TextStitches}</StyledCode>
+    <DocCode style={{width: '100%'}}>{TextComponent}</DocCode>
+    <p>Or you can use the typography mixins in your SCSS files:</p>
+    <DocCode style={{width: '100%'}}>{TextScss}</DocCode>
     <br />
-    <StyledSeparator />
+    <DocSeparator />
     <br />
     <TextStyles />
-  </StyledBody>
-</StyledDocument>
+  </DocBody>
+</Doc>

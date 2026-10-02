@@ -1,0 +1,76 @@
+// =============================================================================
+// TOOLTIP
+// =============================================================================
+
+@use '../../styles/typography';
+
+@keyframes slideUpAndFade {
+  0% { opacity: 0; transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRightAndFade {
+  0% { opacity: 0; transform: translateX(-2px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDownAndFade {
+  0% { opacity: 0; transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeftAndFade {
+  0% { opacity: 0; transform: translateX(2px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+// =============================================================================
+// TRIGGER (inherits the layout of whatever it wraps)
+// =============================================================================
+
+.trigger {
+  all: unset;
+  width: inherit;
+  height: inherit;
+  display: inherit;
+  align-items: inherit;
+  justify-content: inherit;
+  flex-direction: inherit;
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.content {
+  max-width: 296px;
+  border-radius: var(--radii-xsm);
+  padding: var(--space-xxsm) var(--space-sm);
+  background-color: var(--colors-neutral700);
+  @include typography.heading7;
+  color: var(--colors-white);
+  box-shadow: hsl(206 22% 7% / 35%) 0px 10px 38px -10px, hsl(206 22% 7% / 20%) 0px 10px 20px -15px;
+  user-select: none;
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+
+  &[data-state="delayed-open"] {
+    &[data-side="top"] { animation-name: slideDownAndFade; }
+    &[data-side="right"] { animation-name: slideLeftAndFade; }
+    &[data-side="bottom"] { animation-name: slideUpAndFade; }
+    &[data-side="left"] { animation-name: slideRightAndFade; }
+  }
+
+  .text {
+    white-space: pre-line;
+  }
+}
+
+// =============================================================================
+// ARROW
+// =============================================================================
+
+.arrow {
+  fill: var(--colors-neutral700);
+}

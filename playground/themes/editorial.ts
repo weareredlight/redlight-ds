@@ -1,7 +1,7 @@
 // Editorial — warm print feel: deep emerald, stone neutrals, sharp corners.
 import type { PlaygroundTheme } from './base'
 
-import { baseMedia, baseSizes } from './base'
+import { baseSizes } from './base'
 
 const editorial: PlaygroundTheme = {
   id: 'editorial',
@@ -80,7 +80,6 @@ const editorial: PlaygroundTheme = {
     cardShadow: '0px 2px 8px $colors$neutral200',
   },
 
-  media: baseMedia,
 }
 
 export default editorial

@@ -1,0 +1,74 @@
+// =============================================================================
+// MODAL
+// =============================================================================
+
+@use '../../styles/typography';
+
+@keyframes overlayShow {
+  0% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes contentShow {
+  0% { opacity: 0; transform: translate(-50%, -48%) scale(0.96); }
+  100% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+}
+
+// =============================================================================
+// OVERLAY
+// =============================================================================
+
+.overlay {
+  z-index: 100;
+  background-color: rgba(0, 0, 0, 0.4);
+  position: fixed;
+  inset: 0;
+  animation: overlayShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxxlg);
+  z-index: 101;
+  background-color: var(--colors-white);
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadows-greySmall);
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 300px;
+  max-width: 600px;
+  max-height: 85vh;
+  padding: var(--space-xxlg);
+  animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  // close icon
+  > svg {
+    cursor: pointer;
+    position: absolute;
+    top: var(--space-xxlg);
+    right: var(--space-xlg);
+    width: 24px;
+    height: 24px;
+    color: var(--colors-neutral900);
+  }
+
+  &:focus { outline: none; }
+}
+
+.title {
+  margin: 0;
+  @include typography.heading3;
+  color: var(--colors-neutral800);
+}
+
+.description {
+  @include typography.paragraph;
+  color: var(--colors-neutral600);
+}

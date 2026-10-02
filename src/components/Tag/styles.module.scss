@@ -1,0 +1,63 @@
+// =============================================================================
+// TAG
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.tag {
+  @include typography.microCopy;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: var(--space-xxxsm) var(--space-xxsm);
+  gap: var(--space-xxsm);
+  border-radius: var(--radii-xsm);
+
+  // ===========================================================================
+  // CLOSABLE
+  // ===========================================================================
+
+  &.closable {
+    &:hover {
+      background: var(--colors-neutral400);
+    }
+
+    .closeButton {
+      padding: 0;
+      width: 14px;
+      height: 14px;
+      cursor: pointer;
+
+      &:hover { background: transparent; }
+      &:focus { box-shadow: none; }
+    }
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).default {
+    background: var(--colors-neutral300);
+    color: var(--colors-neutral800);
+  }
+
+  :where(&).error {
+    background: var(--colors-danger100);
+    color: var(--colors-danger500);
+  }
+
+  // ===========================================================================
+  // DISABLED
+  // ===========================================================================
+
+  :where(&).disabled {
+    pointer-events: none;
+    background: var(--colors-neutral200);
+    color: var(--colors-neutral400);
+
+    .closeButton { color: var(--colors-neutral400); }
+  }
+}

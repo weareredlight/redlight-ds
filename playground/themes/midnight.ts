@@ -4,7 +4,7 @@
 // `white` is the card surface and `black` the brightest text.
 import type { PlaygroundTheme } from './base'
 
-import { baseMedia, baseSizes } from './base'
+import { baseSizes } from './base'
 
 const midnight: PlaygroundTheme = {
   id: 'midnight',
@@ -84,7 +84,6 @@ const midnight: PlaygroundTheme = {
     cardShadow: '0px 2px 8px rgba(0, 0, 0, 0.4)',
   },
 
-  media: baseMedia,
 }
 
 export default midnight
