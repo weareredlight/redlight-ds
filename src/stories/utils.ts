@@ -37,10 +37,10 @@ export const TextComponent = `import { Text } from '@weareredlight/design-system
   </>
 }
 `
-export const TextStitches = `import { styled } from '@weareredlight/design-system'
+export const TextScss = `@use '@weareredlight/design-system/src/styles/typography';
 
-export const StyledButton = styled('button', {
-  include: 'heading7',
+.button {
+  @include typography.heading7;
   ...
-})
+}
 `

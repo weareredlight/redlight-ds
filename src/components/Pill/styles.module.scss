@@ -1,0 +1,52 @@
+// =============================================================================
+// PILL
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.pill {
+  @include typography.microCopy;
+  display: flex;
+  align-items: center;
+  width: fit-content;
+  padding: var(--space-xxxsm) var(--space-xxsm);
+  gap: var(--space-xxsm);
+  border-radius: var(--radii-full);
+
+  // Close button
+  .closeButton {
+    padding: 0;
+    width: 14px;
+    height: 14px;
+
+    &:hover { background: transparent; }
+    &:focus { box-shadow: none; }
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).default {
+    background: var(--colors-primary200);
+    color: var(--colors-primary);
+
+    .closeButton { color: var(--colors-primary); }
+  }
+
+  :where(&).error {
+    background: var(--colors-danger100);
+    color: var(--colors-danger500);
+
+    .closeButton { color: var(--colors-danger500); }
+  }
+
+  :where(&).success {
+    background: var(--colors-success100);
+    color: var(--colors-success500);
+
+    .closeButton { color: var(--colors-success500); }
+  }
+}

@@ -11,7 +11,8 @@
     "ui",
     "components",
     "react",
-    "stitches",
+    "scss",
+    "css-modules",
     "typescript"
   ],
   "author": "redlightsoft",
@@ -40,6 +41,7 @@
     "@adobe/css-tools": "^4.3.1"
   },
   "scripts": {
+    "start": "vite playground --config vite.config.ts",
     "storybook": "storybook dev -p 6006",
     "ts": "tsc",
     "ts-watch": "tsc --watch",
@@ -48,9 +50,9 @@
     "predeploy-storybook": "yarn build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "build-storybook": "storybook build",
-    "build": "yarn build:esm && yarn build:cjs",
-    "build:esm": "tsc",
-    "build:cjs": "tsc --module commonjs --outDir dist/cjs",
+    "build": "rm -rf dist && yarn build:js && yarn build:types",
+    "build:js": "vite build --config vite.lib.config.ts",
+    "build:types": "tsc --emitDeclarationOnly",
     "prepare": "yarn build"
   },
   "peerDependencies": {
@@ -69,8 +71,6 @@
     "@radix-ui/react-switch": "^1.0.3",
     "@radix-ui/react-tabs": "^1.0.4",
     "@radix-ui/react-tooltip": "^1.0.2",
-    "@stitches/core": "^1.2.8",
-    "@stitches/react": "^1.2.8",
     "@tanstack/react-table": "^8.13.0",
     "dayjs": "^1.11.8",
     "lodash.merge": "^4.6.2",
@@ -81,7 +81,6 @@
     "react-select": "^5.8.0",
     "react-time-picker": "^6.6.0",
     "react-toastify": "^10.0.4",
-    "stitches-mixins": "^1.0.0",
     "uuid": "^9.0.1"
   },
   "devDependencies": {
@@ -117,6 +116,7 @@
     "postcss": "^8.4.31",
     "react": "^18.3.0",
     "react-dom": "^18.3.0",
+    "sass-embedded": "^1.105.1",
     "storybook": "8.6.18",
     "typescript": "^5.3.3",
     "vite": "^6.0.0"

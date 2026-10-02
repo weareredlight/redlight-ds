@@ -1,15 +1,13 @@
 import * as AlertDialog from '@radix-ui/react-alert-dialog'
 import React from 'react'
 
+import type { CSSProperties } from 'react'
+
 import Flex from '../../elements/Flex'
+import { cx } from '../../utils'
 import Button from '../Button'
 
-import {
-  DialogContent,
-  DialogOverlay,
-  DialogTitle,
-  DialogDescription
-} from './styles'
+import styles from './styles.module.scss'
 
 export type DialogProps = {
   open: boolean
@@ -21,6 +19,8 @@ export type DialogProps = {
   description?: string
   children?: React.ReactNode
   onConfirm: () => void
+  className?: string
+  style?: CSSProperties
 }
 
 const Dialog = ({
@@ -33,6 +33,8 @@ const Dialog = ({
   description,
   children,
   onConfirm,
+  className,
+  style,
 }: DialogProps) => {
   const handleConfirm = () => {
     onConfirm()
@@ -42,15 +44,19 @@ const Dialog = ({
   return (
     <AlertDialog.Root open={open}>
       <AlertDialog.Portal>
-        <DialogOverlay />
-        <DialogContent onOpenAutoFocus={event => event.preventDefault()}>
-          <DialogTitle>
+        <AlertDialog.Overlay className={styles.overlay} />
+        <AlertDialog.Content
+          className={cx(styles.content, className)}
+          style={style}
+          onOpenAutoFocus={event => event.preventDefault()}
+        >
+          <AlertDialog.Title className={styles.title}>
             {title}
-          </DialogTitle>
+          </AlertDialog.Title>
           {description && (
-            <DialogDescription>
+            <AlertDialog.Description className={styles.description}>
               {description}
-            </DialogDescription>
+            </AlertDialog.Description>
           )}
           {children}
           <Flex justify='end' gap='xxsm'>
@@ -68,7 +74,7 @@ const Dialog = ({
               </Button>
             </AlertDialog.Action>
           </Flex>
-        </DialogContent>
+        </AlertDialog.Content>
       </AlertDialog.Portal>
     </AlertDialog.Root>
   )

@@ -22,7 +22,13 @@ $ npm install --save @weareredlight/design-system
 
 Now it's time to start using the components.
 
-- First import the component into the desired file:
+- Import the styles once, at your app's entry point:
+
+```jsx
+import '@weareredlight/design-system/dist/style.css'
+```
+
+- Import the component into the desired file:
 
 ```jsx
 import { Button } from '@weareredlight/design-system'
@@ -41,6 +47,23 @@ import { Button } from '@weareredlight/design-system'
   </Button>
 }
 ```
+
+## Theming
+
+Theme tokens are CSS variables (`--colors-primary`, `--space-xxsm`, `--radii-sm`, ...).
+`setupTheme` overrides them globally and returns a class that scopes the theme to an element:
+
+```jsx
+import { setupTheme } from '@weareredlight/design-system'
+
+const { className } = setupTheme({
+  userColors: { primary: '#F472B6' },
+  fontFamily: "'Inter', sans-serif",
+})
+```
+
+You can also override any variable in your own CSS, or restyle a component through its
+selector export (e.g. `buttonSelector`), or with the `className` / `style` props every component accepts.
 
 ## Contributors
 

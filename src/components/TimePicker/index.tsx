@@ -1,12 +1,14 @@
 import { ClockIcon } from '@radix-ui/react-icons'
+import { PatternFormat } from 'react-number-format'
 import { TimePicker as ReactTimePicker } from 'react-time-picker'
 
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import { StyledDurationPicker, StyledTimePicker } from './styles'
+import styles from './styles.module.scss'
 
 import 'react-time-picker/dist/TimePicker.css'
 import 'react-clock/dist/Clock.css'
@@ -26,6 +28,8 @@ export type TimePickerProps = {
   type?: PickerTypes | 'time' | 'duration'
   disabled?: boolean
   fullWidth?: boolean
+  className?: string
+  style?: CSSProperties
 }
 
 const TimePicker = ({
@@ -38,8 +42,19 @@ const TimePicker = ({
   type = PickerTypes.TIME,
   disabled = false,
   fullWidth = false,
+  className,
+  style,
 }: TimePickerProps) => (
-  <StyledTimePicker hasError={Boolean(error)} fullWidth={fullWidth} disabled={disabled}>
+  <div
+    className={cx(
+      styles.timePicker,
+      error && styles.hasError,
+      fullWidth && styles.fullWidth,
+      disabled && styles.disabled,
+      className,
+    )}
+    style={style}
+  >
     {label && <Label id={name} label={label} description={description} />}
     {type === PickerTypes.TIME ? (
       <ReactTimePicker
@@ -47,11 +62,12 @@ const TimePicker = ({
         value={value}
         onChange={time => onChange(time ? `${time}:00` : '')}
         clearIcon={false}
-        className='timePickerMain'
+        className={styles.main}
         clockIcon={<ClockIcon />}
       />
     ) : (
-      <StyledDurationPicker
+      <PatternFormat
+        className={cx(styles.durationPicker, fullWidth && styles.fullWidth)}
         displayType='input'
         value={value?.slice(0, 5).replace(':', '')}
         valueIsNumericString
@@ -65,7 +81,6 @@ const TimePicker = ({
           const isMinAllowed = Number(time[1]) ? Number(time[1]) < 60 : true
           return isHoursAllowed && isMinAllowed
         }}
-        fullWidth={fullWidth}
       />
     )}
     {error && (
@@ -73,7 +88,9 @@ const TimePicker = ({
         {String(error)}
       </Text>
     )}
-  </StyledTimePicker>
+  </div>
 )
+
+export const timePickerSelector = `.${styles.timePicker}`
 
 export default TimePicker

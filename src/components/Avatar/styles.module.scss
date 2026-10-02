@@ -1,0 +1,87 @@
+// =============================================================================
+// AVATAR
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.avatar {
+  width: fit-content;
+  display: flex;
+  align-items: center;
+  gap: var(--space-xxsm);
+
+  // Label next to the picture
+  .label {
+    @include typography.paragraph;
+
+    span {
+      color: var(--colors-neutral400);
+      @include typography.microCopy;
+    }
+  }
+}
+
+// =============================================================================
+// ONLINE STATUS
+// =============================================================================
+
+.status {
+  background-color: var(--colors-success);
+  border-radius: var(--radii-full);
+  position: absolute;
+  border: 1px solid var(--colors-white);
+}
+
+// =============================================================================
+// PICTURE / INITIALS
+// =============================================================================
+
+.placeholder {
+  text-transform: uppercase;
+  background-color: var(--colors-primary200);
+  color: var(--colors-primary600);
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: var(--radii-full);
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: var(--radii-full);
+  }
+
+  // ===========================================================================
+  // SIZE
+  // ===========================================================================
+
+  :where(&).normal {
+    @include typography.subHeading;
+    width: 52px;
+    height: 52px;
+
+    .status {
+      width: 14px;
+      height: 14px;
+      bottom: 2px;
+      right: 2px;
+    }
+  }
+
+  :where(&).small {
+    @include typography.subHeadingSmall;
+    width: 32px;
+    height: 32px;
+
+    .status {
+      width: 8px;
+      height: 8px;
+      bottom: 1px;
+      right: 1px;
+    }
+  }
+}

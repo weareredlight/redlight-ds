@@ -2,12 +2,11 @@ import { Cross2Icon } from '@radix-ui/react-icons'
 import * as Popover from '@radix-ui/react-popover'
 import React from 'react'
 
-import {
-  StyledPopOver,
-  PopoverArrow,
-  PopoverClose,
-  PopoverContent,
-} from './styles'
+import type { CSSProperties } from 'react'
+
+import { cx } from '../../utils'
+
+import styles from './styles.module.scss'
 
 export type PopOverProps = {
   trigger?: React.ReactNode
@@ -15,6 +14,8 @@ export type PopOverProps = {
   side?: 'top' | 'right' | 'bottom' | 'left'
   align?: 'start' | 'center' | 'end'
   sideOffset?: number
+  className?: string
+  style?: CSSProperties
 }
 
 const PopOver = ({
@@ -23,26 +24,32 @@ const PopOver = ({
   side = 'right',
   align = 'center',
   sideOffset = 5,
+  className,
+  style,
 }: PopOverProps) => (
-  <StyledPopOver>
+  <Popover.Root>
     <Popover.Trigger asChild>
       {trigger}
     </Popover.Trigger>
     <Popover.Portal>
-      <PopoverContent
+      <Popover.Content
+        className={cx(styles.content, className)}
+        style={style}
         side={side}
         sideOffset={sideOffset}
         align={align}
         onOpenAutoFocus={event => event.preventDefault()}
       >
         {children}
-        <PopoverClose aria-label='Close'>
+        <Popover.Close className={styles.close} aria-label='Close'>
           <Cross2Icon />
-        </PopoverClose>
-        <PopoverArrow />
-      </PopoverContent>
+        </Popover.Close>
+        <Popover.Arrow className={styles.arrow} />
+      </Popover.Content>
     </Popover.Portal>
-  </StyledPopOver>
+  </Popover.Root>
 )
+
+export const popOverSelector = `.${styles.content}`
 
 export default PopOver

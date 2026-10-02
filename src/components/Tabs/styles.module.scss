@@ -1,0 +1,99 @@
+// =============================================================================
+// TABS
+// -----------------------------------------------------------------------------
+// Built on Radix Tabs: .tabs > .list (.trigger...) + .content
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.list {
+  display: flex;
+  z-index: 1;
+}
+
+.trigger {
+  all: unset;
+  @include typography.heading7;
+  background-color: var(--colors-white);
+  padding: 0 var(--space-xxlg);
+  height: 45px;
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colors-neutral700);
+  user-select: none;
+  cursor: pointer;
+  border-bottom: 1px solid transparent;
+  text-wrap: nowrap;
+
+  &:first-child { border-top-left-radius: var(--radii-sm); }
+  &:last-child { border-top-right-radius: var(--radii-sm); }
+  &:hover { background-color: var(--colors-primary100); }
+
+  &[data-state="active"] {
+    color: var(--colors-primary);
+    background-color: var(--colors-primary100);
+    border-color: var(--colors-primary);
+  }
+
+  &:focus { background-color: var(--colors-primary300); }
+}
+
+.content {
+  flex-grow: 1;
+  padding: var(--space-xxsm);
+  background-color: var(--colors-white);
+  border-bottom-left-radius: var(--radii-sm);
+  border-bottom-right-radius: var(--radii-sm);
+  outline: none;
+}
+
+.tabs {
+  width: 100%;
+  display: flex;
+  flex-grow: 1;
+  flex-direction: column;
+
+  // ===========================================================================
+  // ALIGN
+  // ===========================================================================
+
+  :where(&).alignLeft {
+    .list {
+      width: fit-content;
+      align-self: flex-start;
+    }
+
+    .content {
+      box-shadow: var(--shadows-cardShadow);
+      border-top-right-radius: var(--radii-sm);
+    }
+  }
+
+  :where(&).alignRight {
+    .list {
+      width: fit-content;
+      align-self: flex-end;
+    }
+
+    .content {
+      box-shadow: var(--shadows-cardShadow);
+      border-top-left-radius: var(--radii-sm);
+    }
+  }
+
+  :where(&).alignNull {
+    .list {
+      width: 100%;
+      align-self: unset;
+      border-top-right-radius: none;
+      border-top-left-radius: none;
+    }
+
+    .content {
+      box-shadow: none;
+    }
+  }
+}

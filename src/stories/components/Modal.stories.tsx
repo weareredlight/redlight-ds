@@ -96,9 +96,9 @@ CustomContent.args = {
   description: '',
   children: (
     <form>
-      <Input type='text' label='Name' placeholder='Enter your name' onChange={() => { }} css={{ marginBottom: '$sm' }} />
-      <Input type='email' label='Email' placeholder='Enter your email' onChange={() => { }} css={{ marginBottom: '$sm' }} />
-      <TextArea label='Message' placeholder='Enter your message' onChange={() => { }} css={{ marginBottom: '$sm' }} />
+      <Input type='text' label='Name' placeholder='Enter your name' onChange={() => { }} style={{ marginBottom: 'var(--space-sm)' }} />
+      <Input type='email' label='Email' placeholder='Enter your email' onChange={() => { }} style={{ marginBottom: 'var(--space-sm)' }} />
+      <TextArea label='Message' placeholder='Enter your message' onChange={() => { }} style={{ marginBottom: 'var(--space-sm)' }} />
     </form>
   )
 }

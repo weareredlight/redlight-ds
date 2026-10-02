@@ -1,0 +1,77 @@
+// =============================================================================
+// POPOVER
+// =============================================================================
+
+@keyframes slideUpAndFade {
+  0% { opacity: 0; transform: translateY(2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideRightAndFade {
+  0% { opacity: 0; transform: translateX(-2px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideDownAndFade {
+  0% { opacity: 0; transform: translateY(-2px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideLeftAndFade {
+  0% { opacity: 0; transform: translateX(2px); }
+  100% { opacity: 1; transform: translateX(0); }
+}
+
+// =============================================================================
+// CONTENT
+// =============================================================================
+
+.content {
+  border-radius: var(--radii-xsm);
+  padding: var(--space-xxsm);
+  margin-right: var(--space-xxxsm);
+  margin-left: var(--space-xxxsm);
+  min-width: 260px;
+  background-color: var(--colors-white);
+  box-shadow: var(--shadows-cardShadow);
+  animation-duration: 400ms;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
+
+  &[data-state="open"] {
+    &[data-side="top"] { animation-name: slideDownAndFade; }
+    &[data-side="right"] { animation-name: slideLeftAndFade; }
+    &[data-side="bottom"] { animation-name: slideUpAndFade; }
+    &[data-side="left"] { animation-name: slideRightAndFade; }
+  }
+}
+
+// =============================================================================
+// CLOSE BUTTON
+// =============================================================================
+
+.close {
+  all: unset;
+  font-family: inherit;
+  border-radius: 100%;
+  height: 25px;
+  width: 25px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colors-neutral);
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  cursor: pointer;
+
+  &:hover { background-color: var(--colors-neutral200); }
+}
+
+// =============================================================================
+// ARROW
+// =============================================================================
+
+.arrow {
+  fill: var(--colors-white);
+}

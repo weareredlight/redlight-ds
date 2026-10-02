@@ -2,24 +2,13 @@ import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons
 import * as SelectInput from '@radix-ui/react-select'
 import { useMemo, useState } from 'react'
 
-import type * as Stitches from '@stitches/react'
-import type { ChangeEvent } from 'react'
+import type { ChangeEvent, CSSProperties } from 'react'
 
+import { capitalize, cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import {
-  StyledSelect,
-  StyledTrigger,
-  StyledContent,
-  StyledItem,
-  StyledPortal,
-  StyledChevron,
-  StyledInputCheck,
-  StyledScrollUpButton,
-  StyledScrollDownButton,
-  StyledViewport,
-} from './styles'
+import styles from './styles.module.scss'
 
 export type SelectProps<T> = {
   id: string
@@ -31,14 +20,15 @@ export type SelectProps<T> = {
   description?: string
   emptyOption?: string
   errorMsg?: string
-  state?: Stitches.VariantProps<typeof StyledTrigger>['state']
+  state?: 'error' | 'dirty' | 'disabled' | 'null'
   onChange: (event: ChangeEvent<HTMLSelectElement>) => void
   options: T[]
   getLabel: (option: T) => string
   getValue: (option: T) => string
-  css?: Stitches.CSS
-  variant?: Stitches.VariantProps<typeof StyledTrigger>['variant']
-  fullWidth?: Stitches.VariantProps<typeof StyledSelect>['fullWidth']
+  className?: string
+  style?: CSSProperties
+  variant?: 'simple' | 'null'
+  fullWidth?: boolean
 }
 
 const Select = <T extends object>({
@@ -57,7 +47,8 @@ const Select = <T extends object>({
   getValue,
   emptyOption,
   variant,
-  css,
+  className,
+  style,
   fullWidth = false,
   ...props
 }: SelectProps<T>) => {
@@ -75,9 +66,12 @@ const Select = <T extends object>({
   }, [selectedOption, emptyOption, getLabel, placeholder])
 
   return (
-    <StyledSelect css={css} fullWidth={fullWidth}>
+    <div
+      className={cx(styles.select, fullWidth ? styles.fullWidth : styles.notFullWidth, className)}
+      style={style}
+    >
       {label || description ? (
-        <Label id={id} label={label} description={description} />
+        <Label id={id} label={label} description={description} className={styles.label} />
       ) : null}
 
       <SelectInput.Root
@@ -99,50 +93,58 @@ const Select = <T extends object>({
           if (onChange) onChange(event)
         }}
       >
-        <StyledTrigger id={id} state={state} variant={variant}>
+        <SelectInput.Trigger
+          id={id}
+          className={cx(
+            styles.trigger,
+            variant === 'simple' && styles.simple,
+            styles[`state${capitalize(state)}`],
+          )}
+        >
           <SelectInput.Value>
             {valueToDisplay}
           </SelectInput.Value>
-          <StyledChevron>
+          <SelectInput.Icon className={styles.chevron}>
             <ChevronToShow />
-          </StyledChevron>
-        </StyledTrigger>
+          </SelectInput.Icon>
+        </SelectInput.Trigger>
 
-        <StyledPortal>
-          <StyledContent>
-            <StyledScrollUpButton>
+        <SelectInput.Portal>
+          <SelectInput.Content className={styles.content}>
+            <SelectInput.ScrollUpButton className={styles.scrollButton}>
               <ChevronUpIcon />
-            </StyledScrollUpButton>
-            <StyledViewport>
+            </SelectInput.ScrollUpButton>
+            <SelectInput.Viewport className={styles.viewport}>
               {emptyOption && (
-                <StyledItem value='-1'>
+                <SelectInput.Item className={styles.item} value='-1'>
                   <SelectInput.ItemText>
                     {emptyOption}
                   </SelectInput.ItemText>
-                  <StyledInputCheck>
+                  <SelectInput.ItemIndicator className={styles.check}>
                     <CheckIcon />
-                  </StyledInputCheck>
-                </StyledItem>
+                  </SelectInput.ItemIndicator>
+                </SelectInput.Item>
               )}
               {options.map(option => (
-                <StyledItem
+                <SelectInput.Item
+                  className={styles.item}
                   key={getValue(option)}
                   value={getValue(option)}
                 >
                   <SelectInput.ItemText>
                     {getLabel(option)}
                   </SelectInput.ItemText>
-                  <StyledInputCheck>
+                  <SelectInput.ItemIndicator className={styles.check}>
                     <CheckIcon />
-                  </StyledInputCheck>
-                </StyledItem>
+                  </SelectInput.ItemIndicator>
+                </SelectInput.Item>
               ))}
-            </StyledViewport>
-            <StyledScrollDownButton>
+            </SelectInput.Viewport>
+            <SelectInput.ScrollDownButton className={styles.scrollButton}>
               <ChevronDownIcon />
-            </StyledScrollDownButton>
-          </StyledContent>
-        </StyledPortal>
+            </SelectInput.ScrollDownButton>
+          </SelectInput.Content>
+        </SelectInput.Portal>
       </SelectInput.Root>
       {state === 'error' && errorMsg && (
         <>
@@ -152,8 +154,10 @@ const Select = <T extends object>({
           </Text>
         </>
       )}
-    </StyledSelect>
+    </div>
   )
 }
+
+export const selectSelector = `.${styles.select}`
 
 export default Select

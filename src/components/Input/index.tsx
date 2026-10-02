@@ -1,19 +1,22 @@
 import React from 'react'
 
-import type * as Stitches from '@stitches/react'
 import type { ChangeEvent } from 'react'
 
 import Flex from '../../elements/Flex'
+import { capitalize, cx } from '../../utils'
 import Button from '../Button'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import {
-  StyledInput,
-  StyledInputField,
-  StyledIconWrapper,
-  StyledWrapper,
-} from './styles'
+import styles from './styles.module.scss'
+
+type IconPosition = 'left' | 'right' | 'null'
+
+const iconPositionClasses: Record<IconPosition, string> = {
+  left: styles.iconLeft,
+  right: styles.iconRight,
+  null: styles.noIcon,
+}
 
 export type InputProps = {
   id?: string
@@ -25,15 +28,14 @@ export type InputProps = {
   description?: string
   iconComponent?: React.FC
   errorMsg?: string
-  variant?: Stitches.VariantProps<typeof StyledInputField>['variant']
-  state?: Stitches.VariantProps<typeof StyledInputField>['state']
-  iconPosition?: Stitches.VariantProps<typeof StyledInput>['iconPosition']
+  variant?: 'simple' | 'null'
+  state?: 'error' | 'dirty' | 'disabled' | 'null'
+  iconPosition?: IconPosition
   required?: boolean
-  css?: Stitches.CSS
   onClickIcon?: () => void
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   containerProps?: React.HTMLAttributes<HTMLDivElement>
-  fullWidth?: Stitches.VariantProps<typeof StyledWrapper>['fullWidth']
+  fullWidth?: boolean
   disabled?: boolean,
 } & React.InputHTMLAttributes<HTMLInputElement>
 
@@ -51,7 +53,7 @@ const Input = React.forwardRef(({
   iconPosition = 'right',
   onClickIcon,
   onChange,
-  css,
+  className,
   variant = 'null',
   required = false,
   containerProps,
@@ -68,11 +70,12 @@ const Input = React.forwardRef(({
           iconComponent={iconComponent}
           iconPosition='iconOnly'
           variant='textOnly'
+          className={styles.iconButton}
         />
       )
     }
     return (
-      <Flex css={{ padding: '$xxsm' }}>
+      <Flex style={{ padding: 'var(--space-xxsm)' }}>
         {iconComponent({})}
       </Flex>
     )
@@ -80,24 +83,35 @@ const Input = React.forwardRef(({
   const iconPos = iconComponent ? iconPosition : 'null'
 
   return (
-    <StyledWrapper variant={variant} fullWidth={fullWidth} {...containerProps}>
-      <StyledInput iconPosition={iconPos}>
+    <div
+      className={cx(
+        styles.wrapper,
+        variant === 'simple' && styles.simple,
+        fullWidth ? styles.fullWidth : styles.notFullWidth,
+      )}
+      {...containerProps}
+    >
+      <div className={cx(styles.input, iconPositionClasses[iconPos])}>
         {label || description ? (
           <Label
             id={id || name}
             label={label}
             description={description}
+            className={styles.label}
           />
         ) : null}
-        <StyledInputField
+        <input
+          className={cx(
+            styles.field,
+            variant === 'simple' && styles.simple,
+            state !== 'null' && styles[`state${capitalize(state)}`],
+            className,
+          )}
           id={id || name}
           ref={ref}
-          css={css}
           name={name}
           value={value}
           type={type}
-          state={state}
-          variant={variant}
           placeholder={placeholder}
           required={required}
           disabled={disabled}
@@ -112,18 +126,20 @@ const Input = React.forwardRef(({
           }}
           {...props}
         />
-        <StyledIconWrapper iconPosition={iconPos}>
+        <div className={cx(styles.iconWrapper, iconPositionClasses[iconPos])}>
           {iconComponent && iconPos === 'left' && renderIcon()}
           {iconComponent && iconPos === 'right' && renderIcon()}
-        </StyledIconWrapper>
-      </StyledInput>
+        </div>
+      </div>
       {state === 'error' && errorMsg && (
         <Text color='danger' variant='microCopy'>
           {errorMsg}
         </Text>
       )}
-    </StyledWrapper>
+    </div>
   )
 })
+
+export const inputSelector = `.${styles.input}`
 
 export default Input

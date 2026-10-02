@@ -1,0 +1,181 @@
+// =============================================================================
+// INPUT
+// -----------------------------------------------------------------------------
+// .wrapper > .input (label + field + icon) + error message
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.wrapper {
+  min-width: 256px;
+  max-width: 100%;
+  width: fit-content;
+  display: flex;
+  flex-direction: column;
+
+  span {
+    margin-top: var(--space-xxxsm);
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).simple {
+    width: 100%;
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+  }
+
+  :where(&).notFullWidth {
+    width: fit-content;
+
+    input {
+      min-width: 256px;
+    }
+  }
+}
+
+// =============================================================================
+// ICON
+// =============================================================================
+
+.iconWrapper {
+  position: absolute;
+  bottom: 0;
+
+  .iconButton {
+    pointer-events: all;
+
+    &:hover { background: transparent; }
+    &:focus { box-shadow: none; }
+  }
+
+  // ===========================================================================
+  // ICON POSITION
+  // ===========================================================================
+
+  :where(&).iconLeft {
+    justify-content: flex-start;
+    left: 0;
+  }
+
+  :where(&).iconRight {
+    justify-content: flex-end;
+    right: 0;
+  }
+
+  :where(&).noIcon {
+    display: none;
+  }
+}
+
+// =============================================================================
+// FIELD
+// =============================================================================
+
+.field {
+  position: relative;
+  height: 32px;
+  width: 100%;
+  padding: var(--space-xxsm);
+  border-radius: var(--radii-xsm);
+  appearance: none;
+  outline: none;
+  background-color: transparent;
+  @include typography.microCopy;
+  border: 1px solid var(--colors-neutral400);
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::placeholder {
+    color: var(--colors-neutral);
+  }
+
+  &:hover {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
+  }
+
+  &:focus {
+    border-color: var(--colors-primary);
+  }
+
+  &:disabled {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).simple {
+    min-width: 80px;
+    border: none;
+    border-bottom: 1px solid var(--colors-neutral200);
+    border-radius: 0;
+    border-color: transparent;
+
+    &::placeholder {
+      color: var(--colors-neutral400);
+      opacity: 1;
+    }
+
+    &:hover { background: var(--colors-primary200); }
+    &:focus { border-color: var(--colors-primary); }
+  }
+
+  // ===========================================================================
+  // STATE
+  // ===========================================================================
+
+  :where(&).stateError {
+    border-color: var(--colors-danger);
+
+    &:focus { border-color: var(--colors-danger); }
+  }
+
+  :where(&).stateDirty {
+    border-color: var(--colors-accent);
+  }
+
+  :where(&).stateDisabled {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+  }
+}
+
+// =============================================================================
+// LABEL + FIELD + ICON
+// =============================================================================
+
+.input {
+  width: 100%;
+  display: inline-block;
+  position: relative;
+
+  .label {
+    padding-bottom: var(--space-xxxsm);
+    pointer-events: none;
+  }
+
+  // ===========================================================================
+  // ICON POSITION (room for the icon inside the field)
+  // ===========================================================================
+
+  :where(&).iconLeft .field { padding-left: var(--space-xxxlg); }
+  :where(&).iconRight .field { padding-right: var(--space-xxxlg); }
+}

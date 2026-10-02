@@ -1,0 +1,39 @@
+// =============================================================================
+// GROUP BUTTONS
+// =============================================================================
+
+.groupButtons {
+  display: flex;
+  overflow: hidden;
+  border-radius: var(--radii-xsm);
+  border: 1px solid var(--colors-primary);
+
+  // Each button in the group
+  .button {
+    position: relative;
+    min-width: 72px;
+    flex: 1 1 0px;
+    border-radius: 0;
+    border: 0;
+
+    &:focus {
+      box-shadow: none;
+    }
+
+    // divider between buttons
+    &:before {
+      content: "";
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 1px;
+      background-color: var(--colors-primary);
+    }
+
+    &:first-child:before {
+      display: none;
+    }
+  }
+}

@@ -1,24 +1,37 @@
 import { SymbolIcon } from '@radix-ui/react-icons'
-import * as Stitches from '@stitches/react'
 import React from 'react'
 
 import type { ReactNode } from 'react'
 
-import { StyledButton } from './styles'
+import { colors } from '../../theme/colors'
+import { cx } from '../../utils'
+
+import styles from './styles.module.scss'
+
+export type ButtonVariant = 'neutral' | 'primary' | 'secondary' | 'tertiary' | 'textOnly' | 'danger' | 'success'
+export type ButtonSize = 'normal' | 'large'
+export type ButtonIconPosition = 'left' | 'right' | 'iconOnly' | 'null'
 
 export type ButtonProps = {
   children?: ReactNode
   iconComponent?: React.FC
   onClick?: () => void
-  variant?: Stitches.VariantProps<typeof StyledButton>['variant']
-  size?: Stitches.VariantProps<typeof StyledButton>['size']
-  fullWidth?: Stitches.VariantProps<typeof StyledButton>['fullWidth']
-  iconPosition?: Stitches.VariantProps<typeof StyledButton>['iconPosition']
-  isLoading?: Stitches.VariantProps<typeof StyledButton>['isLoading']
+  variant?: ButtonVariant
+  size?: ButtonSize
+  fullWidth?: boolean
+  iconPosition?: ButtonIconPosition
+  isLoading?: boolean
   type?: 'submit' | 'button',
   disabled?: boolean,
-  extraClasses?: string
-  css?: Stitches.CSS
+  className?: string
+  style?: React.CSSProperties
+}
+
+const iconPositionClasses: Record<ButtonIconPosition, string> = {
+  left: styles.iconLeft,
+  right: styles.iconRight,
+  iconOnly: styles.iconOnly,
+  null: styles.noIcon,
 }
 
 const Button = React.forwardRef(({
@@ -31,8 +44,8 @@ const Button = React.forwardRef(({
   isLoading = false,
   type = 'button',
   disabled = false,
-  extraClasses,
-  css,
+  className,
+  style,
   ...props
 }: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
   const getIconAndText = () => {
@@ -54,24 +67,38 @@ const Button = React.forwardRef(({
       default: return children
     }
   }
+
+  const resolvedIconPosition: ButtonIconPosition = (iconComponent && !children)
+    ? 'iconOnly'
+    : (iconComponent && iconPosition) || 'null'
+
+  const classes = cx(
+    styles.button,
+    styles[size],
+    fullWidth && styles.fullWidth,
+    styles[variant],
+    variant === 'tertiary' && colors.accent && styles.tertiaryAccent,
+    iconPositionClasses[resolvedIconPosition],
+    isLoading && styles.loading,
+    className,
+  )
+
   return (
-    <StyledButton
-      variant={variant}
-      iconPosition={(iconComponent && !children) ? 'iconOnly' : (iconComponent && iconPosition) || 'null'}
+    <button
+      // eslint-disable-next-line react/button-has-type
       type={type || 'button'}
       disabled={disabled}
-      isLoading={isLoading}
-      size={size}
-      fullWidth={fullWidth}
-      css={{ ...css }}
-      className={extraClasses}
+      className={classes}
+      style={style}
       ref={ref}
       {...props}
     >
       {getIconAndText()}
       {isLoading && <SymbolIcon className='loading-icon' />}
-    </StyledButton>
+    </button>
   )
 })
+
+export const buttonSelector = `.${styles.button}`
 
 export default Button

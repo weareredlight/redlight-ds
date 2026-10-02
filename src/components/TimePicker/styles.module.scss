@@ -1,0 +1,121 @@
+// =============================================================================
+// TIME PICKER
+// -----------------------------------------------------------------------------
+// "time" type styles the third-party react-time-picker markup (classes wrapped
+// in :global); "duration" type is a formatted text input (.durationPicker).
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+.timePicker {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-xxxsm);
+
+  // ===========================================================================
+  // TIME INPUT
+  // ===========================================================================
+
+  .main {
+    > div {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: space-between;
+      width: 100%;
+      height: var(--sizes-xxxlg);
+      padding: var(--space-xxsm) 0 var(--space-xxsm) var(--space-xxsm);
+      border-radius: var(--radii-xsm);
+      border: 1px solid var(--colors-neutral400);
+      font-size: var(--fontSizes-xsm);
+
+      &:hover {
+        background-color: var(--colors-neutral100);
+        border-color: var(--colors-neutral600);
+      }
+
+      :global(.react-time-picker__inputGroup__input:invalid) {
+        background-color: var(--colors-transparent);
+      }
+
+      :global(.react-time-picker__inputGroup__input:valid) {
+        color: var(--colors-neutral800);
+      }
+    }
+
+    button {
+      color: var(--colors-neutral);
+      pointer-events: none;
+    }
+
+    &:global(.react-time-picker--open) > div {
+      border-color: var(--colors-primary);
+    }
+  }
+
+  // the analog clock dropdown is never shown
+  :global(.react-time-picker__clock) {
+    display: none;
+  }
+
+  // ===========================================================================
+  // ERROR
+  // ===========================================================================
+
+  :where(&).hasError .main > div {
+    border-color: var(--colors-danger);
+  }
+
+  // ===========================================================================
+  // DISABLED
+  // ===========================================================================
+
+  :where(&).disabled .main > div {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+
+    :global(.react-time-picker__inputGroup__input:valid) {
+      color: var(--colors-neutral);
+    }
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+
+    > div { width: 100%; }
+  }
+}
+
+// =============================================================================
+// DURATION INPUT
+// =============================================================================
+
+.durationPicker {
+  height: var(--sizes-xxxlg);
+  padding: var(--space-xxsm) var(--space-xsm) var(--space-xxsm) var(--space-xxsm);
+  border-radius: var(--radii-xsm);
+  border: 1px solid var(--colors-neutral400);
+  font-size: var(--fontSizes-xsm);
+  -moz-appearance: textfield;
+
+  &:hover {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+
+    > div { width: 100%; }
+  }
+}

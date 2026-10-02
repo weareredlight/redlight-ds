@@ -52,12 +52,12 @@ const Template: StoryFn<PopOverProps> = args => (
           variant='textOnly'
           iconComponent={DotsIcon}
           iconPosition='iconOnly'
-          css={{ borderRadius: '100%' }}
+          style={{ borderRadius: '100%' }}
         />
       )
     }
   >
-    <Flex direction='column' css={{ padding: '1rem' }}>
+    <Flex direction='column' style={{ padding: '1rem' }}>
       <Text variant='textBlock'>Your content...</Text>
     </Flex>
   </PopOver>

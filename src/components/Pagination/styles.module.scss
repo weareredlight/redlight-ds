@@ -1,0 +1,36 @@
+// =============================================================================
+// PAGINATION
+// =============================================================================
+
+.pagination {
+  display: flex;
+  align-items: center;
+  font-size: var(--fontSizes-sm);
+
+  // Every button (arrows and page numbers)
+  .button {
+    width: 32px;
+    height: 32px;
+    padding: 0;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+  }
+}
+
+// =============================================================================
+// PAGE NUMBER
+// -----------------------------------------------------------------------------
+// Single class on purpose: the button's own :hover/:active states still apply.
+// =============================================================================
+
+.page {
+  background-color: initial;
+}
+
+.currentPage {
+  background-color: var(--colors-primary200);
+  color: var(--colors-primary);
+}

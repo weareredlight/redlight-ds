@@ -1,0 +1,35 @@
+// =============================================================================
+// TYPOGRAPHY DOCS
+// =============================================================================
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+  margin-bottom: var(--space-xxxlg);
+
+  > div {
+    background: var(--colors-neutral100);
+    padding: var(--space-xxlg);
+    margin-top: var(--space-xsm);
+    border-radius: var(--radii-md);
+  }
+
+  > ul {
+    margin-left: var(--space-lg);
+  }
+
+  :global(.font-preview) {
+    color: var(--colors-neutral900) !important;
+  }
+}
+
+.textType {
+  width: 100%;
+  border-radius: var(--radii-sm);
+  padding: var(--space-xxlg);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--colors-white);
+}

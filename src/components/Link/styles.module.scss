@@ -1,0 +1,70 @@
+// =============================================================================
+// LINK
+// -----------------------------------------------------------------------------
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.link {
+  color: var(--colors-primary);
+  text-decoration: underline;
+  cursor: pointer;
+  padding: var(--space-xxxsm);
+
+  &:hover {
+    color: var(--colors-primary600);
+    text-decoration: none;
+  }
+
+  &:active {
+    color: var(--colors-primary700);
+    text-decoration: underline;
+  }
+
+  &:focus {
+    color: var(--colors-primary600);
+    text-decoration: none;
+    border-radius: var(--radii-xsm);
+    outline: 1px solid var(--colors-primary200);
+  }
+
+  // ===========================================================================
+  // SIZE
+  // ===========================================================================
+
+  :where(&).regular { @include typography.paragraph; }
+  :where(&).small { @include typography.textBlock; }
+
+  // ===========================================================================
+  // DANGER
+  // ===========================================================================
+
+  :where(&).danger {
+    color: var(--colors-danger);
+
+    &:hover { color: var(--colors-danger500); }
+    &:active { color: var(--colors-danger600); }
+
+    &:focus {
+      color: var(--colors-danger600);
+      outline: 1px solid var(--colors-danger100);
+    }
+  }
+
+  // ===========================================================================
+  // DARK BACKGROUND
+  // ===========================================================================
+
+  :where(&).darkBackground {
+    color: var(--colors-white);
+
+    &:hover { color: var(--colors-primary200); }
+    &:active { color: var(--colors-primary200); }
+
+    &:focus {
+      color: var(--colors-primary200);
+      outline: 1px solid var(--colors-primary600);
+    }
+  }
+}

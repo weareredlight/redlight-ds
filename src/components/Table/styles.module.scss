@@ -1,0 +1,87 @@
+// =============================================================================
+// TABLE
+// =============================================================================
+
+@use '../../styles/typography';
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: var(--space-sm);
+  border-radius: var(--radii-sm);
+  overflow: hidden;
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.head tr th {
+  background: var(--colors-neutral100);
+  padding: var(--space-xxsm);
+  text-align: left;
+  vertical-align: top;
+  @include typography.subHeading;
+  color: var(--colors-neutral800);
+  cursor: default;
+
+  &:first-child { border-top-left-radius: var(--radii-sm); }
+  &:last-child { border-top-right-radius: var(--radii-sm); }
+
+  &:hover {
+    background: var(--colors-primary100);
+  }
+
+  &:active,
+  &:focus {
+    background: var(--colors-primary100);
+    outline: 1px solid var(--colors-primary300);
+    outline-offset: -1px;
+  }
+
+  // not sortable
+  &.disabled {
+    pointer-events: none;
+  }
+
+  // title + sort icon
+  > div.columnHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--space-xxsm);
+    gap: var(--space-xxsm);
+
+    &.sortable {
+      cursor: pointer;
+    }
+  }
+}
+
+// =============================================================================
+// BODY
+// =============================================================================
+
+.body tr {
+  border-bottom: 1px solid var(--colors-neutral200);
+
+  td {
+    padding: var(--space-xsm);
+    text-align: left;
+    vertical-align: top;
+    @include typography.textBlock;
+    color: var(--colors-neutral700);
+  }
+
+  &:hover {
+    background-color: var(--colors-primary100);
+  }
+}
+
+// "Nothing was found" row
+.emptyRow {
+  width: 100%;
+  text-align: center;
+  background: var(--colors-white);
+  padding: var(--space-xxxlg) 0;
+}

@@ -1,7 +1,7 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import Select, { components } from 'react-select'
 
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 import type {
   DropdownIndicatorProps,
   MultiValue,
@@ -9,11 +9,14 @@ import type {
 } from 'react-select'
 
 import Flex from '../../elements/Flex'
+import { colors } from '../../theme/colors'
+import { capitalize, cx } from '../../utils'
 import Pill from '../Pill'
 import Label from '../shared/Label'
 import Text from '../Text'
 
-import { selectStyles, SelectWrapper } from './styles'
+import { selectStyles } from './selectStyles'
+import styles from './styles.module.scss'
 
 type OptionType = { label: string; value: string }
 export type MultiSelectProps = {
@@ -25,9 +28,11 @@ export type MultiSelectProps = {
   placeholder?: string
   hasPills?: boolean
   getLabel: (value: string) => string
-  state?: Stitches.VariantProps<typeof SelectWrapper>['state']
+  state?: 'error' | 'dirty' | 'disabled' | 'null'
   errorMsg?: string
   fullWidth?: boolean
+  className?: string
+  style?: CSSProperties
 }
 
 const DropdownIndicator = (props: DropdownIndicatorProps<OptionType, true>) => {
@@ -61,6 +66,8 @@ const MultiSelect = ({
   state = 'null',
   errorMsg,
   fullWidth = false,
+  className,
+  style,
 }: MultiSelectProps) => {
   const handleRemoveOption = (
     removedValue: string,
@@ -76,10 +83,11 @@ const MultiSelect = ({
       direction='column'
       align='start'
       gap='xxxsm'
-      css={{ width: fullWidth ? '100%' : 'fit-content' }}
+      className={className}
+      style={{ width: fullWidth ? '100%' : 'fit-content', ...style }}
     >
       {label && <Label id={name} label={label} />}
-      <SelectWrapper state={state}>
+      <div className={cx(styles.wrapper, colors.accent && styles.accent, styles[`state${capitalize(state)}`])}>
         <Select
           id={name}
           value={
@@ -108,13 +116,13 @@ const MultiSelect = ({
           }}
         />
         {!hasPills && value?.length > 0 && (
-          <Flex className='options-count'>
+          <Flex className={styles.optionsCount}>
             <Text variant='subHeadingSmall' color='white'>
               {value?.length}
             </Text>
           </Flex>
         )}
-      </SelectWrapper>
+      </div>
       {(state === 'error' && errorMsg) && (
         <Text color='danger' variant='microCopy'>
           {errorMsg}
@@ -125,7 +133,7 @@ const MultiSelect = ({
           align='start'
           justify='start'
           gap='xxxsm'
-          css={{ flexWrap: 'wrap', maxWidth: '256px' }}
+          style={{ flexWrap: 'wrap', maxWidth: '256px' }}
         >
           {value?.map((item: string) => (
             <Pill

@@ -2,17 +2,20 @@
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
 import React, { useState } from 'react'
 
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
+import { cx } from '../../utils'
 import Button from '../Button'
 
-import { StyledPagination } from './styles'
+import styles from './styles.module.scss'
 
 export type PaginationProps = {
   currentPage?: number
   totalPages: number
   onPageChange: (page: number) => void
-  variant?: Stitches.VariantProps<typeof StyledPagination>['variant']
+  variant?: 'default' | 'minimal'
+  className?: string
+  style?: CSSProperties
 }
 
 const LeftArrow = () => <ChevronLeftIcon />
@@ -22,7 +25,9 @@ const Pagination: React.FC<PaginationProps> = ({
   currentPage = 1,
   totalPages,
   onPageChange,
-  variant = 'default'
+  variant = 'default',
+  className,
+  style,
 }) => {
   const [page, setPage] = useState(currentPage)
 
@@ -69,12 +74,7 @@ const Pagination: React.FC<PaginationProps> = ({
         {pageNumbers.map(pageNumber => (
           <Button
             key={pageNumber}
-            css={pageNumber === page ? {
-              backgroundColor: '$primary200',
-              color: '$primary'
-            } : {
-              backgroundColor: 'initial'
-            }}
+            className={cx(styles.button, pageNumber === page ? styles.currentPage : styles.page)}
             variant='textOnly'
             // href='#'
             onClick={() => handlePageChange(pageNumber)}
@@ -87,13 +87,14 @@ const Pagination: React.FC<PaginationProps> = ({
   }
 
   return (
-    <StyledPagination>
+    <div className={cx(styles.pagination, className)} style={style}>
       <Button
         variant='textOnly'
         // href='#'
         onClick={() => handlePageChange(currentPage - 1)}
         iconComponent={LeftArrow}
         iconPosition='iconOnly'
+        className={styles.button}
         disabled={currentPage <= 1}
       />
       {variant === 'default' && (
@@ -105,10 +106,13 @@ const Pagination: React.FC<PaginationProps> = ({
         onClick={() => handlePageChange(currentPage + 1)}
         iconComponent={RightArrow}
         iconPosition='iconOnly'
+        className={styles.button}
         disabled={currentPage >= totalPages}
       />
-    </StyledPagination>
+    </div>
   )
 }
+
+export const paginationSelector = `.${styles.pagination}`
 
 export default Pagination

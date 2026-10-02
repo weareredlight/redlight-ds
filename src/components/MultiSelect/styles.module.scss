@@ -1,0 +1,63 @@
+// =============================================================================
+// MULTI SELECT
+// -----------------------------------------------------------------------------
+// The react-select control itself is styled in JS (selectStyles.ts); this file
+// styles the wrapper around it.
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+.wrapper {
+  position: relative;
+  width: 100%;
+
+  // Selected options counter
+  .optionsCount {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right: calc(var(--space-sm) * 2);
+    top: 50%;
+    transform: translateY(-50%);
+    width: 18px;
+    height: 18px;
+    background-color: var(--colors-primary);
+    border-radius: var(--radii-full);
+  }
+
+  // Counter uses the accent color when the default theme defines one
+  &.accent .optionsCount {
+    background-color: var(--colors-accent);
+  }
+
+  // ===========================================================================
+  // STATE
+  // ===========================================================================
+
+  :where(&).stateError :global(#multi-select) > div {
+    border-color: var(--colors-danger);
+
+    svg { color: var(--colors-danger); }
+  }
+
+  :where(&).stateDirty :global(#multi-select) > div {
+    border-color: var(--colors-secondary);
+
+    svg { color: var(--colors-secondary); }
+  }
+
+  :where(&).stateDisabled :global(#multi-select) > div {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+
+    svg { color: var(--colors-neutral); }
+  }
+
+  :where(&).stateNull :global(#multi-select) > div {
+    border-color: var(--colors-neutral400);
+
+    svg { color: var(--colors-neutral400); }
+  }
+}

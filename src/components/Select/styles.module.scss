@@ -1,0 +1,193 @@
+// =============================================================================
+// SELECT
+// -----------------------------------------------------------------------------
+// Built on Radix Select: .select > label + .trigger, and a portaled .content list.
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+// =============================================================================
+// TRIGGER (the closed select)
+// =============================================================================
+
+.trigger {
+  appearance: none;
+  outline: none;
+  all: unset;
+  @include typography.microCopy;
+  border: 1px solid var(--colors-neutral400);
+  color: var(--colors-neutral800);
+  height: 32px;
+  min-width: 256px;
+  max-width: 100%;
+  padding: var(--space-xxsm);
+  border-radius: var(--radii-xsm);
+  box-sizing: border-box;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-between;
+  cursor: pointer;
+
+  :global(.placeholder) {
+    color: var(--colors-neutral);
+  }
+
+  &:hover {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
+
+    svg { color: var(--colors-neutral600); }
+  }
+
+  &:focus {
+    border-color: var(--colors-primary);
+
+    svg { color: var(--colors-neutral600); }
+  }
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).simple {
+    min-width: 128px;
+    width: 100%;
+  }
+
+  // ===========================================================================
+  // STATE
+  // ===========================================================================
+
+  :where(&).stateError {
+    border-color: var(--colors-danger);
+
+    svg { color: var(--colors-danger); }
+  }
+
+  :where(&).stateDirty {
+    border-color: var(--colors-secondary);
+
+    svg { color: var(--colors-secondary); }
+  }
+
+  :where(&).stateDisabled {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+
+    svg { color: var(--colors-neutral); }
+  }
+
+  :where(&).stateNull {
+    border-color: var(--colors-neutral400);
+
+    svg { color: var(--colors-neutral400); }
+  }
+}
+
+// =============================================================================
+// ROOT (label + trigger)
+// =============================================================================
+
+.select {
+  .label {
+    padding-bottom: var(--space-xxxsm);
+    pointer-events: none;
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+
+    .trigger { width: 100%; }
+  }
+
+  :where(&).notFullWidth {
+    width: fit-content;
+  }
+}
+
+// =============================================================================
+// DROPDOWN
+// =============================================================================
+
+.content {
+  overflow: hidden;
+  background-color: var(--colors-white);
+  border-radius: var(--radii-xsm);
+  filter: drop-shadow(0px 4px 20px rgba(149, 157, 165, 0.15));
+  width: 100%;
+}
+
+.viewport {
+  background: var(--colors-white);
+  box-shadow: var(--shadows-greySmall);
+  width: 100%;
+}
+
+.chevron {
+  padding-top: var(--space-xxxsm);
+  color: var(--colors-primary);
+
+  svg {
+    width: var(--sizes-xlg);
+    height: var(--sizes-xlg);
+  }
+}
+
+.scrollButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 25px;
+  background-color: var(--colors-white);
+  color: var(--colors-primary);
+  cursor: default;
+
+  svg {
+    width: var(--sizes-xlg);
+    height: var(--sizes-xlg);
+  }
+}
+
+// =============================================================================
+// OPTION
+// =============================================================================
+
+.item {
+  all: unset;
+  @include typography.microCopy;
+  line-height: 1;
+  color: var(--colors-neutral800);
+  display: flex;
+  align-items: center;
+  padding: var(--space-xxxsm) var(--space-xxsm);
+  position: relative;
+  user-select: none;
+  height: var(--sizes-xxlg);
+
+  &[data-disabled] {
+    color: var(--colors-neutral400);
+    pointer-events: none;
+  }
+
+  &:focus {
+    background-color: var(--colors-primary100);
+    color: var(--colors-primary);
+  }
+}
+
+.check {
+  padding-left: var(--space-xxsm);
+
+  svg {
+    width: var(--sizes-xsm);
+    height: var(--sizes-xsm);
+  }
+}

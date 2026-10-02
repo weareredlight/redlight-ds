@@ -1,16 +1,20 @@
 import { ReactNode } from 'react'
 
-import type * as Stitches from '@stitches/react'
+import type { CSSProperties } from 'react'
 
-import { StyledLink } from './styles'
+import { cx } from '../../utils'
+
+import styles from './styles.module.scss'
 
 export type LinkProps = {
   href: string,
   children: ReactNode,
   openInNewTab?: boolean
-  size?: Stitches.VariantProps<typeof StyledLink>['size'],
-  danger?: Stitches.VariantProps<typeof StyledLink>['danger'],
-  darkBackground?: Stitches.VariantProps<typeof StyledLink>['darkBackground'],
+  size?: 'regular' | 'small',
+  danger?: boolean,
+  darkBackground?: boolean,
+  className?: string
+  style?: CSSProperties
 }
 
 const Link = ({
@@ -20,19 +24,28 @@ const Link = ({
   size = 'regular',
   danger = false,
   darkBackground = false,
+  className,
+  style,
   ...props
 }: LinkProps) => (
-  <StyledLink
+  <a
     href={href}
     target={openInNewTab ? '_blank' : ''}
     rel='noreferrer'
-    size={size}
-    danger={danger}
-    darkBackground={darkBackground}
+    className={cx(
+      styles.link,
+      styles[size],
+      danger && styles.danger,
+      darkBackground && styles.darkBackground,
+      className,
+    )}
+    style={style}
     {...props}
   >
     {children}
-  </StyledLink>
+  </a>
 )
+
+export const linkSelector = `.${styles.link}`
 
 export default Link

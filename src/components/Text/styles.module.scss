@@ -1,0 +1,31 @@
+// =============================================================================
+// TEXT
+// -----------------------------------------------------------------------------
+// The `color` prop sets `--text-color` inline, so parent components can still
+// override the color with a normal rule.
+// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// =============================================================================
+
+@use '../../styles/typography';
+
+.text {
+  cursor: default;
+  color: var(--text-color);
+
+  // ===========================================================================
+  // VARIANT
+  // ===========================================================================
+
+  :where(&).h1 { @include typography.heading1; }
+  :where(&).h2 { @include typography.heading2; }
+  :where(&).h3 { @include typography.heading3; }
+  :where(&).h4 { @include typography.heading4; }
+  :where(&).h5 { @include typography.heading5; }
+  :where(&).h6 { @include typography.heading6; }
+  :where(&).h7 { @include typography.heading7; }
+  :where(&).subHeading { @include typography.subHeading; }
+  :where(&).subHeadingSmall { @include typography.subHeadingSmall; }
+  :where(&).paragraph { @include typography.paragraph; }
+  :where(&).textBlock { @include typography.textBlock; }
+  :where(&).microCopy { @include typography.microCopy; }
+}

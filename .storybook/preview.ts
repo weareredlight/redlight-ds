@@ -1,5 +1,10 @@
 import type { Preview } from "@storybook/react";
 
+// Stories import components directly, so load what src/index.tsx loads for the library:
+// global styles and the default theme tokens.
+import '../src/styles/global.scss'
+import 'virtual:rl-tokens.css'
+
 import RedTheme from './theme'
 
 const preview: Preview = {

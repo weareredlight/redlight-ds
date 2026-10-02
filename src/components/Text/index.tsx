@@ -1,25 +1,38 @@
-import type { ColorType } from '../../stitches'
-import type * as Stitches from '@stitches/react'
-import type { ReactNode } from 'react'
+import type { ColorType } from '../../theme'
+import type { CSSProperties, ReactNode } from 'react'
 
-import { StyledText } from './styles'
+import { cx } from '../../utils'
+
+import styles from './styles.module.scss'
+
+export type TextVariant = 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6' | 'h7'
+  | 'subHeading' | 'subHeadingSmall' | 'paragraph' | 'textBlock' | 'microCopy'
 
 export type TextProps = {
-  variant?: Stitches.VariantProps<typeof StyledText>['variant']
+  variant?: TextVariant
   color?: ColorType
-  css?: Stitches.CSS
+  className?: string
+  style?: CSSProperties
   children?: string | ReactNode
 }
 
 export const Text = ({
+  variant = 'paragraph',
   color = 'primary',
+  className,
+  style,
   children,
-  css,
   ...props
 }: TextProps) => (
-  <StyledText css={{ color: `$${color}`, ...css }} {...props}>
+  <span
+    className={cx(styles.text, styles[variant], className)}
+    style={{ '--text-color': `var(--colors-${color})`, ...style } as CSSProperties}
+    {...props}
+  >
     {children}
-  </StyledText>
+  </span>
 )
+
+export const textSelector = `.${styles.text}`
 
 export default Text

@@ -1,0 +1,29 @@
+// Typography presets: `@include typography.heading7;` etc.
+
+@mixin text($size, $weight, $line-height) {
+  font-size: var(--fontSizes-#{$size});
+  font-weight: var(--fontWeights-#{$weight});
+  line-height: var(--lineHeights-#{$line-height});
+}
+
+@mixin heading1 { @include text(xxxlg, lg, md); }
+@mixin heading2 { @include text(xxlg, lg, md); }
+@mixin heading3 { @include text(xlg, lg, md); }
+@mixin heading4 { @include text(lg, lg, md); }
+@mixin heading5 { @include text(md, lg, md); }
+@mixin heading6 { @include text(sm, md, md); }
+@mixin heading7 { @include text(xsm, md, md); }
+
+@mixin subHeading {
+  @include text(xsm, lg, md);
+  text-transform: uppercase;
+}
+
+@mixin subHeadingSmall {
+  @include text(xxsm, md, sm);
+  text-transform: uppercase;
+}
+
+@mixin paragraph { @include text(md, n, xlg); }
+@mixin textBlock { @include text(sm, n, lg); }
+@mixin microCopy { @include text(xsm, n, lg); }
