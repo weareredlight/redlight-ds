@@ -76,6 +76,16 @@
     color: var(--colors-neutral700);
   }
 
+  // inline code inside text
+  p code {
+    font-family: monospace;
+    font-size: 0.9em;
+    background-color: var(--colors-neutral100);
+    color: var(--colors-neutral800);
+    padding: 1px var(--space-xxxsm);
+    border-radius: var(--radii-xxsm);
+  }
+
   :global(.micro-copy) {
     @include typography.microCopy;
     color: var(--colors-neutral700);

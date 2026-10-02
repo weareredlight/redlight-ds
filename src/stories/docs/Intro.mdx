@@ -13,14 +13,23 @@ import {
 import { Flex } from '../../elements/Flex'
 import Button from '../../components/Button'
 
-import { BtnImport, BtnUse, Installation } from '../utils'
+import {
+  AlertUse,
+  BtnImport,
+  BtnUse,
+  CustomizeUse,
+  Installation,
+  StylesImport,
+  ThemeCss,
+  ThemeSetup,
+} from '../utils'
 
 <Meta title='Get Started' />
 
 <Doc>
   <DocHeader>
     <h2>Get Started</h2>
-    <p>ver 1.0.0 | Last updated: 20/06/2023</p>
+    <p>ver 0.2.0 | Last updated: 02/10/2026</p>
   </DocHeader>
 
   <DocBody>
@@ -56,21 +65,49 @@ import { BtnImport, BtnUse, Installation } from '../utils'
       It allows developers to interact with and explore different components, view their variations, and access comprehensive documentation and code examples.
     </p>
     <br />
-    <span className="sub-heading">Configure</span>
-    <p>Install the Design System on your project root:</p>
+    <span className="sub-heading">1. Install</span>
+    <p>Add the Design System to your project (it needs React 18 or newer):</p>
     <DocCode style={{width: '100%'}}>{Installation}</DocCode>
     <br />
-    <p>Now it's time to start using the components.</p>
-    <p>First import the component into the desired file:</p>
-    <DocCode style={{width: '100%'}}>{BtnImport}</DocCode>
+    <span className="sub-heading">2. Import the styles</span>
+    <p>Import the stylesheet once. It contains every component's styles, the default theme and the Roboto font:</p>
+    <DocCode style={{width: '100%'}}>{StylesImport}</DocCode>
     <br />
-    <p>Now the component is ready to use. Change its variants and properties so you can use it to your liking.</p>
+    <span className="sub-heading">3. Use the components</span>
+    <p>Import a component and change its variants and properties to your liking:</p>
+    <DocCode style={{width: '100%'}}>{BtnImport}</DocCode>
     <Flex gap="sm" style={{alignItems: 'stretch'}}>
       <DocCode style={{width: '50%'}}>{BtnUse}</DocCode>
-      <Flex style={{width: '50%', backgroundColor: '#F4F4F7', borderRadius: '4px'}}>
+      <Flex style={{width: '50%', backgroundColor: 'var(--colors-neutral100)', borderRadius: 'var(--radii-xsm)'}}>
         <Button size="large" variant="primary">Button Text</Button>
       </Flex>
     </Flex>
+    <p>Using the Next.js App Router? Use the components inside Client Components (<code>'use client'</code>).</p>
+    <br />
+    <span className="sub-heading">4. Enable alerts (optional)</span>
+    <p>To show alerts, render <code>ToastContainer</code> once:</p>
+    <DocCode style={{width: '100%'}}>{AlertUse}</DocCode>
+    <br />
+    <span className="sub-heading">5. Apply your theme (optional)</span>
+    <p>The theme is a set of CSS variables (see <a href="../?path=/docs/style-guides-colors--how-to-use">Colors</a> and <a href="../?path=/docs/style-guides-typography--how-to-use">Typography</a>). Change them with <code>setupTheme</code>:</p>
+    <DocCode style={{width: '100%'}}>{ThemeSetup}</DocCode>
+    <p>Or override the variables in your own CSS, which also works with server-side rendering:</p>
+    <DocCode style={{width: '100%'}}>{ThemeCss}</DocCode>
+    <br />
+    <span className="sub-heading">6. Customize components (optional)</span>
+    <p>Every component accepts <code>className</code> and <code>style</code>, and exports its root selector for your own CSS:</p>
+    <DocCode style={{width: '100%'}}>{CustomizeUse}</DocCode>
+    <br />
+    <DocSeparator />
+    <br />
+    <h4>What's new in 0.2.0</h4>
+    <p>
+      The Design System no longer uses Stitches: styles are written in SCSS Modules and the theme is a set of CSS variables.
+      Components look and behave the same. What changes is the setup (import <code>style.css</code>) and how you customize
+      them (<code>className</code> / <code>style</code> instead of the <code>css</code> prop and <code>extraClasses</code>).
+      <br />
+      See the <a href="https://github.com/weareredlight/redlight-ds#what-changed-in-020" target='_blank'>migration guide</a> to update a project from 0.1.x.
+    </p>
     <br />
     <DocSeparator />
     <br />

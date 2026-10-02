@@ -4,8 +4,11 @@ import {
   Doc,
   DocHeader,
   DocBody,
+  DocCode,
   DocSeparator
 } from '../document';
+
+import { ColorCss, ColorJs, ColorOverride } from '../../utils'
 
 import ColorStyles from './ColorStyles'
 
@@ -14,7 +17,7 @@ import ColorStyles from './ColorStyles'
 <Doc>
   <DocHeader style={{background: '#FFA83D'}}>
     <h2>Color Scheme</h2>
-    <p>ver 1.0.0 | Last updated: 18/07/2023</p>
+    <p>ver 0.2.0 | Last updated: 02/10/2026</p>
   </DocHeader>
 
   <DocBody>
@@ -23,6 +26,8 @@ import ColorStyles from './ColorStyles'
     <br />
     <DocSeparator />
     <br />
+    <ColorStyles variant="base" title="Base Colors" keys={['white', 'black']} description="White is used for surfaces such as cards, inputs and modals; black for the strongest contrast." />
+    <br />
     <ColorStyles variant="primary" description="This is the colour that identifies the brand of the product being designed. It is typically used to create a sense of balance and stability within the design." />
     <br />
     <ColorStyles variant="neutral" description="This colour is intended to create a grey color scheme. Its variations start with a very light tone, close to white. This can be used, for example, in the background of a document or a component. They end in a tone close to black that will be used mainly in the main titles." />
@@ -30,5 +35,15 @@ import ColorStyles from './ColorStyles'
     <ColorStyles variant="success" description="This colour is a result of green tones as it refers us to positive or affirmative actions. The use of this colour helps represent the successful achievement of specific objectives or needs." />
     <br />
     <ColorStyles variant="danger" description="The term &#x22;danger&#x22; is associated with the application of these colours to elements that indicate a potentially risky or destructive action, e.g., altering or deleting data." />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">How to Use</span>
+    <p>Every color is a CSS variable named <code>--colors-</code> plus the color name. Use them in your own CSS:</p>
+    <DocCode style={{width: '100%'}}>{ColorCss}</DocCode>
+    <p>In components and JavaScript, use the color name (<code>Text</code>'s <code>color</code> prop) or <code>theme</code> / <code>getColor</code>:</p>
+    <DocCode style={{width: '100%'}}>{ColorJs}</DocCode>
+    <p>To change the palette, override the colors with <code>setupTheme</code> (or redefine the variables in your CSS):</p>
+    <DocCode style={{width: '100%'}}>{ColorOverride}</DocCode>
   </DocBody>
 </Doc>

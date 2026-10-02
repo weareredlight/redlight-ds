@@ -10,27 +10,37 @@ import {
 
 import TextStyles from './TextStyles'
 
-import { TextComponent, TextScss } from '../../utils'
+import { TextComponent, TextFont, TextScss } from '../../utils'
 
 <Meta title='Style Guides/Typography' />
 
 <Doc>
   <DocHeader style={{background: '#493DB2'}}>
     <h2>Typography</h2>
-    <p>ver 1.0.0 | Last updated: 18/07/2023</p>
+    <p>ver 0.2.0 | Last updated: 02/10/2026</p>
   </DocHeader>
 
   <DocBody>
     <p>Typography is the art and technique of organising "type" to make written language legible and appealing when displayed. The choice of typography is fundamental not only to the appearance of a product or service, but also to the impact of what it is intended to communicate. By carefully considering this process, we ensure consistency and clarity in communicating information to users.</p>
     <br />
-    <span className="sub-heading">How to Use</span>
-    <p>You can use the existing text hierarchy as a component:</p>
-    <DocCode style={{width: '100%'}}>{TextComponent}</DocCode>
-    <p>Or you can use the typography mixins in your SCSS files:</p>
-    <DocCode style={{width: '100%'}}>{TextScss}</DocCode>
-    <br />
     <DocSeparator />
     <br />
     <TextStyles />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">How to Use</span>
+    <p>Use the text hierarchy through the <code>Text</code> component:</p>
+    <DocCode style={{width: '100%'}}>{TextComponent}</DocCode>
+    <p>Or, in your own SCSS files, through the typography mixins:</p>
+    <DocCode style={{width: '100%'}}>{TextScss}</DocCode>
+    <p>
+      Each style is built from theme tokens (<code>{'--fontSizes-*'}</code>, <code>{'--fontWeights-*'}</code>, <code>{'--lineHeights-*'}</code>),
+      so changing a token with <code>setupTheme</code> or CSS updates every style that uses it.
+    </p>
+    <br />
+    <span className="sub-heading">Font</span>
+    <p>The default font is <b>Roboto</b> (loaded by <code>style.css</code>). To use another font:</p>
+    <DocCode style={{width: '100%'}}>{TextFont}</DocCode>
   </DocBody>
 </Doc>

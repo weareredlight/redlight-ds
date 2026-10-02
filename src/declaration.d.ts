@@ -11,3 +11,8 @@ declare module '*.module.scss' {
 }
 
 declare module 'virtual:rl-tokens.css'
+
+declare module '*?raw' {
+  const content: string
+  export default content
+}
