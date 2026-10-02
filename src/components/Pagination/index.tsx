@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 
 import type { CSSProperties } from 'react'
 
@@ -30,6 +30,11 @@ const Pagination: React.FC<PaginationProps> = ({
   style,
 }) => {
   const [page, setPage] = useState(currentPage)
+
+  // Keep in sync when the parent changes the page (e.g. resets to 1 after filtering)
+  useEffect(() => {
+    setPage(currentPage)
+  }, [currentPage])
 
   const getPageNumbers = () => {
     const pageNumbers = []
@@ -91,11 +96,11 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         variant='textOnly'
         // href='#'
-        onClick={() => handlePageChange(currentPage - 1)}
+        onClick={() => handlePageChange(page - 1)}
         iconComponent={LeftArrow}
         iconPosition='iconOnly'
         className={styles.button}
-        disabled={currentPage <= 1}
+        disabled={page <= 1}
       />
       {variant === 'default' && (
         renderPageNumbers()
@@ -103,11 +108,11 @@ const Pagination: React.FC<PaginationProps> = ({
       <Button
         variant='textOnly'
         // href='#'
-        onClick={() => handlePageChange(currentPage + 1)}
+        onClick={() => handlePageChange(page + 1)}
         iconComponent={RightArrow}
         iconPosition='iconOnly'
         className={styles.button}
-        disabled={currentPage >= totalPages}
+        disabled={page >= totalPages}
       />
     </div>
   )

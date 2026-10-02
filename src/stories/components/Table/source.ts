@@ -45,8 +45,8 @@ const Component = () => (
     data={[
       { id: 0, user: 'Diogo Ribeiro', role: 'Front-end Developer' },
       { id: 1, user: 'Samuel Nunes', role: 'Front-end Lead' },
-      { id: 2, user: 'Miguel Vasconcelos', role: 'Designer' },
-      { id: 3, user: 'Miguel Antunes', role: 'CEO' },
+      { id: 2, user: 'Margarida Souto', role: 'Designer' },
+      { id: 3, user: 'Tony Gonçalves', role: 'CTO' },
     ]}
     columns={myTableColumns}
   />
@@ -135,4 +135,37 @@ export const myTableColumns = [
     },
   }),
 ]
+`
+
+export const actionsTableSource = `
+// myTableColumns.tsx
+export const myTableColumns = [
+  // ...
+
+  {/* Add a column with the id 'actions' */}
+  columnHelper.display({
+    id: 'actions',
+    header: 'Actions',
+    meta: { width: '15%' },
+  }),
+]
+
+{/* ------------------------------------------------------------------------------------- */}
+
+// Component.tsx
+<Table
+  data={myData}
+  columns={myTableColumns}
+  {/* Receives the row data and renders the content of the 'actions' cell */}
+  renderOptions={row => (
+    <Button variant='textOnly' onClick={() => editUser(row.id)}>Edit</Button>
+  )}
+/>
+`
+
+export const emptyTableSource = `
+<Table
+  data={[]}
+  columns={myTableColumns}
+/>
 `

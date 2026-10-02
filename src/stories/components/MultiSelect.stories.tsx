@@ -1,5 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react'
-import React, { useState } from 'react'
+import { fn } from '@storybook/test'
+import { useEffect, useState } from 'react'
 
 import MultiSelect, { MultiSelectProps } from '../../components/MultiSelect'
 
@@ -16,9 +17,27 @@ const mockOptions: Option[] = [
   { value: 'option5', label: 'Option 5' },
 ]
 
+// Keeps the selected options, so the select can be used and the "value" control still works
+const Template = (args: MultiSelectProps) => {
+  const [selectedOptions, setSelectedOptions] = useState(args.value)
+  useEffect(() => setSelectedOptions(args.value), [args.value])
+
+  return (
+    <MultiSelect
+      {...args}
+      value={selectedOptions}
+      onChange={options => {
+        setSelectedOptions(options)
+        args.onChange(options)
+      }}
+    />
+  )
+}
+
 const meta = {
   title: 'Components/Data Input/Multi Select',
   component: MultiSelect,
+  render: Template,
   decorators: [
     Story => (
       <div style={{ minHeight: '200px' }}>
@@ -37,45 +56,41 @@ const meta = {
       },
     },
   },
+  args: {
+    name: 'multi-select',
+    label: 'Select multiple options',
+    options: mockOptions,
+    value: ['option2'],
+    getLabel: value => mockOptions.find(option => option.value === value)?.label || '',
+    onChange: fn(),
+    hasPills: false,
+    state: 'null',
+  },
   argTypes: {
     state: {
-      control: { type: 'radio' },
+      control: 'radio',
       options: ['null', 'error', 'dirty', 'disabled'],
     },
+    hasPills: {
+      control: 'boolean',
+    },
+    fullWidth: {
+      control: 'boolean',
+    },
   },
-} as Meta<typeof MultiSelect>
+} satisfies Meta<typeof MultiSelect>
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-const MultiSelectWrapper = (args: Story['args']) => {
-  const [selectedOptions, setSelectedOptions] = useState<string[]>(['option2'])
-  const { hasPills } = args as MultiSelectProps
-  return (
-    <MultiSelect
-      name='multi-select'
-      options={mockOptions}
-      label='Select multiple options'
-      value={selectedOptions}
-      onChange={options => setSelectedOptions(options)}
-      hasPills={hasPills}
-      getLabel={value => mockOptions.find(option => option.value === value)?.label || ''}
-    />
-  )
-}
-
-export const Default = MultiSelectWrapper.bind({})
-Default.args = {
-  hasPills: false,
-  state: 'null',
-}
-Default.parameters = {
-  docs: {
-    description: {
-      story: 'This is the default MultiSelect that has an indicator on the right side of the input field to indicate the number of selected options.'
-    },
-    source: {
-      code: `
+export const Default: Story = {
+  parameters: {
+    docs: {
+      description: {
+        story: 'This is the default MultiSelect that has an indicator on the right side of the input field to indicate the number of selected options.'
+      },
+      source: {
+        code: `
 const myOptions = [
   { value: 'option1', label: 'Option 1' },
   { value: 'option2', label: 'Option 2' },
@@ -95,22 +110,23 @@ return (
   />
 )
 `
-    }
+      }
+    },
   },
 }
 
-export const WithPills = MultiSelectWrapper.bind({})
-WithPills.args = {
-  hasPills: true,
-  state: 'null',
-}
-WithPills.parameters = {
-  docs: {
-    description: {
-      story: 'It can also be displayed with pills to show the selected options by using the `hasPills` prop.'
-    },
-    source: {
-      code: `
+export const WithPills: Story = {
+  args: {
+    hasPills: true,
+    value: ['option2', 'option4'],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'It can also be displayed with pills to show the selected options by using the `hasPills` prop.'
+      },
+      source: {
+        code: `
 <MultiSelect
   hasPills
   name='multi-select'
@@ -119,8 +135,63 @@ WithPills.parameters = {
   value={selectedOptions}
   onChange={options => setSelectedOptions(options)}
   getLabel={value => myOptions.find(option => option.value === value)?.label || ''}
-/>  
+/>
 `
-    }
+      }
+    },
+  },
+}
+
+export const Placeholder: Story = {
+  args: {
+    value: [],
+    placeholder: 'Pick some options...',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The placeholder shows while nothing is selected.'
+      },
+    },
+  },
+}
+
+export const Error: Story = {
+  args: {
+    state: 'error',
+    errorMsg: 'Select at least two options',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'With `state="error"` the field turns red and shows the `errorMsg` below it.'
+      },
+    },
+  },
+}
+
+export const Dirty: Story = {
+  args: {
+    state: 'dirty',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The "dirty" state outlines the field in the accent color, for example to mark a value the user has changed.'
+      },
+    },
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    state: 'disabled',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'With `state="disabled"` the options cannot be changed.'
+      },
+    },
   },
 }

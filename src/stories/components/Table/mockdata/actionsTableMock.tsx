@@ -1,39 +1,37 @@
-// import necessary table components
-
+// import necessary table types
 import type { TableMockType } from './tableMockType'
 
-import Avatar from '../../../../components/Avatar'
+// import necessary table components
 import { createColumnHelper, defaultColumnOptions } from '../../../../components/Table'
-import Flex from '../../../../elements/Flex'
 
 // Specify the content and parameters for each column
 const columnHelper = createColumnHelper<TableMockType>()
-export const customTableColumns = [
+export const actionsTableColumns = [
   columnHelper.accessor('id', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'ID',
+    enableSorting: false,
+    enableColumnFilter: false,
     meta: { width: '10%' },
   }),
   columnHelper.accessor('user', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'User',
-    meta: { width: '45%' },
-    cell: data => {
-      const user = data.getValue()
-      return (
-        <Flex justify='start' style={{ gap: 'var(--space-sm)' }}>
-          <Avatar
-            size='small'
-            name={String(user)}
-            displayLabel
-          />
-        </Flex>
-      )
-    }
+    enableSorting: false,
+    enableColumnFilter: false,
+    meta: { width: '40%' },
   }),
   columnHelper.accessor('role', {
     ...defaultColumnOptions<TableMockType>(),
     header: 'Role',
-    meta: { width: '45%' },
+    enableSorting: false,
+    enableColumnFilter: false,
+    meta: { width: '35%' },
+  }),
+  // The column must have the id 'actions' for `renderOptions` to fill it
+  columnHelper.display({
+    id: 'actions',
+    header: 'Actions',
+    meta: { width: '15%' },
   }),
 ]

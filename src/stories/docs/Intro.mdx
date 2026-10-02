@@ -1,11 +1,11 @@
-import { FontStyleIcon, ColorWheelIcon, Component1Icon } from '@radix-ui/react-icons'
+import { FontStyleIcon, ColorWheelIcon, RulerSquareIcon, Component1Icon } from '@radix-ui/react-icons'
 import { Meta } from '@storybook/blocks'
 
 import {
   Doc,
   DocHeader,
   DocBody,
-  DocCode,
+  DocCodeBlock,
   DocCard,
   DocSeparator,
 } from './document'
@@ -50,6 +50,10 @@ import {
         <ColorWheelIcon width={32} height={32} />
         <h5>Color Styles</h5>
       </DocCard>
+      <DocCard href="../?path=/docs/style-guides-spacing-sizes--how-to-use">
+        <RulerSquareIcon width={32} height={32} />
+        <h5>Spacing & Sizes</h5>
+      </DocCard>
       <DocCard href="../?path=/docs/components-general-button--how-to-use">
         <Component1Icon width={32} height={32} />
         <h5>Components List</h5>
@@ -67,17 +71,17 @@ import {
     <br />
     <span className="sub-heading">1. Install</span>
     <p>Add the Design System to your project (it needs React 18 or newer):</p>
-    <DocCode style={{width: '100%'}}>{Installation}</DocCode>
+    <DocCodeBlock code={Installation} language='bash' />
     <br />
     <span className="sub-heading">2. Import the styles</span>
     <p>Import the stylesheet once. It contains every component's styles, the default theme and the Roboto font:</p>
-    <DocCode style={{width: '100%'}}>{StylesImport}</DocCode>
+    <DocCodeBlock code={StylesImport} language='tsx' />
     <br />
     <span className="sub-heading">3. Use the components</span>
     <p>Import a component and change its variants and properties to your liking:</p>
-    <DocCode style={{width: '100%'}}>{BtnImport}</DocCode>
+    <DocCodeBlock code={BtnImport} language='tsx' />
     <Flex gap="sm" style={{alignItems: 'stretch'}}>
-      <DocCode style={{width: '50%'}}>{BtnUse}</DocCode>
+      <DocCodeBlock code={BtnUse} language='tsx' style={{width: '50%'}} />
       <Flex style={{width: '50%', backgroundColor: 'var(--colors-neutral100)', borderRadius: 'var(--radii-xsm)'}}>
         <Button size="large" variant="primary">Button Text</Button>
       </Flex>
@@ -86,17 +90,17 @@ import {
     <br />
     <span className="sub-heading">4. Enable alerts (optional)</span>
     <p>To show alerts, render <code>ToastContainer</code> once:</p>
-    <DocCode style={{width: '100%'}}>{AlertUse}</DocCode>
+    <DocCodeBlock code={AlertUse} language='tsx' />
     <br />
     <span className="sub-heading">5. Apply your theme (optional)</span>
-    <p>The theme is a set of CSS variables (see <a href="../?path=/docs/style-guides-colors--how-to-use">Colors</a> and <a href="../?path=/docs/style-guides-typography--how-to-use">Typography</a>). Change them with <code>setupTheme</code>:</p>
-    <DocCode style={{width: '100%'}}>{ThemeSetup}</DocCode>
+    <p>The theme is a set of CSS variables (see <a href="../?path=/docs/style-guides-colors--how-to-use">Colors</a>, <a href="../?path=/docs/style-guides-typography--how-to-use">Typography</a> and <a href="../?path=/docs/style-guides-spacing-sizes--how-to-use">Spacing & Sizes</a>). Change them with <code>setupTheme</code>:</p>
+    <DocCodeBlock code={ThemeSetup} language='tsx' />
     <p>Or override the variables in your own CSS, which also works with server-side rendering:</p>
-    <DocCode style={{width: '100%'}}>{ThemeCss}</DocCode>
+    <DocCodeBlock code={ThemeCss} language='css' />
     <br />
     <span className="sub-heading">6. Customize components (optional)</span>
     <p>Every component accepts <code>className</code> and <code>style</code>, and exports its root selector for your own CSS:</p>
-    <DocCode style={{width: '100%'}}>{CustomizeUse}</DocCode>
+    <DocCodeBlock code={CustomizeUse} language='tsx' />
     <br />
     <DocSeparator />
     <br />

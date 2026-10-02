@@ -51,8 +51,8 @@ const Modal = ({
           </RadixDialog.Description>
         )}
         {children}
-        <RadixDialog.Close asChild>
-          <Cross2Icon onClick={closeFn} />
+        <RadixDialog.Close className={styles.close} aria-label='Close' onClick={closeFn}>
+          <Cross2Icon />
         </RadixDialog.Close>
       </RadixDialog.Content>
     </RadixDialog.Portal>

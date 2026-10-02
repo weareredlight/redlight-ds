@@ -50,7 +50,11 @@ const Checkbox = ({
             className={styles.label}
           />
           <input
-            className={cx(styles.trigger, disabled && styles.disabled)}
+            className={cx(
+              styles.trigger,
+              state !== 'null' && styles[`state${capitalize(state)}`],
+              disabled && styles.disabled,
+            )}
             type='checkbox'
             id={id}
             value={value}

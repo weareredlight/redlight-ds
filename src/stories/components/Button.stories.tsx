@@ -1,11 +1,10 @@
 import { ChevronRightIcon, ChevronLeftIcon, PlusIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
 
 import Button from '../../components/Button'
 import Flex from '../../elements/Flex'
 
-export default {
+const meta = {
   title: 'Components/General/Button',
   component: Button,
   parameters: {
@@ -28,7 +27,7 @@ export default {
     },
     variant: {
       control: 'select',
-      options: ['primary', 'secondary', 'neutral', 'textOnly', 'danger', 'success'],
+      options: ['primary', 'secondary', 'tertiary', 'neutral', 'textOnly', 'danger', 'success'],
     },
     type: {
       control: 'radio',
@@ -64,8 +63,9 @@ export default {
     },
   },
 } satisfies Meta<typeof Button>
+export default meta
 
-type Story = StoryObj<typeof Button>
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {}
 export const WithIcon: Story = {
@@ -159,6 +159,50 @@ export const FullWidth: Story = {
   }
 }
 
+export const Loading: Story = {
+  args: {
+    isLoading: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Shows a spinning icon next to the content while an action is in progress.'
+      },
+      source: {
+        code: `
+<Button
+  isLoading={isSubmitting}
+>
+  Button
+</Button>
+  `
+      }
+    }
+  }
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Disabled buttons cannot be clicked.'
+      },
+      source: {
+        code: `
+<Button
+  disabled
+>
+  Button
+</Button>
+  `
+      }
+    }
+  }
+}
+
 export const AllVariants: Story = {
   parameters: {
     docs: {
@@ -175,6 +219,7 @@ export const AllVariants: Story = {
       <Flex gap='xxsm' justify='start'>
         <Button variant='primary'>Button</Button>
         <Button variant='secondary'>Button</Button>
+        <Button variant='tertiary'>Button</Button>
         <Button variant='neutral'>Button</Button>
         <Button variant='danger'>Button</Button>
         <Button variant='success'>Button</Button>
@@ -183,6 +228,7 @@ export const AllVariants: Story = {
       <Flex gap='xxsm'>
         <Button variant='primary' size='large'>Button</Button>
         <Button variant='secondary' size='large'>Button</Button>
+        <Button variant='tertiary' size='large'>Button</Button>
         <Button variant='neutral' size='large'>Button</Button>
         <Button variant='danger' size='large'>Button</Button>
         <Button variant='success' size='large'>Button</Button>

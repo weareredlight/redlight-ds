@@ -1,48 +1,64 @@
+import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react'
-import React from 'react'
+import { fn } from '@storybook/test'
 
-import Table, { TableProps } from '../../../components/Table'
+import type { TableMockType } from './mockdata/tableMockType'
 
+import Button from '../../../components/Button'
+import Table from '../../../components/Table'
+import Flex from '../../../elements/Flex'
+
+import { actionsTableColumns } from './mockdata/actionsTableMock'
 import { customTableColumns } from './mockdata/customTableMock'
 import { defaultTableColumns } from './mockdata/defaultTableMock'
 import { interactiveTableColumns } from './mockdata/interactiveTableMock'
 import { sortedTableColumns, mockSortees } from './mockdata/sortedTableMock'
 import {
+  actionsTableSource,
   defaultTableSource,
+  emptyTableSource,
   interactiveTableSource,
   sortedTableSource,
   customTableSource
 } from './source'
 
-const mockData = [
+const mockData: TableMockType[] = [
   { id: 0, user: 'Diogo Ribeiro', role: 'Front-end Developer' },
   { id: 1, user: 'Samuel Nunes', role: 'Front-end Lead' },
-  { id: 2, user: 'Miguel Vasconcelos', role: 'Designer' },
-  { id: 3, user: 'Miguel Antunes', role: 'CEO' },
+  { id: 2, user: 'Margarida Souto', role: 'Designer' },
+  { id: 3, user: 'Tony Gonçalves', role: 'CTO' },
 ]
 
 const meta = {
   title: 'Components/Displays/Table',
-  component: Table,
+  component: Table<TableMockType>,
   parameters: {
+    docs: {
+      description: {
+        component: 'The Table displays data in rows and columns. It is built on TanStack Table: you describe the columns with `createColumnHelper`, and each column can be sorted, filtered or render custom content.',
+      },
+    },
   },
-} as Meta<typeof Table>
+  args: {
+    data: mockData,
+    columns: defaultTableColumns,
+  },
+  argTypes: {
+    columns: {
+      control: false,
+    },
+    renderOptions: {
+      control: false,
+    },
+  },
+} satisfies Meta<typeof Table<TableMockType>>
 export default meta
 
 type Story = StoryObj<typeof meta>
 
 /* ------------------------------DEFAULT TABLE------------------------------------ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const DefaultTemplate = (args: TableProps<any>) => (
-  <Table
-    {...args}
-    data={mockData}
-    columns={defaultTableColumns}
-  />
-)
 export const Default: Story = {
-  render: DefaultTemplate,
   parameters: {
     docs: {
       description: {
@@ -55,20 +71,14 @@ export const Default: Story = {
 
 /* ------------------------------INTERACTIVE TABLE------------------------------------ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const InteractiveTemplate = (args: TableProps<any>) => (
-  <Table
-    {...args}
-    data={mockData}
-    columns={interactiveTableColumns}
-  />
-)
 export const InteractiveHeaders: Story = {
-  render: InteractiveTemplate,
+  args: {
+    columns: interactiveTableColumns,
+  },
   parameters: {
     docs: {
       description: {
-        story: 'Trough the options `enableSorting` and `enableColumnFilter` you can enable or disable the sorting and filtering functionalities of the table.',
+        story: 'Through the options `enableSorting` and `enableColumnFilter` you can enable or disable the sorting and filtering functionalities of the table.',
       },
       source: { code: interactiveTableSource }
     }
@@ -77,17 +87,11 @@ export const InteractiveHeaders: Story = {
 
 /* ------------------------------DEFAULT SORT------------------------------------ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const SortTemplate = (args: TableProps<any>) => (
-  <Table
-    {...args}
-    data={mockData}
-    columns={sortedTableColumns}
-    sortees={mockSortees}
-  />
-)
 export const DefaultSort: Story = {
-  render: SortTemplate,
+  args: {
+    columns: sortedTableColumns,
+    sortees: mockSortees,
+  },
   parameters: {
     docs: {
       description: {
@@ -100,22 +104,67 @@ export const DefaultSort: Story = {
 
 /* ------------------------------CUSTOM TABLE------------------------------------ */
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const CustomTemplate = (args: TableProps<any>) => (
-  <Table
-    {...args}
-    data={mockData}
-    columns={customTableColumns}
-  />
-)
 export const CustomCellContent: Story = {
-  render: CustomTemplate,
+  args: {
+    columns: customTableColumns,
+  },
   parameters: {
     docs: {
       description: {
         story: 'You can customize the content of the cells by rendering custom components inside the `cell` property of the column definition.',
       },
       source: { code: customTableSource }
+    }
+  }
+}
+
+/* ------------------------------ACTIONS------------------------------------ */
+
+const onEdit = fn()
+const onDelete = fn()
+
+export const WithActions: Story = {
+  args: {
+    columns: actionsTableColumns,
+    renderOptions: row => (
+      <Flex gap='xxsm'>
+        <Button
+          variant='textOnly'
+          iconComponent={() => <Pencil1Icon />}
+          iconPosition='iconOnly'
+          onClick={() => onEdit(row)}
+        />
+        <Button
+          variant='textOnly'
+          iconComponent={() => <TrashIcon />}
+          iconPosition='iconOnly'
+          onClick={() => onDelete(row)}
+        />
+      </Flex>
+    ),
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Add a column with the id `actions` and use `renderOptions` to fill it. It receives the data of each row, so you can add buttons such as edit or delete.',
+      },
+      source: { code: actionsTableSource }
+    }
+  }
+}
+
+/* ------------------------------EMPTY------------------------------------ */
+
+export const Empty: Story = {
+  args: {
+    data: [],
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'When there is no data, or the filters match no rows, the table shows an empty message.',
+      },
+      source: { code: emptyTableSource }
     }
   }
 }

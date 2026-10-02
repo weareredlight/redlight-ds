@@ -61,6 +61,7 @@ const TimePicker = ({
         name={name}
         value={value}
         onChange={time => onChange(time ? `${time}:00` : '')}
+        disabled={disabled}
         clearIcon={false}
         className={styles.main}
         clockIcon={<ClockIcon />}
@@ -69,6 +70,7 @@ const TimePicker = ({
       <PatternFormat
         className={cx(styles.durationPicker, fullWidth && styles.fullWidth)}
         displayType='input'
+        disabled={disabled}
         value={value?.slice(0, 5).replace(':', '')}
         valueIsNumericString
         onValueChange={values => onChange(`${values.formattedValue}:00`)}

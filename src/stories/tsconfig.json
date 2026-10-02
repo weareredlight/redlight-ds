@@ -1,0 +1,9 @@
+// Editor type-checking for the stories, which the root tsconfig.json excludes from the library build
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "noEmit": true
+  },
+  "include": [".", "../declaration.d.ts"],
+  "exclude": []
+}

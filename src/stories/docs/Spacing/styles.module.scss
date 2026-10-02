@@ -1,0 +1,70 @@
+// =============================================================================
+// SPACING & SIZES DOCS
+// =============================================================================
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+  margin-bottom: var(--space-xxxlg);
+
+  > div {
+    background: var(--colors-neutral100);
+    padding: var(--space-xxlg);
+    margin-top: var(--space-xsm);
+    border-radius: var(--radii-md);
+  }
+}
+
+// sample | name, value and variable | guideline and components
+.token {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 112px 180px 1fr;
+  align-items: center;
+  gap: var(--space-xxlg);
+  padding: var(--space-lg) var(--space-xxlg);
+  border-radius: var(--radii-sm);
+  background: var(--colors-white);
+
+  @media (max-width: 640px) {
+    grid-template-columns: 1fr;
+    gap: var(--space-xsm);
+  }
+}
+
+.sample {
+  display: flex;
+  align-items: center;
+  min-height: 56px;
+}
+
+.spaceSample {
+  display: block;
+  height: 24px;
+  background: var(--colors-primary300);
+  border-left: 2px solid var(--colors-primary600);
+  border-right: 2px solid var(--colors-primary600);
+}
+
+.sizeSample {
+  display: block;
+  background: var(--colors-primary300);
+  border-radius: var(--radii-xxsm);
+}
+
+.radiusSample {
+  display: block;
+  width: 56px;
+  height: 56px;
+  background: var(--colors-primary100);
+  border: 2px solid var(--colors-primary500);
+}
+
+.shadowSample {
+  display: block;
+  width: 96px;
+  height: 56px;
+  background: var(--colors-white);
+  border-radius: var(--radii-sm);
+}

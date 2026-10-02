@@ -28,7 +28,7 @@ const Tabs = ({
     className={cx(styles.tabs, align && styles[`align${capitalize(align)}`], className)}
     style={style}
   >
-    <RadixTabs.List className={styles.list} aria-label='Manage your account'>
+    <RadixTabs.List className={styles.list}>
       {tabs.map((tab, index) => (
         <RadixTabs.Trigger key={`tab${index}`} value={`tab${index}`} className={styles.trigger}>
           {tab.label}

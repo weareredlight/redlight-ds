@@ -1,13 +1,35 @@
 import { Meta, StoryObj } from '@storybook/react'
-import React, { useState } from 'react'
+import { fn } from '@storybook/test'
+import { useEffect, useState } from 'react'
 
 import type { TimePickerProps } from '../../components/TimePicker'
 
 import TimePicker, { PickerTypes } from '../../components/TimePicker'
 
+// Current local time, as HH:mm
+const now = new Date().toTimeString().slice(0, 5)
+
+// Keeps the selected time, so the picker can be used and the "value" control still works
+const Template = (args: TimePickerProps) => {
+  const [time, setTime] = useState(args.value)
+  useEffect(() => setTime(args.value), [args.value])
+
+  return (
+    <TimePicker
+      {...args}
+      value={time}
+      onChange={value => {
+        setTime(String(value))
+        args.onChange(value)
+      }}
+    />
+  )
+}
+
 const meta = {
   title: 'Components/Data Input/Time Picker',
   component: TimePicker,
+  render: Template,
   parameters: {
     docs: {
       source: {
@@ -18,10 +40,16 @@ const meta = {
       },
     },
   },
+  args: {
+    name: 'time-picker',
+    label: 'Select a time',
+    value: now,
+    onChange: fn(),
+  },
   argTypes: {
     type: {
       control: 'radio',
-      options: Object.keys(PickerTypes).map(key => PickerTypes[key].toLowerCase()),
+      options: Object.values(PickerTypes),
     },
     fullWidth: {
       control: 'boolean',
@@ -30,39 +58,12 @@ const meta = {
       control: 'boolean',
     },
   }
-} as Meta<typeof TimePicker>
+} satisfies Meta<typeof TimePicker>
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-const Template = (args: TimePickerProps) => {
-  const [time, setTime] = useState<string | undefined>(new Date().toISOString().split('T')[1].slice(0, 5))
-  return (
-    <TimePicker
-      {...args}
-      value={time}
-      onChange={value => setTime(String(value))}
-    />
-  )
-}
-
-const DurationTemplate = (args: TimePickerProps) => {
-  const [time, setTime] = useState<string | undefined>('01:00')
-  return (
-    <TimePicker
-      {...args}
-      value={time}
-      onChange={value => setTime(String(value))}
-    />
-  )
-}
-
 export const Default: Story = {
-  render: Template,
-  args: {
-    name: 'time-picker',
-    label: 'Select a time',
-  },
   parameters: {
     docs: {
       description: {
@@ -73,11 +74,10 @@ export const Default: Story = {
 }
 
 export const Duration: Story = {
-  render: DurationTemplate,
   args: {
-    name: 'time-picker',
     label: 'Select a duration',
     type: PickerTypes.DURATION,
+    value: '01:00',
   },
   parameters: {
     docs: {
@@ -88,16 +88,53 @@ export const Duration: Story = {
   }
 }
 
+export const WithDescription: Story = {
+  args: {
+    description: 'Opening time of the store',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'A description can be shown under the label.',
+      },
+    },
+  }
+}
+
 export const WithError: Story = {
   args: {
-    name: 'time-picker',
-    label: 'Select a time',
     error: 'This field is required',
   },
   parameters: {
     docs: {
       description: {
         story: 'The Time Picker component can display an error message below the input field.',
+      },
+    },
+  }
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'A disabled Time Picker cannot be edited.',
+      },
+    },
+  }
+}
+
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The Time Picker can occupy the full width of the parent container.',
       },
     },
   }

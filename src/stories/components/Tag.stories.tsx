@@ -1,3 +1,5 @@
+import { fn } from '@storybook/test'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import Tag from '../../components/Tag'
@@ -27,9 +29,10 @@ const meta = {
 } satisfies Meta<typeof Tag>
 
 export default meta
+
 type Story = StoryObj<typeof meta>
 
-export const Primary: Story = {
+export const Default: Story = {
   args: {
     onClose: undefined
   },
@@ -44,8 +47,7 @@ export const Primary: Story = {
 
 export const Closable: Story = {
   args: {
-    // eslint-disable-next-line no-alert
-    onClose: () => alert('Are you sure you want to remove this tag?')
+    onClose: fn(),
   },
   parameters: {
     docs: {
@@ -59,11 +61,12 @@ export const Closable: Story = {
 export const Error: Story = {
   args: {
     variant: 'error',
+    onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: 'Tags can also be used to indicate potential errors or dangerous actions.'
+        story: 'Tags can also be used to indicate potential errors or dangerous actions. Error tags never show the close button, even when `onClose` is set.'
       }
     }
   }
@@ -72,11 +75,12 @@ export const Error: Story = {
 export const Disabled: Story = {
   args: {
     disabled: true,
+    onClose: fn(),
   },
   parameters: {
     docs: {
       description: {
-        story: 'You can prevent the user from deleting tags.'
+        story: 'Disabled tags keep the close button but it cannot be clicked, so the user cannot delete them.'
       }
     }
   }

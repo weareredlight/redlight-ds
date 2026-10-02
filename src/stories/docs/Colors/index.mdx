@@ -4,7 +4,7 @@ import {
   Doc,
   DocHeader,
   DocBody,
-  DocCode,
+  DocCodeBlock,
   DocSeparator
 } from '../document';
 
@@ -40,10 +40,10 @@ import ColorStyles from './ColorStyles'
     <br />
     <span className="sub-heading">How to Use</span>
     <p>Every color is a CSS variable named <code>--colors-</code> plus the color name. Use them in your own CSS:</p>
-    <DocCode style={{width: '100%'}}>{ColorCss}</DocCode>
+    <DocCodeBlock code={ColorCss} language='css' />
     <p>In components and JavaScript, use the color name (<code>Text</code>'s <code>color</code> prop) or <code>theme</code> / <code>getColor</code>:</p>
-    <DocCode style={{width: '100%'}}>{ColorJs}</DocCode>
+    <DocCodeBlock code={ColorJs} language='tsx' />
     <p>To change the palette, override the colors with <code>setupTheme</code> (or redefine the variables in your CSS):</p>
-    <DocCode style={{width: '100%'}}>{ColorOverride}</DocCode>
+    <DocCodeBlock code={ColorOverride} language='tsx' />
   </DocBody>
 </Doc>

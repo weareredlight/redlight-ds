@@ -1,0 +1,90 @@
+import { Meta } from '@storybook/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from '../document';
+
+import { SpacingCss, SpacingJs, SpacingOverride } from '../../utils'
+
+import TokenScale from './TokenScale'
+
+<Meta title='Style Guides/Spacing & Sizes' />
+
+<Doc>
+  <DocHeader style={{background: '#1A9E8F'}}>
+    <h2>Spacing & Sizes</h2>
+    <p>ver 0.2.0 | Last updated: 02/10/2026</p>
+  </DocHeader>
+
+  <DocBody>
+    <p>Consistent spacing, sizes and corners give a layout its rhythm: related elements sit close together, separate sections breathe, and every component feels part of the same family. Instead of picking pixel values each time, the components use a small set of tokens, and so can you.</p>
+    <p>Each token below shows its value, its CSS variable, what it's for and which components use it.</p>
+    <br />
+    <DocSeparator />
+    <br />
+    <TokenScale
+      scale="space"
+      title="Spacing"
+      description="Padding, margins and gaps between elements. The steps go from 4px to 32px; there is no md step, the scale goes from sm (14px) to lg (16px)."
+      guidelines={{
+        xxxsm: 'The tightest spacing: inner padding of tags and pills, space between a label and its value.',
+        xxsm: 'The most used step: padding of small controls and the gap between an icon and its text.',
+        xsm: 'Horizontal padding of buttons and table cells.',
+        sm: 'Medium inner padding, e.g. tooltips and table headers.',
+        lg: 'Horizontal padding of large buttons and alerts.',
+        xlg: 'Offsets from a container\'s edge, e.g. a modal\'s close button.',
+        xxlg: 'Padding of modals, dialogs and tabs.',
+        xxxlg: 'Space between sections and inside large containers.',
+      }}
+    />
+    <br />
+    <TokenScale
+      scale="sizes"
+      title="Sizes"
+      description="Fixed widths and heights, such as icons and field heights. Same steps as spacing, but use these for dimensions so each can be changed on its own."
+      guidelines={{
+        xsm: 'Small icons and indicators.',
+        xlg: 'Icons inside fields, e.g. the select chevron.',
+        xxlg: 'Height of compact items, e.g. select options.',
+        xxxlg: 'Height of fields, e.g. the date and time pickers.',
+      }}
+    />
+    <br />
+    <TokenScale
+      scale="radii"
+      title="Border Radius"
+      description="Corner rounding. Smaller elements use smaller radii; full makes pills and circles."
+      guidelines={{
+        xxsm: 'Very small elements, e.g. checkboxes.',
+        xsm: 'Controls: buttons, inputs, selects, tags and tooltips.',
+        sm: 'Surfaces: modals, dialogs, tables, tabs and date picker calendars.',
+        md: 'Large surfaces and panels.',
+        full: 'Pills, avatars, toggles and radio buttons.',
+      }}
+    />
+    <br />
+    <TokenScale
+      scale="shadows"
+      title="Shadows"
+      description="Elevation for elements that float above the page."
+      guidelines={{
+        cardShadow: 'Low elevation: cards, dropdowns, popovers and modals.',
+        mainShadow: 'High elevation: dialogs and large surfaces.',
+      }}
+    />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">How to Use</span>
+    <p>Every token is a CSS variable named after its scale and step (<code>--space-xxsm</code>, <code>--sizes-xlg</code>, <code>--radii-sm</code>, <code>--shadows-cardShadow</code>). Use them in your own CSS:</p>
+    <DocCodeBlock code={SpacingCss} language='css' />
+    <p>In components, <code>Flex</code>'s <code>gap</code> takes the spacing steps. Everywhere else, <code>theme</code> has every token as a CSS variable:</p>
+    <DocCodeBlock code={SpacingJs} language='tsx' />
+    <p>To change them, override the tokens with <code>setupTheme</code> (or redefine the variables in your CSS). The components update with them:</p>
+    <DocCodeBlock code={SpacingOverride} language='tsx' />
+  </DocBody>
+</Doc>

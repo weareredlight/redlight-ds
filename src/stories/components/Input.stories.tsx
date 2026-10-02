@@ -1,13 +1,34 @@
 import { EyeClosedIcon, EyeOpenIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
-import React, { useState } from 'react'
+import { fn } from '@storybook/test'
+import { useEffect, useState } from 'react'
 
+import type { InputProps } from '../../components/Input'
 import type { Meta, StoryObj } from '@storybook/react'
 
 import Input from '../../components/Input'
 
-export default {
+// Keeps the typed value, so the input can be edited and the "value" control still works.
+// Input sends `null` when the field is cleared (and a number for type='number').
+const Template = (args: InputProps) => {
+  const [value, setValue] = useState(args.value ?? '')
+  useEffect(() => setValue(args.value ?? ''), [args.value])
+
+  return (
+    <Input
+      {...args}
+      value={value}
+      onChange={e => {
+        setValue(e.target.value == null ? '' : String(e.target.value))
+        args.onChange(e)
+      }}
+    />
+  )
+}
+
+const meta = {
   title: 'Components/Data Input/Input',
   component: Input,
+  render: Template,
   parameters: {
     docs: {
       description: {
@@ -17,6 +38,8 @@ export default {
     },
   },
   args: {
+    id: 'input-example',
+    onChange: fn(),
     onClickIcon: undefined,
   },
   argTypes: {
@@ -34,17 +57,23 @@ export default {
     },
     state: {
       control: 'radio',
-      options: [null, 'error', 'dirty', 'disabled'],
+      options: ['null', 'error', 'dirty', 'disabled'],
     },
     variant: {
       control: 'radio',
-      options: [null, 'simple'],
+      options: ['null', 'simple'],
     },
     type: {
       control: 'select',
-      options: ['text', 'password', 'email', 'search'],
+      options: ['text', 'password', 'email', 'search', 'number'],
     },
     fullWidth: {
+      control: 'boolean',
+    },
+    disabled: {
+      control: 'boolean',
+    },
+    required: {
       control: 'boolean',
     },
     errorMsg: {
@@ -64,9 +93,9 @@ export default {
       },
     },
     iconPosition: {
-      table: {
-        disable: true,
-      }
+      control: 'radio',
+      options: ['left', 'right'],
+      if: { arg: 'iconComponent', exists: true },
     },
     onClickIcon: {
       table: {
@@ -75,15 +104,15 @@ export default {
     },
   },
 } satisfies Meta<typeof Input>
+export default meta
 
-type Story = StoryObj<typeof Input>
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
     placeholder: 'Write something...',
     label: 'This is the label',
     description: 'This is the description',
-    id: 'input-example',
   },
 }
 
@@ -93,7 +122,6 @@ const SearchIcon = () => <MagnifyingGlassIcon />
 export const WithIcon: Story = {
   args: {
     placeholder: 'Search...',
-    id: 'input-example',
     iconPosition: 'left',
     type: 'search',
     iconComponent: SearchIcon,
@@ -110,6 +138,7 @@ export const WithIcon: Story = {
     id='search-input-example'
     type='search'
     placeholder='Search...'
+    iconPosition='left'
     iconComponent={() => <MagnifyIcon />}
     onChange={e => searchFunction(e.target.value)}
   />
@@ -123,38 +152,35 @@ export const WithIcon: Story = {
 const EyeClosed = () => <EyeClosedIcon />
 const EyeOpen = () => <EyeOpenIcon />
 
-export const WithInteractiveIcon: Story = () => {
+const PasswordTemplate = (args: InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
 
   return (
-    <Input
-      id='input-example'
-      label='Password'
+    <Template
+      {...args}
       type={showPassword ? 'text' : 'password'}
       iconComponent={showPassword ? EyeOpen : EyeClosed}
       onClickIcon={() => setShowPassword(!showPassword)}
-      value='password123456'
-      onChange={() => { }}
     />
   )
 }
-WithInteractiveIcon.args = {
-  placeholder: 'Chose your password',
-  label: 'Password',
-  id: 'input-example',
-  iconPosition: 'right',
-  type: 'password',
-  value: 'password123456',
-  iconComponent: EyeClosed,
-}
-WithInteractiveIcon.parameters = {
-  docs: {
-    description: {
-      story: 'The icons can be interactive. In the case of passwords the icons can be loadable to show or hide the password.',
-    },
-    source: {
-      code: `
-const [showPassword, setShowPassword] = useState(false)   
+
+export const WithInteractiveIcon: Story = {
+  render: PasswordTemplate,
+  args: {
+    id: 'password-input-example',
+    placeholder: 'Choose your password',
+    label: 'Password',
+    value: 'password123456',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The icons can be interactive. In the case of passwords the icons can be loadable to show or hide the password.',
+      },
+      source: {
+        code: `
+const [showPassword, setShowPassword] = useState(false)
 
 return (
   <Input
@@ -168,6 +194,23 @@ return (
   />
 )
 `,
+      },
+    },
+  },
+}
+
+export const NumberInput: Story = {
+  args: {
+    id: 'input-number-example',
+    label: 'Quantity',
+    type: 'number',
+    value: '1',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'With `type="number"`, `e.target.value` in `onChange` is a number. When the field is cleared it is `null`.',
+      },
     },
   },
 }
@@ -206,6 +249,38 @@ export const Error: Story = {
   },
 }
 
+export const Dirty: Story = {
+  args: {
+    id: 'input-dirty-example',
+    label: 'Name',
+    value: 'Edited value',
+    state: 'dirty',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The "dirty" state outlines the field in the accent color, for example to mark a value the user has changed.',
+      },
+    },
+  },
+}
+
+export const Disabled: Story = {
+  args: {
+    id: 'input-disabled-example',
+    label: 'Name',
+    value: 'You cannot edit this',
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use the `disabled` prop (or `state="disabled"`) to prevent editing.',
+      },
+    },
+  },
+}
+
 export const Simple: Story = {
   args: {
     id: 'input-simple-example',
@@ -229,6 +304,22 @@ export const Simple: Story = {
     onChange={e => updateFunction(e.target.value)}
   />
   `,
+      },
+    },
+  },
+}
+
+export const FullWidth: Story = {
+  args: {
+    id: 'input-full-width-example',
+    label: 'Address',
+    placeholder: 'Street, number, city',
+    fullWidth: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The input can occupy the full width of the parent container.',
       },
     },
   },

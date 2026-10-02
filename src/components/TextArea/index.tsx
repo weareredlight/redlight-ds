@@ -36,7 +36,8 @@ const TextArea = React.forwardRef(({
   errorMsg,
   rows = 5,
   required = false,
-  maxLength = 0,
+  maxLength,
+  disabled,
   className,
   onChange,
   ...props
@@ -52,7 +53,7 @@ const TextArea = React.forwardRef(({
         />
       ) : null}
       <textarea
-        className={cx(styles.field, styles[`state${capitalize(state)}`], className)}
+        className={cx(styles.field, state && state !== 'null' && styles[`state${capitalize(state)}`], className)}
         id={id}
         ref={ref}
         name={name}
@@ -61,6 +62,7 @@ const TextArea = React.forwardRef(({
         rows={rows}
         required={required}
         maxLength={maxLength}
+        disabled={disabled || state === 'disabled'}
         onChange={onChange}
         {...props}
       />

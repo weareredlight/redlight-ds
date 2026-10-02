@@ -3,7 +3,7 @@ import { Meta, StoryObj } from '@storybook/react'
 import Link from '../../components/Link'
 import { DarkBackgroundCanvas } from '../decorators'
 
-export default {
+const meta = {
   title: 'Components/General/Link',
   component: Link,
   parameters: {
@@ -15,6 +15,7 @@ export default {
     },
   },
   args: {
+    href: 'https://redlight.dev',
     children: 'Text Link',
     danger: false,
     darkBackground: false,
@@ -25,11 +26,9 @@ export default {
     },
     danger: {
       control: 'boolean',
-      defaultValue: false,
     },
     darkBackground: {
       control: 'boolean',
-      defaultValue: true,
     },
     size: {
       control: 'radio',
@@ -37,22 +36,17 @@ export default {
     },
     openInNewTab: {
       control: 'boolean',
-      defaultValue: true,
     },
   },
 } satisfies Meta<typeof Link>
+export default meta
 
-type Story = StoryObj<typeof Link>
+type Story = StoryObj<typeof meta>
 
-export const Default: Story = {
-  args: {
-    href: 'redlight.dev',
-  },
-}
+export const Default: Story = {}
 
 export const Small: Story = {
   args: {
-    href: 'redlight.dev',
     size: 'small',
   },
   parameters: {
@@ -61,7 +55,7 @@ export const Small: Story = {
         story: 'You can use smaller links for more subtle actions.'
       },
       source: {
-        code: "<Link href='redlight.dev' size='small'>Text Link</Link>"
+        code: "<Link href='https://redlight.dev' size='small'>Text Link</Link>"
       },
     },
   },
@@ -71,7 +65,6 @@ export const Danger: Story = {
   args: {
     href: '/',
     danger: true,
-    darkBackground: false,
   },
   parameters: {
     docs: {
@@ -85,9 +78,26 @@ export const Danger: Story = {
   },
 }
 
+export const SameTab: Story = {
+  args: {
+    // A hash, so clicking it here doesn't navigate the Storybook frame away
+    href: '#same-tab',
+    openInNewTab: false,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Links open in a new tab by default. Set "openInNewTab" to false to open them in the same tab, for example for links inside your own app.'
+      },
+      source: {
+        code: "<Link href='/settings' openInNewTab={false}>Text Link</Link>"
+      },
+    },
+  },
+}
+
 export const DarkBackground: Story = {
   args: {
-    href: 'redlight.dev',
     darkBackground: true,
   },
   parameters: {
@@ -96,7 +106,7 @@ export const DarkBackground: Story = {
         story: 'If the background of the parent container is dark you can use the "darkBackground" property for better readability.'
       },
       source: {
-        code: "<Link href='redlight.dev' darkBackground>Text Link</Link>",
+        code: "<Link href='https://redlight.dev' darkBackground>Text Link</Link>",
       },
     },
   },

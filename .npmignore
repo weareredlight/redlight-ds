@@ -8,7 +8,6 @@
 .github/
 .storybook/
 .vscode/
-tsconfig.storybook.json
 vite.config.ts
 vite.lib.config.ts
 config/vite/

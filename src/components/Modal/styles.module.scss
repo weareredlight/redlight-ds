@@ -37,7 +37,7 @@
   z-index: 101;
   background-color: var(--colors-white);
   border-radius: var(--radii-sm);
-  box-shadow: var(--shadows-greySmall);
+  box-shadow: var(--shadows-cardShadow);
   position: fixed;
   top: 50%;
   left: 50%;
@@ -48,18 +48,26 @@
   padding: var(--space-xxlg);
   animation: contentShow 150ms cubic-bezier(0.16, 1, 0.3, 1);
 
-  // close icon
-  > svg {
-    cursor: pointer;
-    position: absolute;
-    top: var(--space-xxlg);
-    right: var(--space-xlg);
+  &:focus { outline: none; }
+}
+
+// close button
+.close {
+  all: unset;
+  cursor: pointer;
+  position: absolute;
+  top: var(--space-xxlg);
+  right: var(--space-xlg);
+  display: flex;
+  border-radius: var(--radii-xsm);
+  color: var(--colors-neutral900);
+
+  svg {
     width: 24px;
     height: 24px;
-    color: var(--colors-neutral900);
   }
 
-  &:focus { outline: none; }
+  &:focus-visible { outline: 2px solid var(--colors-primary); }
 }
 
 .title {

@@ -104,7 +104,7 @@ const Input = React.forwardRef(({
           className={cx(
             styles.field,
             variant === 'simple' && styles.simple,
-            state !== 'null' && styles[`state${capitalize(state)}`],
+            state && state !== 'null' && styles[`state${capitalize(state)}`],
             className,
           )}
           id={id || name}
@@ -114,7 +114,7 @@ const Input = React.forwardRef(({
           type={type}
           placeholder={placeholder}
           required={required}
-          disabled={disabled}
+          disabled={disabled || state === 'disabled'}
           onChange={e => {
             let finalValue: string | null = e.target.value
             if (type === 'number') finalValue = Number(finalValue) as unknown as string

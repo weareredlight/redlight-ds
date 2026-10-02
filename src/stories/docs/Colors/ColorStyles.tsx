@@ -1,5 +1,3 @@
-import React from 'react'
-
 import type { ColorType } from '../../../theme'
 
 import Flex from '../../../elements/Flex'

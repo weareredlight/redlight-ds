@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react'
 
 import Avatar from '../../components/Avatar'
 
-export default {
+const meta = {
   title: 'Components/General/Avatar',
   component: Avatar,
   parameters: {
@@ -12,12 +12,13 @@ export default {
       },
     },
   },
+  args: {
+    name: 'Diogo Ribeiro',
+  },
   argTypes: {
     size: {
-      control: {
-        type: 'radio',
-        options: ['normal', 'small'],
-      },
+      control: 'radio',
+      options: ['normal', 'small'],
     },
     displayLabel: {
       control: 'boolean',
@@ -25,17 +26,20 @@ export default {
     online: {
       control: 'boolean',
     },
+    width: {
+      control: 'text',
+    },
   },
 } satisfies Meta<typeof Avatar>
+export default meta
 
-type Story = StoryObj<typeof Avatar>
+type Story = StoryObj<typeof meta>
 
 export const Default: Story = {
   args: {
-    name: 'Diogo Ribeiro',
     url: 'https://picsum.photos/300/300',
     displayLabel: true,
-    description: 'Desginer',
+    description: 'Designer',
     online: true,
   },
 }
@@ -43,7 +47,6 @@ export const Default: Story = {
 export const Small: Story = {
   args: {
     size: 'small',
-    name: 'Diogo Ribeiro',
     url: 'https://picsum.photos/300/300',
     displayLabel: false,
     online: false,
@@ -58,10 +61,24 @@ export const Small: Story = {
   },
 }
 
+export const CustomWidth: Story = {
+  args: {
+    url: 'https://picsum.photos/300/300',
+    width: '96px',
+  },
+
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use the "width" property for any other size. The height always matches it.',
+      }
+    },
+  },
+}
+
 export const Initials: Story = {
   args: {
     size: 'normal',
-    name: 'Diogo Ribeiro',
     displayLabel: false,
     online: false,
   },
@@ -69,7 +86,7 @@ export const Initials: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'If you dont specify any image url it will display name initials.'
+        story: "If you don't specify any image url it will display name initials."
       }
     },
   },
@@ -78,7 +95,6 @@ export const Initials: Story = {
 export const Label: Story = {
   args: {
     size: 'normal',
-    name: 'Diogo Ribeiro',
     url: 'https://picsum.photos/300/300',
     displayLabel: true,
     online: false,
@@ -87,7 +103,7 @@ export const Label: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'First name can be displayed if "displayLabel" is set to true.'
+        story: 'The name can be displayed if "displayLabel" is set to true.'
       }
     },
   },
@@ -96,7 +112,6 @@ export const Label: Story = {
 export const Description: Story = {
   args: {
     size: 'normal',
-    name: 'Diogo Ribeiro',
     url: 'https://picsum.photos/300/300',
     description: 'Designer',
     displayLabel: true,
@@ -115,7 +130,6 @@ export const Description: Story = {
 export const Status: Story = {
   args: {
     size: 'normal',
-    name: 'Diogo Ribeiro',
     url: 'https://picsum.photos/300/300',
     online: true,
   },
@@ -123,7 +137,7 @@ export const Status: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'The user status can be online.'
+        story: 'The user status can be online, with or without an image.'
       }
     },
   },

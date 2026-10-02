@@ -1,5 +1,4 @@
 import { Unstyled } from '@storybook/blocks'
-import React from 'react'
 
 import type { TextVariant } from '../../../components/Text'
 

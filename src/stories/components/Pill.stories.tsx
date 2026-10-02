@@ -1,3 +1,5 @@
+import { fn } from '@storybook/test'
+
 import type { Meta, StoryObj } from '@storybook/react'
 
 import Pill from '../../components/Pill'
@@ -70,8 +72,7 @@ export const Error: Story = {
 
 export const Closable: Story = {
   args: {
-    // eslint-disable-next-line no-alert
-    onClose: () => alert('Are you sure you want to remove?'),
+    onClose: fn(),
   },
   parameters: {
     docs: {
@@ -82,7 +83,7 @@ export const Closable: Story = {
   }
 }
 
-export const customCSS: Story = {
+export const CustomCSS: Story = {
   args: {
     style: {
       backgroundColor: 'yellow',

@@ -137,11 +137,13 @@ const Table = <T extends object>({
             </tr>
           ))
         ) : (
-          <th className={styles.emptyRow} colSpan={1000}>
-            <Text variant='textBlock' color='neutral'>
-              Nothing was found...
-            </Text>
-          </th>
+          <tr>
+            <td className={styles.emptyRow} colSpan={1000}>
+              <Text variant='textBlock' color='neutral'>
+                Nothing was found...
+              </Text>
+            </td>
+          </tr>
         )}
       </tbody>
     </table>

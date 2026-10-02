@@ -77,6 +77,7 @@ const Select = <T extends object>({
       <SelectInput.Root
         {...props}
         name={name}
+        disabled={state === 'disabled'}
         value={value || valueToDisplay}
         onOpenChange={() => setViewContent(!viewContent)}
         onValueChange={value => {

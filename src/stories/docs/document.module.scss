@@ -137,6 +137,7 @@
 // CODE SNIPPET
 // =============================================================================
 
+// Inline chip (DocCode)
 .code {
   background-color: var(--colors-neutral900);
   @include typography.textBlock;
@@ -146,11 +147,6 @@
   width: fit-content;
   height: fit-content;
   white-space: pre-wrap;
-
-  :where(&).regular {
-    padding: var(--space-xxsm) var(--space-xsm);
-    line-height: var(--lineHeights-lg);
-  }
 
   :where(&).small {
     padding: var(--space-xxxsm) var(--space-xxsm);
@@ -162,6 +158,67 @@
     padding: var(--space-xxxsm) var(--space-xxsm);
     font-size: var(--fontSizes-xxsm);
     line-height: var(--lineHeights-sm);
+  }
+}
+
+// Highlighted block (DocCodeBlock)
+.codeBlock {
+  background-color: var(--colors-neutral900);
+  border-radius: var(--radii-sm);
+  overflow: hidden;
+  min-width: 0;
+}
+
+.codeBlockHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--space-xxxsm) var(--space-xxsm) var(--space-xxxsm) var(--space-xsm);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  span {
+    @include typography.text(xsm, md, sm);
+    color: var(--colors-neutral400);
+  }
+
+  button {
+    all: unset;
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxxsm);
+    padding: var(--space-xxxsm) var(--space-xxsm);
+    border-radius: var(--radii-xxsm);
+    @include typography.text(xsm, md, sm);
+    color: var(--colors-neutral300);
+    cursor: pointer;
+    transition: background-color 0.2s, color 0.2s;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: var(--colors-white);
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--colors-primary400);
+    }
+  }
+}
+
+.codeBlockBody {
+  pre {
+    margin: 0;
+    padding: var(--space-xsm);
+    overflow-x: auto;
+    // Shiki sets the theme's background inline; use ours
+    background-color: transparent !important;
+    color: var(--colors-neutral100);
+  }
+
+  // Tokens are spans, which the page styles set to Roboto
+  code, code span {
+    font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
+    font-size: var(--fontSizes-xsm);
+    line-height: var(--lineHeights-lg);
   }
 }
 

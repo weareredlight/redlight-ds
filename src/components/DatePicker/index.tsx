@@ -58,6 +58,7 @@ export const DatePicker = ({
         onChange(date ? dayjs(date as Date).format('YYYY-MM-DD') : '')
       }}
       value={value}
+      disabled={disabled}
       inputRef={null}
       calendarIcon={<CalendarIcon />}
       clearIcon={null}

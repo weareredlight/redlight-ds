@@ -14,7 +14,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Get Started',
-          'Style Guides', ['Typography', 'Colors'],
+          'Style Guides', ['Typography', 'Colors', 'Spacing & Sizes'],
           'Components'
         ],
       },
@@ -40,11 +40,6 @@ export const globalTypes = {
     name: 'Container size',
     description: 'Global container\'s size',
     defaultValue: '400px',
-    toolbar: {
-      icon: 'circlehollow',
-      items: ['400px', '100%'],
-      // showName: true,
-    },
   },
 };
 

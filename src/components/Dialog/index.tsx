@@ -48,6 +48,7 @@ const Dialog = ({
         <AlertDialog.Content
           className={cx(styles.content, className)}
           style={style}
+          onEscapeKeyDown={closeFn}
           onOpenAutoFocus={event => event.preventDefault()}
         >
           <AlertDialog.Title className={styles.title}>

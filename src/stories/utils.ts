@@ -16,9 +16,9 @@ export function storyFactory<
 }
 
 /* ---------------SNIPPETS-------------- */
-export const Installation = `$ yarn add @weareredlight/design-system
+export const Installation = `yarn add @weareredlight/design-system
 # or
-$ npm install --save @weareredlight/design-system`
+npm install --save @weareredlight/design-system`
 
 export const StylesImport = `// Once, at your app's entry point (main.tsx, app/layout.tsx, pages/_app.tsx...)
 import '@weareredlight/design-system/dist/style.css'`
@@ -90,4 +90,33 @@ getColor('primary') // 'var(--colors-primary)'`
 
 export const ColorOverride = `setupTheme({
   userColors: { primary: '#F472B6', primary600: '#DB2777' },
+})`
+
+export const SpacingCss = `.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+  padding: var(--space-xxlg);
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadows-cardShadow);
+}
+
+.card-icon {
+  width: var(--sizes-xlg);
+  height: var(--sizes-xlg);
+}`
+
+export const SpacingJs = `import { Flex, theme } from '@weareredlight/design-system'
+
+<Flex direction='column' gap='xxsm'>...</Flex>
+
+<div style={{ padding: theme.space.xxlg, borderRadius: theme.radii.sm }} />
+// theme.space.xxlg === 'var(--space-xxlg)'`
+
+export const SpacingOverride = `setupTheme({
+  userSizes: {
+    space: { xxlg: '1.75rem' },
+    radii: { xsm: '6px', sm: '12px' },
+  },
+  userShadows: { cardShadow: '0px 1px 4px rgba(0, 0, 0, 0.12)' },
 })`

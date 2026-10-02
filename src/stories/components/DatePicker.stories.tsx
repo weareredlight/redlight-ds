@@ -1,11 +1,32 @@
 import { Meta, StoryObj } from '@storybook/react'
-import React, { useState } from 'react'
+import { fn } from '@storybook/test'
+import { useEffect, useState } from 'react'
 
 import DatePicker, { DatePickerProps } from '../../components/DatePicker'
+
+const today = new Date().toISOString().split('T')[0]
+
+// Keeps the selected date, so the picker can be used and the "value" control still works
+const Template = (args: DatePickerProps) => {
+  const [date, setDate] = useState(args.value)
+  useEffect(() => setDate(args.value), [args.value])
+
+  return (
+    <DatePicker
+      {...args}
+      value={date}
+      onChange={value => {
+        setDate(value)
+        args.onChange(value)
+      }}
+    />
+  )
+}
 
 const meta = {
   title: 'Components/Data Input/Date Picker',
   component: DatePicker,
+  render: Template,
   decorators: [
     Story => (
       <div id='date-picker-wrapper' style={{ minHeight: '275px' }}>
@@ -23,28 +44,26 @@ const meta = {
       },
     },
   },
-} as Meta<typeof DatePicker>
+  args: {
+    name: 'date-picker',
+    label: 'Select a date',
+    value: today,
+    onChange: fn(),
+  },
+  argTypes: {
+    disabled: {
+      control: 'boolean',
+    },
+    fullWidth: {
+      control: 'boolean',
+    },
+  },
+} satisfies Meta<typeof DatePicker>
 export default meta
 
 type Story = StoryObj<typeof meta>
 
-const Template = (args: DatePickerProps) => {
-  const [date, setDate] = useState<string | undefined>(new Date().toISOString().split('T')[0])
-  return (
-    <DatePicker
-      {...args}
-      value={date}
-      onChange={value => setDate(value)}
-    />
-  )
-}
-
 export const Default: Story = {
-  render: Template,
-  args: {
-    name: 'date-picker',
-    label: 'Select a date',
-  },
   parameters: {
     docs: {
       description: {
@@ -54,11 +73,8 @@ export const Default: Story = {
   }
 }
 
-export const CustomTimezone: Story = {
-  render: Template,
+export const CustomLocale: Story = {
   args: {
-    name: 'date-picker',
-    label: 'Select a date',
     localeString: 'pt-PT',
   },
   parameters: {
@@ -71,9 +87,7 @@ export const CustomTimezone: Story = {
 }
 
 export const WeekSelector: Story = {
-  render: Template,
   args: {
-    name: 'date-picker',
     label: 'Select a week',
     isWeekSelector: true,
   },
@@ -88,14 +102,38 @@ export const WeekSelector: Story = {
 
 export const WithError: Story = {
   args: {
-    name: 'date-picker',
-    label: 'Select a date',
     error: 'Invalid date format',
   },
   parameters: {
     docs: {
       description: {
         story: 'You can display an error message by setting the `error` prop to a string.',
+      },
+    },
+  }
+}
+
+export const Disabled: Story = {
+  args: {
+    disabled: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'A disabled Date Picker cannot be opened or edited.',
+      },
+    },
+  }
+}
+
+export const FullWidth: Story = {
+  args: {
+    fullWidth: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The Date Picker can occupy the full width of the parent container.',
       },
     },
   }

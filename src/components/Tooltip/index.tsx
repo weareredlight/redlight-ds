@@ -27,8 +27,10 @@ const Tooltip = ({
 }: TooltipProps) => (
   <RadixTooltip.Provider delayDuration={delay}>
     <RadixTooltip.Root>
-      <RadixTooltip.Trigger className={styles.trigger}>
-        {children}
+      <RadixTooltip.Trigger asChild>
+        <span className={styles.trigger}>
+          {children}
+        </span>
       </RadixTooltip.Trigger>
       <RadixTooltip.Portal>
         <RadixTooltip.Content

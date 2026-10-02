@@ -1,6 +1,5 @@
-import React from 'react'
-
-import type { Meta } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react'
+import type { ToastOptions } from 'react-toastify'
 
 import alert, { ToastContainer } from '../../components/Alert'
 import Button from '../../components/Button'
@@ -11,95 +10,47 @@ type AlertWrapperProps = {
   type: 'success' | 'error' | 'info'
   title: string
   description?: string
+  options?: ToastOptions
 }
 
-const meta = {
-  title: 'Components/Overlays/Alert',
-  decorators: [CenterOnCanvas],
-  parameters: {
-    docs: {
-      description: {
-        component: 'Feedback mechanism used to communicate important information to the user. It appears as a small, non-intrusive notification or "toaster" that appears on the screen, and provides information about an event or action that has occurred.'
-      }
-    },
-  },
-  argTypes: {
-    id: {
-      table: {
-        disable: true,
-      }
-    },
-    type: {
-      control: 'radio',
-      options: ['success', 'error', 'info'],
-      description: 'Select the function for the appropriate alert type',
-      defaultValue: { summary: 'info' }
-    },
-    title: {
-      control: 'text',
-      description: 'The title of the alert',
-    },
-    description: {
-      control: 'text',
-      description: 'The description of the alert',
-    },
-  },
-} satisfies Meta<AlertWrapperProps>
-export default meta
+const buttonVariants = {
+  success: 'success',
+  error: 'danger',
+  info: 'primary',
+} as const
 
-const AlertWrapper = (args: AlertWrapperProps) => {
-  const {
-    id,
-    type,
-    title,
-    description
-  } = args
-  const showAlert = () => {
-    alert[type](
-      title,
-      String(description) || '',
-      { containerId: id }
-    )
-  }
-  return (
-    <>
-      <Button onClick={showAlert} variant={type === 'success' ? 'success' : type === 'error' ? 'danger' : 'primary'}>
-        {' '}
-        Click me
-      </Button>
-      <ToastContainer containerId='info-alert' />
-    </>
-  )
-}
+const AlertWrapper = ({
+  id,
+  type,
+  title,
+  description,
+  options,
+}: AlertWrapperProps) => (
+  <>
+    <Button
+      variant={buttonVariants[type]}
+      onClick={() => alert[type](title, description, { ...options, containerId: id })}
+    >
+      Click me
+    </Button>
+    {/* One container per story, so a toast only shows up once on the docs page */}
+    <ToastContainer containerId={id} />
+  </>
+)
 
-/* ----------------------DEFAULT--------------------- */
-export const Default = (args: AlertWrapperProps) => <AlertWrapper {...args} />
-Default.args = {
-  id: 'info-alert',
-  type: 'info',
-  title: 'Info Alert',
-  description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere urna ha.'
-}
-Default.parameters = {
-  docs: {
-    source: {
-      code: `
+const alertSource = (args: AlertWrapperProps, optionsCode = '') => `
 const MyComponent = () => {
   // Create a function to display the alert
   const showAlert = () => {
     // Use the function alert() then provide the type of the alert
-    alert.${Default.args.type}(
-      '${Default.args.title}',
-      '${Default.args.description}',
-      {
-        // You can add custom options
-        // To consult all the options available: fkhadra.github.io/react-toastify
-      }
+    alert.${args.type}(
+      '${args.title}',
+      '${args.description}',${optionsCode ? `\n      ${optionsCode}` : ''}
     )
   }
   return (
-    {/* The function can be trigged by a button ore any other custom condition */}
-    <Button onClick={showAlert} variant='secondary'> Click me</Button>
+    {/* The function can be triggered by a button or any other custom condition */}
+    <Button onClick={showAlert}>Click me</Button>
   )
 }
 
@@ -116,6 +67,122 @@ const App = () => {
   )
 }
 `
-    }
-  }
+
+const meta = {
+  title: 'Components/Overlays/Alert',
+  component: AlertWrapper,
+  decorators: [CenterOnCanvas],
+  parameters: {
+    docs: {
+      description: {
+        component: 'Feedback mechanism used to communicate important information to the user. It appears as a small, non-intrusive notification or "toaster" that appears on the screen, and provides information about an event or action that has occurred.'
+      }
+    },
+  },
+  args: {
+    id: 'info-alert',
+    type: 'info',
+    title: 'Info Alert',
+    description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Posuere urna ha.',
+  },
+  argTypes: {
+    id: {
+      table: {
+        disable: true,
+      }
+    },
+    type: {
+      control: 'radio',
+      options: ['success', 'error', 'info'],
+      description: 'Select the function for the appropriate alert type',
+      table: { defaultValue: { summary: 'info' } },
+    },
+    title: {
+      control: 'text',
+      description: 'The title of the alert',
+    },
+    description: {
+      control: 'text',
+      description: 'The description of the alert',
+    },
+    options: {
+      control: 'object',
+      description: 'Any react-toastify option (fkhadra.github.io/react-toastify), merged over the defaults',
+    },
+  },
+} satisfies Meta<typeof AlertWrapper>
+export default meta
+
+type Story = StoryObj<typeof meta>
+
+/* ----------------------DEFAULT--------------------- */
+export const Default: Story = {
+  parameters: {
+    docs: {
+      source: { code: alertSource(meta.args) },
+    },
+  },
+}
+
+/* ----------------------SUCCESS--------------------- */
+const successArgs: AlertWrapperProps = {
+  id: 'success-alert',
+  type: 'success',
+  title: 'Saved',
+  description: 'Your changes were saved.',
+}
+
+export const Success: Story = {
+  args: successArgs,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `alert.success` to confirm that an action completed.',
+      },
+      source: { code: alertSource(successArgs) },
+    },
+  },
+}
+
+/* ----------------------ERROR--------------------- */
+const errorArgs: AlertWrapperProps = {
+  id: 'error-alert',
+  type: 'error',
+  title: 'Something went wrong',
+  description: 'We could not save your changes. Please try again.',
+}
+
+export const Error: Story = {
+  args: errorArgs,
+  parameters: {
+    docs: {
+      description: {
+        story: 'Use `alert.error` when an action failed.',
+      },
+      source: { code: alertSource(errorArgs) },
+    },
+  },
+}
+
+/* ----------------------CUSTOM OPTIONS--------------------- */
+const customOptionsArgs: AlertWrapperProps = {
+  id: 'custom-options-alert',
+  type: 'info',
+  title: 'Custom options',
+  description: 'This alert shows at the bottom and stays for 8 seconds.',
+  options: { position: 'bottom-right', autoClose: 8000 },
+}
+
+export const CustomOptions: Story = {
+  args: customOptionsArgs,
+  parameters: {
+    docs: {
+      description: {
+        story: 'The third argument takes any react-toastify option, such as `position` or `autoClose`.',
+      },
+      source: {
+        code: alertSource(customOptionsArgs, "{ position: 'bottom-right', autoClose: 8000 }"),
+      },
+    },
+  },
 }

@@ -94,7 +94,7 @@ const Upload = ({
       style={style}
       {...props}
     >
-      <input className={styles.uploadInput} type='file' id='file' ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
+      <input className={styles.uploadInput} type='file' id={id} ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
       {fileUrl && clearBtn && (
         <Button
           variant='danger'
@@ -121,7 +121,7 @@ const Upload = ({
           <Label id={id} label={placeholder} description={description} className={styles.label} />
         )}
       </div>
-      <label className={styles.trigger} htmlFor='file'>
+      <label className={styles.trigger} htmlFor={id}>
         {size === 'normal' ? (
           <Button
             variant='neutral'

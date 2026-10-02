@@ -4,7 +4,7 @@ import {
   Doc,
   DocHeader,
   DocBody,
-  DocCode,
+  DocCodeBlock,
   DocSeparator
 } from '../document';
 
@@ -31,9 +31,9 @@ import { TextComponent, TextFont, TextScss } from '../../utils'
     <br />
     <span className="sub-heading">How to Use</span>
     <p>Use the text hierarchy through the <code>Text</code> component:</p>
-    <DocCode style={{width: '100%'}}>{TextComponent}</DocCode>
+    <DocCodeBlock code={TextComponent} language='tsx' />
     <p>Or, in your own SCSS files, through the typography mixins:</p>
-    <DocCode style={{width: '100%'}}>{TextScss}</DocCode>
+    <DocCodeBlock code={TextScss} language='scss' />
     <p>
       Each style is built from theme tokens (<code>{'--fontSizes-*'}</code>, <code>{'--fontWeights-*'}</code>, <code>{'--lineHeights-*'}</code>),
       so changing a token with <code>setupTheme</code> or CSS updates every style that uses it.
@@ -41,6 +41,6 @@ import { TextComponent, TextFont, TextScss } from '../../utils'
     <br />
     <span className="sub-heading">Font</span>
     <p>The default font is <b>Roboto</b> (loaded by <code>style.css</code>). To use another font:</p>
-    <DocCode style={{width: '100%'}}>{TextFont}</DocCode>
+    <DocCodeBlock code={TextFont} language='tsx' />
   </DocBody>
 </Doc>
