@@ -1,6 +1,6 @@
-import { fn } from '@storybook/test'
+import { fn } from 'storybook/test'
 
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Tag from '../../components/Tag'
 

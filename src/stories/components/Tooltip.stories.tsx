@@ -1,5 +1,5 @@
 import { QuestionMarkCircledIcon } from '@radix-ui/react-icons'
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
 import Button from '../../components/Button'
 import Tooltip from '../../components/Tooltip'

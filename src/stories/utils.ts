@@ -1,5 +1,5 @@
 /* eslint-disable quotes */
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react-vite'
 import { ComponentProps, JSXElementConstructor } from 'react'
 
 export function storyFactory<

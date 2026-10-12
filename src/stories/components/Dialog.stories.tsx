@@ -1,9 +1,9 @@
 import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
-import { fn } from '@storybook/test'
 import { useEffect, useState } from 'react'
+import { fn } from 'storybook/test'
 
 import type { DialogProps } from '../../components/Dialog'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Button from '../../components/Button'
 import Dialog from '../../components/Dialog'

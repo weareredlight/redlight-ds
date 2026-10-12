@@ -1,8 +1,8 @@
-import { fn } from '@storybook/test'
 import { useEffect, useState } from 'react'
+import { fn } from 'storybook/test'
 
 import type { ModalProps } from '../../components/Modal'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'

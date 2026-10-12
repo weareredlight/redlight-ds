@@ -1,8 +1,8 @@
-import { fn } from '@storybook/test'
 import { useEffect, useState } from 'react'
+import { fn } from 'storybook/test'
 
 import type { ToggleProps } from '../../components/Toggle'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Toggle from '../../components/Toggle'
 

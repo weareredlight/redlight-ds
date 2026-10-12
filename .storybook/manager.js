@@ -1,4 +1,4 @@
-import { addons } from '@storybook/manager-api';
+import { addons } from 'storybook/manager-api';
 import { CURRENT_STORY_WAS_SET } from 'storybook/internal/core-events';
 import RedTheme from './theme';
 

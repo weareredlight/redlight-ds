@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
+import { fn } from 'storybook/test'
 
 import DatePicker, { DatePickerProps } from '../../components/DatePicker'
 

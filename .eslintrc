@@ -63,6 +63,15 @@
     "eslint-comments/no-unused-disable": "warn",
     "import/prefer-default-export": "off",
     "import/no-named-as-default": "off",
+    "import/no-unresolved": [
+      "error",
+      {
+        "commonjs": true,
+        "caseSensitive": true,
+        /* Storybook packages are ESM-only (package.json "exports"), which the node resolver can't read */
+        "ignore": ["^@?storybook/"]
+      }
+    ],
     "import/order": [
       "error",
       {

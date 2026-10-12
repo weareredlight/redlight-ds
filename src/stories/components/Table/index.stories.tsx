@@ -1,6 +1,6 @@
 import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons'
-import { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import { Meta, StoryObj } from '@storybook/react-vite'
+import { fn } from 'storybook/test'
 
 import type { TableMockType } from './mockdata/tableMockType'
 

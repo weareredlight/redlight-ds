@@ -1,9 +1,9 @@
 import { EyeClosedIcon, EyeOpenIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
-import { fn } from '@storybook/test'
 import { useEffect, useState } from 'react'
+import { fn } from 'storybook/test'
 
 import type { InputProps } from '../../components/Input'
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 
 import Input from '../../components/Input'
 

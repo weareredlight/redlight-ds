@@ -3,7 +3,9 @@
   "extends": "../../tsconfig.json",
   "compilerOptions": {
     "rootDir": "../..",
-    "noEmit": true
+    "noEmit": true,
+    // Storybook 10 packages are ESM-only and only resolvable through package.json "exports"
+    "moduleResolution": "bundler"
   },
   "include": [".", "../declaration.d.ts"],
   "exclude": []

@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 
-import type { Decorator, Meta, StoryObj } from '@storybook/react'
+import type { Decorator, Meta, StoryObj } from '@storybook/react-vite'
 
 import App from '../../playground/App'
 import { setupThemes, teardownThemes } from '../../playground/themes'

@@ -1,4 +1,4 @@
-import type { Meta, StoryObj } from '@storybook/react'
+import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ToastOptions } from 'react-toastify'
 
 import alert, { ToastContainer } from '../../components/Alert'

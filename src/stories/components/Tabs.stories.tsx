@@ -1,4 +1,4 @@
-import { Meta, StoryObj } from '@storybook/react'
+import { Meta, StoryObj } from '@storybook/react-vite'
 
 import Tabs from '../../components/Tabs'
 import Text from '../../components/Text'

@@ -8,14 +8,15 @@ const config: StorybookConfig = {
   stories: ['../src/**/*.mdx', '../src/**/*.stories.@(js|jsx|mjs|ts|tsx)'],
   typescript: {
     reactDocgen: 'react-docgen-typescript',
+    reactDocgenTypescriptOptions: {
+      // Prop tables only come from the library components. Story helpers, mocks and the playground
+      // sit outside the root tsconfig.json, so docgen would skip them with a warning anyway
+      exclude: ['**/*.stories.tsx', 'src/stories/**', 'playground/**'],
+    },
     check: false,
   },
-  addons: [
-    '@storybook/addon-essentials',
-    '@storybook/addon-interactions',
-  ],
+  addons: ['@storybook/addon-docs'],
   docs: {
-    autodocs: true,
     defaultName: 'How to use',
   },
   async viteFinal(config) {

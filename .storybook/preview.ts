@@ -1,4 +1,4 @@
-import type { Preview } from "@storybook/react";
+import type { Preview } from "@storybook/react-vite";
 
 // Stories import components directly, so load what src/index.tsx loads for the library:
 // global styles and the default theme tokens.
@@ -28,10 +28,12 @@ const preview: Preview = {
     },
     docs: {
       theme: RedTheme,
-      previewSource: 'open',
+      // Code samples start expanded on docs pages
+      canvas: { sourceState: 'shown' },
     },
     viewMode: 'docs'
-  }
+  },
+  tags: ['autodocs'],
 }
 
 export default preview
@@ -44,33 +46,3 @@ export const globalTypes = {
   },
 };
 
-// this little bit of hacky code opens code samples
-window.addEventListener('load', () => {
-  let loc = window.location.href
-  showCodeSamples()
-
-  window.setInterval(() => {
-    let newLoc = window.location.href
-
-    if (newLoc !== loc) {
-      loc = newLoc
-      showCodeSamples()
-    }
-  }, 300)
-})
-
-const showCodeSamples = () => {
-  try {
-    const docs = document.querySelectorAll('.sbdocs')
-
-      ;[].forEach.call(docs, (el) => {
-        const buttons = el.querySelectorAll('button')
-        const codeButton = [].find.call(buttons, (el) => el.textContent === 'Show code')
-        if (codeButton) {
-          codeButton.click()
-        }
-      })
-  } catch (e) {
-    console.warn(e)
-  }
-}

@@ -1,6 +1,6 @@
-import { Meta, StoryObj } from '@storybook/react'
-import { fn } from '@storybook/test'
+import { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
+import { fn } from 'storybook/test'
 
 import Radio from '../../components/Radio'
 import Flex from '../../elements/Flex'
