@@ -1,0 +1,32 @@
+import{j as e}from"./jsx-runtime-CHn-5JxF.js";import{U as u,u as p,M as y}from"./blocks-B8-FKVqD.js";import{h as c,D as j,a as f,b,d,e as r,l as T,m as S,n as w}from"./utils-Dv5rPAtT.js";import{T as v}from"./index-DtWCBfzg.js";import{F as a}from"./index-DYSIL8sV.js";import{s as H}from"./sizes-Djxfc6qe.js";import"./iframe-C6Z6JLDr.js";import"./preload-helper-Dp1pzeXC.js";import"./index-4YCOwCYJ.js";import"./index-Df7W-K4Q.js";import"./react-icons.esm-EwFTjkwr.js";import"./utils-zpUxZkj0.js";const k=`// Typography presets: \`@include typography.heading7;\` etc.
+
+@mixin text($size, $weight, $line-height) {
+  font-size: var(--fontSizes-#{$size});
+  font-weight: var(--fontWeights-#{$weight});
+  line-height: var(--lineHeights-#{$line-height});
+}
+
+@mixin heading1 { @include text(xxxlg, lg, md); }
+@mixin heading2 { @include text(xxlg, lg, md); }
+@mixin heading3 { @include text(xlg, lg, md); }
+@mixin heading4 { @include text(lg, lg, md); }
+@mixin heading5 { @include text(md, lg, md); }
+@mixin heading6 { @include text(sm, md, md); }
+@mixin heading7 { @include text(xsm, md, md); }
+
+@mixin subHeading {
+  @include text(xsm, lg, md);
+  text-transform: uppercase;
+}
+
+@mixin subHeadingSmall {
+  @include text(xxsm, md, sm);
+  text-transform: uppercase;
+}
+
+@mixin paragraph { @include text(md, n, xlg); }
+@mixin textBlock { @include text(sm, n, lg); }
+@mixin microCopy { @include text(xsm, n, lg); }
+`,z="rl-Typography-group",$="rl-Typography-textType",C="rl-Typography-details",D="rl-Typography-values",N="rl-Typography-usage",o={group:z,textType:$,details:C,values:D,usage:N},x={};k.replace(/@mixin (\w+)\s*\{\s*@include text\((\w+),\s*(\w+),\s*(\w+)\);([^}]*)\}/g,(s,t,i,n,g,m)=>(x[t]={size:i,weight:n,lineHeight:g,uppercase:m.includes("uppercase")},""));const F=s=>`${parseFloat(s)*16}px`,{fontSizes:B,fontWeights:M,lineHeights:U}=H,W=[{title:"Headline",description:"Headlines are important for establishing a visual hierarchy and guiding users through content. Use them sparingly and be consistent with font size and style. Stick to a few levels that make sense for your content and design, and support them with other design elements.",styles:[["h1","heading1"],["h2","heading2"],["h3","heading3"],["h4","heading4"],["h5","heading5"],["h6","heading6"],["h7","heading7"]]},{title:"Sub Heading",description:"Sub headings are additional levels of hierarchy that can be used to further break up content and guide users through the page. The regular sub heading can be used for secondary headings or to separate different sections of content; the small sub heading for tertiary headings or to add additional context to the content.",styles:[["subHeading","subHeading"],["subHeadingSmall","subHeadingSmall"]]},{title:"Paragraph",description:"Regular paragraphs are the default style for body text. Text blocks are used for longer content and secondary text. Micro copy is for small bits of text that guide users, such as labels or form instructions; keep it short and concise.",styles:[["paragraph","paragraph"],["textBlock","textBlock"],["microCopy","microCopy"]]}],l=({label:s,value:t,token:i})=>e.jsxs("span",{className:"micro-copy",children:[`${s}: `,e.jsx("span",{className:"micro-copy value",children:t}),e.jsx("span",{className:"micro-copy",children:` (${i})`})]}),L=()=>e.jsx(e.Fragment,{children:W.map(s=>e.jsxs("div",{className:o.group,children:[e.jsx("h3",{children:s.title}),e.jsx("p",{children:s.description}),e.jsx(a,{direction:"column",gap:"xxsm",children:s.styles.map(([t,i])=>{const n=x[i];return e.jsxs("div",{className:o.textType,children:[e.jsxs(a,{direction:"column",align:"start",children:[e.jsx(u,{children:e.jsx(v,{variant:t,color:"neutral900",children:"We are RedLight"})}),e.jsx("p",{children:"Lorem ipsum dolor sit amet, consectetur adipiscing elit."})]}),e.jsxs("div",{className:o.details,children:[e.jsxs(a,{gap:"lg",justify:"start",wrap:!0,className:o.values,children:[e.jsx(l,{label:"Font size",value:F(B[n.size]),token:`--fontSizes-${n.size}`}),e.jsx(l,{label:"Weight",value:String(M[n.weight]),token:`--fontWeights-${n.weight}`}),e.jsx(l,{label:"Line height",value:U[n.lineHeight],token:`--lineHeights-${n.lineHeight}`}),n.uppercase&&e.jsx("span",{className:"micro-copy",children:"Uppercase"})]}),e.jsxs(a,{gap:"lg",justify:"start",wrap:!0,className:o.usage,children:[e.jsxs(a,{gap:"xxxsm",children:[e.jsx("p",{children:"Text component:"}),e.jsx(c,{size:"small",children:`variant='${t}'`})]}),e.jsxs(a,{gap:"xxxsm",children:[e.jsx("p",{children:"SCSS:"}),e.jsx(c,{size:"small",children:`@include typography.${i};`})]})]})]})]},t)})})]},s.title))});function h(s){const t={p:"p",...p(),...s.components};return e.jsxs(e.Fragment,{children:[e.jsx(y,{title:"Style Guides/Typography"}),`
+`,e.jsxs(j,{children:[e.jsxs(f,{style:{background:"#493DB2"},children:[e.jsx("h2",{children:"Typography"}),e.jsx("p",{children:"ver 0.2.0 | Last updated: 02/10/2026"})]}),e.jsxs(b,{children:[e.jsx("p",{children:'Typography is the art and technique of organising "type" to make written language legible and appealing when displayed. The choice of typography is fundamental not only to the appearance of a product or service, but also to the impact of what it is intended to communicate. By carefully considering this process, we ensure consistency and clarity in communicating information to users.'}),e.jsx("br",{}),e.jsx(d,{}),e.jsx("br",{}),e.jsx(L,{}),e.jsx("br",{}),e.jsx(d,{}),e.jsx("br",{}),e.jsx("span",{className:"sub-heading",children:"How to Use"}),e.jsxs("p",{children:["Use the text hierarchy through the ",e.jsx("code",{children:"Text"})," component:"]}),e.jsx(r,{code:T,language:"tsx"}),e.jsx("p",{children:"Or, in your own SCSS files, through the typography mixins:"}),e.jsx(r,{code:S,language:"scss"}),e.jsx("p",{children:e.jsxs(t.p,{children:["Each style is built from theme tokens (",e.jsx("code",{children:"--fontSizes-*"}),", ",e.jsx("code",{children:"--fontWeights-*"}),", ",e.jsx("code",{children:"--lineHeights-*"}),`),
+so changing a token with `,e.jsx("code",{children:"setupTheme"})," or CSS updates every style that uses it."]})}),e.jsx("br",{}),e.jsx("span",{className:"sub-heading",children:"Font"}),e.jsxs("p",{children:["The default font is ",e.jsx("b",{children:"Roboto"})," (loaded by ",e.jsx("code",{children:"style.css"}),"). To use another font:"]}),e.jsx(r,{code:w,language:"tsx"})]})]})]})}function K(s={}){const{wrapper:t}={...p(),...s.components};return t?e.jsx(t,{...s,children:e.jsx(h,{...s})}):h(s)}export{K as default};
