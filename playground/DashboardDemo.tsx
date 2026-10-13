@@ -22,6 +22,7 @@ import {
   ToastContainer,
   Toggle,
   Tooltip,
+  Upload,
   alert,
   createColumnHelper,
   defaultColumnOptions,
@@ -97,6 +98,7 @@ const DashboardDemo = () => {
   const [page, setPage] = useState(1)
   const [modalOpen, setModalOpen] = useState(false)
   const [newProject, setNewProject] = useState('')
+  const [newOwner, setNewOwner] = useState<string | null>(null)
   const [notifications, setNotifications] = useState(true)
   const [weeklyDigest, setWeeklyDigest] = useState(false)
   const [reportDate, setReportDate] = useState('')
@@ -112,8 +114,12 @@ const DashboardDemo = () => {
 
   const createProject = () => {
     setModalOpen(false)
-    alert.success('Project created', `"${newProject || 'Untitled'}" was added to the board.`)
+    alert.success(
+      'Project created',
+      `"${newProject || 'Untitled'}" was added to the board${newOwner ? ` and assigned to ${newOwner}` : ''}.`,
+    )
     setNewProject('')
+    setNewOwner(null)
   }
 
   return (
@@ -163,7 +169,7 @@ const DashboardDemo = () => {
               placeholder='Search projects…'
               iconComponent={SearchIcon}
               value={search}
-              onChange={e => { setSearch(e.target.value); setPage(1) }}
+              onChange={e => { setSearch(e.target.value ?? ''); setPage(1) }}
             />
             <Select
               id='status'
@@ -176,9 +182,7 @@ const DashboardDemo = () => {
               onChange={e => { setStatus(e.target.value); setPage(1) }}
             />
           </Flex>
-          <Flex justify='start' align='start' style={{ overflowX: 'auto' }}>
-            <Table data={pageData} columns={columns} />
-          </Flex>
+          <Table data={pageData} columns={columns} scrollable />
           <Flex justify='spaceBetween' align='center' wrap gap='lg'>
             <Text variant='microCopy' color='neutral700'>
               {`${filtered.length} project${filtered.length === 1 ? '' : 's'}`}
@@ -216,9 +220,18 @@ const DashboardDemo = () => {
           direction='column'
           gap='xxlg'
           style={{
-            ...cardStyle, alignItems: 'flex-start', marginTop: 'var(--space-lg)', maxWidth: 520
+            ...cardStyle,
+            alignItems: 'flex-start',
+            marginTop: 'var(--space-lg)',
           }}
         >
+          <Upload
+            id='profile-picture'
+            placeholder='Profile picture'
+            description='PNG or JPG, up to 2MB.'
+            buttonText='Choose file'
+            onUpload={file => alert.info('Picture uploaded', file.name)}
+          />
           <Toggle
             id='notifications'
             label='Push notifications'
@@ -255,7 +268,18 @@ const DashboardDemo = () => {
             label='Project name'
             placeholder='e.g. Marketing site'
             value={newProject}
-            onChange={e => setNewProject(e.target.value)}
+            onChange={e => setNewProject(e.target.value ?? '')}
+            fullWidth
+          />
+          <Select
+            id='new-project-owner'
+            label='Owner'
+            placeholder='Select an owner'
+            value={newOwner}
+            options={team}
+            getLabel={m => `${m.name} · ${m.role}`}
+            getValue={m => m.name}
+            onChange={e => setNewOwner(e.target.value)}
             fullWidth
           />
           <Flex justify='end' gap='xsm'>

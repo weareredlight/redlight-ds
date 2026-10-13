@@ -114,7 +114,7 @@ export const DocCodeBlock = ({
 
 export const DocCard = ({ className, ...props }: React.AnchorHTMLAttributes<HTMLAnchorElement>) => (
   // eslint-disable-next-line jsx-a11y/anchor-has-content -- content comes from children
-  <a className={cx(styles.card, className)} {...props} />
+  <a className={cx(styles.card, className)} style={{ textDecoration: 'none' }} target='_top' {...props} />
 )
 
 export const DocSeparator = ({ className, ...props }: DivProps) => (

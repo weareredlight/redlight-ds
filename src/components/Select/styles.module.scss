@@ -38,13 +38,17 @@
     background-color: var(--colors-neutral100);
     border-color: var(--colors-neutral600);
 
-    svg { color: var(--colors-neutral600); }
+    svg {
+      color: var(--colors-neutral600);
+    }
   }
 
   &:focus {
     border-color: var(--colors-primary);
 
-    svg { color: var(--colors-neutral600); }
+    svg {
+      color: var(--colors-neutral600);
+    }
   }
 
   // ===========================================================================
@@ -63,13 +67,17 @@
   :where(&).stateError {
     border-color: var(--colors-danger);
 
-    svg { color: var(--colors-danger); }
+    svg {
+      color: var(--colors-danger);
+    }
   }
 
   :where(&).stateDirty {
     border-color: var(--colors-secondary);
 
-    svg { color: var(--colors-secondary); }
+    svg {
+      color: var(--colors-secondary);
+    }
   }
 
   :where(&).stateDisabled {
@@ -78,13 +86,17 @@
     color: var(--colors-neutral);
     pointer-events: none;
 
-    svg { color: var(--colors-neutral); }
+    svg {
+      color: var(--colors-neutral);
+    }
   }
 
   :where(&).stateNull {
     border-color: var(--colors-neutral400);
 
-    svg { color: var(--colors-neutral400); }
+    svg {
+      color: var(--colors-neutral400);
+    }
   }
 }
 
@@ -105,7 +117,9 @@
   :where(&).fullWidth {
     width: 100%;
 
-    .trigger { width: 100%; }
+    .trigger {
+      width: 100%;
+    }
   }
 
   :where(&).notFullWidth {
@@ -118,6 +132,7 @@
 // =============================================================================
 
 .content {
+  z-index: 200;
   overflow: hidden;
   background-color: var(--colors-white);
   border-radius: var(--radii-xsm);

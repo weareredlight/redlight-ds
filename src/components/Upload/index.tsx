@@ -19,7 +19,6 @@ export type UploadProps = {
   defaultFile?: File
   onUpload?: (file: File) => void
   disabled?: boolean
-  clearBtn?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -36,7 +35,6 @@ const Upload = ({
   defaultFile,
   onUpload,
   disabled,
-  clearBtn = false,
   className,
   style,
   ...props
@@ -45,6 +43,11 @@ const Upload = ({
   const [fileUrl, setFileUrl] = useState<string | null | undefined>(defaultFile ? URL.createObjectURL(defaultFile) : '')
   const [fileExtension, setFileExtension] = useState<string>(defaultFile ? defaultFile.name.split('.').pop() || '' : '')
   const [loading, setLoading] = useState<boolean>(false)
+
+  // the extension stays visible; only the base name gets an ellipsis when space runs out
+  const extensionIndex = fileName.lastIndexOf('.')
+  const fileBaseName = extensionIndex > 0 ? fileName.slice(0, extensionIndex) : fileName
+  const fileNameExtension = extensionIndex > 0 ? fileName.slice(extensionIndex) : ''
 
   const fileInput = useRef<HTMLInputElement>(null)
   const selectFile = () => {
@@ -57,21 +60,8 @@ const Upload = ({
     const [file] = Array.from(e.target.files)
     if (!file) return
 
-    let shortenFileName
-
-    const fullFileName = file.name.split('.').shift()
-    if (!fullFileName) throw new Error('No file name')
-
-    if (fullFileName.length >= 10) {
-      shortenFileName = `${fullFileName.substring(0, 10)}..`
-    } else {
-      shortenFileName = fullFileName
-    }
-    const fileExtension = file.name.split('.').pop()
-    if (!fileExtension) throw new Error('No file extension')
-
-    setFileExtension(fileExtension)
-    setFileName(`${shortenFileName}.${file?.name.split('.').pop()}`)
+    setFileExtension(file.name.split('.').pop() || '')
+    setFileName(file.name)
     onUpload?.(file)
     const reader = new FileReader()
     reader.onload = e => {
@@ -84,55 +74,60 @@ const Upload = ({
 
   return (
     <div
-      className={cx(
-        styles.upload,
-        styles[size],
-        fullWidth && styles.fullWidth,
-        disabled && styles.disabled,
-        className,
-      )}
+      className={cx(styles.wrapper, fullWidth && styles.fullWidth, className)}
       style={style}
       {...props}
     >
-      <input className={styles.uploadInput} type='file' id={id} ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
-      {fileUrl && clearBtn && (
-        <Button
-          variant='danger'
-          // eslint-disable-next-line react/no-unstable-nested-components
-          iconComponent={() => <Cross2Icon />}
-          iconPosition='iconOnly'
-          onClick={() => {
-            setFileName('')
-            setFileUrl(null)
-          }}
-          className={styles.clearBtn}
-        >
-          Clear
-        </Button>
-      )}
-      <div className={styles.file}>
-        {fileUrl && isImage(fileExtension) ? (
-          <img src={fileUrl} alt='file-preview' />
-        ) : !fileUrl ? null : <FileTextIcon />}
-        {(size === 'large' && loading) && <span><SymbolIcon /></span>}
-        {fileName ? (
-          <span>{fileName}</span>
-        ) : (
-          <Label id={id} label={placeholder} description={description} className={styles.label} />
-        )}
-      </div>
-      <label className={styles.trigger} htmlFor={id}>
-        {size === 'normal' ? (
+      {size === 'normal' && <Label id={id} label={placeholder} className={styles.label} />}
+      <div className={cx(styles.upload, styles[size], disabled && styles.disabled)}>
+        <input className={styles.uploadInput} type='file' id={id} ref={fileInput} onChange={handleSelectedFile} disabled={disabled} />
+        <div className={styles.file}>
+          {fileUrl && isImage(fileExtension) ? (
+            <img src={fileUrl} alt='file-preview' />
+          ) : !fileUrl ? null : <FileTextIcon />}
+          {(size === 'large' && loading) && <span><SymbolIcon /></span>}
+          {fileName ? (
+            <span className={styles.fileName} title={fileName}>
+              <span className={styles.fileNameBase}>{fileBaseName}</span>
+              <span>{fileNameExtension}</span>
+            </span>
+          ) : (
+            <Label
+              id={id}
+              label={size === 'large' ? placeholder : undefined}
+              description={description}
+              className={styles.label}
+            />
+          )}
+        </div>
+        {fileUrl && (
           <Button
-            variant='neutral'
-            onClick={selectFile}
-            disabled={disabled}
-            iconPosition={loading ? 'left' : undefined}
+            variant='danger'
+            // eslint-disable-next-line react/no-unstable-nested-components
+            iconComponent={() => <Cross2Icon />}
+            iconPosition='iconOnly'
+            onClick={() => {
+              setFileName('')
+              setFileUrl(null)
+            }}
+            className={styles.clearBtn}
           >
-            {loading ? <SymbolIcon /> : buttonText}
+            Clear
           </Button>
-        ) : null}
-      </label>
+        )}
+        <label className={styles.trigger} htmlFor={id}>
+          {size === 'normal' ? (
+            <Button
+              variant='neutral'
+              onClick={selectFile}
+              disabled={disabled}
+              iconPosition={loading ? 'left' : undefined}
+            >
+              {loading ? <SymbolIcon /> : buttonText}
+            </Button>
+          ) : null}
+        </label>
+      </div>
     </div>
   )
 }

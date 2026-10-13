@@ -168,3 +168,21 @@ export const Empty: Story = {
     }
   }
 }
+
+/* ------------------------------SCROLLABLE------------------------------------ */
+
+export const Scrollable: Story = {
+  args: {
+    scrollable: true,
+    style: { minWidth: '700px' },
+  },
+  decorators: [Story => <div style={{ maxWidth: '400px' }}><Story /></div>],
+  parameters: {
+    docs: {
+      description: {
+        story: 'Set `scrollable` to let the table scroll horizontally when it is wider than its container. A shadow appears on each edge that has hidden content.',
+      },
+      source: { code: '<Table data={data} columns={columns} scrollable />' }
+    }
+  }
+}

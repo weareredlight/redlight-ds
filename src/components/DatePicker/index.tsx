@@ -59,26 +59,27 @@ export const DatePicker = ({
       }}
       value={value}
       disabled={disabled}
-      inputRef={null}
       calendarIcon={<CalendarIcon />}
       clearIcon={null}
       locale={localeString}
-      formatMonthYear={(_, date) => date.toLocaleDateString(localeString, {
-        month: 'long',
-        year: 'numeric',
-      })}
-      formatShortWeekday={(_, date) => date.toLocaleDateString(localeString, {
-        weekday: 'short'
-      })}
-      formatMonth={(_, date) => date.toLocaleDateString(localeString, {
-        month: 'long'
-      })}
-      calendarType={`${isWeekSelector ? 'hebrew' : 'iso8601'}`}
-      tileClassName={({ date, view }) => {
-        const isSameWeek = dayjs(date).isSame(value || new Date(), 'week')
-        return view === 'month' && isWeekSelector && isSameWeek
-          ? 'selected-week'
-          : ''
+      calendarProps={{
+        formatMonthYear: (_, date) => date.toLocaleDateString(localeString, {
+          month: 'long',
+          year: 'numeric',
+        }),
+        formatShortWeekday: (_, date) => date.toLocaleDateString(localeString, {
+          weekday: 'short'
+        }),
+        formatMonth: (_, date) => date.toLocaleDateString(localeString, {
+          month: 'long'
+        }),
+        calendarType: isWeekSelector ? 'hebrew' : 'iso8601',
+        tileClassName: ({ date, view }) => {
+          const isSameWeek = dayjs(date).isSame(value || new Date(), 'week')
+          return view === 'month' && isWeekSelector && isSameWeek
+            ? 'selected-week'
+            : ''
+        },
       }}
     />
 

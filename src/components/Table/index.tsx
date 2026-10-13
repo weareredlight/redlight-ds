@@ -15,7 +15,9 @@ import {
   useReactTable,
   createColumnHelper
 } from '@tanstack/react-table'
-import { useState, ReactElement } from 'react'
+import {
+  useCallback, useEffect, useRef, useState, ReactElement
+} from 'react'
 
 import type {
   ColumnDef,
@@ -38,6 +40,7 @@ export type TableProps<T> = {
   columns: ColumnDef<T, any>[]
   sortees?: ColumnSort[]
   renderOptions?: (data: T) => ReactElement
+  scrollable?: boolean
   className?: string
   style?: CSSProperties
 }
@@ -47,10 +50,32 @@ const Table = <T extends object>({
   columns,
   sortees = [],
   renderOptions,
+  scrollable = false,
   className,
   style,
 }: TableProps<T>) => {
   const [sorting, setSorting] = useState<SortingState>(sortees)
+  const scrollRef = useRef<HTMLDivElement>(null)
+  const [overflow, setOverflow] = useState({ left: false, right: false })
+
+  const updateOverflow = useCallback(() => {
+    const el = scrollRef.current
+    if (!el) return
+    const { scrollLeft, scrollWidth, clientWidth } = el
+    const left = scrollLeft > 0
+    const right = Math.ceil(scrollLeft + clientWidth) < scrollWidth
+    setOverflow(prev => (prev.left === left && prev.right === right ? prev : { left, right }))
+  }, [])
+
+  useEffect(() => {
+    const el = scrollRef.current
+    if (!scrollable || !el) return undefined
+    updateOverflow()
+    const observer = new ResizeObserver(updateOverflow)
+    observer.observe(el)
+    if (el.firstElementChild) observer.observe(el.firstElementChild)
+    return () => observer.disconnect()
+  }, [scrollable, updateOverflow])
 
   const table = useReactTable({
     data,
@@ -69,7 +94,7 @@ const Table = <T extends object>({
     sortingFns: { globalSort: globalSort<T> },
   })
 
-  return (
+  const tableElement = (
     <table className={cx(styles.table, className)} style={style}>
       <thead className={styles.head}>
         {table.getHeaderGroups().map(headerGroup => (
@@ -110,7 +135,9 @@ const Table = <T extends object>({
                       placeholder='Filter by'
                       iconPosition='left'
                       iconComponent={() => <MagnifyingGlassIcon />}
-                      onChange={({ target: { value } }) => column.setFilterValue(value)}
+                      onChange={({ target: { value } }) => (
+                        column.setFilterValue(value || undefined)
+                      )}
                       fullWidth
                     />
                   ) : null}
@@ -147,6 +174,22 @@ const Table = <T extends object>({
         )}
       </tbody>
     </table>
+  )
+
+  if (!scrollable) return tableElement
+
+  return (
+    <div
+      className={cx(
+        styles.scrollContainer,
+        overflow.left && styles.shadowLeft,
+        overflow.right && styles.shadowRight,
+      )}
+    >
+      <div ref={scrollRef} className={styles.scrollArea} onScroll={updateOverflow}>
+        {tableElement}
+      </div>
+    </div>
   )
 }
 

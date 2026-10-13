@@ -74,14 +74,13 @@
     "@tanstack/react-table": "^8.13.0",
     "dayjs": "^1.11.8",
     "lodash.merge": "^4.6.2",
-    "react-clock": "^4.6.0",
-    "react-date-picker": "^10.6.0",
+    "react-clock": "^6.0.0",
+    "react-date-picker": "^12.1.0",
     "react-icons": "^5.0.1",
     "react-number-format": "^5.3.1",
     "react-select": "^5.8.0",
-    "react-time-picker": "^6.6.0",
-    "react-toastify": "^10.0.4",
-    "uuid": "^9.0.1"
+    "react-time-picker": "^8.1.0",
+    "react-toastify": "^10.0.4"
   },
   "devDependencies": {
     "@storybook/addon-docs": "10.6.1",

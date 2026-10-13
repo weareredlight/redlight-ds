@@ -52,6 +52,9 @@ export const setupThemes = () => {
     fontStyles!.textContent += `.${className}, .${className} * { font-family: ${t.fontFamily}; }\n`
   })
 
+  // Page background follows the active theme so white cards stand out.
+  document.body.style.backgroundColor = 'var(--colors-neutral100)'
+
   applyTheme(getSavedThemeId())
 }
 
@@ -67,4 +70,5 @@ export const teardownThemes = () => {
   classNames = {}
   theme.className = previousClassName
   document.documentElement.style.colorScheme = ''
+  document.body.style.backgroundColor = ''
 }

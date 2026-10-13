@@ -1,6 +1,7 @@
 // =============================================================================
 // UPLOAD
 // -----------------------------------------------------------------------------
+// .wrapper > .label (normal size) + .upload
 // .upload > hidden file input + clear button + .file (preview / name) + .trigger
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
@@ -10,6 +11,30 @@
 @keyframes rotateIcon {
   0% { transform: rotate(0deg); }
   100% { transform: rotate(359deg); }
+}
+
+// =============================================================================
+// WRAPPER (label on top + field)
+// =============================================================================
+
+.wrapper {
+  width: 256px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-bottom: var(--space-xxxsm);
+
+  > .label {
+    padding-bottom: var(--space-xxxsm);
+  }
+
+  // ===========================================================================
+  // FULL WIDTH
+  // ===========================================================================
+
+  :where(&).fullWidth {
+    width: 100%;
+  }
 }
 
 // =============================================================================
@@ -40,6 +65,7 @@
   img {
     height: 26px;
     width: 26px;
+    flex-shrink: 0;
     border-radius: var(--radii-xsm);
     object-fit: cover;
   }
@@ -64,6 +90,22 @@
     padding-left: var(--space-xxxsm);
   }
 
+  .fileName {
+    display: flex;
+    min-width: 0;
+    max-width: 100%;
+    white-space: nowrap;
+
+    span {
+      padding-left: 0;
+    }
+  }
+
+  .fileNameBase {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
   svg {
     background-color: var(--colors-neutral200);
     border-radius: var(--radii-xsm);
@@ -71,6 +113,7 @@
     color: var(--colors-primary);
     height: 26px;
     width: 26px;
+    flex-shrink: 0;
   }
 }
 
@@ -98,12 +141,11 @@
 
 .upload {
   position: relative;
-  width: 256px;
+  width: 100%;
   border-radius: var(--radii-xsm);
   padding: var(--space-xxxsm);
   display: flex;
   align-items: center;
-  margin-bottom: var(--space-xxxsm);
 
   .clearBtn {
     position: absolute;
@@ -130,10 +172,32 @@
     height: 34px;
     border: 0.075rem solid var(--colors-neutral400);
 
+    gap: var(--space-xxsm);
+
+    // the invisible input covers the whole field; the content flows on top of it
+    .uploadInput {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+    }
+
+    // file name on the left, clear button pushed to the right (next to the trigger)
+    .file {
+      position: static;
+      flex: 1;
+      min-width: 0;
+    }
+
     .clearBtn {
-      right: 80px;
-      top: 50%;
-      transform: translateY(-50%);
+      position: relative;
+    }
+
+    .trigger {
+      position: relative;
+      right: auto;
+      margin-left: auto;
+      margin-right: calc(-1 * var(--space-xxxsm) - 1px);
     }
   }
 
@@ -167,6 +231,7 @@
 
     .file {
       position: unset;
+      max-width: 100%;
       flex-direction: column;
       gap: var(--space-xxsm);
 
@@ -199,14 +264,6 @@
     &:hover .file img {
       opacity: 0.5;
     }
-  }
-
-  // ===========================================================================
-  // FULL WIDTH
-  // ===========================================================================
-
-  :where(&).fullWidth {
-    width: 100%;
   }
 
   // ===========================================================================

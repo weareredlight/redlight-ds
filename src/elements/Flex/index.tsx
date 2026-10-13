@@ -11,16 +11,19 @@ export type FlexProps = {
   justify?: 'start' | 'center' | 'end' | 'spaceBetween' | 'spaceAround' | 'spaceEvenly'
   wrap?: boolean
   gap?: 'xxxsm' | 'xxsm' | 'xsm' | 'sm' | 'lg' | 'xlg' | 'xxlg' | 'xxxlg'
+  debug?: boolean
 } & React.HTMLAttributes<HTMLElement>
 
 export const Flex = React.forwardRef(({
   as: Component = 'div',
   direction = 'row',
-  align = 'center',
-  justify = 'center',
+  align = 'start',
+  justify = 'start',
   wrap = false,
   gap,
   className,
+  style,
+  debug,
   ...props
 }: FlexProps, ref: React.Ref<HTMLElement>) => (
   <Component
@@ -34,6 +37,12 @@ export const Flex = React.forwardRef(({
       gap && styles[`gap-${gap}`],
       className,
     )}
+    style={debug ? {
+      ...style,
+      backgroundColor: debug
+        ? '#000000'.replaceAll('0', () => Math.floor(Math.random() * 16).toString(16))
+        : undefined,
+    } : style}
     {...props}
   />
 ))

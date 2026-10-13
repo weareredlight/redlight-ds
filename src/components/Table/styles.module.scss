@@ -25,8 +25,13 @@
   color: var(--colors-neutral800);
   cursor: default;
 
-  &:first-child { border-top-left-radius: var(--radii-sm); }
-  &:last-child { border-top-right-radius: var(--radii-sm); }
+  &:first-child {
+    border-top-left-radius: var(--radii-sm);
+  }
+
+  &:last-child {
+    border-top-right-radius: var(--radii-sm);
+  }
 
   &:hover {
     background: var(--colors-primary100);
@@ -45,7 +50,7 @@
   }
 
   // title + sort icon
-  > div.columnHeader {
+  >div.columnHeader {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -84,4 +89,51 @@
   text-align: center;
   background: var(--colors-white);
   padding: var(--space-xxxlg) 0;
+}
+
+// =============================================================================
+// SCROLLABLE
+// =============================================================================
+
+.scrollContainer {
+  position: relative;
+  width: 100%;
+  margin-top: var(--space-sm);
+  overflow: hidden;
+
+  &::before,
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: var(--space-xxsm);
+    box-shadow: var(--shadows-cardShadow);
+    pointer-events: none;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+    z-index: 1;
+  }
+
+  &::before {
+    left: calc(-1 * var(--space-xxsm));
+  }
+
+  &::after {
+    right: calc(-1 * var(--space-xxsm));
+  }
+
+  &.shadowLeft::before,
+  &.shadowRight::after {
+    opacity: 1;
+  }
+}
+
+.scrollArea {
+  width: 100%;
+  overflow-x: auto;
+
+  >.table {
+    margin-top: 0;
+  }
 }
