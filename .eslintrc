@@ -3,7 +3,6 @@
   "plugins": [
     "@typescript-eslint",
     "react",
-    "babel",
     "eslint-comments",
     "jsx-a11y",
     "import",

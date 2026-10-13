@@ -35,10 +35,7 @@ const PAGE_SIZE = 5
 const AddIcon = () => <PlusIcon />
 const SearchIcon = () => <MagnifyingGlassIcon />
 
-const stack: CSSProperties = { alignItems: 'stretch' }
-
 const cardStyle: CSSProperties = {
-  ...stack,
   backgroundColor: 'var(--colors-white)',
   border: '1px solid var(--colors-neutral200)',
   borderRadius: 'var(--radii-md)',
@@ -85,7 +82,7 @@ const columns = [
 ]
 
 const StatCard = ({ label, value, hint }: { label: string, value: string, hint: string }) => (
-  <Flex direction='column' gap='xxsm' style={{ ...cardStyle, alignItems: 'flex-start', flex: '1 1 180px' }}>
+  <Flex direction='column' gap='xxsm' align='stretch' style={{ ...cardStyle, alignItems: 'flex-start', flex: '1 1 180px' }}>
     <Text variant='microCopy' color='neutral700'>{label}</Text>
     <Text variant='h2' color='primary'>{value}</Text>
     <Text variant='microCopy' color='neutral'>{hint}</Text>
@@ -126,8 +123,9 @@ const DashboardDemo = () => {
     <Flex
       direction='column'
       gap='xxlg'
+      align='stretch'
       style={{
-        ...stack, padding: 'var(--space-xxxlg)', maxWidth: 1200, margin: '0 auto'
+        padding: 'var(--space-xxxlg)', maxWidth: 1200, margin: '0 auto'
       }}
     >
       {/* Header */}
@@ -149,7 +147,7 @@ const DashboardDemo = () => {
       </Flex>
 
       {/* Stats */}
-      <Flex justify='start' wrap gap='lg' style={stack}>
+      <Flex justify='start' wrap gap='lg' align='stretch'>
         <StatCard label='Active projects' value={String(projects.filter(p => p.status !== 'Done').length)} hint='+2 since last month' />
         <StatCard label='At risk' value={String(projects.filter(p => p.status === 'At risk').length)} hint='Needs attention' />
         <StatCard label='Completed' value={String(projects.filter(p => p.status === 'Done').length)} hint='This quarter' />
@@ -263,7 +261,7 @@ const DashboardDemo = () => {
         description='Give your project a name. You can change it later.'
         closeFn={() => setModalOpen(false)}
       >
-        <Flex direction='column' gap='lg' style={{ ...stack, marginTop: 'var(--space-lg)' }}>
+        <Flex direction='column' gap='lg' align='stretch' style={{ marginTop: 'var(--space-lg)' }}>
           <Input
             label='Project name'
             placeholder='e.g. Marketing site'

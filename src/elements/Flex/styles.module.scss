@@ -16,40 +16,81 @@ $gaps: xxxsm, xxsm, xsm, sm, lg, xlg, xxlg, xxxlg;
   // DIRECTION
   // ===========================================================================
 
-  :where(&).directionRow { flex-direction: row; }
-  :where(&).directionColumn { flex-direction: column; }
+  :where(&).directionRow {
+    flex-direction: row;
+  }
+
+  :where(&).directionColumn {
+    flex-direction: column;
+  }
 
   // ===========================================================================
   // ALIGN
   // ===========================================================================
 
-  :where(&).alignStart { align-items: flex-start; }
-  :where(&).alignCenter { align-items: center; }
-  :where(&).alignEnd { align-items: flex-end; }
-  :where(&).alignBaseline { align-items: baseline; }
+  :where(&).alignStart {
+    align-items: flex-start;
+  }
+
+  :where(&).alignCenter {
+    align-items: center;
+  }
+
+  :where(&).alignEnd {
+    align-items: flex-end;
+  }
+
+  :where(&).alignBaseline {
+    align-items: baseline;
+  }
+
+  :where(&).alignStretch {
+    align-items: stretch;
+  }
 
   // ===========================================================================
   // JUSTIFY
   // ===========================================================================
 
-  :where(&).justifyStart { justify-content: flex-start; }
-  :where(&).justifyCenter { justify-content: center; }
-  :where(&).justifyEnd { justify-content: flex-end; }
-  :where(&).justifySpaceBetween { justify-content: space-between; }
-  :where(&).justifySpaceAround { justify-content: space-around; }
-  :where(&).justifySpaceEvenly { justify-content: space-evenly; }
+  :where(&).justifyStart {
+    justify-content: flex-start;
+  }
+
+  :where(&).justifyCenter {
+    justify-content: center;
+  }
+
+  :where(&).justifyEnd {
+    justify-content: flex-end;
+  }
+
+  :where(&).justifySpaceBetween {
+    justify-content: space-between;
+  }
+
+  :where(&).justifySpaceAround {
+    justify-content: space-around;
+  }
+
+  :where(&).justifySpaceEvenly {
+    justify-content: space-evenly;
+  }
 
   // ===========================================================================
   // WRAP
   // ===========================================================================
 
-  :where(&).wrap { flex-wrap: wrap; }
+  :where(&).wrap {
+    flex-wrap: wrap;
+  }
 
   // ===========================================================================
   // GAP
   // ===========================================================================
 
   @each $gap in $gaps {
-    :where(&).gap-#{$gap} { gap: var(--space-#{$gap}); }
+    :where(&).gap-#{$gap} {
+      gap: var(--space-#{$gap});
+    }
   }
 }

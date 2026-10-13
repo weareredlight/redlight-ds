@@ -80,9 +80,13 @@ import {
     <span className="sub-heading">3. Use the components</span>
     <p>Import a component and change its variants and properties to your liking:</p>
     <DocCodeBlock code={BtnImport} language='tsx' />
-    <Flex gap="sm" style={{alignItems: 'stretch'}}>
+    <Flex gap="sm" align='stretch'>
       <DocCodeBlock code={BtnUse} language='tsx' style={{width: '50%'}} />
-      <Flex style={{width: '50%', backgroundColor: 'var(--colors-neutral100)', borderRadius: 'var(--radii-xsm)'}}>
+      <Flex 
+        justify='center'
+        align='center'
+        style={{width: '50%', backgroundColor: 'var(--colors-neutral100)', borderRadius: 'var(--radii-xsm)'}}
+      >
         <Button size="large" variant="primary">Button Text</Button>
       </Flex>
     </Flex>

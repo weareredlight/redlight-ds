@@ -7,7 +7,7 @@ import styles from './styles.module.scss'
 export type FlexProps = {
   as?: React.ElementType
   direction?: 'row' | 'column'
-  align?: 'start' | 'center' | 'end' | 'baseline'
+  align?: 'start' | 'center' | 'end' | 'baseline' | 'stretch'
   justify?: 'start' | 'center' | 'end' | 'spaceBetween' | 'spaceAround' | 'spaceEvenly'
   wrap?: boolean
   gap?: 'xxxsm' | 'xxsm' | 'xsm' | 'sm' | 'lg' | 'xlg' | 'xxlg' | 'xxxlg'
