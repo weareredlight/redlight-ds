@@ -5,6 +5,7 @@ import { createHighlighterCore } from 'shiki/dist/core.mjs'
 import { createJavaScriptRegexEngine } from 'shiki/dist/engine-javascript.mjs'
 
 import { cx } from '../../utils'
+import { LAST_UPDATED, VERSION } from '../constants'
 
 import styles from './document.module.scss'
 
@@ -18,6 +19,10 @@ export const Doc = ({ className, ...props }: DivProps) => (
 
 export const DocHeader = ({ className, ...props }: DivProps) => (
   <div className={cx(styles.header, className)} {...props} />
+)
+
+export const DocVersion = () => (
+  <p>{`ver ${VERSION} | Last updated: ${LAST_UPDATED}`}</p>
 )
 
 export const DocBody = ({ className, ...props }: DivProps) => (
