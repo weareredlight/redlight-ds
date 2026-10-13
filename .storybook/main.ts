@@ -16,6 +16,7 @@ const config: StorybookConfig = {
     check: false,
   },
   addons: ['@storybook/addon-docs'],
+  staticDirs: ['./public'],
   docs: {
     defaultName: 'How to use',
   },

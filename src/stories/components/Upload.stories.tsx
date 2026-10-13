@@ -29,9 +29,6 @@ const meta = {
     disabled: {
       control: 'boolean',
     },
-    clearBtn: {
-      control: 'boolean',
-    },
     fullWidth: {
       control: 'boolean',
     },
@@ -44,18 +41,13 @@ export default meta
 
 type Story = StoryObj<typeof meta>
 
-export const Normal: Story = {
-  args: {
-    clearBtn: true,
-  },
-}
+export const Normal: Story = {}
 
 export const Large: Story = {
   args: {
     size: 'large',
     id: 'large-upload-example',
     description: 'Max. 50mb',
-    clearBtn: false,
   },
   parameters: {
     docs: {
@@ -70,7 +62,6 @@ export const WithDefaultFile: Story = {
   args: {
     id: 'default-file-upload-example',
     defaultFile: new File(['Hello'], 'report.pdf', { type: 'application/pdf' }),
-    clearBtn: true,
   },
   parameters: {
     docs: {

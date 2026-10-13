@@ -23,7 +23,7 @@
     "noFallthroughCasesInSwitch": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "esModuleInterop": true,
     "allowSyntheticDefaultImports": true,
     "skipLibCheck": true,
@@ -31,7 +31,6 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
-    "baseUrl": "src",
     "jsx": "react-jsx"
   }
 }

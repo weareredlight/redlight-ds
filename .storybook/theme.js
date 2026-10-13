@@ -28,6 +28,7 @@ export default create({
   inputTextColor: 'black',
   inputBorderRadius: 4,
 
-  // brandTitle: 'RedLight Design System',
-  brandTitle: '<img src="https://i.imgur.com/X66euSs.png" style="max-width: 164px; width: 100%"/>',
+  brandTitle: 'RedLight Design System',
+  brandImage: 'logo.png',
+  brandUrl: '/',
 });

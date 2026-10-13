@@ -10,6 +10,9 @@ declare module '*.module.scss' {
   export default classes
 }
 
+declare module '*.css'
+declare module '*.scss'
+
 declare module 'virtual:rl-tokens.css'
 
 declare module '*?raw' {
