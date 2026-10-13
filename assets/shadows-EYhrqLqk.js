@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";var t;function n(){return(n=e((()=>{t={mainShadow:`0px 4px 20px $colors$neutral200`,cardShadow:`0px 2px 8px $colors$neutral200`}})))()}export{t as n,n as t};
