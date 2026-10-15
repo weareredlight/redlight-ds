@@ -1,0 +1,94 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocVersion,
+  DocBody,
+  DocCodeBlock,
+  DocCodeTabs,
+  DocSeparator
+} from '../document';
+
+import {
+  CustomCompose,
+  CustomProjectCardTsx,
+  CustomProjectCardScss,
+  CustomProjectCardUse,
+  CustomComponentTsx,
+  CustomComponentScss,
+  CustomComponentUse,
+} from './snippets'
+
+import { ProjectCardPreview, ProjectHeaderPreview, StatCardPreview } from './Previews'
+
+<Meta title='Custom Components' />
+
+<Doc>
+  <DocHeader style={{background: '#2F6FDE'}}>
+    <h2>Custom Components</h2>
+    <DocVersion />
+  </DocHeader>
+
+  <DocBody>
+    <h3>Can't find the component you need?</h3>
+    <p>No problem. The design system doesn't try to cover every case, and it gives you everything you need to build your own: tokens, typography, layout and icons. Follow these steps, and your component will look like it was always part of it.</p>
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">1. Make sure it doesn't exist yet</span>
+    <p>Look through the <b>Components</b> section in the sidebar. A component may go by a different name than you expect: a badge is a <code>Pill</code> or a <code>Tag</code>, a confirmation popup is a <code>Dialog</code>, a dropdown is a <code>PopOver</code> or a <code>Select</code>, a switch is a <code>Toggle</code>. The <a href="https://www.figma.com/design/rkRWOtSBgEd6wdfInQU2Oi/Design-System?node-id=0-1&t=hXvn4xpcG8NhqUEF-1" target='_blank'>Figma file</a> has them all too.</p>
+    <br />
+    <span className="sub-heading">2. Try to build it from existing components</span>
+    <p>Most "new" components are existing ones put together. Check each component's props and variants first, then combine them with <code>Flex</code> for the layout. Every component also accepts <code>className</code> and <code>style</code> for small adjustments:</p>
+    <ProjectHeaderPreview />
+    <DocCodeBlock code={CustomCompose} language='tsx' />
+    <br />
+    <span className="sub-heading">3. Build it with the design system's styles</span>
+    <p>If nothing fits, create it in your project. Write the styles with the same building blocks the components use, and never with hard-coded values:</p>
+    <ul>
+      <li><p><b>Colors, spacing, sizes, radii and shadows:</b> CSS variables like <code>var(--colors-primary)</code> and <code>var(--space-xxsm)</code>. See <a href="./?path=/docs/style-guides-colors--how-to-use" target="_top">Colors</a> and <a href="./?path=/docs/style-guides-spacing-sizes--how-to-use" target="_top">Spacing & Sizes</a>.</p></li>
+      <li><p><b>Text:</b> the <code>Text</code> component, or the typography mixins in your SCSS. See <a href="./?path=/docs/style-guides-typography--how-to-use" target="_top">Typography</a>.</p></li>
+      <li><p><b>Layout:</b> <code>Flex</code>, and the <code>media.query</code> mixin for breakpoints.</p></li>
+      <li><p><b>Icons:</b> Lucide, the same library as the components. See <a href="./?path=/docs/style-guides-icons--how-to-use" target="_top">Icons</a>.</p></li>
+    </ul>
+    <p>For example, a project card. It combines <code>Avatar</code>, <code>Tooltip</code>, <code>Pill</code>, <code>PopOver</code>, <code>Button</code> and <code>Text</code> with its own progress bar and menu button, and every color, space and text style comes from the design system. Hover the avatars and open the menu:</p>
+    <ProjectCardPreview />
+    <DocCodeTabs
+      tabs={[
+        { label: 'ProjectCard.tsx', code: CustomProjectCardTsx, language: 'tsx' },
+        { label: 'styles.module.scss', code: CustomProjectCardScss, language: 'scss' },
+        { label: 'Usage', code: CustomProjectCardUse, language: 'tsx' },
+      ]}
+    />
+    <br />
+    <p>Or something simpler, like a stat card for a dashboard:</p>
+    <StatCardPreview />
+    <DocCodeTabs
+      tabs={[
+        { label: 'StatCard.tsx', code: CustomComponentTsx, language: 'tsx' },
+        { label: 'styles.module.scss', code: CustomComponentScss, language: 'scss' },
+        { label: 'Usage', code: CustomComponentUse, language: 'tsx' },
+      ]}
+    />
+    <p>Building something interactive, like a dropdown menu or an accordion? Don't write the behavior from scratch: use a <a href="https://www.radix-ui.com/primitives" target='_blank'>Radix primitive</a> (the design system uses them for <code>Dialog</code>, <code>PopOver</code>, <code>Select</code>, <code>Tabs</code>, <code>Toggle</code> and <code>Tooltip</code>) and style it with the tokens. You get keyboard navigation and accessibility for free.</p>
+    <br />
+    <span className="sub-heading">4. Follow the same conventions</span>
+    <p>Give it an API like the other components, so it feels familiar and is easy to move into the design system later:</p>
+    <ul>
+      <li><p>Accept <code>className</code> and <code>style</code>.</p></li>
+      <li><p>Use <code>variant</code> and <code>size</code> props with a few named options (<code>'default' | 'highlight'</code>), not booleans for each look.</p></li>
+      <li><p>Give every optional prop a sensible default.</p></li>
+    </ul>
+    <br />
+    <span className="sub-heading">5. Check it before you ship it</span>
+    <ul>
+      <li><p><b>Theme:</b> change the theme with <code>setupTheme</code> (e.g. another <code>primary</code>). Your component should follow it, like the others.</p></li>
+      <li><p><b>Small screens:</b> resize the window down to mobile width.</p></li>
+      <li><p><b>Keyboard:</b> if it's interactive, you can reach and use it with <code>Tab</code>, <code>Enter</code> and <code>Esc</code>.</p></li>
+    </ul>
+    <br />
+    <span className="sub-heading">6. Share it</span>
+    <p>Think other projects could use it too? <a href="https://github.com/weareredlight/redlight-ds/issues" target='_blank'>Open an issue</a> with what it does, a screenshot and where you're using it. If it's useful beyond your project, it can become part of the design system.</p>
+  </DocBody>
+</Doc>

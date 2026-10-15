@@ -7,6 +7,9 @@
     // Storybook 10 packages are ESM-only and only resolvable through package.json "exports"
     "moduleResolution": "bundler"
   },
-  "include": [".", "../declaration.d.ts"],
+  "include": [
+    ".",
+    "../declaration.d.ts"
+  ],
   "exclude": []
 }

@@ -1,0 +1,137 @@
+// =============================================================================
+// CUSTOM COMPONENTS DOCS
+// =============================================================================
+
+@use '../../../styles/typography';
+@use '../../../styles/media';
+
+// -----------------------------------------------------------------------------
+// Preview above its code
+// -----------------------------------------------------------------------------
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  padding: var(--space-xxlg);
+  background: var(--colors-neutral100);
+  border-radius: var(--radii-md);
+}
+
+// -----------------------------------------------------------------------------
+// Stat card: same styles as the StatCard.module.scss snippet
+// -----------------------------------------------------------------------------
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+  padding: var(--space-xxlg);
+  border-radius: var(--radii-sm);
+  background: var(--colors-white);
+  box-shadow: var(--shadows-cardShadow);
+
+  @include media.query(sm) {
+    padding: var(--space-lg);
+  }
+}
+
+.label {
+  @include typography.microCopy;
+  color: var(--colors-neutral600);
+}
+
+.value {
+  @include typography.heading3;
+  color: var(--colors-neutral900);
+}
+
+.highlight {
+  background: var(--colors-primary100);
+
+  .value { color: var(--colors-primary600); }
+}
+
+// -----------------------------------------------------------------------------
+// Project card: same styles as the ProjectCard.module.scss snippet
+// -----------------------------------------------------------------------------
+
+.projectGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: var(--space-lg);
+}
+
+.projectCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xxlg);
+  border-radius: var(--radii-sm);
+  background: var(--colors-white);
+  box-shadow: var(--shadows-cardShadow);
+
+  @include media.query(sm) {
+    padding: var(--space-lg);
+  }
+}
+
+.menuButton {
+  all: unset;
+  display: flex;
+  padding: var(--space-xxxsm);
+  border-radius: var(--radii-xsm);
+  color: var(--colors-neutral600);
+  cursor: pointer;
+
+  &:hover { background: var(--colors-neutral100); }
+  &:focus-visible { outline: 2px solid var(--colors-primary400); }
+}
+
+.progressLabel {
+  @include typography.microCopy;
+  color: var(--colors-neutral600);
+}
+
+.track {
+  height: var(--sizes-xxsm);
+  border-radius: var(--radii-full);
+  background: var(--colors-neutral200);
+  overflow: hidden;
+}
+
+.bar {
+  height: 100%;
+  border-radius: inherit;
+  background: var(--colors-primary);
+  transition: width 0.3s;
+
+  .atRisk & { background: var(--colors-danger); }
+  .done & { background: var(--colors-success); }
+}
+
+.members {
+  padding-left: var(--space-xxsm);
+}
+
+.member,
+.more {
+  margin-left: calc(-1 * var(--space-xxsm));
+  border-radius: var(--radii-full);
+  box-shadow: 0 0 0 2px var(--colors-white);
+}
+
+.more {
+  @include typography.microCopy;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sizes-xxxlg);
+  height: var(--sizes-xxxlg);
+  background: var(--colors-neutral200);
+  color: var(--colors-neutral700);
+}
+
+.dueDate {
+  @include typography.microCopy;
+  color: var(--colors-neutral600);
+}

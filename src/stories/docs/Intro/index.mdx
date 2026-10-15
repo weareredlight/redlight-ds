@@ -9,10 +9,10 @@ import {
   DocCodeBlock,
   DocCard,
   DocSeparator,
-} from './document'
+} from '../document'
 
-import { Flex } from '../../elements/Flex'
-import Button from '../../components/Button'
+import { Flex } from '../../../elements/Flex'
+import Button from '../../../components/Button'
 
 import {
   AlertUse,
@@ -23,7 +23,7 @@ import {
   StylesImport,
   ThemeCss,
   ThemeSetup,
-} from '../utils'
+} from './snippets'
 
 <Meta title='Get Started' />
 
@@ -106,6 +106,7 @@ import {
     <span className="sub-heading">6. Customize components (optional)</span>
     <p>Every component accepts <code>className</code> and <code>style</code>, and exports its root selector for your own CSS:</p>
     <DocCodeBlock code={CustomizeUse} language='tsx' />
+    <p>Can't find the component you need? See <a href="./?path=/docs/custom-components--how-to-use" target="_top">Custom Components</a>.</p>
     <br />
     <DocSeparator />
     <br />

@@ -1,5 +1,7 @@
 // Breakpoints: `@include media.query(md) { ... }`
 
+@use 'sass:map';
+
 $breakpoints: (
   sm: '(max-width: 620px)',
   md: '(max-width: 960px)',
@@ -8,7 +10,7 @@ $breakpoints: (
 );
 
 @mixin query($name) {
-  @media #{map-get($breakpoints, $name)} {
+  @media #{map.get($breakpoints, $name)} {
     @content;
   }
 }
