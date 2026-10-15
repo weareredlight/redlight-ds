@@ -1,9 +1,10 @@
-import { Cross2Icon } from '@radix-ui/react-icons'
 import * as Popover from '@radix-ui/react-popover'
+import { XIcon } from 'lucide-react'
 import React from 'react'
 
 import type { CSSProperties } from 'react'
 
+import { ICON_SIZE } from '../../constants'
 import { cx } from '../../utils'
 
 import styles from './styles.module.scss'
@@ -42,7 +43,7 @@ const PopOver = ({
       >
         {children}
         <Popover.Close className={styles.close} aria-label='Close'>
-          <Cross2Icon />
+          <XIcon size={ICON_SIZE} />
         </Popover.Close>
         <Popover.Arrow className={styles.arrow} />
       </Popover.Content>

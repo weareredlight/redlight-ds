@@ -1,4 +1,4 @@
-import { SymbolIcon } from '@radix-ui/react-icons'
+import { RefreshCwIcon } from 'lucide-react'
 import React from 'react'
 
 import type { ReactNode } from 'react'
@@ -94,7 +94,7 @@ const Button = React.forwardRef(({
       {...props}
     >
       {getIconAndText()}
-      {isLoading && <SymbolIcon className='loading-icon' />}
+      {isLoading && <RefreshCwIcon className='loading-icon' />}
     </button>
   )
 })

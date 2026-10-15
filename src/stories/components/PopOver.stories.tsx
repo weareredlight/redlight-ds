@@ -1,5 +1,5 @@
-import { DotsVerticalIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react-vite'
+import { EllipsisVerticalIcon } from 'lucide-react'
 
 import Button from '../../components/Button'
 import Input from '../../components/Input'
@@ -8,7 +8,7 @@ import Text from '../../components/Text'
 import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
 
-const DotsIcon = () => <DotsVerticalIcon width={14} height={14} />
+const DotsIcon = () => <EllipsisVerticalIcon width={14} height={14} />
 
 const meta = {
   title: 'Components/Overlays/PopOver',

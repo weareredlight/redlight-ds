@@ -1,4 +1,4 @@
-import { EyeClosedIcon, EyeOpenIcon, MagnifyingGlassIcon } from '@radix-ui/react-icons'
+import { EyeClosedIcon, EyeIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
@@ -117,14 +117,14 @@ export const Default: Story = {
 }
 
 /* -------------------------Search input demo------------------------ */
-const SearchIcon = () => <MagnifyingGlassIcon />
+const SearchFieldIcon = () => <SearchIcon />
 
 export const WithIcon: Story = {
   args: {
     placeholder: 'Search...',
     iconPosition: 'left',
     type: 'search',
-    iconComponent: SearchIcon,
+    iconComponent: SearchFieldIcon,
   },
 
   parameters: {
@@ -139,7 +139,7 @@ export const WithIcon: Story = {
     type='search'
     placeholder='Search...'
     iconPosition='left'
-    iconComponent={() => <MagnifyIcon />}
+    iconComponent={() => <SearchIcon />}
     onChange={e => searchFunction(e.target.value)}
   />
   `,
@@ -149,8 +149,8 @@ export const WithIcon: Story = {
 }
 
 /* -------------------------Password input demo------------------------ */
-const EyeClosed = () => <EyeClosedIcon />
-const EyeOpen = () => <EyeOpenIcon />
+const HidePasswordIcon = () => <EyeClosedIcon />
+const ShowPasswordIcon = () => <EyeIcon />
 
 const PasswordTemplate = (args: InputProps) => {
   const [showPassword, setShowPassword] = useState(false)
@@ -159,7 +159,7 @@ const PasswordTemplate = (args: InputProps) => {
     <Template
       {...args}
       type={showPassword ? 'text' : 'password'}
-      iconComponent={showPassword ? EyeOpen : EyeClosed}
+      iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
       onClickIcon={() => setShowPassword(!showPassword)}
     />
   )
@@ -187,7 +187,7 @@ return (
     id='password-input-example'
     label='Password'
     type={showPassword ? 'text' : 'password'}
-    iconComponent={showPassword ? EyeOpen : EyeClosed}
+    iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
     onClickIcon={() => setShowPassword(!showPassword)}
     value={yourPassword}
     onChange={e => updateFunction(e.target.value)}

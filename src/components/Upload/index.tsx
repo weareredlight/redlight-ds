@@ -1,4 +1,4 @@
-import { SymbolIcon, FileTextIcon, Cross2Icon } from '@radix-ui/react-icons'
+import { FileTextIcon, RefreshCwIcon, XIcon } from 'lucide-react'
 import { useState, useRef, useCallback } from 'react'
 
 import type { ChangeEvent, CSSProperties } from 'react'
@@ -85,7 +85,7 @@ const Upload = ({
           {fileUrl && isImage(fileExtension) ? (
             <img src={fileUrl} alt='file-preview' />
           ) : !fileUrl ? null : <FileTextIcon />}
-          {(size === 'large' && loading) && <span><SymbolIcon /></span>}
+          {(size === 'large' && loading) && <span><RefreshCwIcon /></span>}
           {fileName ? (
             <span className={styles.fileName} title={fileName}>
               <span className={styles.fileNameBase}>{fileBaseName}</span>
@@ -104,7 +104,7 @@ const Upload = ({
           <Button
             variant='danger'
             // eslint-disable-next-line react/no-unstable-nested-components
-            iconComponent={() => <Cross2Icon />}
+            iconComponent={() => <XIcon />}
             iconPosition='iconOnly'
             onClick={() => {
               setFileName('')
@@ -123,7 +123,7 @@ const Upload = ({
               disabled={disabled}
               iconPosition={loading ? 'left' : undefined}
             >
-              {loading ? <SymbolIcon /> : buttonText}
+              {loading ? <RefreshCwIcon /> : buttonText}
             </Button>
           ) : null}
         </label>

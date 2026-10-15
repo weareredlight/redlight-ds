@@ -30,5 +30,6 @@ export default create({
 
   brandTitle: 'RedLight Design System',
   brandImage: 'logo.png',
-  brandUrl: '/',
+  brandUrl: './',
+  brandTarget: '_self',
 });

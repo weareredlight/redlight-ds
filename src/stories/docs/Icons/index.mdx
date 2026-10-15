@@ -1,0 +1,54 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocVersion,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from '../document';
+
+import { IconsInstall, IconsUse, IconsInComponents } from '../../utils'
+
+import ComponentIcons from './ComponentIcons'
+import CustomIcons from './CustomIcons'
+
+<Meta title='Style Guides/Icons' />
+
+<Doc>
+  <DocHeader style={{background: '#D9467F'}}>
+    <h2>Icons</h2>
+    <DocVersion />
+  </DocHeader>
+
+  <DocBody>
+    <p>The components draw their icons from <a href="https://lucide.dev" target='_blank'>Lucide</a>, an open-source icon library. Every icon is drawn on the same 24×24 grid with the same stroke, so they look like one family wherever they appear.</p>
+    <p><b>Lucide</b> replaces <b>Radix Icons</b>, which the design system used before. Radix Icons had 318 icons; Lucide has over 2,100, so there are about <b>1,800 more to choose from</b>. We've been using Lucide in RedLight projects, and it has enough icons to cover most features of a project: navigation, actions, files, status, charts, people, devices and more.</p>
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">Do I need to install it?</span>
+    <p>No. Lucide comes with the design system, and the components already include their icons, so you don't have to install anything to use them.</p>
+    <p>If you want icons in the rest of your app, we recommend Lucide, so they look the same as the ones in the components. Add <code>lucide-react</code> to your project, so it's one of your own dependencies instead of relying on the copy the design system brings:</p>
+    <DocCodeBlock code={IconsInstall} language='bash' />
+    <p>Browse and search the icons at <a href="https://lucide.dev/icons" target='_blank'>lucide.dev/icons</a>, and see the <a href="https://lucide.dev/guide/packages/lucide-react" target='_blank'>lucide-react guide</a> for every option.</p>
+    <br />
+    <span className="sub-heading">How to Use</span>
+    <p>Each icon is a React component. Import it by name with the <code>Icon</code> suffix (<code>SearchIcon</code>, not <code>Search</code>). That's the convention we follow: it makes icons easy to spot and keeps names like <code>Calendar</code> or <code>Table</code> free for components.</p>
+    <p>Icons are 24px by default and use the current text color, so they follow the text around them. Change them with <code>size</code>, <code>strokeWidth</code> and any SVG or style prop; use <code>theme</code> for the design system's colors:</p>
+    <DocCodeBlock code={IconsUse} language='tsx' />
+    <p>Components with an <code>iconComponent</code> prop, like <code>Button</code> and <code>Input</code>, take a component rather than an element. They size the icon themselves, so leave out <code>size</code>:</p>
+    <DocCodeBlock code={IconsInComponents} language='tsx' />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">In the Components</span>
+    <p>A few of the components and the icons they use. They're live, so try them.</p>
+    <ComponentIcons />
+    <br />
+    <span className="sub-heading">In Your Own Components</span>
+    <p>A few common patterns. Each preview is built with the code below it.</p>
+    <CustomIcons />
+  </DocBody>
+</Doc>

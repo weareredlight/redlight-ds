@@ -1,4 +1,4 @@
-import { Cross2Icon } from '@radix-ui/react-icons'
+import { XIcon } from 'lucide-react'
 
 import type { ReactNode, CSSProperties } from 'react'
 
@@ -16,7 +16,7 @@ export type TagProps = {
   style?: CSSProperties
 }
 
-const CloseIcon = () => <Cross2Icon />
+const CloseIcon = () => <XIcon />
 
 const Tag = ({
   children,

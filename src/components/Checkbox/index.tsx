@@ -1,8 +1,9 @@
-import { CheckIcon } from '@radix-ui/react-icons'
+import { CheckIcon } from 'lucide-react'
 import React from 'react'
 
 import type { CSSProperties } from 'react'
 
+import { ICON_SIZE } from '../../constants'
 import { capitalize, cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
@@ -64,7 +65,7 @@ const Checkbox = ({
             {...props}
           />
           <label className={styles.indicator} htmlFor={id}>
-            <CheckIcon />
+            <CheckIcon size={ICON_SIZE} />
           </label>
         </>
       ) : (
@@ -84,7 +85,7 @@ const Checkbox = ({
             {...props}
           />
           <label className={styles.indicator} htmlFor={id}>
-            <CheckIcon />
+            <CheckIcon size={ICON_SIZE} />
           </label>
           <Label
             id={id}

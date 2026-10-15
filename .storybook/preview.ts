@@ -15,7 +15,7 @@ const preview: Preview = {
         order: [
           'Get Started',
           'Playground',
-          'Style Guides', ['Typography', 'Colors', 'Spacing & Sizes'],
+          'Style Guides', ['Typography', 'Colors', 'Spacing & Sizes', 'Icons'],
           'Components'
         ],
       },

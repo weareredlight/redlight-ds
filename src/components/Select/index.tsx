@@ -1,5 +1,5 @@
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
 import * as SelectInput from '@radix-ui/react-select'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import type { ChangeEvent, CSSProperties } from 'react'

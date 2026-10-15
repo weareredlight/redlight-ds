@@ -1,4 +1,4 @@
-import { CheckCircledIcon, InfoCircledIcon, CrossCircledIcon } from '@radix-ui/react-icons'
+import { CircleCheckIcon, CircleXIcon, InfoIcon } from 'lucide-react'
 import 'react-toastify/dist/ReactToastify.css'
 import { toast as toastOG, Slide } from 'react-toastify'
 
@@ -87,7 +87,7 @@ export const alert = {
         <Text variant='h6' color='success500'>{title}</Text>
         <Text variant='microCopy' color='success'>{description}</Text>
       </Flex>
-      <CheckCircledIcon
+      <CircleCheckIcon
         style={{
           color: 'var(--colors-success500)',
           position: 'absolute',
@@ -107,7 +107,7 @@ export const alert = {
         <Text variant='h6' color='danger500'>{title}</Text>
         <Text variant='microCopy' color='danger'>{description}</Text>
       </Flex>
-      <CrossCircledIcon
+      <CircleXIcon
         style={{
           color: 'var(--colors-danger500)',
           position: 'absolute',
@@ -127,7 +127,7 @@ export const alert = {
         <Text variant='h6' color='primary600'>{title}</Text>
         <Text variant='microCopy' color='primary'>{description}</Text>
       </Flex>
-      <InfoCircledIcon
+      <InfoIcon
         style={{
           color: 'var(--colors-primary600)',
           position: 'absolute',

@@ -15,11 +15,23 @@
   min-height: 100%;
   overflow: hidden;
 
-  h1, h2, h3, h4, h5, h6, :global(.h7), p, span {
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  :global(.h7),
+  p,
+  span {
     font-family: Roboto, sans-serif;
-    margin: 0;
-    padding: 0;
-    border: 0;
+
+    // Not inside live components (.sb-unstyled), or it would beat their own padding, e.g. Pill's
+    &:where(:not(:global(.sb-unstyled) *)) {
+      margin: 0;
+      padding: 0;
+      border: 0;
+    }
   }
 
   h1 {
@@ -215,7 +227,8 @@
   }
 
   // Tokens are spans, which the page styles set to Roboto
-  code, code span {
+  code,
+  code span {
     font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', monospace;
     font-size: var(--fontSizes-xsm);
     line-height: var(--lineHeights-lg);

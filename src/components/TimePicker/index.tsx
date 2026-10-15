@@ -1,9 +1,10 @@
-import { ClockIcon } from '@radix-ui/react-icons'
+import { ClockIcon } from 'lucide-react'
 import { PatternFormat } from 'react-number-format'
 import { TimePicker as ReactTimePicker } from 'react-time-picker'
 
 import type { ChangeEvent, CSSProperties } from 'react'
 
+import { ICON_SIZE } from '../../constants'
 import { cx } from '../../utils'
 import Label from '../shared/Label'
 import Text from '../Text'
@@ -64,7 +65,7 @@ const TimePicker = ({
         disabled={disabled}
         clearIcon={false}
         className={styles.main}
-        clockIcon={<ClockIcon />}
+        clockIcon={<ClockIcon size={ICON_SIZE} />}
       />
     ) : (
       <PatternFormat

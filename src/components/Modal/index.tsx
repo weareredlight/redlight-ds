@@ -1,5 +1,5 @@
 import * as RadixDialog from '@radix-ui/react-dialog'
-import { Cross2Icon } from '@radix-ui/react-icons'
+import { XIcon } from 'lucide-react'
 import React, { ReactElement } from 'react'
 
 import { cx } from '../../utils'
@@ -52,7 +52,7 @@ const Modal = ({
         )}
         {children}
         <RadixDialog.Close className={styles.close} aria-label='Close' onClick={closeFn}>
-          <Cross2Icon />
+          <XIcon />
         </RadixDialog.Close>
       </RadixDialog.Content>
     </RadixDialog.Portal>

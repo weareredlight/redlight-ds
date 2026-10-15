@@ -1,5 +1,5 @@
-import { Pencil1Icon, TrashIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react-vite'
+import { PencilIcon, TrashIcon } from 'lucide-react'
 import { fn } from 'storybook/test'
 
 import type { TableMockType } from './mockdata/tableMockType'
@@ -130,7 +130,7 @@ export const WithActions: Story = {
       <Flex gap='xxsm'>
         <Button
           variant='textOnly'
-          iconComponent={() => <Pencil1Icon />}
+          iconComponent={() => <PencilIcon />}
           iconPosition='iconOnly'
           onClick={() => onEdit(row)}
         />

@@ -1,4 +1,4 @@
-import { MagnifyingGlassIcon, PlusIcon } from '@radix-ui/react-icons'
+import { PlusIcon, SearchIcon } from 'lucide-react'
 import { useMemo, useState } from 'react'
 
 import type { Project, ProjectStatus } from './data'
@@ -33,7 +33,7 @@ import { projects, statusOptions, team } from './data'
 const PAGE_SIZE = 5
 
 const AddIcon = () => <PlusIcon />
-const SearchIcon = () => <MagnifyingGlassIcon />
+const SearchFieldIcon = () => <SearchIcon />
 
 const cardStyle: CSSProperties = {
   backgroundColor: 'var(--colors-white)',
@@ -165,7 +165,7 @@ const DashboardDemo = () => {
             <Input
               label='Search'
               placeholder='Search projects…'
-              iconComponent={SearchIcon}
+              iconComponent={SearchFieldIcon}
               value={search}
               onChange={e => { setSearch(e.target.value ?? ''); setPage(1) }}
             />

@@ -9,7 +9,7 @@ import { capitalize, cx } from '../../utils'
 import styles from './styles.module.scss'
 
 export type TabsProps = {
-  tabs: { label: string }[],
+  tabs: { label: string | React.ReactNode }[],
   children: React.ReactNode | React.ReactNode[],
   align?: 'left' | 'right' | 'null'
   className?: string

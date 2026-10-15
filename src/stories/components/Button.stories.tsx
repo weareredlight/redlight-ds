@@ -1,5 +1,5 @@
-import { ChevronRightIcon, ChevronLeftIcon, PlusIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react-vite'
+import { ChevronLeftIcon, ChevronRightIcon, PlusIcon } from 'lucide-react'
 
 import Button from '../../components/Button'
 import Flex from '../../elements/Flex'

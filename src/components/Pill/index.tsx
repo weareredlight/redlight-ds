@@ -1,4 +1,4 @@
-import { Cross2Icon } from '@radix-ui/react-icons'
+import { XIcon } from 'lucide-react'
 
 import type { CSSProperties, ReactNode } from 'react'
 
@@ -15,7 +15,7 @@ export type PillProps = {
   style?: CSSProperties
 }
 
-const CloseIcon = () => <Cross2Icon />
+const CloseIcon = () => <XIcon />
 
 const Pill = ({
   children,

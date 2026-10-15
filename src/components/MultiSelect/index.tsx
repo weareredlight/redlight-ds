@@ -1,4 +1,4 @@
-import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from '@radix-ui/react-icons'
+import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
 import Select, { components } from 'react-select'
 
 import type { CSSProperties } from 'react'
@@ -8,6 +8,7 @@ import type {
   OptionProps,
 } from 'react-select'
 
+import { ICON_SIZE } from '../../constants'
 import Flex from '../../elements/Flex'
 import { colors } from '../../theme/colors'
 import { capitalize, cx } from '../../utils'
@@ -40,7 +41,7 @@ const DropdownIndicator = (props: DropdownIndicatorProps<OptionType, true>) => {
 
   return (
     <components.DropdownIndicator {...props}>
-      {menuIsOpen ? <ChevronUpIcon /> : <ChevronDownIcon />}
+      {menuIsOpen ? <ChevronUpIcon size={ICON_SIZE} /> : <ChevronDownIcon size={ICON_SIZE} />}
     </components.DropdownIndicator>
   )
 }
@@ -50,7 +51,7 @@ const CustomOption = (
 ) => (
   <components.Option {...props}>
     {props.data.label}
-    {props.isSelected && <CheckIcon />}
+    {props.isSelected && <CheckIcon size={ICON_SIZE} />}
   </components.Option>
 )
 

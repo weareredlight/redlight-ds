@@ -1,9 +1,10 @@
-import { CalendarIcon } from '@radix-ui/react-icons'
 import dayjs from 'dayjs'
+import { CalendarDaysIcon } from 'lucide-react'
 import * as Calendar from 'react-date-picker'
 
 import type { CSSProperties } from 'react'
 
+import { ICON_SIZE } from '../../constants'
 import { colors } from '../../theme/colors'
 import { cx } from '../../utils'
 import Label from '../shared/Label'
@@ -59,7 +60,7 @@ export const DatePicker = ({
       }}
       value={value}
       disabled={disabled}
-      calendarIcon={<CalendarIcon />}
+      calendarIcon={<CalendarDaysIcon size={ICON_SIZE} />}
       clearIcon={null}
       locale={localeString}
       calendarProps={{

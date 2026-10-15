@@ -2,12 +2,6 @@
 /* eslint-disable jsx-a11y/no-static-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 import {
-  CaretSortIcon,
-  CaretDownIcon,
-  CaretUpIcon,
-  MagnifyingGlassIcon
-} from '@radix-ui/react-icons'
-import {
   flexRender,
   getCoreRowModel,
   getFilteredRowModel,
@@ -15,6 +9,12 @@ import {
   useReactTable,
   createColumnHelper
 } from '@tanstack/react-table'
+import {
+  ChevronDownIcon,
+  ChevronsUpDownIcon,
+  ChevronUpIcon,
+  SearchIcon
+} from 'lucide-react'
 import {
   useCallback, useEffect, useRef, useState, ReactElement
 } from 'react'
@@ -26,6 +26,7 @@ import type {
 } from '@tanstack/react-table'
 import type { CSSProperties } from 'react'
 
+import { ICON_SIZE } from '../../constants'
 import Flex from '../../elements/Flex'
 import { cx } from '../../utils'
 import Input from '../Input'
@@ -121,10 +122,10 @@ const Table = <T extends object>({
                       {flexRender(column.columnDef.header, header.getContext())}
                     </Text>
                     {(isSortable && {
-                      asc: <CaretDownIcon />,
-                      desc: <CaretUpIcon />,
+                      asc: <ChevronDownIcon size={ICON_SIZE} />,
+                      desc: <ChevronUpIcon size={ICON_SIZE} />,
                     }[column.getIsSorted() as string])
-                      ?? <CaretSortIcon />}
+                      ?? <ChevronsUpDownIcon size={ICON_SIZE} />}
                   </div>
                   {header.column.getCanFilter() ? (
                     <Input
@@ -134,7 +135,7 @@ const Table = <T extends object>({
                       value={(columnFilterValue ?? '') as string}
                       placeholder='Filter by'
                       iconPosition='left'
-                      iconComponent={() => <MagnifyingGlassIcon />}
+                      iconComponent={() => <SearchIcon />}
                       onChange={({ target: { value } }) => (
                         column.setFilterValue(value || undefined)
                       )}

@@ -1,5 +1,5 @@
 /* eslint-disable no-plusplus */
-import { ChevronLeftIcon, ChevronRightIcon } from '@radix-ui/react-icons'
+import { ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 
 import type { CSSProperties } from 'react'

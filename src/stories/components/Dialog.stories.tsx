@@ -1,4 +1,4 @@
-import { ExclamationTriangleIcon } from '@radix-ui/react-icons'
+import { TriangleAlertIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
@@ -186,7 +186,7 @@ export const CustomContent: Story = {
     title: 'Custom Dialog Title',
     description: '',
     children: (
-      <ExclamationTriangleIcon
+      <TriangleAlertIcon
         style={{ margin: '0 auto', color: 'var(--colors-neutral)' }}
         width={42}
         height={42}

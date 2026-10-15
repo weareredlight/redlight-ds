@@ -1,0 +1,77 @@
+// =============================================================================
+// ICONS DOCS
+// =============================================================================
+
+// -----------------------------------------------------------------------------
+// In the components: one card per component
+// -----------------------------------------------------------------------------
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: var(--space-lg);
+  padding: var(--space-xxlg);
+  background: var(--colors-neutral100);
+  border-radius: var(--radii-md);
+}
+
+.card {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  padding: var(--space-lg);
+  background: var(--colors-white);
+  border-radius: var(--radii-sm);
+  box-shadow: var(--shadows-cardShadow);
+}
+
+.cardHeader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+}
+
+.iconNames {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xxxsm);
+
+  code {
+    font-family: monospace;
+    font-size: var(--fontSizes-xsm);
+    padding: 2px var(--space-xxsm);
+    border-radius: var(--radii-xsm);
+    background: var(--colors-primary100);
+    color: var(--colors-primary700);
+  }
+}
+
+.hint {
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-neutral600);
+}
+
+// -----------------------------------------------------------------------------
+// In your own components: preview above its code
+// -----------------------------------------------------------------------------
+
+.examples {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxxlg);
+}
+
+.example {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xsm);
+}
+
+.preview {
+  display: flex;
+  align-items: center;
+  padding: var(--space-xxlg);
+  background: var(--colors-neutral100);
+  border-radius: var(--radii-md);
+}

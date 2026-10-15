@@ -51,11 +51,21 @@
   position: absolute;
   bottom: 0;
 
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
   .iconButton {
     pointer-events: all;
 
-    &:hover { background: transparent; }
-    &:focus { box-shadow: none; }
+    &:hover {
+      background: transparent;
+    }
+
+    &:focus {
+      box-shadow: none;
+    }
   }
 
   // ===========================================================================
@@ -132,8 +142,13 @@
       opacity: 1;
     }
 
-    &:hover { background: var(--colors-primary200); }
-    &:focus { border-color: var(--colors-primary); }
+    &:hover {
+      background: var(--colors-primary200);
+    }
+
+    &:focus {
+      border-color: var(--colors-primary);
+    }
   }
 
   // ===========================================================================
@@ -143,7 +158,9 @@
   :where(&).stateError {
     border-color: var(--colors-danger);
 
-    &:focus { border-color: var(--colors-danger); }
+    &:focus {
+      border-color: var(--colors-danger);
+    }
   }
 
   :where(&).stateDirty {
@@ -176,6 +193,11 @@
   // ICON POSITION (room for the icon inside the field)
   // ===========================================================================
 
-  :where(&).iconLeft .field { padding-left: var(--space-xxxlg); }
-  :where(&).iconRight .field { padding-right: var(--space-xxxlg); }
+  :where(&).iconLeft .field {
+    padding-left: var(--space-xxxlg);
+  }
+
+  :where(&).iconRight .field {
+    padding-right: var(--space-xxxlg);
+  }
 }

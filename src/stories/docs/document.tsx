@@ -1,11 +1,11 @@
-import { CheckIcon, CopyIcon } from '@radix-ui/react-icons'
+import { CheckIcon, CopyIcon } from 'lucide-react'
 import React, { useEffect, useState } from 'react'
 // Fine-grained imports, so the build only includes these languages and theme (not all of Shiki's)
 import { createHighlighterCore } from 'shiki/dist/core.mjs'
 import { createJavaScriptRegexEngine } from 'shiki/dist/engine-javascript.mjs'
 
+import { ICON_SIZE, LAST_UPDATED, VERSION } from '../../constants'
 import { cx } from '../../utils'
-import { LAST_UPDATED, VERSION } from '../constants'
 
 import styles from './document.module.scss'
 
@@ -105,7 +105,7 @@ export const DocCodeBlock = ({
       <div className={styles.codeBlockHeader}>
         <span>{title ?? LANGUAGE_LABELS[language]}</span>
         <button type='button' onClick={copy} aria-label='Copy code'>
-          {copied ? <CheckIcon /> : <CopyIcon />}
+          {copied ? <CheckIcon size={ICON_SIZE} /> : <CopyIcon size={ICON_SIZE} />}
           {copied ? 'Copied' : 'Copy'}
         </button>
       </div>

@@ -1,12 +1,12 @@
-import { QuestionMarkCircledIcon } from '@radix-ui/react-icons'
 import { Meta, StoryObj } from '@storybook/react-vite'
+import { CircleQuestionMarkIcon } from 'lucide-react'
 
 import Button from '../../components/Button'
 import Tooltip from '../../components/Tooltip'
 import Flex from '../../elements/Flex'
 import { CenterOnCanvas } from '../decorators'
 
-const questionIcon = () => <QuestionMarkCircledIcon width='18' height='18' />
+const questionIcon = () => <CircleQuestionMarkIcon width='18' height='18' />
 
 const meta = {
   title: 'Components/Overlays/Tooltip',
