@@ -16,3 +16,13 @@ getColor('primary') // 'var(--colors-primary)'`
 export const ColorOverride = `setupTheme({
   userColors: { primary: '#F472B6', primary600: '#DB2777' },
 })`
+
+export const ColorDarkTheme = `setupTheme({
+  userColors: {
+    white: '#18181F', // surfaces
+    black: '#F4F4F6', // text
+    // ...inverted primary, neutral, success and danger scales
+    onPrimary: '#FFFFFF', // #3366FF still reads best with white text
+    onSuccess: '#18181F', // a light green fill reads best with dark text
+  },
+})`

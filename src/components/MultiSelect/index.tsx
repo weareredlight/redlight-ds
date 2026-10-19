@@ -118,7 +118,7 @@ const MultiSelect = ({
         />
         {!hasPills && value?.length > 0 && (
           <Flex className={styles.optionsCount}>
-            <Text variant='subHeadingSmall' color='white'>
+            <Text variant='subHeadingSmall' color={colors.accent ? 'onAccent' : 'onPrimary'}>
               {value?.length}
             </Text>
           </Flex>

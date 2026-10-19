@@ -91,7 +91,7 @@
       }
 
       + label svg {
-        color: var(--colors-white);
+        color: var(--colors-onPrimary);
       }
     }
   }
@@ -111,5 +111,5 @@
   position: relative;
   border: 1px solid var(--colors-neutral500);
   background-color: transparent;
-  color: var(--colors-white);
+  color: var(--colors-onPrimary);
 }

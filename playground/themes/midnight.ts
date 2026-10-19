@@ -15,6 +15,12 @@ const midnight: PlaygroundTheme = {
   colors: {
     black: '#F4F4F6', // brightest text
     white: '#18181F', // card / input surface
+    // on colors — the fills are light, so text on them uses the dark surface
+    onPrimary: '#18181F',
+    onAccent: '#18181F',
+    onNeutral: '#18181F',
+    onSuccess: '#18181F',
+    onDanger: '#18181F',
     // primary colors — hot pink
     primary100: '#392636', // 85% toward surface
     primary200: '#4F2F45', // 75% toward surface

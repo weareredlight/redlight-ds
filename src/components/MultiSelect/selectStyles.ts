@@ -1,5 +1,8 @@
-import { colors } from '../../theme/colors'
+import { theme } from '../../theme'
 import { sizes } from '../../theme/sizes'
+
+// `var(--colors-*)` references, so the menu follows the active theme.
+const { colors } = theme
 
 export const selectStyles = {
   valueContainer: (styles: object) => ({
@@ -15,6 +18,7 @@ export const selectStyles = {
     height: sizes.sizes.xxxlg,
     padding: `0 0 0 ${sizes.sizes.xxsm}`,
     borderColor: colors.neutral400,
+    backgroundColor: colors.white,
     boxShadow: 'none',
     '&:hover': {
       borderColor: colors.neutral600,
@@ -25,6 +29,7 @@ export const selectStyles = {
     ...styles,
     margin: 0,
     padding: 0,
+    color: colors.neutral800,
     cursor: 'pointer',
   }),
   menu: (styles: object) => ({

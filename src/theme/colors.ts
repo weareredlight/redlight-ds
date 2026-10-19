@@ -1,6 +1,14 @@
 export const colors = {
   black: '#000000',
   white: '#FFFFFF',
+  // on colors: text and icons over solid fills (filled buttons, checked controls,
+  // selected dates, ...). Separate from `white` (the surface color), so a dark
+  // theme can invert the surfaces and keep the right contrast on each fill.
+  onPrimary: '#FFFFFF',
+  onAccent: '#FFFFFF',
+  onNeutral: '#FFFFFF',
+  onSuccess: '#FFFFFF',
+  onDanger: '#FFFFFF',
   // primary colors
   primary100: '#EBF0FF', // 90% tint
   primary200: '#D6E0FF', // 80% tint

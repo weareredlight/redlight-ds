@@ -9,6 +9,7 @@
 .datePicker {
   // "Today" and weekday highlight: neutral, or accent when the default theme defines one
   --highlight: var(--colors-neutral);
+  --highlight-on: var(--colors-onNeutral);
   --highlight600: var(--colors-neutral600);
   --highlight700: var(--colors-neutral700);
 
@@ -143,7 +144,7 @@
 
         &:global(.selected-week) {
           background-color: var(--colors-primary);
-          color: var(--colors-white);
+          color: var(--colors-onPrimary);
 
           &:hover { background-color: var(--colors-primary600); }
           &:active { background-color: var(--colors-primary700); }
@@ -153,7 +154,7 @@
       // selected day
       button:global(.react-calendar__tile--active) {
         background-color: var(--colors-primary);
-        color: var(--colors-white);
+        color: var(--colors-onPrimary);
 
         &:hover { background-color: var(--colors-primary600); }
         &:active { background-color: var(--colors-primary700); }
@@ -162,7 +163,7 @@
       // today
       button:global(.react-calendar__tile--now) {
         background-color: var(--highlight);
-        color: var(--colors-white);
+        color: var(--highlight-on);
 
         &:hover { background-color: var(--highlight600); }
         &:active { background-color: var(--highlight700); }
@@ -176,6 +177,7 @@
 
   :where(&).accent {
     --highlight: var(--colors-accent);
+    --highlight-on: var(--colors-onAccent);
     --highlight600: var(--colors-accent600);
     --highlight700: var(--colors-accent700);
 

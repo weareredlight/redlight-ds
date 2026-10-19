@@ -9,7 +9,7 @@ import {
   DocSeparator
 } from '../document';
 
-import { ColorCss, ColorJs, ColorOverride } from './snippets'
+import { ColorCss, ColorDarkTheme, ColorJs, ColorOverride } from './snippets'
 
 import ColorStyles from './ColorStyles'
 
@@ -29,6 +29,8 @@ import ColorStyles from './ColorStyles'
     <br />
     <ColorStyles variant="base" title="Base Colors" keys={['white', 'black']} description="White is used for surfaces such as cards, inputs and modals; black for the strongest contrast." />
     <br />
+    <ColorStyles variant="on" title="On Colors" keys={['onPrimary', 'onAccent', 'onNeutral', 'onSuccess', 'onDanger']} description="Text and icons over a solid fill: filled buttons, checked checkboxes, radios and toggles, selected dates. Each one pairs with its fill, not with the surface, so it stays the same when a dark theme inverts white and black." />
+    <br />
     <ColorStyles variant="primary" description="This is the colour that identifies the brand of the product being designed. It is typically used to create a sense of balance and stability within the design." />
     <br />
     <ColorStyles variant="neutral" description="This colour is intended to create a grey color scheme. Its variations start with a very light tone, close to white. This can be used, for example, in the background of a document or a component. They end in a tone close to black that will be used mainly in the main titles." />
@@ -46,5 +48,19 @@ import ColorStyles from './ColorStyles'
     <DocCodeBlock code={ColorJs} language='tsx' />
     <p>To change the palette, override the colors with <code>setupTheme</code> (or redefine the variables in your CSS):</p>
     <DocCodeBlock code={ColorOverride} language='tsx' />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">Dark Themes</span>
+    <p>A dark theme usually inverts the scales: <code>white</code> becomes the dark surface (cards, inputs, modals), <code>black</code> the brightest text, and the tints and shades swap places. In an inverted theme, <code>white</code> and <code>black</code> name the surface and text roles, not the colors themselves.</p>
+    <p>Text and icons over a solid fill don't follow the surface: they follow the fill. White text on a <code>#3366FF</code> button still reads best when the page turns dark. That's why components use the <code>on</code> colors there instead of <code>white</code>:</p>
+    <ul>
+      <li><code>onPrimary</code>: filled primary buttons, checked checkboxes, radios and toggles, selected dates and the MultiSelect counter.</li>
+      <li><code>onAccent</code> / <code>onNeutral</code>: tertiary buttons, the MultiSelect counter and today's date, over the accent color when the theme defines one and over neutral otherwise.</li>
+      <li><code>onSuccess</code> / <code>onDanger</code>: filled success and danger buttons.</li>
+    </ul>
+    <p>The <code>on</code> colors are white by default and are never inverted. In a dark theme, set them for each fill: keep them light when the fill is still dark enough, make them dark when the fill is light (e.g. a pastel pink or green).</p>
+    <p>Set them as hex values, not as <code>$white</code> / <code>$black</code>: those point to the theme's own <code>white</code> and <code>black</code>, which are inverted. In a dark theme, <code>'$black'</code> is the light text color.</p>
+    <DocCodeBlock code={ColorDarkTheme} language='tsx' />
   </DocBody>
 </Doc>

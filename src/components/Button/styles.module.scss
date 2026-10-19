@@ -11,10 +11,13 @@
 
 @use '../../styles/typography';
 
-// Filled button: solid background that darkens on hover/active.
-@mixin filled($bg, $hover, $active, $disabled, $focus: null) {
+// Filled button: solid background that darkens on hover/active, with its
+// `on` color for the text and icons.
+@mixin filled($bg, $on, $hover, $active, $disabled, $focus: null) {
+  --button-on-color: #{$on};
+
   background-color: $bg;
-  color: var(--colors-white);
+  color: var(--button-on-color);
 
   &:hover { background-color: $hover; }
   &:active { background-color: $active; }
@@ -115,6 +118,7 @@
   :where(&).primary {
     @include filled(
       $bg: var(--colors-primary),
+      $on: var(--colors-onPrimary),
       $hover: var(--colors-primary600),
       $active: var(--colors-primary700),
       $disabled: var(--colors-primary200),
@@ -148,12 +152,14 @@
   // Uses the accent palette when the default theme defines one, neutral otherwise.
   :where(&).tertiary {
     --tertiary: var(--colors-neutral);
+    --tertiary-on: var(--colors-onNeutral);
     --tertiary600: var(--colors-neutral600);
     --tertiary700: var(--colors-neutral700);
     --tertiary200: var(--colors-neutral200);
 
     @include filled(
       $bg: var(--tertiary),
+      $on: var(--tertiary-on),
       $hover: var(--tertiary600),
       $active: var(--tertiary700),
       $disabled: var(--tertiary200),
@@ -163,6 +169,7 @@
 
   :where(&).tertiaryAccent {
     --tertiary: var(--colors-accent);
+    --tertiary-on: var(--colors-onAccent);
     --tertiary600: var(--colors-accent600);
     --tertiary700: var(--colors-accent700);
     --tertiary200: var(--colors-accent200);
@@ -183,6 +190,7 @@
   :where(&).danger {
     @include filled(
       $bg: var(--colors-danger),
+      $on: var(--colors-onDanger),
       $hover: var(--colors-danger500),
       $active: var(--colors-danger600),
       $disabled: var(--colors-danger200),
@@ -194,6 +202,7 @@
   :where(&).success {
     @include filled(
       $bg: var(--colors-success),
+      $on: var(--colors-onSuccess),
       $hover: var(--colors-success500),
       $active: var(--colors-success600),
       $disabled: var(--colors-success200),
@@ -256,7 +265,7 @@
   // --- loading + variant / icon ----------------------------------------------
   :where(&).loading {
     &:where(.neutral, .textOnly) svg { color: var(--colors-neutral700); }
-    &:where(.primary, .tertiary, .danger, .success) svg { color: var(--colors-white); }
+    &:where(.primary, .tertiary, .danger, .success) svg { color: var(--button-on-color); }
     &:where(.secondary) svg { color: var(--colors-primary); }
 
     &:where(.iconLeft) :global(.loading-icon) { margin-left: var(--space-xxsm); }
