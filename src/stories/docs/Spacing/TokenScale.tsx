@@ -50,7 +50,7 @@ const Sample = ({ scale, value }: { scale: Scale, value: string }) => {
   }
 }
 
-export type Props = {
+type Props = {
   scale: Scale
   title: string
   description: string
@@ -58,7 +58,7 @@ export type Props = {
   guidelines?: Record<string, string>
 }
 
-export const TokenScale = ({
+const TokenScale = ({
   scale, title, description, guidelines = {},
 }: Props) => (
   <div className={styles.group}>

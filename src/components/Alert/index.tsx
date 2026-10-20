@@ -80,7 +80,7 @@ const infoOptions: ToastOptions = {
   },
 }
 
-export const alert = {
+const alert = {
   success: (title: string, description?: string, options?: ToastOptions) => toastOG(
     <>
       <Flex direction='column' justify='start' align='start' gap='xxsm'>

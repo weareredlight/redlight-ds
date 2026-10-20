@@ -35,7 +35,7 @@ const App = () => {
   return (
     <>
       <Flex as='nav' justify='spaceBetween' align='center' wrap gap='lg' style={navbarStyle}>
-        <Text variant='h5'>RedLight DS Playground</Text>
+        <Text variant='h5' color='primary'>RedLight DS Playground</Text>
         <GroupButtons
           buttons={themeButtons}
           selectedButton={themeId}

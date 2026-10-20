@@ -4,7 +4,7 @@ import { capitalize, cx } from '../../utils'
 
 import styles from './styles.module.scss'
 
-export type FlexProps = {
+type FlexProps = {
   as?: React.ElementType
   direction?: 'row' | 'column'
   align?: 'start' | 'center' | 'end' | 'baseline' | 'stretch'
@@ -14,7 +14,7 @@ export type FlexProps = {
   debug?: boolean
 } & React.HTMLAttributes<HTMLElement>
 
-export const Flex = React.forwardRef(({
+const Flex = React.forwardRef(({
   as: Component = 'div',
   direction = 'row',
   align = 'start',

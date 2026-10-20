@@ -7,7 +7,7 @@ import { DocCode } from '../document'
 
 import styles from './styles.module.scss'
 
-export type Props = {
+type Props = {
   variant: string
   title?: string
   description?: string
@@ -15,7 +15,7 @@ export type Props = {
   keys?: ColorType[]
 }
 
-export const ColorStyles = ({
+const ColorStyles = ({
   variant = 'primary',
   title,
   description,

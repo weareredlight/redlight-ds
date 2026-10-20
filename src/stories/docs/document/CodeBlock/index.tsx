@@ -77,7 +77,7 @@ export const DocCodeBlock = ({
 
 /* ------------------------------- DocCodeTabs -------------------------------- */
 
-export type DocCodeTab = { label: string, code: string, language?: CodeLanguage }
+type DocCodeTab = { label: string, code: string, language?: CodeLanguage }
 
 type DocCodeTabsProps = {
   tabs: DocCodeTab[]

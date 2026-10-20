@@ -59,7 +59,7 @@ const Value = ({ label, value, token }: { label: string, value: string, token: s
   </span>
 )
 
-export const TextStyles = () => (
+const TextStyles = () => (
   <>
     {groups.map(group => (
       <div className={styles.group} key={group.title}>

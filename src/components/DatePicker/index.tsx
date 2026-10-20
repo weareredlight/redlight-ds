@@ -28,7 +28,7 @@ export type DatePickerProps = {
   style?: CSSProperties
 }
 
-export const DatePicker = ({
+const DatePicker = ({
   name,
   label,
   error,
