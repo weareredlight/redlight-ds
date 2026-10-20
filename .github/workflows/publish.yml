@@ -1,13 +1,17 @@
-# This workflow will run tests using node and then publish a package to GitHub Packages when a release is created
+# Publishes the package to npm when a release is created, then deploys Storybook to GitHub Pages.
+# Storybook can also be redeployed on its own from the Actions tab ("Run workflow"), without publishing to npm.
 # For more information see: https://docs.github.com/en/actions/publishing-packages/publishing-nodejs-packages
 
 name: Publish to NPM
 on:
   release:
     types: [created]
+  workflow_dispatch:
 
 jobs:
   build:
+    # Only a release publishes to npm. A manual run skips this job
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -22,3 +26,23 @@ jobs:
       - run: npm publish
         env:
           NODE_AUTH_TOKEN: ${{secrets.NPM_PUBLISH_KEY}}
+
+  storybook:
+    needs: build
+    # Run after a successful publish, or on a manual run where build was skipped. Never after a failed publish
+    if: ${{ !failure() && !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn build-storybook
+      - uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./storybook-static
