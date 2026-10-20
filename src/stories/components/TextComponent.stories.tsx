@@ -60,7 +60,7 @@ export const Default: Story = {
 
 export const AllVariants: Story = {
   args: {
-    color: 'neutral800',
+    color: 'primary',
   },
   render: args => (
     <Flex direction='column' align='start' gap='xsm'>

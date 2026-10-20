@@ -8,9 +8,9 @@ import { cx } from '../../utils'
 
 import styles from './styles.module.scss'
 
-export type ButtonVariant = 'neutral' | 'primary' | 'secondary' | 'tertiary' | 'textOnly' | 'danger' | 'success'
-export type ButtonSize = 'normal' | 'large'
-export type ButtonIconPosition = 'left' | 'right' | 'iconOnly' | 'null'
+type ButtonVariant = 'neutral' | 'primary' | 'secondary' | 'tertiary' | 'textOnly' | 'danger' | 'success'
+type ButtonSize = 'normal' | 'large'
+type ButtonIconPosition = 'left' | 'right' | 'iconOnly' | 'null'
 
 export type ButtonProps = {
   children?: ReactNode

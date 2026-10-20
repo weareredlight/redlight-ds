@@ -6,7 +6,7 @@ import { sizes } from './sizes'
 import { defaultScales, scalesToCss, scalesToVarRefs } from './tokens'
 
 // Class that carries the default tokens (they are also set on :root by the generated tokens CSS).
-export const DEFAULT_THEME_CLASS = 'rl-theme-default'
+const DEFAULT_THEME_CLASS = 'rl-theme-default'
 
 export const theme = {
   ...scalesToVarRefs({ colors, ...sizes, shadows }),

@@ -12,6 +12,7 @@ vite.config.ts
 vite.lib.config.ts
 config/vite/
 yarn.lock
+knip.ts
 
 # storybook
 src/stories/

@@ -131,7 +131,7 @@ const DashboardDemo = () => {
       {/* Header */}
       <Flex justify='spaceBetween' align='center' wrap gap='lg'>
         <Flex direction='column' align='start' gap='xxxsm'>
-          <Text variant='h3'>Projects</Text>
+          <Text variant='h3' color='primary'>Projects</Text>
           <Text variant='paragraph' color='neutral700'>Track what the team is shipping this quarter.</Text>
         </Flex>
         <Flex align='center' gap='lg'>
@@ -203,7 +203,7 @@ const DashboardDemo = () => {
             ))}
           </Flex>
           <Flex direction='column' align='start' gap='xsm'>
-            <Text variant='h6'>Focus areas</Text>
+            <Text variant='h6' color='primary'>Focus areas</Text>
             <Flex justify='start' wrap gap='xsm'>
               {tags.map(tag => (
                 <Tag key={tag} onClose={() => setTags(tags.filter(t => t !== tag))}>{tag}</Tag>

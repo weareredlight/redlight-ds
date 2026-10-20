@@ -1,18 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { useRef } from 'react'
 
-export const RestrictedWidth = (Story: any, context: any) => {
-  const firstRender = useRef(true)
-
-  const maxWidth = firstRender.current ? context.parameters.width : context.globals.containerSize
-  firstRender.current = false
-  return (
-    <div style={{ maxWidth }}>
-      <Story />
-    </div>
-  )
-}
-
 export const CenterOnCanvas = (Story: any) => {
   const firstRender = useRef(true)
 

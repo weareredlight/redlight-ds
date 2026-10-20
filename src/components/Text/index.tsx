@@ -16,9 +16,9 @@ export type TextProps = {
   children?: string | ReactNode
 }
 
-export const Text = ({
+const Text = ({
   variant = 'paragraph',
-  color = 'primary',
+  color = 'black',
   className,
   style,
   children,

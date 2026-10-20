@@ -9,4 +9,3 @@ export {
   DocSeparator,
 } from './Layout'
 export { DocCodeBlock, DocCodeTabs } from './CodeBlock'
-export type { DocCodeTab } from './CodeBlock'

@@ -28,6 +28,26 @@ const setFlag = (value) => {
   }
 };
 
+// Automatically expands all sidebar groups (folders) in the Storybook explorer tree when they first render.
+const expandedGroups = new Set();
+
+const expandGroups = () => {
+  document
+    .querySelectorAll('#storybook-explorer-tree [data-nodetype="group"][data-item-id]')
+    .forEach((group) => {
+      const id = group.getAttribute('data-item-id');
+      if (expandedGroups.has(id)) return;
+
+      expandedGroups.add(id);
+
+      group.removeAttribute('data-item-id');
+      group.querySelector('[aria-expanded="false"]')?.click();
+      group.setAttribute('data-item-id', id);
+    });
+};
+
+new MutationObserver(expandGroups).observe(document.body, { childList: true, subtree: true });
+
 addons.register('redlight-ds/hide-panel', (api) => {
   api.on(CURRENT_STORY_WAS_SET, ({ storyId }) => {
     const shouldHide = STORIES_WITHOUT_PANEL.includes(storyId);
