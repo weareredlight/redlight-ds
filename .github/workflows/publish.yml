@@ -15,9 +15,9 @@ jobs:
         with:
           node-version: 22
           registry-url: https://registry.npmjs.org/
-      - run: yarn install
-      - run: yarn lint
-      - run: yarn ts
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn validate
       - run: yarn build
       - run: npm publish
         env:

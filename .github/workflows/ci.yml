@@ -1,0 +1,26 @@
+# Validates every pull request and every push to main.
+# Note: `yarn install` also runs the `prepare` script, which builds the library,
+# so a broken build fails the install step.
+
+name: CI
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+# Cancel an in-progress run when new commits are pushed to the same branch/PR
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: yarn
+      - run: yarn install --frozen-lockfile
+      - run: yarn validate
