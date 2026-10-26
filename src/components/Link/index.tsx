@@ -30,7 +30,7 @@ const Link = ({
 }: LinkProps) => (
   <a
     href={href}
-    target={openInNewTab ? '_blank' : ''}
+    target={openInNewTab ? '_blank' : undefined}
     rel='noreferrer'
     className={cx(
       styles.link,

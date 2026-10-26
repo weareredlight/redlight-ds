@@ -35,12 +35,10 @@ export const globalFilter = <T extends object>(
       ?.toLowerCase()
       .includes(filterValue?.toLowerCase())
   }
-  // Filter by date
-  if (
-    columnId?.toLowerCase().includes('date')
-    && dayjs(value as string).isValid()
-  ) {
-    return dayjs(value as string)
+  // Filter by date. An empty date never matches (dayjs reads it as today)
+  const date = toDate(value)
+  if (columnId?.toLowerCase().includes('date') && date?.isValid()) {
+    return date
       .format('DD-MM-YYYY')
       .includes(filterValue)
   }
@@ -65,25 +63,13 @@ export const globalSort = <T extends object>(
   }
   // Sort objects by name
   if (typeof aVal === 'object' && typeof bVal === 'object') {
-    const aUnknown = aVal || ({} as any)
-    const bUnknown = bVal || ({} as any)
-    const aUserName = `${aUnknown.firstName}${aUnknown.lastName}`?.toLowerCase()
-    const bUserName = `${bUnknown.firstName}${bUnknown.lastName}`?.toLowerCase()
-    const aName: string = aUnknown.name
-      || aUserName
-      || aUnknown.title
-      || aUnknown.label
-      || aUnknown.id
-      || ''
-    const bName: string = bUnknown.name
-      || bUserName
-      || bUnknown.title
-      || bUnknown.label
-      || bUnknown.id
-      || ''
+    const aName = getObjectName(aVal)
+    const bName = getObjectName(bVal)
+    if (!aName && !bName) return 0
     if (!aName) return -1
     if (!bName) return 1
-    return aName.localeCompare(bName)
+    // numeric: 'Item 2' before 'Item 10', and id 3 before id 20
+    return aName.localeCompare(bName, undefined, { numeric: true })
   }
   // Sort booleans by value
   if (typeof aVal === 'boolean' && typeof bVal === 'boolean') {
@@ -92,14 +78,15 @@ export const globalSort = <T extends object>(
     return 1
   }
   // Sort dates by value
+  const aDate = toDate(aVal)
+  const bDate = toDate(bVal)
   if (
     columnId?.toLowerCase().includes('date')
-    && (dayjs(aVal as string).isValid() || dayjs(bVal as string).isValid())
+    && (aDate?.isValid() || bDate?.isValid())
   ) {
-    const aDate = dayjs(aVal as string)
-    const bDate = dayjs(bVal as string)
-    if (!aDate.isValid()) return -1
-    if (!bDate.isValid()) return 1
+    // Empty and invalid dates go first
+    if (!aDate?.isValid()) return -1
+    if (!bDate?.isValid()) return 1
     if (aDate.isBefore(bDate)) return -1
     if (aDate.isAfter(bDate)) return 1
     return 0
@@ -115,6 +102,21 @@ export const globalSort = <T extends object>(
     return aVal.localeCompare(bVal)
   }
   return 0
+}
+
+// Empty values become null instead of a date, because dayjs(undefined) is today
+const toDate = (value: unknown) => (
+  value === undefined || value === null || value === '' ? null : dayjs(value as string)
+)
+
+// The text an object is sorted by: name, then first + last name, title, label or id
+const getObjectName = (value: unknown): string => {
+  const obj = (value || {}) as any
+  const fullName = obj.firstName || obj.lastName
+    ? `${obj.firstName ?? ''}${obj.lastName ?? ''}`
+    : ''
+  // String() because an id can be a number
+  return String(obj.name || fullName || obj.title || obj.label || obj.id || '').toLowerCase()
 }
 
 const getObjectStringContents = (value: unknown): string => {

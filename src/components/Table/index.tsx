@@ -24,7 +24,7 @@ import type {
   SortingState,
   ColumnSort,
 } from '@tanstack/react-table'
-import type { CSSProperties } from 'react'
+import type { CSSProperties, KeyboardEvent } from 'react'
 
 import { ICON_SIZE } from '../../constants'
 import Flex from '../../elements/Flex'
@@ -106,17 +106,35 @@ const Table = <T extends object>({
               const isSortable = column.getCanSort()
 
               const columnWidth = (column.columnDef.meta as { width?: string })?.width ?? 'auto'
+              const sorted = column.getIsSorted()
+              const headerText = typeof column.columnDef.header === 'string'
+                ? column.columnDef.header
+                : column.id
 
               return (
                 <th
                   key={header.id}
                   style={{ width: columnWidth }}
                   className={cx(!isSortable && styles.disabled)}
+                  // Tells screen readers how the table is sorted by this column
+                  aria-sort={isSortable
+                    ? ({ asc: 'ascending', desc: 'descending' } as const)[sorted as string] ?? 'none'
+                    : undefined}
                 >
                   <div
                     className={cx(styles.columnHeader, isSortable && styles.sortable)}
                     // eslint-disable-next-line no-mixed-operators
                     onClick={isSortable && column.getToggleSortingHandler() || undefined}
+                    // Sortable headers are buttons: reachable with Tab, sorted with Enter or Space
+                    {...(isSortable && {
+                      role: 'button',
+                      tabIndex: 0,
+                      onKeyDown: (event: KeyboardEvent) => {
+                        if (event.key !== 'Enter' && event.key !== ' ') return
+                        event.preventDefault()
+                        column.toggleSorting()
+                      },
+                    })}
                   >
                     <Text variant='subHeading' color='neutral800'>
                       {flexRender(column.columnDef.header, header.getContext())}
@@ -134,6 +152,7 @@ const Table = <T extends object>({
                       variant='simple'
                       value={(columnFilterValue ?? '') as string}
                       placeholder='Filter by'
+                      aria-label={`Filter by ${headerText}`}
                       iconPosition='left'
                       iconComponent={() => <SearchIcon />}
                       onChange={({ target: { value } }) => (

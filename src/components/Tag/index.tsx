@@ -49,6 +49,7 @@ const Tag = ({
           iconPosition='iconOnly'
           variant='textOnly'
           className={styles.closeButton}
+          aria-label='Remove'
         />
       )}
     </span>

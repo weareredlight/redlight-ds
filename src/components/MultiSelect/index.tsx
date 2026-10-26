@@ -90,7 +90,7 @@ const MultiSelect = ({
       {label && <Label id={name} label={label} />}
       <div className={cx(styles.wrapper, colors.accent && styles.accent, styles[`state${capitalize(state)}`])}>
         <Select
-          id={name}
+          inputId={name}
           value={
             value?.length
               ? value.map((item: string) => ({

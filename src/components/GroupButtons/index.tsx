@@ -28,6 +28,7 @@ const GroupButtons = ({
         key={button.value + Number(index)}
         onClick={() => onButtonSelect(button.value)}
         variant={button.value === selectedButton ? 'primary' : 'secondary'}
+        aria-pressed={button.value === selectedButton}
         className={styles.button}
       >
         {button.label}

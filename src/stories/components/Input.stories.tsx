@@ -161,6 +161,7 @@ const PasswordTemplate = (args: InputProps) => {
       type={showPassword ? 'text' : 'password'}
       iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
       onClickIcon={() => setShowPassword(!showPassword)}
+      iconLabel={showPassword ? 'Hide password' : 'Show password'}
     />
   )
 }
@@ -189,6 +190,7 @@ return (
     type={showPassword ? 'text' : 'password'}
     iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
     onClickIcon={() => setShowPassword(!showPassword)}
+    iconLabel={showPassword ? 'Hide password' : 'Show password'}
     value={yourPassword}
     onChange={e => updateFunction(e.target.value)}
   />

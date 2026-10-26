@@ -34,3 +34,10 @@
   background-color: var(--colors-primary200);
   color: var(--colors-primary);
 }
+
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--colors-neutral700);
+}

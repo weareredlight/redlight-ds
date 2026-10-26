@@ -55,7 +55,7 @@ export const selectStyles = {
     color: isDisabled ? colors.neutral400 : colors.neutral800,
     fontSize: sizes.fontSizes.xsm,
     lineHeight: 1,
-    cursor: isDisabled ? 'defaul' : 'pointer',
+    cursor: isDisabled ? 'default' : 'pointer',
 
     '&:hover': {
       backgroundColor: colors.primary100,

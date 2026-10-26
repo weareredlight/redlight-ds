@@ -33,6 +33,8 @@ export type InputProps = {
   iconPosition?: IconPosition
   required?: boolean
   onClickIcon?: () => void
+  // Accessible name of the icon button, e.g. 'Show password'. Needed together with onClickIcon
+  iconLabel?: string
   onChange: (event: ChangeEvent<HTMLInputElement>) => void
   containerProps?: React.HTMLAttributes<HTMLDivElement>
   fullWidth?: boolean
@@ -52,6 +54,7 @@ const Input = React.forwardRef(({
   state = 'null',
   iconPosition = 'right',
   onClickIcon,
+  iconLabel,
   onChange,
   className,
   variant = 'null',
@@ -71,6 +74,7 @@ const Input = React.forwardRef(({
           iconPosition='iconOnly'
           variant='textOnly'
           className={styles.iconButton}
+          aria-label={iconLabel}
         />
       )
     }
@@ -116,10 +120,14 @@ const Input = React.forwardRef(({
           required={required}
           disabled={disabled || state === 'disabled'}
           onChange={e => {
-            let finalValue: string | null = e.target.value
-            if (type === 'number') finalValue = Number(finalValue) as unknown as string
+            const { value: rawValue } = e.target
+            // An empty field is null for every type. Converting first would turn it into 0
+            let finalValue: string | null = rawValue === '' ? null : rawValue
+            if (type === 'number' && finalValue !== null) {
+              finalValue = Number(finalValue) as unknown as string
+            }
             const target = {
-              value: finalValue === '' ? null : finalValue, name: name || id
+              value: finalValue, name: name || id
             } as (EventTarget & HTMLInputElement)
             const event = { target } as ChangeEvent<HTMLInputElement>
             onChange(event)

@@ -34,6 +34,7 @@ const Pill = ({
         iconPosition='iconOnly'
         variant='textOnly'
         className={styles.closeButton}
+        aria-label='Remove'
       />
     )}
   </span>

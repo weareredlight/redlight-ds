@@ -46,7 +46,7 @@ const TextArea = React.forwardRef(({
     <div className={styles.textArea}>
       {label || description ? (
         <Label
-          id={id}
+          id={id || name}
           label={label}
           description={description}
           className={styles.label}
@@ -54,7 +54,7 @@ const TextArea = React.forwardRef(({
       ) : null}
       <textarea
         className={cx(styles.field, state && state !== 'null' && styles[`state${capitalize(state)}`], className)}
-        id={id}
+        id={id || name}
         ref={ref}
         name={name}
         value={value}

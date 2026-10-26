@@ -13,6 +13,12 @@ vite.lib.config.ts
 config/vite/
 yarn.lock
 knip.ts
+jest.config.js
+tsconfig.build.json
+
+# tests
+src/setupTests.ts
+__tests__/
 
 # storybook
 src/stories/

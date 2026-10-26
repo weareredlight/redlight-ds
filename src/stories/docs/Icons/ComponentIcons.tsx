@@ -107,6 +107,7 @@ const InputDemo = () => {
         type={showPassword ? 'text' : 'password'}
         iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
         onClickIcon={() => setShowPassword(!showPassword)}
+        iconLabel={showPassword ? 'Hide password' : 'Show password'}
         value={password}
         onChange={e => setPassword(e.target.value)}
         fullWidth

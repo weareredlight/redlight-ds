@@ -77,15 +77,22 @@ const Pagination: React.FC<PaginationProps> = ({
     return (
       <>
         {pageNumbers.map(pageNumber => (
-          <Button
-            key={pageNumber}
-            className={cx(styles.button, pageNumber === page ? styles.currentPage : styles.page)}
-            variant='textOnly'
-            // href='#'
-            onClick={() => handlePageChange(pageNumber)}
-          >
-            {pageNumber}
-          </Button>
+          typeof pageNumber === 'number' ? (
+            <Button
+              key={pageNumber}
+              className={cx(styles.button, pageNumber === page ? styles.currentPage : styles.page)}
+              variant='textOnly'
+              aria-label={`Page ${pageNumber}`}
+              aria-current={pageNumber === page ? 'page' : undefined}
+              onClick={() => handlePageChange(pageNumber)}
+            >
+              {pageNumber}
+            </Button>
+          ) : (
+            <span key={pageNumber} className={cx(styles.button, styles.ellipsis)} aria-hidden>
+              {pageNumber}
+            </span>
+          )
         ))}
       </>
     )
@@ -101,6 +108,7 @@ const Pagination: React.FC<PaginationProps> = ({
         iconPosition='iconOnly'
         className={styles.button}
         disabled={page <= 1}
+        aria-label='Previous page'
       />
       {variant === 'default' && (
         renderPageNumbers()
@@ -113,6 +121,7 @@ const Pagination: React.FC<PaginationProps> = ({
         iconPosition='iconOnly'
         className={styles.button}
         disabled={page >= totalPages}
+        aria-label='Next page'
       />
     </div>
   )
