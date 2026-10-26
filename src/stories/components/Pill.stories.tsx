@@ -2,7 +2,7 @@ import { fn } from 'storybook/test'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import Pill from '../../components/Pill'
+import Pill from 'src/components/Pill'
 
 const meta = {
   title: 'Components/Displays/Pill',

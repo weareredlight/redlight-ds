@@ -1,6 +1,6 @@
 import type { CSSProperties } from 'react'
 
-import { capitalize, cx } from '../../../utils'
+import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

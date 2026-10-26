@@ -3,7 +3,7 @@ import { useState } from 'react'
 
 import type { CSSProperties } from 'react'
 
-import { Flex, GroupButtons, Text } from '../src'
+import { Flex, GroupButtons, Text } from 'src'
 
 import DashboardDemo from './DashboardDemo'
 import { applyTheme, getSavedThemeId, themes } from './themes'

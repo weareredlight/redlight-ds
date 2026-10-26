@@ -8,15 +8,15 @@ import {
 
 import type { CSSProperties, ReactNode } from 'react'
 
-import Avatar from '../../../components/Avatar'
-import Button from '../../../components/Button'
-import Pill from '../../../components/Pill'
-import PopOver from '../../../components/PopOver'
-import Tag from '../../../components/Tag'
-import Text from '../../../components/Text'
-import Tooltip from '../../../components/Tooltip'
-import Flex from '../../../elements/Flex'
-import { cx } from '../../../utils'
+import Avatar from 'src/components/Avatar'
+import Button from 'src/components/Button'
+import Pill from 'src/components/Pill'
+import PopOver from 'src/components/PopOver'
+import Tag from 'src/components/Tag'
+import Text from 'src/components/Text'
+import Tooltip from 'src/components/Tooltip'
+import Flex from 'src/elements/Flex'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

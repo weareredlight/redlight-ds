@@ -1,6 +1,6 @@
 import React, { useRef, useState } from 'react'
 
-import { cx } from '../../../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

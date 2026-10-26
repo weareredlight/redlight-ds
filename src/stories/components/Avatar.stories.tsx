@@ -1,6 +1,6 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-import Avatar from '../../components/Avatar'
+import Avatar from 'src/components/Avatar'
 
 const meta = {
   title: 'Components/General/Avatar',

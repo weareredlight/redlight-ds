@@ -3,9 +3,9 @@ import { useState, useRef, useCallback } from 'react'
 
 import type { ChangeEvent, CSSProperties } from 'react'
 
-import { cx } from '../../utils'
-import Button from '../Button'
-import Label from '../shared/Label'
+import Button from 'src/components/Button'
+import Label from 'src/components/shared/Label'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -18,6 +18,7 @@ export type UploadProps = {
   buttonText?: string
   defaultFile?: File
   onUpload?: (file: File) => void
+  onClear?: () => void
   disabled?: boolean
   className?: string
   style?: CSSProperties
@@ -34,6 +35,7 @@ const Upload = ({
   buttonText,
   defaultFile,
   onUpload,
+  onClear,
   disabled,
   className,
   style,
@@ -109,11 +111,13 @@ const Upload = ({
             onClick={() => {
               setFileName('')
               setFileUrl(null)
+              setFileExtension('')
+              if (fileInput.current) fileInput.current.value = ''
+              onClear?.()
             }}
             className={styles.clearBtn}
-          >
-            Clear
-          </Button>
+            aria-label='Remove file'
+          />
         )}
         <label className={styles.trigger} htmlFor={id}>
           {size === 'normal' ? (

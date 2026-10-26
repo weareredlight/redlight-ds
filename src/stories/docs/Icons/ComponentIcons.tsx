@@ -10,15 +10,15 @@ import { useState } from 'react'
 
 import type { ReactNode } from 'react'
 
-import alert, { ToastContainer } from '../../../components/Alert'
-import Button from '../../../components/Button'
-import Checkbox from '../../../components/Checkbox'
-import DatePicker from '../../../components/DatePicker'
-import Input from '../../../components/Input'
-import Pagination from '../../../components/Pagination'
-import Select from '../../../components/Select'
-import Flex from '../../../elements/Flex'
-import { cx } from '../../../utils'
+import alert, { ToastContainer } from 'src/components/Alert'
+import Button from 'src/components/Button'
+import Checkbox from 'src/components/Checkbox'
+import DatePicker from 'src/components/DatePicker'
+import Input from 'src/components/Input'
+import Pagination from 'src/components/Pagination'
+import Select from 'src/components/Select'
+import Flex from 'src/elements/Flex'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -107,6 +107,7 @@ const InputDemo = () => {
         type={showPassword ? 'text' : 'password'}
         iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
         onClickIcon={() => setShowPassword(!showPassword)}
+        iconLabel={showPassword ? 'Hide password' : 'Show password'}
         value={password}
         onChange={e => setPassword(e.target.value)}
         fullWidth

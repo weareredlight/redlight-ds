@@ -2,10 +2,10 @@ import { EyeClosedIcon, EyeIcon, SearchIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import type { InputProps } from '../../components/Input'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { InputProps } from 'src/components/Input'
 
-import Input from '../../components/Input'
+import Input from 'src/components/Input'
 
 // Keeps the typed value, so the input can be edited and the "value" control still works.
 // Input sends `null` when the field is cleared (and a number for type='number').
@@ -161,6 +161,7 @@ const PasswordTemplate = (args: InputProps) => {
       type={showPassword ? 'text' : 'password'}
       iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
       onClickIcon={() => setShowPassword(!showPassword)}
+      iconLabel={showPassword ? 'Hide password' : 'Show password'}
     />
   )
 }
@@ -189,6 +190,7 @@ return (
     type={showPassword ? 'text' : 'password'}
     iconComponent={showPassword ? ShowPasswordIcon : HidePasswordIcon}
     onClickIcon={() => setShowPassword(!showPassword)}
+    iconLabel={showPassword ? 'Hide password' : 'Show password'}
     value={yourPassword}
     onChange={e => updateFunction(e.target.value)}
   />

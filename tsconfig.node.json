@@ -1,0 +1,17 @@
+// Type-checking for the config files at the root, which run in Node and no other tsconfig includes
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "rootDir": ".",
+    "noEmit": true,
+    "types": ["node"]
+  },
+  "include": [
+    "vite.config.ts",
+    "vite.lib.config.ts",
+    "knip.ts",
+    "config",
+    "src/declaration.d.ts"
+  ],
+  "exclude": []
+}

@@ -2,12 +2,13 @@ import * as RadixDialog from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 import React, { ReactElement } from 'react'
 
-import { cx } from '../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
 export type ModalProps = {
   open: boolean
+  openFn?: () => void
   closeFn: () => void
   renderTrigger?: () => ReactElement
   title?: string
@@ -19,6 +20,7 @@ export type ModalProps = {
 
 const Modal = ({
   open = false,
+  openFn,
   closeFn,
   renderTrigger,
   title,
@@ -27,7 +29,9 @@ const Modal = ({
   className,
   style,
 }: ModalProps) => (
-  <RadixDialog.Root open={open}>
+  // Radix reports every open and close here: the trigger, the close button, Escape and a click
+  // outside. Without it, clicking the trigger did nothing, because `open` is controlled
+  <RadixDialog.Root open={open} onOpenChange={isOpen => (isOpen ? openFn?.() : closeFn())}>
     <RadixDialog.Trigger asChild>
       {renderTrigger && renderTrigger()}
     </RadixDialog.Trigger>
@@ -35,8 +39,6 @@ const Modal = ({
       <RadixDialog.Overlay className={styles.overlay} />
       <RadixDialog.Content
         style={style}
-        onEscapeKeyDown={closeFn}
-        onInteractOutside={closeFn}
         className={cx(styles.content, className)}
         onOpenAutoFocus={event => event.preventDefault()}
       >
@@ -51,7 +53,7 @@ const Modal = ({
           </RadixDialog.Description>
         )}
         {children}
-        <RadixDialog.Close className={styles.close} aria-label='Close' onClick={closeFn}>
+        <RadixDialog.Close className={styles.close} aria-label='Close'>
           <XIcon />
         </RadixDialog.Close>
       </RadixDialog.Content>

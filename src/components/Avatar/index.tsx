@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
-import Label from '../shared/Label'
+import Label from 'src/components/shared/Label'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -34,7 +34,15 @@ const Avatar = ({
   return (
     <div className={cx(styles.avatar, className)} style={style} {...props}>
       <div className={cx(styles.placeholder, styles[size])} style={{ width, height: width }}>
-        {url ? <img src={url} alt={name} /> : initials}
+        {url ? <img src={url} alt={displayLabel ? '' : name} /> : (
+          <span
+            role={displayLabel ? undefined : 'img'}
+            aria-label={displayLabel ? undefined : name}
+            aria-hidden={displayLabel || undefined}
+          >
+            {initials}
+          </span>
+        )}
         {online && <div className={styles.status} />}
       </div>
       {displayLabel

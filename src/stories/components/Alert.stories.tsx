@@ -1,9 +1,9 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import type { ToastOptions } from 'react-toastify'
 
-import alert, { ToastContainer } from '../../components/Alert'
-import Button from '../../components/Button'
-import { CenterOnCanvas } from '../decorators'
+import alert, { ToastContainer } from 'src/components/Alert'
+import Button from 'src/components/Button'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 type AlertWrapperProps = {
   id: string

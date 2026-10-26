@@ -2,12 +2,12 @@ import { TriangleAlertIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import type { DialogProps } from '../../components/Dialog'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { DialogProps } from 'src/components/Dialog'
 
-import Button from '../../components/Button'
-import Dialog from '../../components/Dialog'
-import { CenterOnCanvas } from '../decorators'
+import Button from 'src/components/Button'
+import Dialog from 'src/components/Dialog'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 const buttonVariants = {
   confirm: 'primary',

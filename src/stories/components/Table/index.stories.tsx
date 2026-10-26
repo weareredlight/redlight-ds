@@ -2,17 +2,17 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { PencilIcon, TrashIcon } from 'lucide-react'
 import { fn } from 'storybook/test'
 
-import type { TableMockType } from './mockdata/tableMockType'
+import type { TableMockType } from 'src/stories/components/Table/mockdata/tableMockType'
 
-import Button from '../../../components/Button'
-import Table from '../../../components/Table'
-import Flex from '../../../elements/Flex'
+import Button from 'src/components/Button'
+import Table from 'src/components/Table'
+import Flex from 'src/elements/Flex'
+import { actionsTableColumns } from 'src/stories/components/Table/mockdata/actionsTableMock'
+import { customTableColumns } from 'src/stories/components/Table/mockdata/customTableMock'
+import { defaultTableColumns } from 'src/stories/components/Table/mockdata/defaultTableMock'
+import { interactiveTableColumns } from 'src/stories/components/Table/mockdata/interactiveTableMock'
+import { sortedTableColumns, mockSortees } from 'src/stories/components/Table/mockdata/sortedTableMock'
 
-import { actionsTableColumns } from './mockdata/actionsTableMock'
-import { customTableColumns } from './mockdata/customTableMock'
-import { defaultTableColumns } from './mockdata/defaultTableMock'
-import { interactiveTableColumns } from './mockdata/interactiveTableMock'
-import { sortedTableColumns, mockSortees } from './mockdata/sortedTableMock'
 import {
   actionsTableSource,
   defaultTableSource,

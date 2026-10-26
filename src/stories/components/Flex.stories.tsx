@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 import React from 'react'
 
-import Flex from '../../elements/Flex'
+import Flex from 'src/elements/Flex'
 
 const Box = ({ children }: { children: React.ReactNode }) => (
   <div

@@ -14,12 +14,12 @@ import {
 import type { LucideIcon } from 'lucide-react'
 import type { ReactNode } from 'react'
 
-import Button from '../../../components/Button'
-import Text from '../../../components/Text'
-import Flex from '../../../elements/Flex'
-import { theme } from '../../../theme'
-import { cx } from '../../../utils'
-import { DocCodeBlock } from '../document'
+import Button from 'src/components/Button'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { DocCodeBlock } from 'src/stories/docs/document'
+import { theme } from 'src/theme'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

@@ -1,5 +1,5 @@
-import { theme } from '../../theme'
-import { sizes } from '../../theme/sizes'
+import { theme } from 'src/theme'
+import { sizes } from 'src/theme/sizes'
 
 // `var(--colors-*)` references, so the menu follows the active theme.
 const { colors } = theme
@@ -55,7 +55,7 @@ export const selectStyles = {
     color: isDisabled ? colors.neutral400 : colors.neutral800,
     fontSize: sizes.fontSizes.xsm,
     lineHeight: 1,
-    cursor: isDisabled ? 'defaul' : 'pointer',
+    cursor: isDisabled ? 'default' : 'pointer',
 
     '&:hover': {
       backgroundColor: colors.primary100,

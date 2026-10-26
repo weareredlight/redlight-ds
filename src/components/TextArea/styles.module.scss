@@ -17,10 +17,10 @@
   padding: var(--space-xxsm);
   border-radius: var(--radii-xsm);
   appearance: none;
-  border: none;
+  outline: none;
   background-color: transparent;
   @include typography.microCopy;
-  outline: 1px solid var(--colors-neutral400);
+  border: 1px solid var(--colors-neutral400);
   display: inline-flex;
   align-items: center;
   justify-content: space-between;
@@ -30,34 +30,43 @@
     color: var(--colors-neutral);
   }
 
+  &:hover {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
+  }
+
+  &:focus {
+    border-color: var(--colors-primary);
+  }
+
+  &:disabled {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+  }
+
   // ===========================================================================
   // STATE
   // ===========================================================================
 
   :where(&).stateError {
-    outline-color: var(--colors-danger);
+    border-color: var(--colors-danger);
+
+    &:focus {
+      border-color: var(--colors-danger);
+    }
   }
 
   :where(&).stateDirty {
-    outline-color: var(--colors-accent);
+    border-color: var(--colors-accent);
   }
 
   :where(&).stateDisabled {
     background-color: var(--colors-neutral200);
-    outline-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
     color: var(--colors-neutral);
     pointer-events: none;
-  }
-
-  :where(&).stateNull {
-    &:hover {
-      background-color: var(--colors-neutral100);
-      outline-color: var(--colors-neutral600);
-    }
-
-    &:focus {
-      outline-color: var(--colors-primary);
-    }
   }
 }
 
@@ -72,9 +81,9 @@
   display: inline-block;
   position: relative;
 
+  // Clicking the label focuses the field (it used to have pointer-events: none, which blocked that)
   .label {
     padding-bottom: var(--space-xxxsm);
-    pointer-events: none;
   }
 }
 

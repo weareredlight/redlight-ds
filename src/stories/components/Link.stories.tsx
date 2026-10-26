@@ -1,7 +1,7 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-import Link from '../../components/Link'
-import { DarkBackgroundCanvas } from '../decorators'
+import Link from 'src/components/Link'
+import { DarkBackgroundCanvas } from 'src/stories/decorators'
 
 const meta = {
   title: 'Components/General/Link',

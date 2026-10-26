@@ -4,11 +4,11 @@ import * as Calendar from 'react-date-picker'
 
 import type { CSSProperties } from 'react'
 
-import { ICON_SIZE } from '../../constants'
-import { colors } from '../../theme/colors'
-import { cx } from '../../utils'
-import Label from '../shared/Label'
-import Text from '../Text'
+import Label from 'src/components/shared/Label'
+import Text from 'src/components/Text'
+import { ICON_SIZE } from 'src/constants'
+import { colors } from 'src/theme/colors'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -58,8 +58,16 @@ const DatePicker = ({
       onChange={date => {
         onChange(date ? dayjs(date as Date).format('YYYY-MM-DD') : '')
       }}
-      value={value}
+      // A 'YYYY-MM-DD' string given to the library is read as UTC midnight, which is the previous
+      // day anywhere west of UTC. dayjs reads it as local midnight
+      value={value ? dayjs(value).toDate() : null}
       disabled={disabled}
+      // The date is split into day, month and year fields. Each one carries the field's label
+      dayAriaLabel={label ? `${label}, day` : 'Day'}
+      monthAriaLabel={label ? `${label}, month` : 'Month'}
+      yearAriaLabel={label ? `${label}, year` : 'Year'}
+      nativeInputAriaLabel={label}
+      calendarAriaLabel='Open calendar'
       calendarIcon={<CalendarDaysIcon size={ICON_SIZE} />}
       clearIcon={null}
       locale={localeString}

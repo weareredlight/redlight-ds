@@ -1,7 +1,7 @@
 import { CheckIcon, CopyIcon } from 'lucide-react'
 import { useEffect, useState } from 'react'
 
-import { ICON_SIZE } from '../../../../constants'
+import { ICON_SIZE } from 'src/constants'
 
 import styles from './styles.module.scss'
 

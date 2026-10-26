@@ -1,9 +1,9 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-import Tabs from '../../components/Tabs'
-import Text from '../../components/Text'
-import Flex from '../../elements/Flex'
-import { CenterOnCanvas } from '../decorators'
+import Tabs from 'src/components/Tabs'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 const tabContent = (label: string) => (
   <Flex key={label} direction='column' style={{ padding: '2rem' }}>

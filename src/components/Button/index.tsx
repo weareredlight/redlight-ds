@@ -3,8 +3,8 @@ import React from 'react'
 
 import type { ReactNode } from 'react'
 
-import { colors } from '../../theme/colors'
-import { cx } from '../../utils'
+import { colors } from 'src/theme/colors'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -12,10 +12,10 @@ type ButtonVariant = 'neutral' | 'primary' | 'secondary' | 'tertiary' | 'textOnl
 type ButtonSize = 'normal' | 'large'
 type ButtonIconPosition = 'left' | 'right' | 'iconOnly' | 'null'
 
-export type ButtonProps = {
+type ButtonOwnProps = {
   children?: ReactNode
   iconComponent?: React.FC
-  onClick?: () => void
+  onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant?: ButtonVariant
   size?: ButtonSize
   fullWidth?: boolean
@@ -26,6 +26,9 @@ export type ButtonProps = {
   className?: string
   style?: React.CSSProperties
 }
+
+export type ButtonProps = ButtonOwnProps
+  & Omit<React.ButtonHTMLAttributes<HTMLButtonElement>, keyof ButtonOwnProps>
 
 const iconPositionClasses: Record<ButtonIconPosition, string> = {
   left: styles.iconLeft,

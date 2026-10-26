@@ -2,7 +2,7 @@ import { fn } from 'storybook/test'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import Tag from '../../components/Tag'
+import Tag from 'src/components/Tag'
 
 const meta = {
   title: 'Components/Displays/Tag',

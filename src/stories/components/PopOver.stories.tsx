@@ -1,12 +1,12 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { EllipsisVerticalIcon } from 'lucide-react'
 
-import Button from '../../components/Button'
-import Input from '../../components/Input'
-import PopOver from '../../components/PopOver'
-import Text from '../../components/Text'
-import Flex from '../../elements/Flex'
-import { CenterOnCanvas } from '../decorators'
+import Button from 'src/components/Button'
+import Input from 'src/components/Input'
+import PopOver from 'src/components/PopOver'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 const DotsIcon = () => <EllipsisVerticalIcon width={14} height={14} />
 

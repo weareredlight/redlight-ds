@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import DatePicker, { DatePickerProps } from '../../components/DatePicker'
+import DatePicker, { DatePickerProps } from 'src/components/DatePicker'
 
 const today = new Date().toISOString().split('T')[0]
 

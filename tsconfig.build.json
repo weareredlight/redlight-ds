@@ -1,0 +1,11 @@
+{
+  // Used by `yarn build:types`. Same as tsconfig.json, without the tests, so no .d.ts is generated for them
+  "extends": "./tsconfig.json",
+  "exclude": [
+    "dist",
+    "node_modules",
+    "src/stories",
+    "src/setupTests.ts",
+    "src/**/__tests__"
+  ]
+}

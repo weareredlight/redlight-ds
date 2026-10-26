@@ -1,7 +1,7 @@
 // import necessary table components
 import type { TableMockType } from './tableMockType'
 
-import { createColumnHelper, defaultColumnOptions } from '../../../../components/Table'
+import { createColumnHelper, defaultColumnOptions } from 'src/components/Table'
 
 // Specify the content and parameters for each column
 const columnHelper = createColumnHelper<TableMockType>()

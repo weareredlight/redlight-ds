@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -30,7 +30,7 @@ const Link = ({
 }: LinkProps) => (
   <a
     href={href}
-    target={openInNewTab ? '_blank' : ''}
+    target={openInNewTab ? '_blank' : undefined}
     rel='noreferrer'
     className={cx(
       styles.link,
