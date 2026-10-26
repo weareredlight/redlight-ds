@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";var t;function n(){return(n=e((()=>{t=`0.2.5`})))()}var r,i;function a(){return(a=e((()=>{n(),r=t,i=`26/10/2026`})))()}export{r as n,a as r,i as t};
