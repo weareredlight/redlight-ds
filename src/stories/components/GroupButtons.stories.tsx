@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import GroupButtons, { GroupButtonsProps } from '../../components/GroupButtons'
+import GroupButtons, { GroupButtonsProps } from 'src/components/GroupButtons'
 
 // Keeps the selected button, so the group can be clicked and its control still works
 const Template = (args: GroupButtonsProps) => {

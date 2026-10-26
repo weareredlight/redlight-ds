@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Avatar from '../Avatar'
+import Avatar from 'src/components/Avatar'
 
 describe('Avatar', () => {
   it('shows the initials, named with the full name for screen readers, when there is no image', () => {

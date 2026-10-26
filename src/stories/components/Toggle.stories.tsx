@@ -1,10 +1,10 @@
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import type { ToggleProps } from '../../components/Toggle'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ToggleProps } from 'src/components/Toggle'
 
-import Toggle from '../../components/Toggle'
+import Toggle from 'src/components/Toggle'
 
 // Keeps the on/off state, so the toggle can be clicked and the "value" control still works.
 // Toggle sends the new boolean in `e.target.value`.

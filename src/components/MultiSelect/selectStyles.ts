@@ -1,5 +1,5 @@
-import { theme } from '../../theme'
-import { sizes } from '../../theme/sizes'
+import { theme } from 'src/theme'
+import { sizes } from 'src/theme/sizes'
 
 // `var(--colors-*)` references, so the menu follows the active theme.
 const { colors } = theme

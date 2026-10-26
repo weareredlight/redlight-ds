@@ -3,8 +3,8 @@ import React from 'react'
 
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
-import Text from '../Text'
+import Text from 'src/components/Text'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

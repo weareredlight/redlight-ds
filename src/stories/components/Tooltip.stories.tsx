@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { CircleQuestionMarkIcon } from 'lucide-react'
 
-import Button from '../../components/Button'
-import Tooltip from '../../components/Tooltip'
-import Flex from '../../elements/Flex'
-import { CenterOnCanvas } from '../decorators'
+import Button from 'src/components/Button'
+import Tooltip from 'src/components/Tooltip'
+import Flex from 'src/elements/Flex'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 const questionIcon = () => <CircleQuestionMarkIcon width='18' height='18' />
 

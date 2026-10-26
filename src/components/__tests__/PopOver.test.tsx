@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import PopOver from '../PopOver'
+import PopOver from 'src/components/PopOver'
 
 const renderPopOver = () => render(
   <PopOver trigger={<button type='button'>Details</button>}>

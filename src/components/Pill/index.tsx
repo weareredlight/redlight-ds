@@ -2,8 +2,8 @@ import { XIcon } from 'lucide-react'
 
 import type { CSSProperties, ReactNode } from 'react'
 
-import { cx } from '../../utils'
-import Button from '../Button'
+import Button from 'src/components/Button'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

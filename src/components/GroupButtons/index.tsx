@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
-import Button from '../Button'
+import Button from 'src/components/Button'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

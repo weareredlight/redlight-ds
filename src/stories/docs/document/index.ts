@@ -8,4 +8,4 @@ export {
   DocCard,
   DocSeparator,
 } from './Layout'
-export { DocCodeBlock, DocCodeTabs } from './CodeBlock'
+export { DocCodeBlock, DocCodeTabs } from 'src/stories/docs/document/CodeBlock'

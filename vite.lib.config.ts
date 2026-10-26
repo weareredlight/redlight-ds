@@ -11,6 +11,11 @@ export default defineConfig({
   css: {
     modules: cssModules,
   },
+  resolve: {
+    alias: {
+      src: path.resolve(__dirname, 'src'),
+    },
+  },
   build: {
     outDir: 'dist',
     emptyOutDir: false,
@@ -22,11 +27,13 @@ export default defineConfig({
     },
     rollupOptions: {
       // Every bare import (dependencies, peer dependencies and their subpaths) stays external,
-      // except our own virtual modules (the generated tokens CSS)
+      // except our own virtual modules (the generated tokens CSS) and our 'src/...' imports
       external: id => !id.startsWith('.')
         && !path.isAbsolute(id)
         && !id.startsWith('\0')
-        && !id.startsWith('virtual:'),
+        && !id.startsWith('virtual:')
+        && id !== 'src'
+        && !id.startsWith('src/'),
       output: [
         {
           format: 'es',

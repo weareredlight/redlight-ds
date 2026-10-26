@@ -1,7 +1,7 @@
 import React from 'react'
 
-import { LAST_UPDATED, VERSION } from '../../../constants'
-import { cx } from '../../../utils'
+import { LAST_UPDATED, VERSION } from 'src/constants'
+import { cx } from 'src/utils'
 
 import styles from './Layout.module.scss'
 

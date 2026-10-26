@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import Pagination, { PaginationProps } from '../../components/Pagination'
+import Pagination, { PaginationProps } from 'src/components/Pagination'
 
 // Keeps the current page, so the pagination can be clicked and its control still works
 const Template = (args: PaginationProps) => {

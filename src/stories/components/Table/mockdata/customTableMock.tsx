@@ -2,9 +2,9 @@
 
 import type { TableMockType } from './tableMockType'
 
-import Avatar from '../../../../components/Avatar'
-import { createColumnHelper, defaultColumnOptions } from '../../../../components/Table'
-import Flex from '../../../../elements/Flex'
+import Avatar from 'src/components/Avatar'
+import { createColumnHelper, defaultColumnOptions } from 'src/components/Table'
+import Flex from 'src/elements/Flex'
 
 // Specify the content and parameters for each column
 const columnHelper = createColumnHelper<TableMockType>()

@@ -2,7 +2,7 @@
 // them by swapping the theme's class on <body>.
 import type { PlaygroundTheme } from './base'
 
-import { setupTheme, theme } from '../../src'
+import { setupTheme, theme } from 'src'
 
 import brutalist from './brutalist'
 import editorial from './editorial'

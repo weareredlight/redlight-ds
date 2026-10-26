@@ -4,8 +4,8 @@ import React from 'react'
 
 import type { CSSProperties } from 'react'
 
-import { ICON_SIZE } from '../../constants'
-import { cx } from '../../utils'
+import { ICON_SIZE } from 'src/constants'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

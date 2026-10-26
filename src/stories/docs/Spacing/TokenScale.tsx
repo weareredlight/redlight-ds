@@ -1,8 +1,8 @@
 /// <reference types="vite/client" />
-import Flex from '../../../elements/Flex'
-import { shadows } from '../../../theme/shadows'
-import { sizes } from '../../../theme/sizes'
-import { DocCode } from '../document'
+import Flex from 'src/elements/Flex'
+import { DocCode } from 'src/stories/docs/document'
+import { shadows } from 'src/theme/shadows'
+import { sizes } from 'src/theme/sizes'
 
 import styles from './styles.module.scss'
 

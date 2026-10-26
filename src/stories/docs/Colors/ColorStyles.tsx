@@ -1,9 +1,9 @@
-import type { ColorType } from '../../../theme'
+import type { ColorType } from 'src/theme'
 
-import Flex from '../../../elements/Flex'
-import { colors } from '../../../theme/colors'
-import { capitalize } from '../../../utils'
-import { DocCode } from '../document'
+import Flex from 'src/elements/Flex'
+import { DocCode } from 'src/stories/docs/document'
+import { colors } from 'src/theme/colors'
+import { capitalize } from 'src/utils'
 
 import styles from './styles.module.scss'
 

@@ -2,7 +2,7 @@ import * as RadixDialog from '@radix-ui/react-dialog'
 import { XIcon } from 'lucide-react'
 import React, { ReactElement } from 'react'
 
-import { cx } from '../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

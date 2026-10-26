@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Checkbox from '../Checkbox'
+import Checkbox from 'src/components/Checkbox'
 
 describe('Checkbox', () => {
   it('is linked to its label, so clicking the label toggles it', async () => {

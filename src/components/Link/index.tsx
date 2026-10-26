@@ -2,7 +2,7 @@ import { ReactNode } from 'react'
 
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

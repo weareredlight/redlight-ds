@@ -1,4 +1,4 @@
-import { capitalize, cx } from '../utils'
+import { capitalize, cx } from 'src/utils'
 
 describe('capitalize', () => {
   it('uppercases the first letter', () => {

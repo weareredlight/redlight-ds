@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Dialog from '../Dialog'
+import Dialog from 'src/components/Dialog'
 
 describe('Dialog', () => {
   it('renders nothing while closed', () => {

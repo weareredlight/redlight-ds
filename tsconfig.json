@@ -31,6 +31,14 @@
     "noImplicitAny": true,
     "noImplicitThis": true,
     "resolveJsonModule": true,
+    "paths": {
+      "src": [
+        "./src"
+      ],
+      "src/*": [
+        "./src/*"
+      ]
+    },
     "jsx": "react-jsx"
   }
 }

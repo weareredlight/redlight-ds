@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import TextArea, { TextAreaProps } from '../../components/TextArea'
+import TextArea, { TextAreaProps } from 'src/components/TextArea'
 
 // Keeps the typed value, so the textarea can be edited and the "value" control still works
 const Template = (args: TextAreaProps) => {

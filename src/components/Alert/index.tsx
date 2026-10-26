@@ -4,8 +4,8 @@ import { toast as toastOG, Slide } from 'react-toastify'
 
 import type { ToastOptions } from 'react-toastify'
 
-import Flex from '../../elements/Flex'
-import Text from '../Text'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
 
 export { ToastContainer } from 'react-toastify'
 

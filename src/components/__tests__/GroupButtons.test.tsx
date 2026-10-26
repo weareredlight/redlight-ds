@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import GroupButtons from '../GroupButtons'
+import GroupButtons from 'src/components/GroupButtons'
 
 const buttons = [
   { label: 'Day', value: 'day' },

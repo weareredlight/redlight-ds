@@ -26,11 +26,11 @@ import type {
 } from '@tanstack/react-table'
 import type { CSSProperties, KeyboardEvent } from 'react'
 
-import { ICON_SIZE } from '../../constants'
-import Flex from '../../elements/Flex'
-import { cx } from '../../utils'
-import Input from '../Input'
-import Text from '../Text'
+import Input from 'src/components/Input'
+import Text from 'src/components/Text'
+import { ICON_SIZE } from 'src/constants'
+import Flex from 'src/elements/Flex'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 import { defaultColumnOptions, globalFilter, globalSort } from './utils'

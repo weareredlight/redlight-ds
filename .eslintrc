@@ -38,7 +38,10 @@
       "as-needed"
     ],
     "default-case": "off",
-    "semi": [2, "never"],
+    "semi": [
+      2,
+      "never"
+    ],
     "space-before-function-paren": [
       "error",
       {
@@ -67,8 +70,9 @@
       {
         "commonjs": true,
         "caseSensitive": true,
-        /* Storybook packages are ESM-only (package.json "exports"), which the node resolver can't read */
-        "ignore": ["^@?storybook/"]
+        // Vite virtual modules (virtual:rl-tokens.css, from config/vite/designSystem.ts) only exist
+        // inside Vite, so no resolver can find them
+        "ignore": ["^virtual:"]
       }
     ],
     "import/order": [
@@ -78,6 +82,7 @@
           "builtin",
           "external",
           "type",
+          "internal",
           "parent",
           "sibling",
           "index",
@@ -202,16 +207,15 @@
         ".tsx"
       ]
     },
+    "import/internal-regex": "^src(/|$)",
     "import/resolver": {
-      "node": {
-        "paths": [
-          "src"
-        ],
-        "extensions": [
-          ".js",
-          ".jsx",
-          ".ts",
-          ".tsx"
+      "typescript": {
+        "project": [
+          "tsconfig.json",
+          "tsconfig.node.json",
+          "src/stories/tsconfig.json",
+          "playground/tsconfig.json",
+          ".storybook/tsconfig.json"
         ]
       }
     }

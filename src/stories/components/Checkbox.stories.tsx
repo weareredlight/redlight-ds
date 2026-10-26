@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import Checkbox, { CheckboxProps } from '../../components/Checkbox'
+import Checkbox, { CheckboxProps } from 'src/components/Checkbox'
 
 // Keeps the checked state, so the checkbox can be clicked and the "checked" control still works
 const Template = (args: CheckboxProps) => {

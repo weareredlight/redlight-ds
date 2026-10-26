@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event'
 
 import type { TimePickerProps } from 'react-time-picker'
 
-import TimePicker from '../TimePicker'
+import TimePicker from 'src/components/TimePicker'
 
 // react-time-picker ships only ES modules, which this Jest config doesn't transform. The mock
 // records the props our wrapper passes, so we can test how the wrapper maps them

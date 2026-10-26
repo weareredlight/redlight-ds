@@ -1,4 +1,4 @@
-import { getColor, setupTheme, theme } from '..'
+import { getColor, setupTheme, theme } from 'src/theme'
 
 describe('theme', () => {
   afterEach(() => {

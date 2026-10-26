@@ -4,11 +4,11 @@ import * as Calendar from 'react-date-picker'
 
 import type { CSSProperties } from 'react'
 
-import { ICON_SIZE } from '../../constants'
-import { colors } from '../../theme/colors'
-import { cx } from '../../utils'
-import Label from '../shared/Label'
-import Text from '../Text'
+import Label from 'src/components/shared/Label'
+import Text from 'src/components/Text'
+import { ICON_SIZE } from 'src/constants'
+import { colors } from 'src/theme/colors'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

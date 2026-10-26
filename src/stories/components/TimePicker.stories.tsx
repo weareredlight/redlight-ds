@@ -2,9 +2,9 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import type { TimePickerProps } from '../../components/TimePicker'
+import type { TimePickerProps } from 'src/components/TimePicker'
 
-import TimePicker, { PickerTypes } from '../../components/TimePicker'
+import TimePicker, { PickerTypes } from 'src/components/TimePicker'
 
 // Current local time, as HH:mm
 const now = new Date().toTimeString().slice(0, 5)

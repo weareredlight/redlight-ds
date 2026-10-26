@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Text from '../Text'
+import Text from 'src/components/Text'
 
 describe('Text', () => {
   it('uses the theme text color by default', () => {

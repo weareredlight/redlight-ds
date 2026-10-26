@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Tooltip from '../Tooltip'
+import Tooltip from 'src/components/Tooltip'
 
 describe('Tooltip', () => {
   it('shows its content on hover', async () => {

@@ -1,7 +1,7 @@
 import type { CSSProperties } from 'react'
 
-import { cx } from '../../utils'
-import Label from '../shared/Label'
+import Label from 'src/components/shared/Label'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

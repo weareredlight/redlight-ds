@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Link from '../Link'
+import Link from 'src/components/Link'
 
 describe('Link', () => {
   it('renders a link with its text and href', () => {

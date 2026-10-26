@@ -3,8 +3,8 @@ import React from 'react'
 
 import type { ReactNode } from 'react'
 
-import { colors } from '../../theme/colors'
-import { cx } from '../../utils'
+import { colors } from 'src/theme/colors'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

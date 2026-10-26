@@ -1,14 +1,14 @@
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import type { ModalProps } from '../../components/Modal'
 import type { Meta, StoryObj } from '@storybook/react-vite'
+import type { ModalProps } from 'src/components/Modal'
 
-import Button from '../../components/Button'
-import Input from '../../components/Input'
-import Modal from '../../components/Modal'
-import TextArea from '../../components/TextArea'
-import { CenterOnCanvas } from '../decorators'
+import Button from 'src/components/Button'
+import Input from 'src/components/Input'
+import Modal from 'src/components/Modal'
+import TextArea from 'src/components/TextArea'
+import { CenterOnCanvas } from 'src/stories/decorators'
 
 // Keeps the open state, so the button opens the modal and the "open" control still works
 const Template = (args: ModalProps) => {

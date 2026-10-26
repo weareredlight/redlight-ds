@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Toggle from '../Toggle'
+import Toggle from 'src/components/Toggle'
 
 describe('Toggle', () => {
   it('sends the new value and the field name in onChange', async () => {

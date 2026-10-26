@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Tag from '../Tag'
+import Tag from 'src/components/Tag'
 
 describe('Tag', () => {
   it('renders its content', () => {

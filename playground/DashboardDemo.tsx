@@ -26,7 +26,7 @@ import {
   alert,
   createColumnHelper,
   defaultColumnOptions,
-} from '../src'
+} from 'src'
 
 import { projects, statusOptions, team } from './data'
 

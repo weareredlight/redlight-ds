@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import Label from '../shared/Label'
+import Label from 'src/components/shared/Label'
 
 describe('Label', () => {
   it('renders the label and the description', () => {

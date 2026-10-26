@@ -1,8 +1,8 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 import { ChevronLeftIcon, ChevronRightIcon, PlusIcon } from 'lucide-react'
 
-import Button from '../../components/Button'
-import Flex from '../../elements/Flex'
+import Button from 'src/components/Button'
+import Flex from 'src/elements/Flex'
 
 const meta = {
   title: 'Components/General/Button',

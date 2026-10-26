@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import Select, { SelectProps } from '../../components/Select'
+import Select, { SelectProps } from 'src/components/Select'
 
 type Option = {
   value: string

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Radio from '../Radio'
+import Radio from 'src/components/Radio'
 
 describe('Radio', () => {
   it('is linked to its label, so clicking the label selects it', async () => {

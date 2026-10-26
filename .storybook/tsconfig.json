@@ -1,0 +1,17 @@
+// Editor type-checking for the Storybook config, which no other tsconfig includes
+{
+  "extends": "../tsconfig.json",
+  "compilerOptions": {
+    "rootDir": "..",
+    "noEmit": true,
+    // preview.ts imports theme.js; allowJs reads its types from the code
+    "allowJs": true
+  },
+  // Listed by name: a "." pattern skips this folder, because its name starts with a dot
+  "include": [
+    "main.ts",
+    "preview.ts",
+    "../src/declaration.d.ts"
+  ],
+  "exclude": []
+}

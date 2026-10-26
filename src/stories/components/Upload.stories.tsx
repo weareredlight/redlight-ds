@@ -2,7 +2,7 @@ import { fn } from 'storybook/test'
 
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import Upload from '../../components/Upload'
+import Upload from 'src/components/Upload'
 
 const meta = {
   title: 'Components/Data Input/Upload',

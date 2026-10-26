@@ -2,7 +2,7 @@ import React, { useId, useRef, useState } from 'react'
 
 import type { CodeLanguage } from './HighlightedCode'
 
-import { cx } from '../../../../utils'
+import { cx } from 'src/utils'
 
 import Collapsible from './Collapsible'
 import CopyButton from './CopyButton'

@@ -15,6 +15,7 @@ module.exports = {
   // Jest can't read SCSS. With identity-obj-proxy, `styles.button` returns 'button'
   moduleNameMapper: {
     '\\.(css|scss)$': 'identity-obj-proxy',
+    '^src(/.*)?$': '<rootDir>/src$1',
   },
   setupFilesAfterEnv: ['<rootDir>/src/setupTests.ts'],
   // With --coverage: measure every library file, not only the ones a test imports

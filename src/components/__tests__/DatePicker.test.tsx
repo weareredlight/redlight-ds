@@ -2,7 +2,7 @@ import { act, render, screen } from '@testing-library/react'
 
 import type { DatePickerProps } from 'react-date-picker'
 
-import DatePicker from '../DatePicker'
+import DatePicker from 'src/components/DatePicker'
 
 // react-date-picker ships only ES modules, which this Jest config doesn't transform. The mock
 // records the props our wrapper passes, so we can test how the wrapper maps them

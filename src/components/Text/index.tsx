@@ -1,7 +1,7 @@
-import type { ColorType } from '../../theme'
 import type { CSSProperties, ReactNode } from 'react'
+import type { ColorType } from 'src/theme'
 
-import { cx } from '../../utils'
+import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

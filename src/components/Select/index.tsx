@@ -4,9 +4,9 @@ import { useMemo, useState } from 'react'
 
 import type { ChangeEvent, CSSProperties } from 'react'
 
-import { capitalize, cx } from '../../utils'
-import Label from '../shared/Label'
-import Text from '../Text'
+import Label from 'src/components/shared/Label'
+import Text from 'src/components/Text'
+import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

@@ -1,9 +1,9 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import type { UploadProps } from '../Upload'
+import type { UploadProps } from 'src/components/Upload'
 
-import Upload from '../Upload'
+import Upload from 'src/components/Upload'
 
 const renderUpload = (props: Partial<UploadProps> = {}) => render(
   <Upload

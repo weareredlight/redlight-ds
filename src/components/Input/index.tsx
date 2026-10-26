@@ -2,11 +2,11 @@ import React from 'react'
 
 import type { ChangeEvent } from 'react'
 
-import Flex from '../../elements/Flex'
-import { capitalize, cx } from '../../utils'
-import Button from '../Button'
-import Label from '../shared/Label'
-import Text from '../Text'
+import Button from 'src/components/Button'
+import Label from 'src/components/shared/Label'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 

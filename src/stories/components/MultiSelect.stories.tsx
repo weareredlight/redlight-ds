@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useEffect, useState } from 'react'
 import { fn } from 'storybook/test'
 
-import MultiSelect, { MultiSelectProps } from '../../components/MultiSelect'
+import MultiSelect, { MultiSelectProps } from 'src/components/MultiSelect'
 
 type Option = {
   value: string

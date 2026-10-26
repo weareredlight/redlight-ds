@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import { createRef } from 'react'
 
-import Flex from '../Flex'
+import Flex from 'src/elements/Flex'
 
 describe('Flex', () => {
   it('renders a div with its children by default', () => {

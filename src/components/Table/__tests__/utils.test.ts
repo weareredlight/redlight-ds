@@ -1,6 +1,6 @@
 import type { Row } from '@tanstack/react-table'
 
-import { globalFilter, globalSort } from '../utils'
+import { globalFilter, globalSort } from 'src/components/Table/utils'
 
 type Item = Record<string, unknown>
 

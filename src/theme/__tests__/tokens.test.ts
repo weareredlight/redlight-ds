@@ -1,4 +1,4 @@
-import { defaultScales, scalesToCss, scalesToVarRefs } from '../tokens'
+import { defaultScales, scalesToCss, scalesToVarRefs } from 'src/theme/tokens'
 
 describe('tokens', () => {
   it('scalesToCss writes one CSS variable per token inside the selector', () => {

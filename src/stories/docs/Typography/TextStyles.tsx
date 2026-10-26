@@ -1,13 +1,12 @@
 import { Unstyled } from '@storybook/addon-docs/blocks'
 
-import type { TextVariant } from '../../../components/Text'
+import type { TextVariant } from 'src/components/Text'
 
-import Text from '../../../components/Text'
-import Flex from '../../../elements/Flex'
-// eslint-disable-next-line import/no-unresolved -- Vite raw import
-import typographyScss from '../../../styles/_typography.scss?raw'
-import { sizes } from '../../../theme/sizes'
-import { DocCode } from '../document'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { DocCode } from 'src/stories/docs/document'
+import typographyScss from 'src/styles/_typography.scss?raw'
+import { sizes } from 'src/theme/sizes'
 
 import styles from './styles.module.scss'
 

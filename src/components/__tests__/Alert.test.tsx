@@ -1,6 +1,6 @@
 import { render, screen } from '@testing-library/react'
 
-import alert, { ToastContainer } from '../Alert'
+import alert, { ToastContainer } from 'src/components/Alert'
 
 describe('alert', () => {
   it('success shows a toast with the title and the description', async () => {

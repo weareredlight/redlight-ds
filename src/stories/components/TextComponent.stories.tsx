@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react-vite'
 
-import type { TextVariant } from '../../components/Text'
+import type { TextVariant } from 'src/components/Text'
 
-import Text from '../../components/Text'
-import Flex from '../../elements/Flex'
-import { colorOptions } from '../../theme'
+import Text from 'src/components/Text'
+import Flex from 'src/elements/Flex'
+import { colorOptions } from 'src/theme'
 
 const variants: TextVariant[] = [
   'h1',

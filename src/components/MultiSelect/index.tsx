@@ -8,13 +8,13 @@ import type {
   OptionProps,
 } from 'react-select'
 
-import { ICON_SIZE } from '../../constants'
-import Flex from '../../elements/Flex'
-import { colors } from '../../theme/colors'
-import { capitalize, cx } from '../../utils'
-import Pill from '../Pill'
-import Label from '../shared/Label'
-import Text from '../Text'
+import Pill from 'src/components/Pill'
+import Label from 'src/components/shared/Label'
+import Text from 'src/components/Text'
+import { ICON_SIZE } from 'src/constants'
+import Flex from 'src/elements/Flex'
+import { colors } from 'src/theme/colors'
+import { capitalize, cx } from 'src/utils'
 
 import { selectStyles } from './selectStyles'
 import styles from './styles.module.scss'

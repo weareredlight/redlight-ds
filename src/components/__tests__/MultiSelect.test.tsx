@@ -1,9 +1,9 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import type { MultiSelectProps } from '../MultiSelect'
+import type { MultiSelectProps } from 'src/components/MultiSelect'
 
-import MultiSelect from '../MultiSelect'
+import MultiSelect from 'src/components/MultiSelect'
 
 const fruits = [
   { value: 'apple', label: 'Apple' },

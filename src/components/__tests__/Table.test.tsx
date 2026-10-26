@@ -1,9 +1,9 @@
 import { render, screen, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import type { ColumnDef } from '../Table'
+import type { ColumnDef } from 'src/components/Table'
 
-import Table, { defaultColumnOptions } from '../Table'
+import Table, { defaultColumnOptions } from 'src/components/Table'
 
 type Person = { id: string; name: string; age: number }
 

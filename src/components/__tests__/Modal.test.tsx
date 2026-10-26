@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import Modal from '../Modal'
+import Modal from 'src/components/Modal'
 
 describe('Modal', () => {
   it('renders nothing but its trigger while closed', () => {

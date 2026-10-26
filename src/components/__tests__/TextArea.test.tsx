@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 
-import TextArea from '../TextArea'
+import TextArea from 'src/components/TextArea'
 
 describe('TextArea', () => {
   it('is linked to its label', () => {

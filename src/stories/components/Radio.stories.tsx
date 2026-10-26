@@ -2,8 +2,8 @@ import { Meta, StoryObj } from '@storybook/react-vite'
 import { useState } from 'react'
 import { fn } from 'storybook/test'
 
-import Radio from '../../components/Radio'
-import Flex from '../../elements/Flex'
+import Radio from 'src/components/Radio'
+import Flex from 'src/elements/Flex'
 
 const meta = {
   title: 'Components/Data Input/Radio',
