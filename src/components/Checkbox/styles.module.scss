@@ -39,60 +39,55 @@
 .trigger {
   display: none;
 
-  &:hover {
-    + label {
-      background-color: var(--colors-neutral100);
-      border-color: var(--colors-neutral600);
-    }
-
-    + label svg {
-      color: var(--colors-neutral100);
-    }
+  &:hover+label {
+    background-color: var(--colors-neutral100);
+    border-color: var(--colors-neutral600);
   }
 
-  &:focus + label {
+  &:focus+label {
     background-color: var(--colors-neutral200);
     border-color: var(--colors-neutral700);
   }
 
-  &:checked + label {
+  &:checked+label {
     background-color: var(--colors-primary);
     border-color: var(--colors-primary);
 
-    &:hover { background-color: var(--colors-primary600); }
-    &:focus { background-color: var(--colors-primary700); }
+    &:hover {
+      background-color: var(--colors-primary600);
+    }
+
+    &:focus {
+      background-color: var(--colors-primary700);
+    }
+
+    svg {
+      visibility: visible;
+    }
   }
 
   // ===========================================================================
   // STATE
   // ===========================================================================
 
-  :where(&).stateError + label { border-color: var(--colors-danger); }
-  :where(&).stateDirty + label { border-color: var(--colors-accent); }
+  :where(&).stateError+label {
+    border-color: var(--colors-danger);
+  }
+
+  :where(&).stateDirty+label {
+    border-color: var(--colors-accent);
+  }
 
   // ===========================================================================
   // DISABLED
   // ===========================================================================
 
   :where(&).disabled {
-    + label {
+
+    +label,
+    &:checked+label {
       background-color: var(--colors-neutral300);
       border-color: var(--colors-neutral300);
-    }
-
-    + label svg {
-      color: transparent;
-    }
-
-    &:checked {
-      + label {
-        background-color: var(--colors-neutral300);
-        border-color: var(--colors-neutral300);
-      }
-
-      + label svg {
-        color: var(--colors-onPrimary);
-      }
     }
   }
 }
@@ -112,4 +107,8 @@
   border: 1px solid var(--colors-neutral500);
   background-color: transparent;
   color: var(--colors-onPrimary);
+
+  svg {
+    visibility: hidden;
+  }
 }

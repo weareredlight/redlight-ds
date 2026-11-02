@@ -7,7 +7,6 @@ import type { CSSProperties } from 'react'
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
-import { colors } from 'src/theme/colors'
 import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
@@ -44,7 +43,6 @@ const DatePicker = ({
   <div
     className={cx(
       styles.datePicker,
-      colors.accent && styles.accent,
       error && styles.hasError,
       fullWidth && styles.fullWidth,
       disabled && styles.disabled,

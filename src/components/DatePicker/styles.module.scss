@@ -7,11 +7,11 @@
 // =============================================================================
 
 .datePicker {
-  // "Today" and weekday highlight: neutral, or accent when the default theme defines one
-  --highlight: var(--colors-neutral);
-  --highlight-on: var(--colors-onNeutral);
-  --highlight600: var(--colors-neutral600);
-  --highlight700: var(--colors-neutral700);
+  // "Today" and weekday highlight: accent when the theme has one, neutral otherwise (an empty accent is unset)
+  --highlight: var(--colors-accent, var(--colors-neutral));
+  --highlight-on: var(--colors-onAccent, var(--colors-onNeutral));
+  --highlight600: var(--colors-accent600, var(--colors-neutral600));
+  --highlight700: var(--colors-accent700, var(--colors-neutral700));
 
   display: flex;
   flex-direction: column;
@@ -168,21 +168,6 @@
         &:hover { background-color: var(--highlight600); }
         &:active { background-color: var(--highlight700); }
       }
-    }
-  }
-
-  // ===========================================================================
-  // ACCENT HIGHLIGHT (when the default theme defines an accent color)
-  // ===========================================================================
-
-  :where(&).accent {
-    --highlight: var(--colors-accent);
-    --highlight-on: var(--colors-onAccent);
-    --highlight600: var(--colors-accent600);
-    --highlight700: var(--colors-accent700);
-
-    :global(.react-calendar__viewContainer) button:global(.react-calendar__tile--now) {
-      background-color: var(--colors-accent) !important;
     }
   }
 

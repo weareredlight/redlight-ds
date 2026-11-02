@@ -19,6 +19,7 @@ tsconfig.build.json
 # tests
 src/setupTests.ts
 __tests__/
+coverage/
 
 # storybook
 src/stories/

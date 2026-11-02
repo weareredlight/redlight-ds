@@ -14,6 +14,9 @@ export const theme = {
   className: DEFAULT_THEME_CLASS,
 }
 
+// The default token values that `setupTheme` overrides (e.g. to compare a theme against them).
+export { defaultScales }
+
 export type ColorType = keyof typeof colors
 export const colorOptions = Object.keys(colors) as ColorType[]
 export const getColor = (color: ColorType) => theme.colors[color]

@@ -3,7 +3,6 @@ import React from 'react'
 
 import type { ReactNode } from 'react'
 
-import { colors } from 'src/theme/colors'
 import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
@@ -80,7 +79,6 @@ const Button = React.forwardRef(({
     styles[size],
     fullWidth && styles.fullWidth,
     styles[variant],
-    variant === 'tertiary' && colors.accent && styles.tertiaryAccent,
     iconPositionClasses[resolvedIconPosition],
     isLoading && styles.loading,
     className,

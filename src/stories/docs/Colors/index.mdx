@@ -55,8 +55,8 @@ import ColorStyles from './ColorStyles'
     <p>A dark theme usually inverts the scales: <code>white</code> becomes the dark surface (cards, inputs, modals), <code>black</code> the brightest text, and the tints and shades swap places. In an inverted theme, <code>white</code> and <code>black</code> name the surface and text roles, not the colors themselves.</p>
     <p>Text and icons over a solid fill don't follow the surface: they follow the fill. White text on a <code>#3366FF</code> button still reads best when the page turns dark. That's why components use the <code>on</code> colors there instead of <code>white</code>:</p>
     <ul>
-      <li><code>onPrimary</code>: filled primary buttons, checked checkboxes, radios and toggles, selected dates and the MultiSelect counter.</li>
-      <li><code>onAccent</code> / <code>onNeutral</code>: tertiary buttons, the MultiSelect counter and today's date, over the accent color when the theme defines one and over neutral otherwise.</li>
+      <li><code>onPrimary</code>: filled primary buttons, checked checkboxes, radios and toggles, selected dates, and the MultiSelect counter when the theme has no accent.</li>
+      <li><code>onAccent</code>: tertiary buttons, today's date and the MultiSelect counter, when the theme defines an accent. Leave <code>accent</code> empty for no accent: these then use <code>onNeutral</code> over neutral (the counter uses primary).</li>
       <li><code>onSuccess</code> / <code>onDanger</code>: filled success and danger buttons.</li>
     </ul>
     <p>The <code>on</code> colors are white by default and are never inverted. In a dark theme, set them for each fill: keep them light when the fill is still dark enough, make them dark when the fill is light (e.g. a pastel pink or green).</p>

@@ -73,6 +73,7 @@ import Flex, { flexSelector } from 'src/elements/Flex'
 import {
   setupTheme,
   theme,
+  defaultScales,
   colorOptions,
   getColor,
 } from 'src/theme'
@@ -109,6 +110,7 @@ export type {
 export {
   setupTheme,
   theme,
+  defaultScales,
   colorOptions,
   getColor,
 }
