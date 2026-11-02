@@ -20,6 +20,7 @@
   outline: none;
   background-color: transparent;
   @include typography.microCopy;
+  color: var(--colors-neutral800);
   border: 1px solid var(--colors-neutral400);
   display: inline-flex;
   align-items: center;

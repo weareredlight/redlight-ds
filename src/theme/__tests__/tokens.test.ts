@@ -25,6 +25,15 @@ describe('tokens', () => {
     expect(css).toBe('.theme{--colors-primary:#FF0000;--colors-link:var(--colors-primary)}')
   })
 
+  it('scalesToCss sets empty tokens, and the on* color of an empty color, to initial', () => {
+    const colors = {
+      accent: '', onAccent: '#FFFFFF', primary: '#FF0000', onPrimary: '#FFFFFF'
+    }
+    const css = scalesToCss('.theme', { colors })
+
+    expect(css).toBe('.theme{--colors-accent:initial;--colors-onAccent:initial;--colors-primary:#FF0000;--colors-onPrimary:#FFFFFF}')
+  })
+
   it('scalesToVarRefs maps every token to its CSS variable', () => {
     const refs = scalesToVarRefs({ colors: { primary: '#FF0000' }, space: { sm: '1rem' } })
 

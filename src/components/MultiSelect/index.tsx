@@ -13,7 +13,6 @@ import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
 import Flex from 'src/elements/Flex'
-import { colors } from 'src/theme/colors'
 import { capitalize, cx } from 'src/utils'
 
 import { selectStyles } from './selectStyles'
@@ -35,6 +34,9 @@ export type MultiSelectProps = {
   className?: string
   style?: CSSProperties
 }
+
+// The counter is accent when the theme has one, primary otherwise (an empty accent is unset).
+const countTextStyle = { '--text-color': 'var(--colors-onAccent, var(--colors-onPrimary))' } as CSSProperties
 
 const DropdownIndicator = (props: DropdownIndicatorProps<OptionType, true>) => {
   const { menuIsOpen } = props.selectProps
@@ -88,7 +90,7 @@ const MultiSelect = ({
       style={{ width: fullWidth ? '100%' : 'fit-content', ...style }}
     >
       {label && <Label id={name} label={label} />}
-      <div className={cx(styles.wrapper, colors.accent && styles.accent, styles[`state${capitalize(state)}`])}>
+      <div className={cx(styles.wrapper, styles[`state${capitalize(state)}`])}>
         <Select
           inputId={name}
           value={
@@ -118,7 +120,7 @@ const MultiSelect = ({
         />
         {!hasPills && value?.length > 0 && (
           <Flex className={styles.optionsCount}>
-            <Text variant='subHeadingSmall' color={colors.accent ? 'onAccent' : 'onPrimary'}>
+            <Text variant='subHeadingSmall' style={countTextStyle}>
               {value?.length}
             </Text>
           </Flex>
