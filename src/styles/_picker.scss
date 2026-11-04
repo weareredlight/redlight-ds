@@ -1,0 +1,140 @@
+// Shared by DatePicker and TimePicker: the bordered field around the library's
+// typed inputs (react-date-picker / react-time-picker, so their classes are
+// wrapped in :global), the popover it opens and the popover's footer.
+
+@keyframes pickerIn {
+  0% {
+    opacity: 0;
+    transform: translateY(-2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+// Include in the component's root. $prefix is the library's class prefix, e.g. 'react-date-picker'.
+// Gives .field, .fieldButton and the root's hasError, fullWidth and disabled modifiers
+@mixin field($prefix) {
+  .field {
+    display: inline-flex;
+    align-items: center;
+    height: var(--sizes-xxxlg);
+    padding-left: var(--space-xxsm);
+    border-radius: var(--radii-xsm);
+    border: 1px solid var(--colors-neutral400);
+    font-size: var(--fontSizes-xsm);
+    // Set here so the inputs and the dividers between them share one color
+    color: var(--colors-neutral800);
+
+    &:hover {
+      background-color: var(--colors-neutral100);
+      border-color: var(--colors-neutral600);
+    }
+
+    &:focus-within,
+    &.isOpen {
+      border-color: var(--colors-primary);
+    }
+
+    :global(.#{$prefix}) {
+      flex-grow: 1;
+    }
+
+    // The library's disabled colors and wrapper border; the field draws its own
+    :global(.#{$prefix}--disabled) {
+      background-color: transparent;
+      color: inherit;
+    }
+
+    :global(.#{$prefix}__wrapper) {
+      border: none;
+    }
+
+    :global(.#{$prefix}__inputGroup__input:invalid) {
+      background-color: var(--colors-transparent);
+    }
+
+    :global(.#{$prefix}__inputGroup__input::placeholder) {
+      color: var(--colors-neutral);
+      opacity: 1;
+    }
+
+    // While no field has a value, the dividers match the "--" placeholders
+    &:not(:has(input:global(.#{$prefix}__inputGroup__input):not(:placeholder-shown))) :global(.#{$prefix}__inputGroup__divider) {
+      color: var(--colors-neutral);
+    }
+  }
+
+  // the icon button that opens the popover
+  .fieldButton {
+    appearance: none;
+    align-self: stretch;
+    display: flex;
+    align-items: center;
+    padding: 0 var(--space-xxsm);
+    border: none;
+    border-radius: var(--radii-xsm);
+    background-color: transparent;
+    color: var(--colors-neutral);
+    cursor: pointer;
+
+    &:hover {
+      color: var(--colors-neutral700);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: 0 0 0 2px var(--colors-primary300);
+    }
+  }
+
+  :where(&).hasError .field {
+    border-color: var(--colors-danger);
+  }
+
+  :where(&).fullWidth .field {
+    width: 100%;
+  }
+
+  :where(&).disabled .field {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
+  }
+}
+
+// Include in the popover content's class
+@mixin popover {
+  // Today and the current time: accent when the theme has one, neutral otherwise (an empty accent is unset)
+  --highlight: var(--colors-accent, var(--colors-neutral));
+
+  // Above Modal and Dialog, like the Select dropdown
+  z-index: 200;
+  padding: var(--space-xxsm);
+  border-radius: var(--radii-sm);
+  background-color: var(--colors-white);
+  box-shadow: var(--shadows-cardShadow);
+  color: var(--colors-neutral700);
+  font-size: var(--fontSizes-sm);
+
+  &[data-state="open"] {
+    animation: pickerIn 150ms ease-out;
+  }
+
+  .footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: var(--space-xxsm);
+    margin-top: var(--space-xxsm);
+    padding-top: var(--space-xxsm);
+    border-top: 1px solid var(--colors-neutral200);
+  }
+
+  .footerButton {
+    padding: var(--space-xxxsm) var(--space-xsm);
+  }
+}

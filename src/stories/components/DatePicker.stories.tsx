@@ -67,7 +67,7 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'By default, the Date Picker component displays a text input field with a calendar icon. Clicking on the calendar icon opens a calendar for selecting a date.',
+        story: 'By default, the Date Picker component displays a text input field with a calendar icon. Clicking on the calendar icon opens a calendar for selecting a date. Its footer clears the date or picks today.',
       },
     },
   }
@@ -75,12 +75,39 @@ export const Default: Story = {
 
 export const CustomLocale: Story = {
   args: {
-    localeString: 'pt-PT',
+    locale: 'pt-PT',
   },
   parameters: {
     docs: {
       description: {
-        story: 'You can set a custom locale by providing a locale string to the `localeString` prop.',
+        story: 'The field order and separators and the first day of the week follow the browser\'s locale. Set the `locale` prop to use another one. The month and weekday names stay in English, and the value is always `YYYY-MM-DD`.',
+      },
+    },
+  },
+}
+
+export const LocalizedNames: Story = {
+  args: {
+    locale: 'pt-PT',
+    localizeNames: true,
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'With `localizeNames`, the month and weekday names are in the locale\'s language. Weekdays are cut to 3 letters, e.g. `seg`.',
+      },
+    },
+  },
+}
+
+export const CustomFormat: Story = {
+  args: {
+    format: 'y-MM-dd',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The `format` prop overrides the locale\'s field order, with the Unicode tokens `d`, `dd`, `M`, `MM` and `y`.',
       },
     },
   },

@@ -1,204 +1,160 @@
 // =============================================================================
 // DATE PICKER
 // -----------------------------------------------------------------------------
-// Styles the third-party react-date-picker / react-calendar markup, so their
-// classes are wrapped in :global(...).
+// Styles the third-party react-date-picker (typed fields) and react-calendar
+// (dropdown) markup, so their classes are wrapped in :global(...).
+// The field, the popover and its footer are shared with TimePicker (styles/picker).
+// The calendar renders in a portal, outside `.datePicker`, so it has its own
+// root class (.calendar).
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
-.datePicker {
-  // "Today" and weekday highlight: accent when the theme has one, neutral otherwise (an empty accent is unset)
-  --highlight: var(--colors-accent, var(--colors-neutral));
-  --highlight-on: var(--colors-onAccent, var(--colors-onNeutral));
-  --highlight600: var(--colors-accent600, var(--colors-neutral600));
-  --highlight700: var(--colors-accent700, var(--colors-neutral700));
+@use '../../styles/picker';
 
+.datePicker {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: var(--space-xxxsm);
 
+  @include picker.field('react-date-picker');
+}
+
+// =============================================================================
+// CALENDAR
+// =============================================================================
+
+.calendar {
+  // --highlight (today and the weekdays) comes from picker.popover
+  @include picker.popover;
+
+  // 7 columns of 36px squares
+  :global(.react-calendar) {
+    width: 252px;
+  }
+
+  // Only the calendar's own buttons; the footer uses Button
+  :global(.react-calendar) button {
+    appearance: none;
+    border: 1px solid transparent;
+    outline: none;
+    padding: 0;
+    background-color: transparent;
+    border-radius: var(--radii-xsm);
+    font: inherit;
+    color: inherit;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+
+    &:focus-visible {
+      box-shadow: 0 0 0 2px var(--colors-primary300);
+    }
+
+    &:disabled {
+      color: var(--colors-neutral400);
+      cursor: default;
+    }
+  }
+
   // ===========================================================================
-  // INPUT
+  // HEADER
   // ===========================================================================
 
-  :global(.react-date-picker) {
-    > div {
-      width: 100%;
+  :global(.react-calendar__navigation) {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxxsm);
+    margin-bottom: var(--space-xxsm);
+
+    button {
       height: var(--sizes-xxxlg);
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: var(--space-xxsm) 0 var(--space-xxsm) var(--space-xxsm);
-      border-radius: var(--radii-xsm);
-      border: 1px solid var(--colors-neutral400);
-      font-size: var(--fontSizes-xsm);
+      min-width: var(--sizes-xxxlg);
 
       &:hover {
-        background-color: var(--colors-neutral100);
-        border-color: var(--colors-neutral600);
+        background-color: var(--colors-neutral200);
       }
 
-      :global(.react-date-picker__inputGroup__input:invalid) {
-        background-color: var(--colors-transparent);
-      }
-
-      :global(.react-date-picker__inputGroup__input:valid) {
-        color: var(--colors-neutral800);
+      &:active {
+        background-color: var(--colors-neutral300);
       }
     }
 
-    &:global(.react-date-picker--open) > div {
-      border-color: var(--colors-primary);
-    }
-
-    button {
-      color: var(--colors-neutral);
+    :global(.react-calendar__navigation__label) {
+      color: var(--colors-primary);
+      font-weight: var(--fontWeights-md);
     }
   }
 
   // ===========================================================================
-  // CALENDAR
+  // WEEKDAYS
   // ===========================================================================
 
-  :global(.react-calendar) {
-    padding: var(--space-xxsm);
-    border: none;
-    border-radius: var(--radii-sm);
-    background-color: var(--colors-white);
-    box-shadow: var(--shadows-cardShadow);
+  :global(.react-calendar__month-view__weekdays) {
+    padding-bottom: var(--space-xxxsm);
+  }
 
-    button {
-      --shadow-color: var(--colors-primary300);
+  :global(.react-calendar__month-view__weekdays__weekday) {
+    text-align: center;
+    font-size: var(--fontSizes-xsm);
 
-      appearance: none;
-      border: none;
-      outline: none;
-      background-color: transparent;
-      border-radius: var(--radii-xsm);
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      gap: var(--space-xxsm);
-      cursor: pointer;
-
-      &:focus {
-        box-shadow: 0 0 0 2px var(--shadow-color);
-      }
-    }
-
-    // --- header ----------------------------------------------------------------
-    :global(.react-calendar__navigation) {
-      display: flex;
-
-      button {
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        font-size: var(--fontSizes-lg);
-        background-color: transparent;
-        border: 1px solid transparent;
-        color: var(--colors-neutral700);
-
-        &:hover { background-color: var(--colors-neutral200); }
-        &:active { background-color: var(--colors-neutral300); }
-        &:disabled { color: var(--colors-neutral400); }
-
-        &:global(.react-calendar__navigation__label) {
-          color: var(--colors-primary);
-          font-size: var(--fontSizes-sm);
-        }
-      }
-    }
-
-    // --- body ------------------------------------------------------------------
-    :global(.react-calendar__viewContainer) {
-      :global(.react-calendar__month-view__weekdays) {
-        padding: var(--space-xxsm) 0;
-      }
-
-      :global(.react-calendar__month-view__weekdays__weekday) {
-        text-align: center;
-        font-size: var(--fontSizes-sm);
-
-        abbr {
-          text-decoration: none;
-          color: var(--highlight);
-        }
-      }
-
-      // --- day tiles -----------------------------------------------------------
-      button:global(.react-calendar__tile) {
-        width: 32px;
-        height: 32px;
-        padding: 0;
-        font-size: var(--fontSizes-xsm);
-        background-color: transparent;
-        border: 1px solid transparent;
-        color: var(--colors-neutral700);
-
-        &:hover { background-color: var(--colors-neutral200); }
-        &:active { background-color: var(--colors-neutral300); }
-        &:disabled { color: var(--colors-neutral400); }
-
-        &:global(.selected-week) {
-          background-color: var(--colors-primary);
-          color: var(--colors-onPrimary);
-
-          &:hover { background-color: var(--colors-primary600); }
-          &:active { background-color: var(--colors-primary700); }
-        }
-      }
-
-      // selected day
-      button:global(.react-calendar__tile--active) {
-        background-color: var(--colors-primary);
-        color: var(--colors-onPrimary);
-
-        &:hover { background-color: var(--colors-primary600); }
-        &:active { background-color: var(--colors-primary700); }
-      }
-
-      // today
-      button:global(.react-calendar__tile--now) {
-        background-color: var(--highlight);
-        color: var(--highlight-on);
-
-        &:hover { background-color: var(--highlight600); }
-        &:active { background-color: var(--highlight700); }
-      }
+    abbr {
+      text-decoration: none;
+      color: var(--highlight);
     }
   }
 
   // ===========================================================================
-  // ERROR
+  // TILES
   // ===========================================================================
 
-  :where(&).hasError :global(.react-date-picker) > div {
-    border-color: var(--colors-danger);
+  button:global(.react-calendar__tile) {
+    &:hover {
+      background-color: var(--colors-neutral200);
+    }
+
+    &:active {
+      background-color: var(--colors-neutral300);
+    }
   }
 
-  // ===========================================================================
-  // FULL WIDTH
-  // ===========================================================================
-
-  :where(&).fullWidth :global(.react-date-picker) {
-    width: 100%;
+  // Days are squares; months, years and decades fill a 3-column grid of about the same height
+  button:global(.react-calendar__month-view__days__day) {
+    aspect-ratio: 1;
   }
 
-  // ===========================================================================
-  // DISABLED
-  // ===========================================================================
+  button:global(.react-calendar__year-view__months__month),
+  button:global(.react-calendar__decade-view__years__year),
+  button:global(.react-calendar__century-view__decades__decade) {
+    height: 50px;
+  }
 
-  :where(&).disabled :global(.react-date-picker) > div {
-    background-color: var(--colors-neutral200);
-    border-color: var(--colors-neutral200);
-    color: var(--colors-neutral400);
-    pointer-events: none;
+  // days from the previous and next month
+  button:global(.react-calendar__month-view__days__day--neighboringMonth) {
+    color: var(--colors-neutral);
+  }
 
-    input {
-      color: var(--colors-neutral) !important;
+  // today: outlined, so it doesn't compete with the selected day
+  button:global(.react-calendar__tile--now) {
+    border-color: var(--highlight);
+    color: var(--highlight);
+    font-weight: var(--fontWeights-md);
+  }
+
+  // selected day, and the selected week of a week selector
+  button:global(.react-calendar__tile--active),
+  button:global(.selected-week) {
+    background-color: var(--colors-primary);
+    border-color: var(--colors-primary);
+    color: var(--colors-onPrimary);
+
+    &:hover {
+      background-color: var(--colors-primary600);
+    }
+
+    &:active {
+      background-color: var(--colors-primary700);
     }
   }
 }

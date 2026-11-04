@@ -19,6 +19,7 @@ import {
   Tabs,
   Tag,
   Text,
+  TimePicker,
   ToastContainer,
   Toggle,
   Tooltip,
@@ -99,6 +100,7 @@ const DashboardDemo = () => {
   const [notifications, setNotifications] = useState(true)
   const [weeklyDigest, setWeeklyDigest] = useState(false)
   const [reportDate, setReportDate] = useState('')
+  const [reportTime, setReportTime] = useState('')
   const [tags, setTags] = useState(['design', 'frontend', 'q4'])
 
   const filtered = useMemo(() => projects.filter(p => (
@@ -244,7 +246,10 @@ const DashboardDemo = () => {
             checked={weeklyDigest}
             onChange={e => setWeeklyDigest(e.target.checked)}
           />
-          <DatePicker label='Next report date' value={reportDate} onChange={setReportDate} />
+          <Flex gap='xxsm' align='end'>
+            <DatePicker label='Next report date' value={reportDate} onChange={setReportDate} />
+            <TimePicker value={reportTime} onChange={time => setReportTime(String(time))} />
+          </Flex>
           <Flex gap='lg'>
             <Button onClick={() => alert.success('Settings saved')}>Save changes</Button>
             <Button variant='secondary' onClick={() => alert.info('Changes discarded')}>Cancel</Button>
