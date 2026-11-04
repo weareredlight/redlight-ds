@@ -13,24 +13,35 @@
 
 // Filled button: solid background that darkens on hover/active, with its
 // `on` color for the text and icons.
-@mixin filled($bg, $on, $hover, $active, $disabled, $focus: null) {
+@mixin filled($bg, $on, $hover, $active, $focus: null) {
   --button-on-color: #{$on};
 
   background-color: $bg;
   color: var(--button-on-color);
 
-  &:hover { background-color: $hover; }
-  &:active { background-color: $active; }
-  &:disabled { background-color: $disabled; }
+  &:hover {
+    background-color: $hover;
+  }
+
+  &:active {
+    background-color: $active;
+  }
 
   @if $focus {
-    &:focus { --button-shadow-color: #{$focus}; }
+    &:focus {
+      --button-shadow-color: #{$focus};
+    }
   }
 }
 
 @keyframes rotateIcon {
-  0% { transform: rotate(0deg); }
-  100% { transform: rotate(359deg); }
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(359deg);
+  }
 }
 
 .button {
@@ -47,12 +58,20 @@
   gap: var(--space-xxsm);
   cursor: pointer;
 
-  &:focus { box-shadow: 0 0 0 2px var(--button-shadow-color); }
-  &:disabled { pointer-events: none; }
+  &:focus {
+    box-shadow: 0 0 0 2px var(--button-shadow-color);
+  }
+
+  &:disabled {
+    pointer-events: none;
+    opacity: var(--button-disabled-opacity, 0.5);
+  }
 
   // No icon: default padding. Comes before SIZE so the size paddings win
   // (large buttons get the wider padding).
-  :where(&).noIcon { padding: var(--space-xxsm) var(--space-lg); }
+  :where(&).noIcon {
+    padding: var(--space-xxsm) var(--space-lg);
+  }
 
   // ===========================================================================
   // SIZE
@@ -107,21 +126,14 @@
       border-color: var(--colors-neutral800);
       color: var(--colors-neutral900);
     }
-
-    &:disabled {
-      color: var(--colors-neutral300);
-      border-color: var(--colors-neutral400);
-    }
   }
 
   // --- primary ---------------------------------------------------------------
   :where(&).primary {
-    @include filled(
-      $bg: var(--colors-primary),
+    @include filled($bg: var(--colors-primary),
       $on: var(--colors-onPrimary),
       $hover: var(--colors-primary600),
       $active: var(--colors-primary700),
-      $disabled: var(--colors-primary200),
     );
   }
 
@@ -141,22 +153,15 @@
       border-color: var(--colors-primary700);
       color: var(--colors-primary700);
     }
-
-    &:disabled {
-      color: var(--colors-primary200);
-      border-color: var(--colors-primary200);
-    }
   }
 
   // --- tertiary --------------------------------------------------------------
   // Uses the accent palette when the theme has one, neutral otherwise (an empty accent is unset).
   :where(&).tertiary {
-    @include filled(
-      $bg: var(--colors-accent, var(--colors-neutral)),
+    @include filled($bg: var(--colors-accent, var(--colors-neutral)),
       $on: var(--colors-onAccent, var(--colors-onNeutral)),
       $hover: var(--colors-accent600, var(--colors-neutral600)),
       $active: var(--colors-accent700, var(--colors-neutral700)),
-      $disabled: var(--colors-accent200, var(--colors-neutral200)),
       $focus: var(--colors-accent200, var(--colors-neutral200)),
     );
   }
@@ -167,31 +172,31 @@
     background-color: transparent;
     color: var(--colors-neutral700);
 
-    &:hover { background-color: var(--colors-neutral200); }
-    &:active { background-color: var(--colors-neutral300); }
-    &:disabled { color: var(--colors-neutral400); }
+    &:hover {
+      background-color: var(--colors-neutral200);
+    }
+
+    &:active {
+      background-color: var(--colors-neutral300);
+    }
   }
 
   // --- danger ----------------------------------------------------------------
   :where(&).danger {
-    @include filled(
-      $bg: var(--colors-danger),
+    @include filled($bg: var(--colors-danger),
       $on: var(--colors-onDanger),
       $hover: var(--colors-danger500),
       $active: var(--colors-danger600),
-      $disabled: var(--colors-danger200),
       $focus: var(--colors-danger200),
     );
   }
 
   // --- success ---------------------------------------------------------------
   :where(&).success {
-    @include filled(
-      $bg: var(--colors-success),
+    @include filled($bg: var(--colors-success),
       $on: var(--colors-onSuccess),
       $hover: var(--colors-success500),
       $active: var(--colors-success600),
-      $disabled: var(--colors-success200),
       $focus: var(--colors-success200),
     );
   }
@@ -200,8 +205,13 @@
   // ICON POSITION
   // ===========================================================================
 
-  :where(&).iconLeft { padding-left: var(--space-xxsm); }
-  :where(&).iconRight { padding-right: var(--space-xxsm); }
+  :where(&).iconLeft {
+    padding-left: var(--space-xxsm);
+  }
+
+  :where(&).iconRight {
+    padding-right: var(--space-xxsm);
+  }
 
   :where(&).iconOnly {
     padding: var(--space-xxsm);
@@ -238,8 +248,13 @@
 
   // --- large + icon ----------------------------------------------------------
   :where(&).large {
-    &:where(.iconLeft) { padding-left: var(--space-lg); }
-    &:where(.iconRight) { padding-right: var(--space-lg); }
+    &:where(.iconLeft) {
+      padding-left: var(--space-lg);
+    }
+
+    &:where(.iconRight) {
+      padding-right: var(--space-lg);
+    }
 
     &:where(.iconOnly) {
       padding: var(--space-xxsm) var(--space-xsm);
@@ -250,11 +265,24 @@
 
   // --- loading + variant / icon ----------------------------------------------
   :where(&).loading {
-    &:where(.neutral, .textOnly) svg { color: var(--colors-neutral700); }
-    &:where(.primary, .tertiary, .danger, .success) svg { color: var(--button-on-color); }
-    &:where(.secondary) svg { color: var(--colors-primary); }
+    &:where(.neutral, .textOnly) svg {
+      color: var(--colors-neutral700);
+    }
 
-    &:where(.iconLeft) :global(.loading-icon) { margin-left: var(--space-xxsm); }
-    &:where(.iconRight) :global(.loading-icon) { margin-right: var(--space-xxsm); }
+    &:where(.primary, .tertiary, .danger, .success) svg {
+      color: var(--button-on-color);
+    }
+
+    &:where(.secondary) svg {
+      color: var(--colors-primary);
+    }
+
+    &:where(.iconLeft) :global(.loading-icon) {
+      margin-left: var(--space-xxsm);
+    }
+
+    &:where(.iconRight) :global(.loading-icon) {
+      margin-right: var(--space-xxsm);
+    }
   }
 }
