@@ -10,7 +10,7 @@
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
-@use '../../styles/picker';
+@use 'styles/picker';
 
 .timePicker {
   display: flex;
