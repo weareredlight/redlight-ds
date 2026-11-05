@@ -6,7 +6,7 @@
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
-@use '../../styles/typography';
+@use 'styles/typography';
 
 @keyframes rotateIcon {
   0% { transform: rotate(0deg); }

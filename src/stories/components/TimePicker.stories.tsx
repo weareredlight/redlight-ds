@@ -67,10 +67,38 @@ export const Default: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'By default, the Time Picker component displays a text input field with a clock icon. Clicking on the clock icon opens a clock for selecting a time.',
+        story: 'By default, the Time Picker component displays a text input field with a clock icon. Clicking on the clock icon opens a list of hours and minutes for selecting a time. Its footer clears the time or picks the current one.',
       },
     },
   }
+}
+
+export const TwelveHours: Story = {
+  name: '12 Hours',
+  args: {
+    locale: 'en-US',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The field and the list show 12 hours (4:00 PM) or 24 hours (16:00) as the browser\'s locale does. Set the `locale` prop to use another one. AM and PM stay in English unless `localizeNames` is set, and the value is always `HH:mm:ss` in 24 hours.',
+      },
+    },
+  },
+}
+
+export const CustomFormat: Story = {
+  args: {
+    locale: 'en-US',
+    format: 'HH:mm',
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'The `format` prop overrides the locale. Here `HH:mm` shows 24 hours in an `en-US` locale. Use `h` for 12 hours, with `a` for AM/PM.',
+      },
+    },
+  },
 }
 
 export const Duration: Story = {

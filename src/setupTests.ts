@@ -5,6 +5,7 @@ import '@testing-library/jest-dom'
 Element.prototype.hasPointerCapture = () => false
 Element.prototype.releasePointerCapture = () => { }
 Element.prototype.scrollIntoView = () => { }
+Element.prototype.scrollTo = () => { }
 
 window.ResizeObserver = jest.fn().mockImplementation(() => ({
   observe: jest.fn(),

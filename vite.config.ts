@@ -3,12 +3,13 @@ import path from 'path'
 import react from '@vitejs/plugin-react'
 import { defineConfig } from 'vite'
 
-import { cssModules, tokensPlugin } from './config/vite/designSystem'
+import { cssModules, scssOptions, tokensPlugin } from './config/vite/designSystem'
 
 export default defineConfig({
   plugins: [react(), tokensPlugin()],
   css: {
     modules: cssModules,
+    preprocessorOptions: { scss: scssOptions },
   },
   resolve: {
     alias: {

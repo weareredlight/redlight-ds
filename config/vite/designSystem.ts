@@ -1,6 +1,6 @@
 import path from 'path'
 
-import type { CSSModulesOptions, Plugin } from 'vite'
+import type { CSSModulesOptions, CSSOptions, Plugin } from 'vite'
 
 import { defaultScales, scalesToCss } from '../../src/theme/tokens'
 
@@ -25,4 +25,12 @@ export const cssModules: CSSModulesOptions = {
     const component = path.basename(path.dirname(filename.split('?')[0]))
     return `rl-${component}-${name}`
   },
+}
+
+/**
+ * Sass resolves `@use` paths from `src`, so shared partials load the same way from any depth
+ * (e.g. `@use 'styles/typography'` instead of `@use '../../styles/typography'`).
+ */
+export const scssOptions: NonNullable<CSSOptions['preprocessorOptions']>['scss'] = {
+  loadPaths: [path.resolve(__dirname, '../../src')],
 }

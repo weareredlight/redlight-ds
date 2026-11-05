@@ -4,7 +4,7 @@
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
-@use '../../styles/typography';
+@use 'styles/typography';
 
 .link {
   color: var(--colors-primary);

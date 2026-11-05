@@ -2,7 +2,7 @@
 // TOOLTIP
 // =============================================================================
 
-@use '../../styles/typography';
+@use 'styles/typography';
 
 @keyframes slideUpAndFade {
   0% { opacity: 0; transform: translateY(2px); }

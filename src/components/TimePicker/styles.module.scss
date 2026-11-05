@@ -2,9 +2,15 @@
 // TIME PICKER
 // -----------------------------------------------------------------------------
 // "time" type styles the third-party react-time-picker markup (classes wrapped
-// in :global); "duration" type is a formatted text input (.durationPicker).
+// in :global) and opens a popover with hour and minute columns; "duration" type
+// is a formatted text input (.durationPicker).
+// The field, the popover and its footer are shared with DatePicker (styles/picker).
+// The popover renders in a portal, outside `.timePicker`, so it has its own
+// root class (.clock).
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
+
+@use 'styles/picker';
 
 .timePicker {
   display: flex;
@@ -12,83 +18,101 @@
   align-items: flex-start;
   gap: var(--space-xxxsm);
 
-  // ===========================================================================
-  // TIME INPUT
-  // ===========================================================================
+  @include picker.field('react-time-picker');
 
-  .main {
-    > div {
-      position: relative;
-      display: inline-flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      height: var(--sizes-xxxlg);
-      padding: var(--space-xxsm) 0 var(--space-xxsm) var(--space-xxsm);
-      border-radius: var(--radii-xsm);
-      border: 1px solid var(--colors-neutral400);
-      font-size: var(--fontSizes-xsm);
+  // AM/PM in 12-hour locales: a select that looks like the other fields
+  :global(.react-time-picker__inputGroup__amPm) {
+    appearance: none;
+    padding: 0 1px;
+    border: none;
+    background: none;
+    font: inherit;
+    color: inherit;
+    cursor: pointer;
+
+    // the "--" placeholder, while no period is picked
+    &:has(option[value=""]:checked) {
+      color: var(--colors-neutral);
+    }
+  }
+}
+
+// =============================================================================
+// CLOCK
+// =============================================================================
+
+.clock {
+  @include picker.popover;
+
+  .columns {
+    display: flex;
+    gap: var(--space-xxxsm);
+  }
+
+  // 7 rows of 32px, with half of the next ones showing so the columns read as scrollable
+  .column {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    width: 64px;
+    height: 270px;
+    overflow-y: auto;
+    scrollbar-width: thin;
+    overscroll-behavior: contain;
+  }
+
+  // AM and PM fit without scrolling
+  .periodColumn {
+    height: auto;
+  }
+
+  .option {
+    appearance: none;
+    flex-shrink: 0;
+    height: var(--sizes-xxxlg);
+    padding: 0;
+    border: 1px solid transparent;
+    border-radius: var(--radii-xsm);
+    background-color: transparent;
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+    color: inherit;
+    cursor: pointer;
+
+    &:hover {
+      background-color: var(--colors-neutral200);
+    }
+
+    &:active {
+      background-color: var(--colors-neutral300);
+    }
+
+    &:focus-visible {
+      outline: none;
+      box-shadow: inset 0 0 0 2px var(--colors-primary300);
+    }
+
+    // the current hour, minute and period: outlined like today in DatePicker
+    &.isNow {
+      border-color: var(--highlight);
+      color: var(--highlight);
+      font-weight: var(--fontWeights-md);
+    }
+
+    &[aria-pressed="true"] {
+      background-color: var(--colors-primary);
+      border-color: var(--colors-primary);
+      color: var(--colors-onPrimary);
 
       &:hover {
-        background-color: var(--colors-neutral100);
-        border-color: var(--colors-neutral600);
+        background-color: var(--colors-primary600);
       }
 
-      :global(.react-time-picker__inputGroup__input:invalid) {
-        background-color: var(--colors-transparent);
-      }
-
-      :global(.react-time-picker__inputGroup__input:valid) {
-        color: var(--colors-neutral800);
+      &:active {
+        background-color: var(--colors-primary700);
       }
     }
-
-    button {
-      color: var(--colors-neutral);
-      pointer-events: none;
-    }
-
-    &:global(.react-time-picker--open) > div {
-      border-color: var(--colors-primary);
-    }
-  }
-
-  // the analog clock dropdown is never shown
-  :global(.react-time-picker__clock) {
-    display: none;
-  }
-
-  // ===========================================================================
-  // ERROR
-  // ===========================================================================
-
-  :where(&).hasError .main > div {
-    border-color: var(--colors-danger);
-  }
-
-  // ===========================================================================
-  // DISABLED
-  // ===========================================================================
-
-  :where(&).disabled .main > div {
-    background-color: var(--colors-neutral200);
-    border-color: var(--colors-neutral200);
-    color: var(--colors-neutral);
-    pointer-events: none;
-
-    :global(.react-time-picker__inputGroup__input:valid) {
-      color: var(--colors-neutral);
-    }
-  }
-
-  // ===========================================================================
-  // FULL WIDTH
-  // ===========================================================================
-
-  :where(&).fullWidth {
-    width: 100%;
-
-    > div { width: 100%; }
   }
 }
 
