@@ -1,0 +1,123 @@
+// =============================================================================
+// ACCORDION
+// -----------------------------------------------------------------------------
+// Built on Radix Collapsible: .accordion > .header (.headerContent + .icon)
+//                                       + .content > .body
+// Radix sets data-state="open|closed" on the root, header and content.
+// =============================================================================
+
+@use 'styles/typography';
+
+.accordion {
+  width: 100%;
+  background-color: var(--colors-neutral100);
+  color: var(--colors-neutral800);
+}
+
+// =============================================================================
+// HEADER
+// =============================================================================
+
+.header {
+  all: unset;
+  box-sizing: border-box;
+  display: flex;
+  align-items: center;
+  gap: var(--space-lg);
+  width: 100%;
+  padding: var(--space-xxlg) var(--space-xlg);
+  border-bottom: 1px solid var(--colors-neutral200);
+  @include typography.heading5;
+  color: inherit;
+  cursor: pointer;
+  user-select: none;
+
+  &:hover {
+    background-color: var(--colors-neutral200);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--colors-primary);
+    outline-offset: -2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+    opacity: var(--accordion-disabled-opacity, 0.5);
+
+    &:hover {
+      background-color: transparent;
+    }
+  }
+}
+
+// Fills the row so custom headers can lay out their own columns
+.headerContent {
+  flex: 1;
+  min-width: 0;
+  text-align: left;
+}
+
+.icon {
+  flex-shrink: 0;
+  width: var(--sizes-xxlg);
+  height: var(--sizes-xxlg);
+  color: var(--colors-neutral700);
+  transition: transform 200ms ease;
+
+  .header[data-state="open"] & {
+    transform: rotate(180deg);
+  }
+}
+
+// =============================================================================
+// BODY
+// =============================================================================
+
+.content {
+  overflow: hidden;
+
+  &[data-state="open"] {
+    animation: slideDown 200ms ease-out;
+  }
+
+  &[data-state="closed"] {
+    animation: slideUp 200ms ease-out;
+  }
+}
+
+.body {
+  padding: var(--space-xxlg) var(--space-xlg);
+  @include typography.paragraph;
+  color: var(--colors-neutral600);
+}
+
+@keyframes slideDown {
+  from {
+    height: 0;
+  }
+
+  to {
+    height: var(--radix-collapsible-content-height);
+  }
+}
+
+@keyframes slideUp {
+  from {
+    height: var(--radix-collapsible-content-height);
+  }
+
+  to {
+    height: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .content[data-state] {
+    animation: none;
+  }
+
+  .icon {
+    transition: none;
+  }
+}
