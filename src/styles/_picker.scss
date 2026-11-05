@@ -15,9 +15,12 @@
 }
 
 // Include in the component's root. $prefix is the library's class prefix, e.g. 'react-date-picker'.
-// Gives .field, .fieldButton and the root's hasError, fullWidth and disabled modifiers
+// Gives .field, .fieldButton and the root's hasError, fullWidth and disabled modifiers.
+// The button's click area covers the whole field, below the typed value: a click on the value
+// types, a click anywhere else opens the popover
 @mixin field($prefix) {
   .field {
+    position: relative;
     display: inline-flex;
     align-items: center;
     height: var(--sizes-xxxlg);
@@ -38,8 +41,23 @@
       border-color: var(--colors-primary);
     }
 
+    // Above the button's click area, but only the value takes clicks
     :global(.#{$prefix}) {
+      position: relative;
+      z-index: 1;
       flex-grow: 1;
+      pointer-events: none;
+    }
+
+    // the inputs (and the AM/PM select) and the characters between them
+    :global(.#{$prefix}__inputGroup__input),
+    :global(.#{$prefix}__inputGroup__divider),
+    :global(.#{$prefix}__inputGroup__leadingZero) {
+      pointer-events: auto;
+    }
+
+    input:global(.#{$prefix}__inputGroup__input) {
+      cursor: text;
     }
 
     // The library's disabled colors and wrapper border; the field draws its own
@@ -79,6 +97,13 @@
     background-color: transparent;
     color: var(--colors-neutral);
     cursor: pointer;
+
+    // the click area over the whole field
+    &::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+    }
 
     &:hover {
       color: var(--colors-neutral700);
