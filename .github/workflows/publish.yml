@@ -47,3 +47,19 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./storybook-static
+
+  announce:
+    needs: [build, storybook]
+    # Posts the release notes to #design-system on Slack once the package is on npm. Waits for Storybook so
+    # the link opens the new version, but a failed Storybook deploy doesn't hold it back. A failed publish
+    # (or a manual run, where build is skipped) does
+    if: ${{ !cancelled() && needs.build.result == 'success' }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - run: node .github/scripts/announce-release.mjs
+        env:
+          SLACK_WEBHOOK_URL: ${{ secrets.SLACK_DS_WEBHOOK_URL }}
