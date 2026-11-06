@@ -51,6 +51,7 @@ const Avatar = ({
             label={name}
             description={description}
             className={styles.label}
+            size={size}
           />
         )}
     </div>

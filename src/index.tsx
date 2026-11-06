@@ -2,6 +2,7 @@
 import './styles/global.scss'
 import 'virtual:rl-tokens.css'
 
+import type { AccordionProps, AccordionGroupProps } from 'src/components/Accordion'
 import type { AvatarProps } from 'src/components/Avatar'
 import type { ButtonProps } from 'src/components/Button'
 import type { CheckboxProps } from 'src/components/Checkbox'
@@ -34,6 +35,7 @@ import type { TooltipProps } from 'src/components/Tooltip'
 import type { UploadProps } from 'src/components/Upload'
 import type { ColorType } from 'src/theme'
 
+import Accordion, { AccordionGroup, accordionSelector } from 'src/components/Accordion'
 import alert, { ToastContainer } from 'src/components/Alert'
 import Avatar, { avatarSelector } from 'src/components/Avatar'
 import Button, { buttonSelector } from 'src/components/Button'
@@ -79,6 +81,8 @@ import {
 } from 'src/theme'
 
 export type {
+  AccordionProps,
+  AccordionGroupProps,
   AvatarProps,
   ButtonProps,
   CheckboxProps,
@@ -120,6 +124,8 @@ export {
   alert,
   ToastContainer,
   // Components imports
+  Accordion,
+  AccordionGroup,
   Avatar,
   Button,
   Checkbox,
@@ -162,6 +168,7 @@ export {
 
 // Root-element selectors, to style components from the outside (`${buttonSelector} { ... }`).
 export {
+  accordionSelector,
   avatarSelector,
   buttonSelector,
   checkboxSelector,

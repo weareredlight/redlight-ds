@@ -34,13 +34,32 @@
   // ===========================================================================
 
   p {
-    @include typography.heading7;
     user-select: none;
   }
 
   span {
-    @include typography.microCopy;
     color: var(--colors-neutral);
     user-select: none;
+  }
+
+  :where(&).sizeSmall {
+    p {
+      @include typography.heading7;
+    }
+
+    span {
+      @include typography.microCopy;
+    }
+
+  }
+
+  :where(&).sizeNormal {
+    p {
+      @include typography.heading6;
+    }
+
+    span {
+      @include typography.textBlock;
+    }
   }
 }

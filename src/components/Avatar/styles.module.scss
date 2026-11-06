@@ -11,16 +11,6 @@
   display: flex;
   align-items: center;
   gap: var(--space-xxsm);
-
-  // Label next to the picture
-  .label {
-    @include typography.paragraph;
-
-    span {
-      color: var(--colors-neutral400);
-      @include typography.microCopy;
-    }
-  }
 }
 
 // =============================================================================

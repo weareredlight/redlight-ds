@@ -10,6 +10,7 @@ export type LabelProps = {
   description?: string
   optional?: boolean
   align?: 'left' | 'center' | 'right'
+  size?: 'small' | 'normal'
   className?: string
   style?: CSSProperties
 }
@@ -20,13 +21,19 @@ const Label = ({
   description,
   optional,
   align = 'left',
+  size = 'small',
   className,
   style,
   ...props
 }: LabelProps) => (
   <label
     htmlFor={id}
-    className={cx(styles.label, styles[`align${capitalize(align)}`], className)}
+    className={cx(
+      styles.label,
+      styles[`align${capitalize(align)}`],
+      styles[`size${capitalize(size)}`],
+      className
+    )}
     style={style}
     {...props}
   >
