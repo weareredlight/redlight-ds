@@ -5,7 +5,20 @@ import type { Preview } from "@storybook/react-vite";
 import 'src/styles/global.scss'
 import 'virtual:rl-tokens.css'
 
-import RedTheme from './theme'
+import { darkThemeCss } from 'src/stories/darkTheme'
+
+import { getColorMode, subscribeToColorMode } from './colorMode'
+import DocsContainer from './DocsContainer'
+
+// In dark mode (toolbar toggle), stories and docs pages use the dark version of the default tokens
+const darkStyle = document.createElement('style')
+darkStyle.dataset.rlTheme = 'storybook-dark'
+darkStyle.textContent = darkThemeCss
+document.head.appendChild(darkStyle)
+
+const applyColorMode = () => { document.documentElement.dataset.rlColorMode = getColorMode() }
+applyColorMode()
+subscribeToColorMode(applyColorMode)
 
 const preview: Preview = {
   parameters: {
@@ -28,7 +41,7 @@ const preview: Preview = {
       },
     },
     docs: {
-      theme: RedTheme,
+      container: DocsContainer,
       // Code samples start expanded on docs pages
       canvas: { sourceState: 'shown' },
     },

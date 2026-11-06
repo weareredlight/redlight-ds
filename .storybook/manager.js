@@ -1,9 +1,53 @@
-import { addons } from 'storybook/manager-api';
+import { createElement, useState } from 'react';
+import { addons, types } from 'storybook/manager-api';
+import { IconButton } from 'storybook/internal/components';
 import { CURRENT_STORY_WAS_SET } from 'storybook/internal/core-events';
-import RedTheme from './theme';
+import { getColorMode, setColorMode } from './colorMode';
+import { themes } from './theme';
 
 addons.setConfig({
-  theme: RedTheme,
+  theme: themes[getColorMode()],
+});
+
+// Light / dark toggle in the toolbar. The manager switches its own theme here; the preview
+// (stories and docs pages) follows through localStorage (see colorMode.js)
+const icon = (...children) => createElement('svg', {
+  width: 14, height: 14, viewBox: '0 0 24 24', fill: 'none',
+  stroke: 'currentColor', strokeWidth: 2, strokeLinecap: 'round', strokeLinejoin: 'round',
+}, ...children);
+
+const moonIcon = icon(createElement('path', { d: 'M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z' }));
+const sunIcon = icon(
+  createElement('circle', { cx: 12, cy: 12, r: 4 }),
+  createElement('path', { d: 'M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41' }),
+);
+
+const ColorModeToggle = ({ api }) => {
+  const [mode, setMode] = useState(getColorMode);
+  const next = mode === 'dark' ? 'light' : 'dark';
+
+  const toggle = () => {
+    setColorMode(next);
+    api.setOptions({ theme: themes[next] });
+    setMode(next);
+  };
+
+  return createElement(IconButton, {
+    key: 'redlight-ds/color-mode',
+    variant: 'ghost',
+    padding: 'small',
+    ariaLabel: `Switch to ${next} mode`,
+    onClick: toggle,
+  }, mode === 'dark' ? sunIcon : moonIcon);
+};
+
+addons.register('redlight-ds/color-mode', (api) => {
+  addons.add('redlight-ds/color-mode', {
+    type: types.TOOL,
+    title: 'Light / dark mode',
+    match: () => true,
+    render: () => createElement(ColorModeToggle, { api }),
+  });
 });
 
 // Stories rendered without the addons panel (Controls, Actions, ...)
