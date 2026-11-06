@@ -9,6 +9,17 @@
 // =============================================================================
 
 .frame {
+  // Code blocks are dark in both themes, so they keep the light theme's values
+  // (otherwise the dark theme's inverted neutrals would turn them light)
+  --colors-white: #FFFFFF;
+  --colors-neutral100: #F4F4F7;
+  --colors-neutral300: #D2D5E0;
+  --colors-neutral400: #BCBFD1;
+  --colors-neutral700: #56596B;
+  --colors-neutral800: #393C47;
+  --colors-neutral900: #1D1E24;
+  --colors-primary400: #85A3FF;
+
   background-color: var(--colors-neutral900);
   border-radius: var(--radii-sm);
   // clip, not hidden: hidden would make this a scroll container and break the sticky collapse button

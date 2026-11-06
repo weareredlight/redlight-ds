@@ -26,7 +26,7 @@ const meta = {
       values: [
         {
           name: 'gray',
-          value: '#F4F4F7',
+          value: 'var(--colors-neutral100)',
         },
       ],
     },
