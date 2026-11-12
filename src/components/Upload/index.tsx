@@ -1,5 +1,7 @@
 import { FileTextIcon, RefreshCwIcon, XIcon } from 'lucide-react'
-import { useState, useRef, useCallback } from 'react'
+import React, {
+  useState, useRef, useCallback, useImperativeHandle,
+} from 'react'
 
 import type { ChangeEvent, CSSProperties } from 'react'
 
@@ -26,7 +28,7 @@ export type UploadProps = {
 
 const isImage = (ext: string) => ext === 'png' || ext === 'jpg' || ext === 'jpeg'
 
-const Upload = ({
+const Upload = React.forwardRef(({
   id,
   size = 'normal',
   fullWidth = false,
@@ -40,7 +42,7 @@ const Upload = ({
   className,
   style,
   ...props
-}: UploadProps) => {
+}: UploadProps, ref: React.Ref<HTMLInputElement>) => {
   const [fileName, setFileName] = useState<string>(defaultFile ? defaultFile.name : '')
   const [fileUrl, setFileUrl] = useState<string | null | undefined>(defaultFile ? URL.createObjectURL(defaultFile) : '')
   const [fileExtension, setFileExtension] = useState<string>(defaultFile ? defaultFile.name.split('.').pop() || '' : '')
@@ -52,6 +54,7 @@ const Upload = ({
   const fileNameExtension = extensionIndex > 0 ? fileName.slice(extensionIndex) : ''
 
   const fileInput = useRef<HTMLInputElement>(null)
+  useImperativeHandle(ref, () => fileInput.current as HTMLInputElement)
   const selectFile = () => {
     fileInput.current?.click()
   }
@@ -105,8 +108,7 @@ const Upload = ({
         {fileUrl && (
           <Button
             variant='danger'
-            // eslint-disable-next-line react/no-unstable-nested-components
-            iconComponent={() => <XIcon />}
+            iconComponent={XIcon}
             iconPosition='iconOnly'
             onClick={() => {
               setFileName('')
@@ -134,7 +136,7 @@ const Upload = ({
       </div>
     </div>
   )
-}
+})
 
 export const uploadSelector = `.${styles.upload}`
 

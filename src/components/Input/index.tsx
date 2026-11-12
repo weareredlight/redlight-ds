@@ -6,6 +6,7 @@ import Button from 'src/components/Button'
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import Flex from 'src/elements/Flex'
+import { useField } from 'src/hooks'
 import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
@@ -26,7 +27,7 @@ export type InputProps = {
   value?: string
   placeholder?: string
   description?: string
-  iconComponent?: React.FC
+  iconComponent?: React.ElementType
   errorMsg?: string
   variant?: 'simple' | 'null'
   state?: 'error' | 'dirty' | 'disabled' | 'null'
@@ -49,7 +50,7 @@ const Input = React.forwardRef(({
   value,
   placeholder,
   description,
-  iconComponent,
+  iconComponent: Icon,
   errorMsg,
   state = 'null',
   iconPosition = 'right',
@@ -64,13 +65,15 @@ const Input = React.forwardRef(({
   disabled = false,
   ...props
 }: InputProps, ref: React.Ref<HTMLInputElement>) => {
+  const { fieldId, errorId, ariaProps } = useField(id || name, state === 'error', Boolean(errorMsg))
+
   const renderIcon = () => {
-    if (!iconComponent) return null
+    if (!Icon) return null
     if (onClickIcon) {
       return (
         <Button
           onClick={onClickIcon}
-          iconComponent={iconComponent}
+          iconComponent={Icon}
           iconPosition='iconOnly'
           variant='textOnly'
           className={styles.iconButton}
@@ -80,11 +83,11 @@ const Input = React.forwardRef(({
     }
     return (
       <Flex style={{ padding: 'var(--space-xxsm)' }}>
-        {iconComponent({})}
+        <Icon />
       </Flex>
     )
   }
-  const iconPos = iconComponent ? iconPosition : 'null'
+  const iconPos = Icon ? iconPosition : 'null'
 
   return (
     <div
@@ -98,7 +101,7 @@ const Input = React.forwardRef(({
       <div className={cx(styles.input, iconPositionClasses[iconPos])}>
         {label || description ? (
           <Label
-            id={id || name}
+            id={fieldId}
             label={label}
             description={description}
             className={styles.label}
@@ -111,7 +114,7 @@ const Input = React.forwardRef(({
             state && state !== 'null' && styles[`state${capitalize(state)}`],
             className,
           )}
-          id={id || name}
+          id={fieldId}
           ref={ref}
           name={name}
           value={value}
@@ -119,6 +122,7 @@ const Input = React.forwardRef(({
           placeholder={placeholder}
           required={required}
           disabled={disabled || state === 'disabled'}
+          {...ariaProps}
           onChange={e => {
             const { value: rawValue } = e.target
             // An empty field is null for every type. Converting first would turn it into 0
@@ -135,12 +139,12 @@ const Input = React.forwardRef(({
           {...props}
         />
         <div className={cx(styles.iconWrapper, iconPositionClasses[iconPos])}>
-          {iconComponent && iconPos === 'left' && renderIcon()}
-          {iconComponent && iconPos === 'right' && renderIcon()}
+          {Icon && iconPos === 'left' && renderIcon()}
+          {Icon && iconPos === 'right' && renderIcon()}
         </div>
       </div>
       {state === 'error' && errorMsg && (
-        <Text color='danger' variant='microCopy'>
+        <Text id={errorId} color='danger' variant='microCopy'>
           {errorMsg}
         </Text>
       )}

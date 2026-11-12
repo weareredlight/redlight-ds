@@ -1,3 +1,5 @@
+import React from 'react'
+
 import type { CSSProperties } from 'react'
 
 import Label from 'src/components/shared/Label'
@@ -5,7 +7,7 @@ import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type AvatarProps = {
+type AvatarOwnProps = {
   size?: 'normal' | 'small',
   name: string,
   displayLabel?: boolean,
@@ -17,7 +19,10 @@ export type AvatarProps = {
   style?: CSSProperties
 }
 
-const Avatar = ({
+export type AvatarProps = AvatarOwnProps
+  & Omit<React.HTMLAttributes<HTMLDivElement>, keyof AvatarOwnProps>
+
+const Avatar = React.forwardRef(({
   size = 'normal',
   name,
   displayLabel = false,
@@ -28,11 +33,11 @@ const Avatar = ({
   className,
   style,
   ...props
-}: AvatarProps) => {
+}: AvatarProps, ref: React.Ref<HTMLDivElement>) => {
   const initials = name.split(' ').map(text => text.charAt(0)).join('')
 
   return (
-    <div className={cx(styles.avatar, className)} style={style} {...props}>
+    <div ref={ref} className={cx(styles.avatar, className)} style={style} {...props}>
       <div className={cx(styles.placeholder, styles[size])} style={{ width, height: width }}>
         {url ? <img src={url} alt={displayLabel ? '' : name} /> : (
           <span
@@ -56,7 +61,7 @@ const Avatar = ({
         )}
     </div>
   )
-}
+})
 
 export const avatarSelector = `.${styles.avatar}`
 

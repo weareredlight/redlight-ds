@@ -111,7 +111,7 @@ theme to one element only (useful to switch between several themes: add the clas
 
 | Scale | Variable | Tokens |
 | --- | --- | --- |
-| Colors | `--colors-*` | `white`, `black`, and `primary`, `accent`, `neutral` (`100`–`900`), `success`, `danger` (`100`–`600`) |
+| Colors | `--colors-*` | `white`, `black`, `primary`, `accent`, `neutral` (`100`–`900`), `success`, `danger` (`100`–`600`), and the text colors over each fill: `onPrimary`, `onAccent`, `onNeutral`, `onSuccess`, `onDanger` |
 | Spacing | `--space-*` | `xxxsm`, `xxsm`, `xsm`, `sm`, `lg`, `xlg`, `xxlg`, `xxxlg` |
 | Sizes | `--sizes-*` | same names as spacing |
 | Font sizes | `--fontSizes-*` | `xxsm`, `xsm`, `sm`, `md`, `lg`, `xlg`, `xxlg`, `xxxlg` |
@@ -156,6 +156,49 @@ The package ships its Sass helpers, so your own styles can match the design syst
   }
 }
 ```
+
+## What changed in 0.3.0
+
+Form components now work with form libraries and screen readers. Try the changes on the [0.3.0 page in Storybook](https://weareredlight.github.io/redlight-ds/?path=/docs/releases-v0-3-0--how-to-use), and see the full list in the [release notes](https://github.com/weareredlight/redlight-ds/releases/tag/0.3.0).
+
+- **Every form field takes a `ref`**, pointing to the element that takes the focus (the `<input>`,
+  the select's button, the first part of a date, ...). Form libraries use it to focus a field, e.g.
+  react-hook-form's `shouldFocusError`:
+
+  ```jsx
+  <Controller
+    name='country'
+    control={control}
+    render={({ field, fieldState }) => (
+      <Select
+        ref={field.ref}
+        value={field.value}
+        onChange={e => field.onChange(e.target.value)}
+        state={fieldState.error ? 'error' : 'null'}
+        errorMsg={fieldState.error?.message}
+        ...
+      />
+    )}
+  />
+  ```
+
+- **Error messages are announced.** In the error state, fields get `aria-invalid` and point to their
+  message (`aria-describedby`), so screen readers read it with the field.
+- **Native attributes pass through** on `Checkbox`, `Radio` and `Toggle` (`name`, `required`,
+  `onBlur`, `aria-*`, ...), and on `Text`, `Link`, `Label`, `Avatar`, `Tag` and `Pill`, which also take
+  a `ref`.
+- **Icons can be passed directly:** `iconComponent={PlusIcon}` works in `Button` and `Input`, without
+  a wrapper function.
+
+### Upgrading from 0.2.x
+
+| 0.2.x | 0.3.0 |
+| --- | --- |
+| `Button isLoading` still clicks with Enter or Space | ignores clicks while loading, from the mouse and the keyboard |
+| `MultiSelect state='error'` (or `dirty`, `disabled`) shows no color | the border and arrow follow the state |
+| `useRef<HTMLInputElement>` for `Toggle` | `useRef<HTMLButtonElement>` (the switch is a button) |
+| `const AddIcon = () => <PlusIcon />` for `iconComponent` | `iconComponent={PlusIcon}` (the wrapper still works) |
+| `Text` is always a `<span>` | the element follows the variant (`h1` → `<h1>`, `paragraph` → `<p>`, ...) |
 
 ## What changed in 0.2.0
 
@@ -206,12 +249,26 @@ what changes is how you set up and customize them.
     </td>
     <td style="text-align: center">
       <a href="https://github.com/samuthekid">
-        <img src="https://avatars.githubusercontent.com/u/6068533?v=4" width="100px;" alt="Samuel Nunes"/>
+        <img 
+          src="https://redlight.dev/wp-content/uploads/2024/11/working.png" 
+          width="100px;" height="100px;" 
+          style="object-fit: cover;"
+          alt="Samuel Nunes"
+        />
         <br />
         <sub><b>Samuel Nunes</b></sub>
       </a>
       <br />
       <sub>Developer & maintainer</sub>
+    </td>
+    <td style="text-align: center">
+      <a href="https://www.linkedin.com/in/margarida-souto/">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEcaE1XsSKlwQ/profile-displayphoto-crop_800_800/B4DZg86bqMHYAM-/0/1753368608251?e=1796256000&v=beta&t=uUhu-OXo-AAgVbYqJ-7GDltoL2ZLHA0wHQADvO_yoio" width="100px;" alt="Margarida Souto"/>
+        <br />
+        <sub><b>Margarida Souto</b></sub>
+      </a>
+      <br />
+      <sub>Designer</sub>
     </td>
   </tr>
 </table>

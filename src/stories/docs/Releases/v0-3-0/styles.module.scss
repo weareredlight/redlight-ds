@@ -1,0 +1,283 @@
+// =============================================================================
+// v0.3.0 RELEASE PAGE
+// -----------------------------------------------------------------------------
+// The previews are .sb-unstyled, so the docs typography doesn't reach the live
+// components. Their own text (notes, labels, the table) is styled here.
+// =============================================================================
+
+@use 'styles/typography';
+@use 'styles/media';
+
+// -----------------------------------------------------------------------------
+// Preview
+// -----------------------------------------------------------------------------
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xxlg);
+  background: var(--colors-neutral100);
+  border-radius: var(--radii-md);
+  min-width: 0;
+
+  @include media.query(sm) {
+    padding: var(--space-lg);
+  }
+}
+
+.note {
+  @include typography.microCopy;
+  font-family: Roboto, sans-serif;
+  color: var(--colors-neutral700);
+
+  code {
+    font-family: monospace;
+    font-size: 0.95em;
+  }
+
+  kbd {
+    font-family: monospace;
+    padding: 0 var(--space-xxxsm);
+    border: 1px solid var(--colors-neutral300);
+    border-bottom-width: 2px;
+    border-radius: var(--radii-xxsm);
+    background: var(--colors-white);
+  }
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xsm);
+}
+
+.label {
+  @include typography.subHeadingSmall;
+  font-family: Roboto, sans-serif;
+  color: var(--colors-neutral700);
+}
+
+// -----------------------------------------------------------------------------
+// Loading button
+// -----------------------------------------------------------------------------
+
+.counter {
+  @include typography.textBlock;
+  font-family: Roboto, sans-serif;
+  font-variant-numeric: tabular-nums;
+  color: var(--colors-neutral700);
+
+  strong {
+    color: var(--colors-neutral900);
+  }
+}
+
+.attr {
+  font-family: monospace;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-neutral700);
+}
+
+// -----------------------------------------------------------------------------
+// Form and inspector
+// -----------------------------------------------------------------------------
+
+.formLayout {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+// The fields in as many columns as fit; the buttons and the message take a whole row
+.form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(256px, 1fr));
+  align-items: start;
+}
+
+.fullRow {
+  grid-column: 1 / -1;
+}
+
+.success {
+  @include typography.microCopy;
+  font-family: Roboto, sans-serif;
+  color: var(--colors-success600);
+  background: var(--colors-success100);
+  padding: var(--space-xxsm) var(--space-xsm);
+  border-radius: var(--radii-xsm);
+}
+
+.inspector {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+  min-width: 0;
+}
+
+.tableWrap {
+  overflow-x: auto;
+  background: var(--colors-white);
+  border: 1px solid var(--colors-neutral200);
+  border-radius: var(--radii-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Roboto, sans-serif;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-neutral800);
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--space-xxsm) var(--space-xsm);
+    border-bottom: 1px solid var(--colors-neutral200);
+  }
+
+  thead th {
+    @include typography.subHeadingSmall;
+    font-family: Roboto, sans-serif;
+    color: var(--colors-neutral700);
+    white-space: nowrap;
+  }
+
+  tbody th {
+    font-weight: var(--fontWeights-md);
+    white-space: nowrap;
+  }
+
+  tbody tr:last-child th,
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  code {
+    font-family: monospace;
+    white-space: nowrap;
+  }
+}
+
+.invalidRow {
+  background: var(--colors-danger100);
+}
+
+.chip {
+  font-family: monospace;
+  padding: 1px var(--space-xxsm);
+  border-radius: var(--radii-full);
+  background: var(--colors-neutral100);
+  color: var(--colors-neutral700);
+  white-space: nowrap;
+}
+
+.chipError,
+.attrName {
+  background: var(--colors-danger200);
+  color: var(--colors-danger600);
+}
+
+.attrName {
+  padding: 0 var(--space-xxxsm);
+  border-radius: var(--radii-xxsm);
+}
+
+.focusButton {
+  all: unset;
+  font-family: Roboto, sans-serif;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-primary);
+  padding: 0 var(--space-xxsm);
+  border: 1px solid var(--colors-primary200);
+  border-radius: var(--radii-xsm);
+  cursor: pointer;
+
+  &:hover {
+    background: var(--colors-primary100);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--colors-primary);
+    outline-offset: 2px;
+  }
+}
+
+// -----------------------------------------------------------------------------
+// State colors
+// -----------------------------------------------------------------------------
+
+.states {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+  gap: var(--space-lg);
+  align-items: start;
+}
+
+// -----------------------------------------------------------------------------
+// Text elements
+// -----------------------------------------------------------------------------
+
+.textRows {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xxsm);
+}
+
+.textRow {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  align-items: baseline;
+  gap: var(--space-lg);
+  padding-bottom: var(--space-xxsm);
+  border-bottom: 1px solid var(--colors-neutral200);
+
+  &:last-child {
+    border-bottom: 0;
+    padding-bottom: 0;
+  }
+}
+
+.tag {
+  font-family: monospace;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-primary);
+}
+
+// -----------------------------------------------------------------------------
+// Native attributes
+// -----------------------------------------------------------------------------
+
+.radios {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+  border: 0;
+  padding: 0;
+  margin: 0;
+
+  legend {
+    @include typography.subHeadingSmall;
+    font-family: Roboto, sans-serif;
+    color: var(--colors-neutral700);
+    padding-bottom: var(--space-xxsm);
+  }
+}
+
+// Dark in both themes, like the docs code blocks
+.markup {
+  margin: 0;
+  padding: var(--space-xsm) var(--space-lg);
+  background: #1D1E24;
+  color: #E9EAF0;
+  border-radius: var(--radii-sm);
+  font-family: monospace;
+  font-size: var(--fontSizes-xsm);
+  line-height: var(--lineHeights-lg);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}

@@ -1,5 +1,8 @@
-import { render, screen, within } from '@testing-library/react'
+import {
+  act, render, screen, within,
+} from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import type { MultiSelectProps } from 'src/components/MultiSelect'
 
@@ -82,5 +85,64 @@ describe('MultiSelect', () => {
     renderMultiSelect()
 
     expect(screen.getByRole('combobox', { name: 'Fruits' })).toBeInTheDocument()
+  })
+
+  it('forwards the ref to the input, so the field can be focused', () => {
+    const ref = createRef<HTMLInputElement>()
+    render(
+      <MultiSelect
+        ref={ref}
+        name='fruits'
+        label='Fruits'
+        value={[]}
+        onChange={jest.fn()}
+        options={fruits}
+        getLabel={getLabel}
+      />,
+    )
+
+    act(() => ref.current?.focus())
+
+    expect(screen.getByRole('combobox')).toHaveFocus()
+  })
+
+  it('calls onBlur when the field loses the focus', async () => {
+    const user = userEvent.setup()
+    const onBlur = jest.fn()
+    renderMultiSelect({ onBlur })
+
+    await user.click(screen.getByRole('combobox'))
+    await user.tab()
+
+    expect(onBlur).toHaveBeenCalled()
+  })
+
+  it('is invalid and points to its error message in the error state', () => {
+    renderMultiSelect({ state: 'error', errorMsg: 'Pick one' })
+
+    const field = screen.getByRole('combobox')
+    expect(field).toBeInvalid()
+    expect(field).toHaveAccessibleErrorMessage('Pick one')
+  })
+
+  it('marks the field with its state, which the styles color', () => {
+    const { container } = renderMultiSelect({ state: 'error', errorMsg: 'Pick one' })
+
+    expect(container.querySelector('.wrapper')).toHaveClass('stateError')
+  })
+
+  it('styles its parts with the module classes instead of the react-select styles', async () => {
+    const user = userEvent.setup()
+    const { container } = renderMultiSelect()
+
+    await user.click(screen.getByRole('combobox'))
+    await user.keyboard('{ArrowDown}')
+
+    expect(container.querySelector('.control')).toHaveClass('isFocused')
+    expect(container.querySelector('.menu')).toBeInTheDocument()
+    const options = screen.getAllByRole('option')
+    options.forEach(option => expect(option).toHaveClass('option'))
+    // The option reached with the arrow keys is highlighted
+    expect(options.filter(option => option.classList.contains('isFocused'))).toHaveLength(1)
   })
 })

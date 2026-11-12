@@ -1,4 +1,5 @@
 import { XIcon } from 'lucide-react'
+import React from 'react'
 
 import type { CSSProperties, ReactNode } from 'react'
 
@@ -7,7 +8,7 @@ import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type PillProps = {
+type PillOwnProps = {
   children: ReactNode
   variant?: 'default' | 'error' | 'success'
   onClose?: () => void
@@ -15,22 +16,23 @@ export type PillProps = {
   style?: CSSProperties
 }
 
-const CloseIcon = () => <XIcon />
+export type PillProps = PillOwnProps
+  & Omit<React.HTMLAttributes<HTMLSpanElement>, keyof PillOwnProps>
 
-const Pill = ({
+const Pill = React.forwardRef(({
   children,
   variant = 'default',
   onClose,
   className,
   style,
   ...props
-}: PillProps) => (
-  <span className={cx(styles.pill, styles[variant], className)} style={style} {...props}>
+}: PillProps, ref: React.Ref<HTMLSpanElement>) => (
+  <span ref={ref} className={cx(styles.pill, styles[variant], className)} style={style} {...props}>
     {children}
     {onClose && (
       <Button
         onClick={onClose}
-        iconComponent={CloseIcon}
+        iconComponent={XIcon}
         iconPosition='iconOnly'
         variant='textOnly'
         className={styles.closeButton}
@@ -38,7 +40,7 @@ const Pill = ({
       />
     )}
   </span>
-)
+))
 
 export const pillSelector = `.${styles.pill}`
 

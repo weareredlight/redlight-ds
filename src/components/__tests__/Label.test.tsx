@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { createRef } from 'react'
 
 import Label from 'src/components/shared/Label'
 
@@ -43,5 +44,13 @@ describe('Label', () => {
     render(<Label label='Name' align='center' />)
 
     expect(screen.getByText('Name').closest('label')).toHaveClass('alignCenter')
+  })
+
+  it('forwards the ref to the label', () => {
+    const ref = createRef<HTMLLabelElement>()
+    render(<Label ref={ref} id='email' label='Email' />)
+
+    expect(ref.current?.tagName).toBe('LABEL')
+    expect(ref.current).toHaveAttribute('for', 'email')
   })
 })

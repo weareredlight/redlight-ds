@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import type { UploadProps } from 'src/components/Upload'
 
@@ -105,5 +106,12 @@ describe('Upload', () => {
 
     expect(onClear).toHaveBeenCalledTimes(1)
     expect(onUpload).toHaveBeenCalledTimes(2)
+  })
+
+  it('forwards the ref to the file input', () => {
+    const ref = createRef<HTMLInputElement>()
+    render(<Upload ref={ref} id='avatar' placeholder='Profile picture' buttonText='Browse' />)
+
+    expect(ref.current).toBe(screen.getByLabelText('Profile picture'))
   })
 })

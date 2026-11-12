@@ -12,20 +12,59 @@
   cursor: default;
   color: var(--text-color);
 
+  :where(&) {
+    margin: 0;
+  }
+
   // ===========================================================================
   // VARIANT
   // ===========================================================================
 
-  :where(&).h1 { @include typography.heading1; }
-  :where(&).h2 { @include typography.heading2; }
-  :where(&).h3 { @include typography.heading3; }
-  :where(&).h4 { @include typography.heading4; }
-  :where(&).h5 { @include typography.heading5; }
-  :where(&).h6 { @include typography.heading6; }
-  :where(&).h7 { @include typography.heading7; }
-  :where(&).subHeading { @include typography.subHeading; }
-  :where(&).subHeadingSmall { @include typography.subHeadingSmall; }
-  :where(&).paragraph { @include typography.paragraph; }
-  :where(&).textBlock { @include typography.textBlock; }
-  :where(&).microCopy { @include typography.microCopy; }
+  :where(&).h1 {
+    @include typography.heading1;
+  }
+
+  :where(&).h2 {
+    @include typography.heading2;
+  }
+
+  :where(&).h3 {
+    @include typography.heading3;
+  }
+
+  :where(&).h4 {
+    @include typography.heading4;
+  }
+
+  :where(&).h5 {
+    @include typography.heading5;
+  }
+
+  :where(&).h6 {
+    @include typography.heading6;
+  }
+
+  :where(&).h7 {
+    @include typography.heading7;
+  }
+
+  :where(&).subHeading {
+    @include typography.subHeading;
+  }
+
+  :where(&).subHeadingSmall {
+    @include typography.subHeadingSmall;
+  }
+
+  :where(&).paragraph {
+    @include typography.paragraph;
+  }
+
+  :where(&).textBlock {
+    @include typography.textBlock;
+  }
+
+  :where(&).microCopy {
+    @include typography.microCopy;
+  }
 }

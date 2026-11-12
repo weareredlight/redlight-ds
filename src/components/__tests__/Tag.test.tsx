@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import Tag from 'src/components/Tag'
 
@@ -36,5 +37,13 @@ describe('Tag', () => {
     render(<Tag variant='error' disabled>React</Tag>)
 
     expect(screen.getByText('React')).toHaveClass('tag', 'error', 'disabled')
+  })
+
+  it('forwards the ref and other attributes to the tag', () => {
+    const ref = createRef<HTMLSpanElement>()
+    render(<Tag ref={ref} title='Design tag'>Design</Tag>)
+
+    expect(ref.current).toBe(screen.getByText('Design'))
+    expect(ref.current).toHaveAttribute('title', 'Design tag')
   })
 })

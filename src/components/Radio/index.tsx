@@ -7,7 +7,7 @@ import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type RadioProps = {
+type RadioOwnProps = {
   label?: string,
   description?: string,
   name?: string,
@@ -21,7 +21,10 @@ export type RadioProps = {
   style?: CSSProperties
 }
 
-const Radio = ({
+export type RadioProps = RadioOwnProps
+  & Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof RadioOwnProps | 'type'>
+
+const Radio = React.forwardRef(({
   id,
   name,
   value,
@@ -34,57 +37,40 @@ const Radio = ({
   className,
   style,
   ...props
-}: RadioProps) => (
-  <div
-    className={cx(styles.radio, disabled && styles.disabled, className)}
-    style={style}
-    {...props}
-  >
-    {labelPosition === 'left' ? (
-      <>
-        <Label
-          label={label}
-          description={description}
-          id={id}
-          className={styles.label}
-        />
-        <input
-          className={cx(styles.trigger, disabled && styles.disabled)}
-          type='radio'
-          name={name}
-          id={id}
-          value={value}
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-        />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
-        <label className={styles.indicator} htmlFor={id} />
-      </>
-    ) : (
-      <>
-        <input
-          className={cx(styles.trigger, disabled && styles.disabled)}
-          type='radio'
-          name={name}
-          id={id}
-          value={value}
-          checked={checked}
-          onChange={onChange}
-          disabled={disabled}
-        />
-        {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
-        <label className={styles.indicator} htmlFor={id} />
-        <Label
-          label={label}
-          description={description}
-          id={id}
-          className={styles.label}
-        />
-      </>
-    )}
-  </div>
-)
+}: RadioProps, ref: React.Ref<HTMLInputElement>) => {
+  const labelElement = (
+    <Label
+      label={label}
+      description={description}
+      id={id}
+      className={styles.label}
+    />
+  )
+
+  return (
+    <div
+      className={cx(styles.radio, disabled && styles.disabled, className)}
+      style={style}
+    >
+      {labelPosition === 'left' && labelElement}
+      <input
+        ref={ref}
+        className={cx(styles.trigger, disabled && styles.disabled)}
+        type='radio'
+        name={name}
+        id={id}
+        value={value}
+        checked={checked}
+        onChange={onChange}
+        disabled={disabled}
+        {...props}
+      />
+      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
+      <label className={styles.indicator} htmlFor={id} />
+      {labelPosition !== 'left' && labelElement}
+    </div>
+  )
+})
 
 export const radioSelector = `.${styles.radio}`
 

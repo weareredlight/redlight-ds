@@ -1,5 +1,7 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { SearchIcon as SearchLucideIcon } from 'lucide-react'
+import { createRef } from 'react'
 
 import Input from 'src/components/Input'
 
@@ -106,5 +108,32 @@ describe('Input', () => {
     )
 
     expect(screen.getByRole('button', { name: 'Show password' })).toBeInTheDocument()
+  })
+
+  it('renders a forwardRef icon component, like the Lucide icons', () => {
+    const { container } = render(<Input name='q' iconComponent={SearchLucideIcon} onChange={jest.fn()} />)
+
+    expect(container.querySelector('svg')).toBeInTheDocument()
+  })
+
+  it('forwards the ref to the input', () => {
+    const ref = createRef<HTMLInputElement>()
+    render(<Input ref={ref} name='email' label='Email' onChange={jest.fn()} />)
+
+    expect(ref.current).toBe(screen.getByRole('textbox', { name: 'Email' }))
+  })
+
+  it('is invalid and described by its error message in the error state', () => {
+    render(<Input name='email' label='Email' state='error' errorMsg='Invalid email' onChange={jest.fn()} />)
+
+    const field = screen.getByRole('textbox', { name: 'Email' })
+    expect(field).toBeInvalid()
+    expect(field).toHaveAccessibleDescription('Invalid email')
+  })
+
+  it('links the label to the field without an id or a name', () => {
+    render(<Input label='Email' onChange={jest.fn()} />)
+
+    expect(screen.getByRole('textbox', { name: 'Email' })).toBeInTheDocument()
   })
 })

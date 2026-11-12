@@ -1,11 +1,14 @@
 import * as SelectInput from '@radix-ui/react-select'
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
-import { useMemo, useState } from 'react'
+import React, { useMemo, useState } from 'react'
 
-import type { ChangeEvent, CSSProperties } from 'react'
+import type {
+  ChangeEvent, CSSProperties, ReactElement, Ref,
+} from 'react'
 
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
+import { useField } from 'src/hooks'
 import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
@@ -31,7 +34,7 @@ export type SelectProps<T> = {
   fullWidth?: boolean
 }
 
-const Select = <T extends object>({
+const SelectInner = <T extends object>({
   id,
   name,
   label,
@@ -51,7 +54,8 @@ const Select = <T extends object>({
   style,
   fullWidth = false,
   ...props
-}: SelectProps<T>) => {
+}: SelectProps<T>, ref: Ref<HTMLButtonElement>) => {
+  const { errorId, ariaProps } = useField(id, state === 'error', Boolean(errorMsg))
   const [viewContent, setViewContent] = useState(false)
   const selectedOption = options.find(o => getValue(o) === value)
   const ChevronToShow = viewContent ? ChevronUpIcon : ChevronDownIcon
@@ -95,7 +99,9 @@ const Select = <T extends object>({
         }}
       >
         <SelectInput.Trigger
+          ref={ref}
           id={id}
+          {...ariaProps}
           className={cx(
             styles.trigger,
             variant === 'simple' && styles.simple,
@@ -150,7 +156,7 @@ const Select = <T extends object>({
       {state === 'error' && errorMsg && (
         <>
           <br />
-          <Text color='danger' variant='microCopy'>
+          <Text id={errorId} color='danger' variant='microCopy'>
             {errorMsg}
           </Text>
         </>
@@ -158,6 +164,10 @@ const Select = <T extends object>({
     </div>
   )
 }
+
+const Select = React.forwardRef(SelectInner) as (<T extends object>(
+  props: SelectProps<T> & { ref?: Ref<HTMLButtonElement> },
+) => ReactElement) & { displayName?: string }
 
 export const selectSelector = `.${styles.select}`
 

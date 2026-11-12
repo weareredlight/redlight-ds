@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import Toggle from 'src/components/Toggle'
 
@@ -25,5 +26,17 @@ describe('Toggle', () => {
 
     expect(screen.getByRole('switch', { name: 'Notifications' })).toBeDisabled()
     expect(onChange).not.toHaveBeenCalled()
+  })
+
+  it('forwards the ref to the switch and is described by its error message in the error state', () => {
+    const ref = createRef<HTMLButtonElement>()
+    render(
+      <Toggle ref={ref} id='terms' label='Terms' state='error' errorMsg='Required' onChange={jest.fn()} />,
+    )
+
+    const toggle = screen.getByRole('switch', { name: 'Terms' })
+    expect(ref.current).toBe(toggle)
+    expect(toggle).toHaveAttribute('aria-invalid', 'true')
+    expect(toggle).toHaveAccessibleDescription('Required')
   })
 })
