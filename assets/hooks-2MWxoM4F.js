@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{t}from"./react-B6tGW3fj.js";var n,r;function i(){return(i=e((()=>{n=t(),r=(e,t,r)=>{let i=(0,n.useId)(),a=e||i,o=`${a}-error`;return{fieldId:a,errorId:o,ariaProps:{"aria-invalid":t||void 0,"aria-describedby":t&&r?o:void 0}}}})))()}export{r as n,i as t};
