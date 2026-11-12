@@ -1,0 +1,103 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from 'src/stories/docs/document';
+
+import {
+  IconsBefore,
+  IconsAfter,
+  ErrorMarkup,
+  ReactHookForm,
+  TextElements,
+  ToggleRef,
+} from './snippets'
+
+import {
+  FormDemo,
+  IconsDemo,
+  LoadingDemo,
+  StatesDemo,
+  NativeDemo,
+  TriggersDemo,
+  TextDemo,
+} from './Demos'
+
+<Meta title='Releases/v0.3.0' />
+
+<Doc>
+  <DocHeader style={{background: '#1F3D99'}}>
+    <h2>What's new in 0.3.0</h2>
+    <p>Release 0.3.0</p>
+  </DocHeader>
+
+  <DocBody>
+    <h3>Form fields that work with form libraries and screen readers</h3>
+    <p>Every form field now takes a <code>ref</code>, error messages are announced to screen readers, and fields pass native attributes through. This release also fixes the icons in <code>Button</code> and <code>Input</code> and the state colors of <code>MultiSelect</code>. Everything on this page is live: these are the components of this version.</p>
+    <p>The full list of changes is in the <a href="https://github.com/weareredlight/redlight-ds/releases/tag/0.3.0" target='_blank'>release notes</a>.</p>
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Before you upgrade</span>
+    <p>No component, prop or export was removed. These changes can still affect your app:</p>
+    <ul>
+      <li><p><b>Toggle:</b> the <code>ref</code> is an <code>HTMLButtonElement</code> (it was typed as <code>HTMLInputElement</code>, but the switch was always a button).</p></li>
+      <li><p><b>Button with <code>isLoading</code>:</b> <code>onClick</code> is no longer called from the keyboard.</p></li>
+      <li><p><b>MultiSelect:</b> the <code>state</code> prop now colors the field, and the placeholder uses the same grey as <code>Select</code>.</p></li>
+      <li><p><b>Select with <code>state='dirty'</code>:</b> the border is <code>accent</code>, or <code>primary</code> without an accent.</p></li>
+      <li><p><b>Radio:</b> extra props go to the <code>&lt;input&gt;</code> instead of the wrapper.</p></li>
+      <li><p><b>Text:</b> renders the element of its variant instead of always a <code>&lt;span&gt;</code>.</p></li>
+    </ul>
+    <DocCodeBlock code={ToggleRef} language='tsx' title='Toggle ref' />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Errors are announced, and every field takes a ref</span>
+    <p>An error used to show only visually. In the error state, <code>Input</code>, <code>TextArea</code>, <code>Checkbox</code>, <code>Toggle</code>, <code>Select</code>, <code>MultiSelect</code>, <code>DatePicker</code> and <code>TimePicker</code> are now marked as invalid and point to their message, so screen readers read it with the field.</p>
+    <p>The <code>ref</code> of each field is the element that takes the focus, which form libraries use to focus the first field with an error. Press <b>Validate</b> with empty fields: the errors show up and the focus moves to the first invalid field through its ref. The table reads each field through its ref too, live.</p>
+    <FormDemo />
+    <DocCodeBlock code={ErrorMarkup} language='tsx' title='Markup of a field with an error' />
+    <p>With react-hook-form, pass <code>field.ref</code> so <code>shouldFocusError</code> can focus the field:</p>
+    <DocCodeBlock code={ReactHookForm} language='tsx' title='react-hook-form' />
+    <br />
+
+    <span className="sub-heading">State colors</span>
+    <p><code>MultiSelect</code> ignored its <code>state</code> prop, <code>Select</code> had no visible <code>dirty</code> color, and the duration <code>TimePicker</code> kept a grey border with an error. They now follow the state like the other fields. In <code>MultiSelect</code>, the option reached with the arrow keys is also highlighted now.</p>
+    <StatesDemo />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Lucide icons in iconComponent</span>
+    <p><code>Button</code> and <code>Input</code> called the icon as a function, so a Lucide icon passed directly crashed the page. They now render it as a component.</p>
+    <IconsDemo />
+    <DocCodeBlock code={IconsBefore} language='tsx' title='Before' />
+    <DocCodeBlock code={IconsAfter} language='tsx' title='Now' />
+    <br />
+
+    <span className="sub-heading">Loading buttons ignore every click</span>
+    <p>A loading <code>Button</code> blocked the mouse, but <kbd>Enter</kbd> and <kbd>Space</kbd> still called <code>onClick</code>, which could submit a form twice. It now ignores clicks while loading, keeps its focus and tells screen readers it's busy.</p>
+    <LoadingDemo />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Native attributes and refs</span>
+    <p><code>Checkbox</code> and <code>Radio</code> pass other <code>&lt;input&gt;</code> attributes through (<code>name</code>, <code>required</code>, <code>onBlur</code>, <code>data-*</code>…), <code>Toggle</code> passes <code>&lt;button&gt;</code> attributes, and <code>MultiSelect</code> has a new <code>onBlur</code> prop.</p>
+    <NativeDemo />
+    <p><code>Text</code>, <code>Link</code>, <code>Label</code>, <code>Avatar</code>, <code>Tag</code> and <code>Pill</code> also take a <code>ref</code> and the attributes of their element, so they work as the trigger of a <code>PopOver</code>:</p>
+    <TriggersDemo />
+    <br />
+
+    <span className="sub-heading">Text elements</span>
+    <p><code>Text</code> renders the element of its variant: <code>h1</code> to <code>h6</code> are headings of that level, <code>microCopy</code> is a <code>&lt;span&gt;</code> and the other variants are a <code>&lt;p&gt;</code>. The look doesn't change.</p>
+    <TextDemo />
+    <DocCodeBlock code={TextElements} language='tsx' />
+  </DocBody>
+</Doc>

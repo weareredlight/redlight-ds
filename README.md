@@ -159,8 +159,7 @@ The package ships its Sass helpers, so your own styles can match the design syst
 
 ## What changed in 0.3.0
 
-Form components now work with form libraries and screen readers. The full list is in the
-[release notes](release-notes/v0.3.0.md).
+Form components now work with form libraries and screen readers. Try the changes on the [0.3.0 page in Storybook](https://weareredlight.github.io/redlight-ds/?path=/docs/releases-v0-3-0--how-to-use), and see the full list in the [release notes](https://github.com/weareredlight/redlight-ds/releases/tag/0.3.0).
 
 - **Every form field takes a `ref`**, pointing to the element that takes the focus (the `<input>`,
   the select's button, the first part of a date, ...). Form libraries use it to focus a field, e.g.

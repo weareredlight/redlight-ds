@@ -4,6 +4,10 @@
 
 @use 'styles/typography';
 
+// The page's own text, not the live components in a preview (.sb-unstyled). Text renders real
+// headings and paragraphs, so without this the page's h4 or p rules would restyle them
+$outside-previews: ':not(:global(.sb-unstyled) *)';
+
 // =============================================================================
 // PAGE
 // =============================================================================
@@ -34,31 +38,31 @@
     }
   }
 
-  h1 {
+  h1:where(#{$outside-previews}) {
     @include typography.heading1;
     color: var(--colors-neutral900);
   }
 
-  h2 {
+  h2:where(#{$outside-previews}) {
     @include typography.heading2;
   }
 
-  h3 {
+  h3:where(#{$outside-previews}) {
     @include typography.heading3;
     color: var(--colors-neutral800);
   }
 
-  h4 {
+  h4:where(#{$outside-previews}) {
     @include typography.heading4;
     color: var(--colors-neutral800);
   }
 
-  h5 {
+  h5:where(#{$outside-previews}) {
     @include typography.heading5;
     color: var(--colors-neutral700);
   }
 
-  h6 {
+  h6:where(#{$outside-previews}) {
     @include typography.heading6;
     color: var(--colors-neutral700);
   }
@@ -78,7 +82,7 @@
     color: var(--colors-primary);
   }
 
-  p {
+  p:where(#{$outside-previews}) {
     @include typography.textBlock;
     color: var(--colors-neutral700);
   }
@@ -100,7 +104,7 @@
   }
 
   // inline code inside text
-  p code {
+  p:where(#{$outside-previews}) code {
     font-family: monospace;
     font-size: 0.9em;
     background-color: var(--colors-neutral100);
