@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import Radio from 'src/components/Radio'
 
@@ -57,5 +58,14 @@ describe('Radio', () => {
     expect(screen.getByRole('radio', { name: 'Monthly' })).toBeDisabled()
     expect(screen.getByRole('radio', { name: 'Monthly' })).not.toBeChecked()
     expect(onChange).not.toHaveBeenCalled()
+  })
+
+  it('forwards the ref and other input attributes to the radio', () => {
+    const ref = createRef<HTMLInputElement>()
+    render(<Radio ref={ref} id='plan-pro' name='plan' label='Pro' required />)
+
+    const radio = screen.getByRole('radio', { name: 'Pro' })
+    expect(ref.current).toBe(radio)
+    expect(radio).toBeRequired()
   })
 })

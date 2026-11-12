@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { createRef } from 'react'
 
 import Link from 'src/components/Link'
 
@@ -28,5 +29,13 @@ describe('Link', () => {
 
     expect(screen.getByRole('link', { name: 'Delete' }))
       .toHaveClass('link', 'small', 'danger', 'darkBackground')
+  })
+
+  it('forwards the ref and other attributes to the anchor', () => {
+    const ref = createRef<HTMLAnchorElement>()
+    render(<Link ref={ref} href='/docs' download>Docs</Link>)
+
+    expect(ref.current).toBe(screen.getByRole('link', { name: 'Docs' }))
+    expect(ref.current).toHaveAttribute('download')
   })
 })

@@ -1,4 +1,5 @@
 import { render, screen } from '@testing-library/react'
+import { createRef } from 'react'
 
 import Avatar from 'src/components/Avatar'
 
@@ -48,5 +49,12 @@ describe('Avatar', () => {
     render(<Avatar name='Ada Lovelace' size='small' />)
 
     expect(screen.getByText('AL').parentElement).toHaveClass('small')
+  })
+
+  it('forwards the ref and other attributes to the root element', () => {
+    const ref = createRef<HTMLDivElement>()
+    render(<Avatar ref={ref} name='Ana Silva' data-testid='avatar' />)
+
+    expect(ref.current).toBe(screen.getByTestId('avatar'))
   })
 })

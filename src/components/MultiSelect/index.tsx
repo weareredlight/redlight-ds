@@ -1,11 +1,14 @@
 import { CheckIcon, ChevronDownIcon, ChevronUpIcon } from 'lucide-react'
+import React, { useImperativeHandle, useRef } from 'react'
 import Select, { components } from 'react-select'
 
 import type { CSSProperties } from 'react'
 import type {
+  ClassNamesConfig,
   DropdownIndicatorProps,
   MultiValue,
   OptionProps,
+  SelectInstance,
 } from 'react-select'
 
 import Pill from 'src/components/Pill'
@@ -13,9 +16,9 @@ import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
 import Flex from 'src/elements/Flex'
+import { useField } from 'src/hooks'
 import { capitalize, cx } from 'src/utils'
 
-import { selectStyles } from './selectStyles'
 import styles from './styles.module.scss'
 
 type OptionType = { label: string; value: string }
@@ -24,6 +27,7 @@ export type MultiSelectProps = {
   label?: string
   value: string[]
   onChange: (event: string[]) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
   options: OptionType[]
   placeholder?: string
   hasPills?: boolean
@@ -48,6 +52,23 @@ const DropdownIndicator = (props: DropdownIndicatorProps<OptionType, true>) => {
   )
 }
 
+// react-select renders unstyled and each part takes a class from styles.module.scss
+const classNames: ClassNamesConfig<OptionType, true> = {
+  control: ({ isFocused }) => cx(styles.control, isFocused && styles.isFocused),
+  valueContainer: () => styles.valueContainer,
+  placeholder: () => styles.placeholder,
+  input: () => styles.input,
+  dropdownIndicator: () => styles.indicator,
+  menu: () => styles.menu,
+  menuList: () => styles.menuList,
+  option: ({ isFocused, isDisabled }) => cx(
+    styles.option,
+    isFocused && styles.isFocused,
+    isDisabled && styles.isDisabled,
+  ),
+  noOptionsMessage: () => styles.noOptions,
+}
+
 const CustomOption = (
   props: OptionProps<OptionType, true>,
 ) => (
@@ -57,11 +78,12 @@ const CustomOption = (
   </components.Option>
 )
 
-const MultiSelect = ({
+const MultiSelect = React.forwardRef(({
   name,
   label,
   value,
   onChange,
+  onBlur,
   options,
   placeholder,
   hasPills = false,
@@ -71,7 +93,11 @@ const MultiSelect = ({
   fullWidth = false,
   className,
   style,
-}: MultiSelectProps) => {
+}: MultiSelectProps, ref: React.Ref<HTMLInputElement>) => {
+  const { errorId, ariaProps } = useField(name, state === 'error', Boolean(errorMsg))
+  const selectRef = useRef<SelectInstance<OptionType, true>>(null)
+  useImperativeHandle(ref, () => selectRef.current?.inputRef as HTMLInputElement)
+
   const handleRemoveOption = (
     removedValue: string,
     value: string[],
@@ -92,7 +118,11 @@ const MultiSelect = ({
       {label && <Label id={name} label={label} />}
       <div className={cx(styles.wrapper, styles[`state${capitalize(state)}`])}>
         <Select
+          ref={selectRef}
           inputId={name}
+          onBlur={onBlur}
+          aria-invalid={ariaProps['aria-invalid']}
+          aria-errormessage={ariaProps['aria-describedby']}
           value={
             value?.length
               ? value.map((item: string) => ({
@@ -111,10 +141,13 @@ const MultiSelect = ({
           controlShouldRenderValue={false}
           hideSelectedOptions={false}
           isClearable={false}
-          styles={selectStyles}
+          unstyled
+          classNames={classNames}
           isDisabled={state === 'disabled'}
           components={{
             DropdownIndicator,
+            // Unstyled, the separator is still a 1px-wide empty column
+            IndicatorSeparator: null,
             Option: props => CustomOption(props),
           }}
         />
@@ -127,7 +160,7 @@ const MultiSelect = ({
         )}
       </div>
       {(state === 'error' && errorMsg) && (
-        <Text color='danger' variant='microCopy'>
+        <Text id={errorId} color='danger' variant='microCopy'>
           {errorMsg}
         </Text>
       )}
@@ -150,6 +183,6 @@ const MultiSelect = ({
       )}
     </Flex>
   )
-}
+})
 
 export default MultiSelect

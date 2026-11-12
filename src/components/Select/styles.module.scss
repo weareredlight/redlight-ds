@@ -73,10 +73,10 @@
   }
 
   :where(&).stateDirty {
-    border-color: var(--colors-secondary);
+    border-color: var(--colors-accent, var(--colors-primary));
 
     svg {
-      color: var(--colors-secondary);
+      color: var(--colors-accent, var(--colors-primary));
     }
   }
 

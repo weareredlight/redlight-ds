@@ -4,6 +4,7 @@ import type { ChangeEvent } from 'react'
 
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
+import { useField } from 'src/hooks'
 import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
@@ -41,39 +42,45 @@ const TextArea = React.forwardRef(({
   className,
   onChange,
   ...props
-}: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => (
-  <div className={cx(styles.wrapper, fullWidth && styles.fullWidth)}>
-    <div className={styles.textArea}>
-      {label || description ? (
-        <Label
-          id={id || name}
-          label={label}
-          description={description}
-          className={styles.label}
+}: TextAreaProps, ref: React.Ref<HTMLTextAreaElement>) => {
+  const { fieldId, errorId, ariaProps } = useField(id || name, state === 'error', Boolean(errorMsg))
+
+  return (
+    <div className={cx(styles.wrapper, fullWidth && styles.fullWidth)}>
+      <div className={styles.textArea}>
+        {label || description ? (
+          <Label
+            id={fieldId}
+            label={label}
+            description={description}
+            className={styles.label}
+          />
+        ) : null}
+        <textarea
+          className={cx(styles.field, state && state !== 'null' && styles[`state${capitalize(state)}`], className)}
+          id={fieldId}
+          ref={ref}
+          name={name}
+          value={value}
+          placeholder={placeholder}
+          rows={rows}
+          required={required}
+          maxLength={maxLength}
+          disabled={disabled || state === 'disabled'}
+          onChange={onChange}
+          {...ariaProps}
+          {...props}
         />
-      ) : null}
-      <textarea
-        className={cx(styles.field, state && state !== 'null' && styles[`state${capitalize(state)}`], className)}
-        id={id || name}
-        ref={ref}
-        name={name}
-        value={value}
-        placeholder={placeholder}
-        rows={rows}
-        required={required}
-        maxLength={maxLength}
-        disabled={disabled || state === 'disabled'}
-        onChange={onChange}
-        {...props}
-      />
+      </div>
+      {state === 'error' && errorMsg && (
+        <Text id={errorId} color='danger' variant='microCopy'>
+          {errorMsg}
+        </Text>
+      )}
     </div>
-    {state === 'error' && errorMsg && (
-      <Text color='danger' variant='microCopy'>
-        {errorMsg}
-      </Text>
-    )}
-  </div>
-))
+  )
+})
+
 export const textAreaSelector = `.${styles.textArea}`
 
 export default TextArea

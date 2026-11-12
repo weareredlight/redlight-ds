@@ -1,16 +1,65 @@
 // =============================================================================
 // MULTI SELECT
 // -----------------------------------------------------------------------------
-// The react-select control itself is styled in JS (selectStyles.ts); this file
-// styles the wrapper around it.
-// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// Built on react-select with `unstyled`: react-select keeps only its layout
+// (flex, positions) and each part gets a class from this file through
+// `classNames` (.control, .menu, .option, ...).
+// react-select injects that layout at runtime, after this stylesheet, so the
+// parts are nested in .wrapper: two classes win the few properties both set
+// (the control's min-height, the option's display, the menu's z-index).
+// The states are `:where(&).modifier` on .wrapper; the parts' own modifiers
+// (isFocused, isDisabled) are `&.modifier`, so they win over the part's rule.
 // =============================================================================
+
+@use 'styles/typography';
 
 .wrapper {
   position: relative;
   width: 100%;
 
-  // Selected options counter
+  // ===========================================================================
+  // CONTROL (the closed select)
+  // ===========================================================================
+
+  .control {
+    min-width: 256px;
+    width: 100%;
+    height: var(--sizes-xxxlg);
+    min-height: var(--sizes-xxxlg);
+    padding-left: var(--space-xxsm);
+    border: 1px solid var(--colors-neutral400);
+    border-radius: var(--radii-xsm);
+    background-color: var(--colors-white);
+
+    &:hover {
+      border-color: var(--colors-neutral600);
+      background-color: var(--colors-neutral100);
+    }
+
+    // Like the Select: the border shows where the focus is
+    &.isFocused {
+      border-color: var(--colors-primary);
+    }
+  }
+
+  .valueContainer {
+    font-size: var(--fontSizes-xsm);
+  }
+
+  .placeholder {
+    color: var(--colors-neutral);
+  }
+
+  .input {
+    color: var(--colors-neutral800);
+  }
+
+  .indicator {
+    padding: var(--space-xxsm);
+    color: var(--colors-neutral400);
+  }
+
+  // Selected options counter, over the indicator area
   .optionsCount {
     display: flex;
     align-items: center;
@@ -26,41 +75,74 @@
   }
 
   // ===========================================================================
+  // MENU
+  // ===========================================================================
+
+  .menu {
+    z-index: 3;
+    margin-block: var(--space-xxsm);
+    border-radius: var(--radii-xsm);
+    background-color: var(--colors-white);
+    box-shadow: 0 2px 8px var(--colors-neutral200);
+  }
+
+  .menuList {
+    border-radius: var(--radii-xsm);
+    background-color: var(--colors-white);
+  }
+
+  .option {
+    display: flex;
+    align-items: center;
+    gap: var(--space-xxsm);
+    height: var(--sizes-xxxlg);
+    padding: var(--sizes-xxxsm) var(--sizes-xxsm);
+    font-size: var(--fontSizes-xsm);
+    line-height: 1;
+    color: var(--colors-neutral800);
+    background-color: var(--colors-white);
+    cursor: pointer;
+
+    // The option under the mouse or reached with the arrow keys
+    &.isFocused {
+      background-color: var(--colors-primary100);
+      color: var(--colors-primary);
+    }
+
+    &.isDisabled {
+      color: var(--colors-neutral400);
+      background-color: var(--colors-white);
+      cursor: default;
+    }
+  }
+
+  .noOptions {
+    padding: var(--space-xxsm) var(--space-xsm);
+    text-align: center;
+    font-size: var(--fontSizes-xsm);
+    color: var(--colors-neutral);
+  }
+
+  // ===========================================================================
   // STATE
   // ===========================================================================
 
-  :where(&).stateError :global(#multi-select)>div {
-    border-color: var(--colors-danger);
-
-    svg {
-      color: var(--colors-danger);
-    }
+  :where(&).stateError {
+    .control, .control:hover { border-color: var(--colors-danger); }
+    .indicator { color: var(--colors-danger); }
   }
 
-  :where(&).stateDirty :global(#multi-select)>div {
-    border-color: var(--colors-secondary);
-
-    svg {
-      color: var(--colors-secondary);
-    }
+  :where(&).stateDirty {
+    .control, .control:hover { border-color: var(--colors-accent, var(--colors-primary)); }
+    .indicator { color: var(--colors-accent, var(--colors-primary)); }
   }
 
-  :where(&).stateDisabled :global(#multi-select)>div {
-    background-color: var(--colors-neutral200);
-    border-color: var(--colors-neutral200);
-    color: var(--colors-neutral);
-    pointer-events: none;
-
-    svg {
-      color: var(--colors-neutral);
+  :where(&).stateDisabled {
+    .control, .control:hover {
+      border-color: var(--colors-neutral200);
+      background-color: var(--colors-neutral200);
     }
-  }
 
-  :where(&).stateNull :global(#multi-select)>div {
-    border-color: var(--colors-neutral400);
-
-    svg {
-      color: var(--colors-neutral400);
-    }
+    .indicator { color: var(--colors-neutral); }
   }
 }

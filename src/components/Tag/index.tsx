@@ -1,4 +1,5 @@
 import { XIcon } from 'lucide-react'
+import React from 'react'
 
 import type { ReactNode, CSSProperties } from 'react'
 
@@ -7,7 +8,7 @@ import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type TagProps = {
+type TagOwnProps = {
   children: ReactNode
   variant?: 'default' | 'error'
   disabled?: boolean
@@ -16,9 +17,10 @@ export type TagProps = {
   style?: CSSProperties
 }
 
-const CloseIcon = () => <XIcon />
+export type TagProps = TagOwnProps
+  & Omit<React.HTMLAttributes<HTMLSpanElement>, keyof TagOwnProps>
 
-const Tag = ({
+const Tag = React.forwardRef(({
   children,
   variant = 'default',
   onClose,
@@ -26,11 +28,12 @@ const Tag = ({
   className,
   style,
   ...props
-}: TagProps) => {
+}: TagProps, ref: React.Ref<HTMLSpanElement>) => {
   const closable = onClose && variant !== 'error'
 
   return (
     <span
+      ref={ref}
       className={cx(
         styles.tag,
         styles[variant],
@@ -45,7 +48,7 @@ const Tag = ({
       {closable && (
         <Button
           onClick={onClose}
-          iconComponent={CloseIcon}
+          iconComponent={XIcon}
           iconPosition='iconOnly'
           variant='textOnly'
           className={styles.closeButton}
@@ -54,7 +57,7 @@ const Tag = ({
       )}
     </span>
   )
-}
+})
 
 export const tagSelector = `.${styles.tag}`
 

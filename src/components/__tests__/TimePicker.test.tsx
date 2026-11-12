@@ -3,6 +3,7 @@ import {
 } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import dayjs from 'dayjs'
+import { createRef } from 'react'
 
 import type { TimePickerProps } from 'react-time-picker'
 
@@ -333,5 +334,35 @@ describe('TimePicker', () => {
 
       expect(screen.getByRole('textbox')).toBeDisabled()
     })
+  })
+
+  it('forwards the ref to the first input and marks the inputs invalid with the error', () => {
+    mockClock.mockImplementation((() => (
+      <>
+        <input data-input='true' aria-label='Hours' />
+        <input data-input='true' aria-label='Minutes' />
+      </>
+    )) as unknown as () => null)
+    const ref = createRef<HTMLInputElement>()
+    render(<TimePicker ref={ref} name='start' label='Start' error='Required' onChange={jest.fn()} />)
+
+    expect(ref.current).toBe(screen.getByRole('textbox', { name: 'Hours' }))
+    screen.getAllByRole('textbox').forEach(input => {
+      expect(input).toBeInvalid()
+      expect(input).toHaveAccessibleDescription('Required')
+    })
+    mockClock.mockImplementation(() => null)
+  })
+
+  it('forwards the ref to the duration input and describes it by the error', () => {
+    const ref = createRef<HTMLInputElement>()
+    render(
+      <TimePicker ref={ref} type='duration' label='Duration' error='Too long' onChange={jest.fn()} />,
+    )
+
+    const field = screen.getByRole('textbox', { name: 'Duration' })
+    expect(ref.current).toBe(field)
+    expect(field).toBeInvalid()
+    expect(field).toHaveAccessibleDescription('Too long')
   })
 })

@@ -1,7 +1,9 @@
 import * as Popover from '@radix-ui/react-popover'
 import dayjs from 'dayjs'
 import { CalendarDaysIcon, ChevronLeftIcon, ChevronRightIcon } from 'lucide-react'
-import { useState } from 'react'
+import React, {
+  useEffect, useImperativeHandle, useRef, useState,
+} from 'react'
 import Calendar from 'react-calendar'
 import { CALENDAR_TYPE_LOCALES } from 'react-calendar/dist/shared/const.js'
 import * as DateInput from 'react-date-picker'
@@ -13,7 +15,10 @@ import Button from 'src/components/Button'
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
-import { cx, resolveLocale } from 'src/utils'
+import { useField } from 'src/hooks'
+import {
+  cx, getPickerInputs, resolveLocale, setPickerInputsAria,
+} from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -57,7 +62,7 @@ const formatShortWeekday = (locale: string, day: Date) => {
   return /^\p{Script=Latin}+$/u.test(name) ? name.slice(0, 3) : name
 }
 
-const DatePicker = ({
+const DatePicker = React.forwardRef(({
   name,
   label,
   error,
@@ -71,8 +76,14 @@ const DatePicker = ({
   fullWidth = false,
   className,
   style,
-}: DatePickerProps) => {
+}: DatePickerProps, ref: React.Ref<HTMLInputElement>) => {
   const [isOpen, setIsOpen] = useState(false)
+  const fieldRef = useRef<HTMLDivElement>(null)
+  const { errorId, ariaProps } = useField(name, Boolean(error), Boolean(error))
+
+  useImperativeHandle(ref, () => getPickerInputs(fieldRef.current)[0])
+  // After every render, since the library can render its inputs again (e.g. a new format)
+  useEffect(() => setPickerInputsAria(fieldRef.current, ariaProps))
 
   const locale = resolveLocale(localeProp)
   // The fields are numbers, so they follow the locale. The names are in English unless asked
@@ -111,7 +122,7 @@ const DatePicker = ({
       <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
         {/* The calendar lines up with the whole field, not only with its button */}
         <Popover.Anchor asChild>
-          <div className={cx(styles.field, isOpen && styles.isOpen)}>
+          <div ref={fieldRef} className={cx(styles.field, isOpen && styles.isOpen)}>
             <DateInput.DatePicker
               name={name}
               onChange={next => change(next as Date | null)}
@@ -204,13 +215,13 @@ const DatePicker = ({
       </Popover.Root>
 
       {error && (
-        <Text color='danger' variant='microCopy'>
+        <Text id={errorId} color='danger' variant='microCopy'>
           {String(error)}
         </Text>
       )}
     </div>
   )
-}
+})
 
 export const datePickerSelector = `.${styles.datePicker}`
 

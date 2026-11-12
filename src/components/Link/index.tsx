@@ -1,12 +1,12 @@
-import { ReactNode } from 'react'
+import React from 'react'
 
-import type { CSSProperties } from 'react'
+import type { CSSProperties, ReactNode } from 'react'
 
 import { cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type LinkProps = {
+type LinkOwnProps = {
   href: string,
   children: ReactNode,
   openInNewTab?: boolean
@@ -17,7 +17,10 @@ export type LinkProps = {
   style?: CSSProperties
 }
 
-const Link = ({
+export type LinkProps = LinkOwnProps
+  & Omit<React.AnchorHTMLAttributes<HTMLAnchorElement>, keyof LinkOwnProps>
+
+const Link = React.forwardRef(({
   href,
   children,
   openInNewTab = true,
@@ -27,8 +30,9 @@ const Link = ({
   className,
   style,
   ...props
-}: LinkProps) => (
+}: LinkProps, ref: React.Ref<HTMLAnchorElement>) => (
   <a
+    ref={ref}
     href={href}
     target={openInNewTab ? '_blank' : undefined}
     rel='noreferrer'
@@ -44,7 +48,7 @@ const Link = ({
   >
     {children}
   </a>
-)
+))
 
 export const linkSelector = `.${styles.link}`
 

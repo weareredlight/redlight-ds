@@ -1,7 +1,9 @@
 import * as Popover from '@radix-ui/react-popover'
 import dayjs from 'dayjs'
 import { ClockIcon } from 'lucide-react'
-import { useState } from 'react'
+import React, {
+  useEffect, useImperativeHandle, useRef, useState,
+} from 'react'
 import { PatternFormat } from 'react-number-format'
 import { TimePicker as ReactTimePicker } from 'react-time-picker'
 
@@ -11,7 +13,10 @@ import Button from 'src/components/Button'
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
-import { cx, resolveLocale, uses12Hours } from 'src/utils'
+import { useField } from 'src/hooks'
+import {
+  cx, getPickerInputs, resolveLocale, setPickerInputsAria, uses12Hours,
+} from 'src/utils'
 
 import styles from './styles.module.scss'
 
@@ -114,7 +119,7 @@ const TimeColumn = ({
   </div>
 )
 
-const TimePicker = ({
+const TimePicker = React.forwardRef(({
   name,
   label,
   description,
@@ -129,8 +134,15 @@ const TimePicker = ({
   fullWidth = false,
   className,
   style,
-}: TimePickerProps) => {
+}: TimePickerProps, ref: React.Ref<HTMLInputElement>) => {
   const [isOpen, setIsOpen] = useState(false)
+  const fieldRef = useRef<HTMLDivElement>(null)
+  const durationRef = useRef<HTMLInputElement>(null)
+  const { fieldId, errorId, ariaProps } = useField(name, Boolean(error), Boolean(error))
+
+  useImperativeHandle(ref, () => durationRef.current ?? getPickerInputs(fieldRef.current)[0])
+  // After every render, since the library can render its inputs again (e.g. a new format)
+  useEffect(() => setPickerInputsAria(fieldRef.current, ariaProps))
 
   const locale = resolveLocale(localeProp)
   // A format decides on its own: 'h' is the 12-hour hour, 'H' the 24-hour one
@@ -169,12 +181,12 @@ const TimePicker = ({
       )}
       style={style}
     >
-      {label && <Label id={name} label={label} description={description} />}
+      {label && <Label id={fieldId} label={label} description={description} />}
       {type === PickerTypes.TIME ? (
         <Popover.Root open={isOpen} onOpenChange={setIsOpen}>
           {/* The popover lines up with the whole field, not only with its button */}
           <Popover.Anchor asChild>
-            <div className={cx(styles.field, isOpen && styles.isOpen)}>
+            <div ref={fieldRef} className={cx(styles.field, isOpen && styles.isOpen)}>
               <ReactTimePicker
                 name={name}
                 value={value}
@@ -276,7 +288,9 @@ const TimePicker = ({
         </Popover.Root>
       ) : (
         <PatternFormat
-          id={name}
+          id={fieldId}
+          getInputRef={durationRef}
+          {...ariaProps}
           className={cx(styles.durationPicker, fullWidth && styles.fullWidth)}
           displayType='input'
           disabled={disabled}
@@ -301,13 +315,13 @@ const TimePicker = ({
         />
       )}
       {error && (
-        <Text color='danger' variant='microCopy'>
+        <Text id={errorId} color='danger' variant='microCopy'>
           {String(error)}
         </Text>
       )}
     </div>
   )
-}
+})
 
 export const timePickerSelector = `.${styles.timePicker}`
 

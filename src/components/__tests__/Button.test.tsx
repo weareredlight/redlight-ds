@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { PlusIcon } from 'lucide-react'
 
 import Button from 'src/components/Button'
 
@@ -42,5 +43,25 @@ describe('Button', () => {
 
     const button = screen.getByRole('button', { name: 'Delete' })
     expect(button).toHaveClass('button', 'danger', 'large')
+  })
+
+  it('renders a forwardRef icon component, like the Lucide icons', () => {
+    render(<Button iconComponent={PlusIcon} aria-label='Add' />)
+
+    expect(screen.getByRole('button', { name: 'Add' }).querySelector('svg')).toBeInTheDocument()
+  })
+
+  it('is busy and ignores clicks, also from the keyboard, while loading', async () => {
+    const user = userEvent.setup()
+    const onClick = jest.fn()
+    render(<Button onClick={onClick} isLoading> Save </Button>)
+
+    const button = screen.getByRole('button', { name: 'Save' })
+    expect(button).toHaveAttribute('aria-busy', 'true')
+    await user.click(button)
+    button.focus()
+    await user.keyboard('{Enter}')
+
+    expect(onClick).not.toHaveBeenCalled()
   })
 })

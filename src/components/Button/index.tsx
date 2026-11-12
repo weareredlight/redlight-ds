@@ -13,7 +13,7 @@ type ButtonIconPosition = 'left' | 'right' | 'iconOnly' | 'null'
 
 type ButtonOwnProps = {
   children?: ReactNode
-  iconComponent?: React.FC
+  iconComponent?: React.ElementType
   onClick?: (event: React.MouseEvent<HTMLButtonElement>) => void
   variant?: ButtonVariant
   size?: ButtonSize
@@ -38,7 +38,8 @@ const iconPositionClasses: Record<ButtonIconPosition, string> = {
 
 const Button = React.forwardRef(({
   children,
-  iconComponent,
+  iconComponent: Icon,
+  onClick,
   variant = 'primary',
   size = 'normal',
   fullWidth = false,
@@ -51,28 +52,28 @@ const Button = React.forwardRef(({
   ...props
 }: ButtonProps, ref: React.Ref<HTMLButtonElement>) => {
   const getIconAndText = () => {
-    if (!iconComponent || !iconPosition) return children
+    if (!Icon || !iconPosition) return children
     switch (iconPosition) {
       case 'left': return (
         <>
-          {iconComponent({})}
+          <Icon />
           {children}
         </>
       )
       case 'right': return (
         <>
           {children}
-          {iconComponent({})}
+          <Icon />
         </>
       )
-      case 'iconOnly': return iconComponent({})
+      case 'iconOnly': return <Icon />
       default: return children
     }
   }
 
-  const resolvedIconPosition: ButtonIconPosition = (iconComponent && !children)
+  const resolvedIconPosition: ButtonIconPosition = (Icon && !children)
     ? 'iconOnly'
-    : (iconComponent && iconPosition) || 'null'
+    : (Icon && iconPosition) || 'null'
 
   const classes = cx(
     styles.button,
@@ -89,6 +90,9 @@ const Button = React.forwardRef(({
       // eslint-disable-next-line react/button-has-type
       type={type || 'button'}
       disabled={disabled}
+      aria-busy={isLoading || undefined}
+      aria-disabled={isLoading || undefined}
+      onClick={isLoading ? undefined : onClick}
       className={classes}
       style={style}
       ref={ref}

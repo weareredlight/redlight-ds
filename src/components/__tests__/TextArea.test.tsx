@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import TextArea from 'src/components/TextArea'
 
@@ -60,5 +61,15 @@ describe('TextArea', () => {
     render(<TextArea name='bio' label='Bio' onChange={jest.fn()} />)
 
     expect(screen.getByLabelText('Bio')).toHaveRole('textbox')
+  })
+
+  it('forwards the ref and is described by its error message in the error state', () => {
+    const ref = createRef<HTMLTextAreaElement>()
+    render(<TextArea ref={ref} name='bio' label='Bio' state='error' errorMsg='Too long' onChange={jest.fn()} />)
+
+    const field = screen.getByRole('textbox', { name: 'Bio' })
+    expect(ref.current).toBe(field)
+    expect(field).toBeInvalid()
+    expect(field).toHaveAccessibleDescription('Too long')
   })
 })

@@ -1,5 +1,6 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
+import { createRef } from 'react'
 
 import Pill from 'src/components/Pill'
 
@@ -36,5 +37,13 @@ describe('Pill', () => {
     render(<Pill variant='success'>Active</Pill>)
 
     expect(screen.getByText('Active')).toHaveClass('pill', 'success')
+  })
+
+  it('forwards the ref and other attributes to the pill', () => {
+    const ref = createRef<HTMLSpanElement>()
+    render(<Pill ref={ref} title='Active filter'>Active</Pill>)
+
+    expect(ref.current).toBe(screen.getByText('Active'))
+    expect(ref.current).toHaveAttribute('title', 'Active filter')
   })
 })

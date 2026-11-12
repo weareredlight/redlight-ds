@@ -1,6 +1,7 @@
 import { act, render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
 import dayjs from 'dayjs'
+import { createRef } from 'react'
 
 import type { MouseEvent } from 'react'
 import type { CalendarProps } from 'react-calendar'
@@ -229,5 +230,45 @@ describe('DatePicker', () => {
     expect(await tileClassName('en-US', new Date(2024, 2, 17))).toBe('')
     expect(await tileClassName('pt-PT', new Date(2024, 2, 10))).toBe('')
     expect(await tileClassName('pt-PT', new Date(2024, 2, 17))).toBe('selected-week')
+  })
+
+  describe('with the inputs the library renders', () => {
+    beforeEach(() => {
+      mockDateInput.mockImplementation((() => (
+        <>
+          <input data-input='true' aria-label='Day' />
+          <input data-input='true' aria-label='Month' />
+        </>
+      )) as unknown as () => null)
+    })
+
+    afterEach(() => {
+      mockDateInput.mockImplementation(() => null)
+    })
+
+    it('forwards the ref to the first input', () => {
+      const ref = createRef<HTMLInputElement>()
+      render(<DatePicker ref={ref} name='birthday' label='Birthday' onChange={jest.fn()} />)
+
+      expect(ref.current).toBe(screen.getByRole('textbox', { name: 'Day' }))
+    })
+
+    it('marks every input invalid and described by the error, until the error is gone', () => {
+      const { rerender } = render(
+        <DatePicker name='birthday' label='Birthday' error='Invalid date' onChange={jest.fn()} />,
+      )
+
+      screen.getAllByRole('textbox').forEach(input => {
+        expect(input).toBeInvalid()
+        expect(input).toHaveAccessibleDescription('Invalid date')
+      })
+
+      rerender(<DatePicker name='birthday' label='Birthday' onChange={jest.fn()} />)
+
+      screen.getAllByRole('textbox').forEach(input => {
+        expect(input).not.toBeInvalid()
+        expect(input).not.toHaveAttribute('aria-describedby')
+      })
+    })
   })
 })

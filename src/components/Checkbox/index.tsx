@@ -6,11 +6,12 @@ import type { CSSProperties } from 'react'
 import Label from 'src/components/shared/Label'
 import Text from 'src/components/Text'
 import { ICON_SIZE } from 'src/constants'
+import { useField } from 'src/hooks'
 import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type CheckboxProps = {
+type CheckboxOwnProps = {
   label?: string
   description?: string
   id: string
@@ -25,7 +26,10 @@ export type CheckboxProps = {
   style?: CSSProperties
 }
 
-const Checkbox = ({
+export type CheckboxProps = CheckboxOwnProps
+  & Omit<React.InputHTMLAttributes<HTMLInputElement>, keyof CheckboxOwnProps | 'type'>
+
+const Checkbox = React.forwardRef(({
   id,
   value,
   label,
@@ -39,70 +43,51 @@ const Checkbox = ({
   className,
   style,
   ...props
-}: CheckboxProps) => (
-  <>
-    <div className={cx(styles.checkbox, disabled && styles.disabled, className)} style={style}>
-      {labelPosition === 'left' ? (
-        <>
-          <Label
-            id={id}
-            label={label}
-            description={description}
-            className={styles.label}
-          />
-          <input
-            className={cx(
-              styles.trigger,
-              state !== 'null' && styles[`state${capitalize(state)}`],
-              disabled && styles.disabled,
-            )}
-            type='checkbox'
-            id={id}
-            value={value}
-            checked={checked}
-            disabled={disabled}
-            onChange={onChange}
-            {...props}
-          />
-          <label className={styles.indicator} htmlFor={id}>
-            <CheckIcon size={ICON_SIZE} />
-          </label>
-        </>
-      ) : (
-        <>
-          <input
-            className={cx(
-              styles.trigger,
-              state !== 'null' && styles[`state${capitalize(state)}`],
-              disabled && styles.disabled,
-            )}
-            type='checkbox'
-            id={id}
-            value={value}
-            checked={checked}
-            disabled={disabled}
-            onChange={onChange}
-            {...props}
-          />
-          <label className={styles.indicator} htmlFor={id}>
-            <CheckIcon size={ICON_SIZE} />
-          </label>
-          <Label
-            id={id}
-            label={label}
-            description={description}
-            className={styles.label}
-          />
-        </>
+}: CheckboxProps, ref: React.Ref<HTMLInputElement>) => {
+  const { errorId, ariaProps } = useField(id, state === 'error', Boolean(errorMsg))
+
+  const labelElement = (
+    <Label
+      id={id}
+      label={label}
+      description={description}
+      className={styles.label}
+    />
+  )
+
+  return (
+    <>
+      <div className={cx(styles.checkbox, disabled && styles.disabled, className)} style={style}>
+        {labelPosition === 'left' && labelElement}
+        <input
+          ref={ref}
+          className={cx(
+            styles.trigger,
+            state !== 'null' && styles[`state${capitalize(state)}`],
+            disabled && styles.disabled,
+          )}
+          type='checkbox'
+          id={id}
+          value={value}
+          checked={checked}
+          disabled={disabled}
+          onChange={onChange}
+          {...ariaProps}
+          {...props}
+        />
+        <label className={styles.indicator} htmlFor={id}>
+          <CheckIcon size={ICON_SIZE} />
+        </label>
+        {labelPosition !== 'left' && labelElement}
+      </div>
+      {state === 'error' && errorMsg && (
+        <Text id={errorId} color='danger' variant='microCopy'>
+          {errorMsg}
+        </Text>
       )}
-    </div>
-    {state === 'error' && errorMsg && (
-      <Text color='danger' variant='microCopy'>
-        {errorMsg}
-      </Text>
-    )}
-  </>
-)
+    </>
+  )
+})
 
 export const checkboxSelector = `.${styles.checkbox}`
 

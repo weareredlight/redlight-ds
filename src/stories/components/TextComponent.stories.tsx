@@ -28,7 +28,9 @@ const meta = {
     docs: {
       description: {
         component:
-          'The "Text" component can be used anywhere to create any type of text, from headings to long paragraphs. By changing its variant you can change the hierarchy of the text you want to display and you can also change its colour using the "color" property.',
+          'The "Text" component can be used anywhere to create any type of text, from headings to long paragraphs. By changing its variant you can change the hierarchy of the text you want to display and you can also change its colour using the "color" property.\n\n'
+          + 'The variant also sets the element: `h1` to `h6` render the heading of the same level, `microCopy` renders a `<span>`, and the other variants (including `h7`, since HTML has no h7) render a `<p>`. '
+          + 'A `<p>` can\'t go inside a button, a label, a link or another paragraph: use `microCopy` there.',
       },
     },
   },

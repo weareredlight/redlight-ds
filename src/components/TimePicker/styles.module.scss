@@ -140,6 +140,21 @@
   :where(&).fullWidth {
     width: 100%;
 
-    > div { width: 100%; }
+    >div {
+      width: 100%;
+    }
+  }
+}
+
+.timePicker {
+  :where(&).hasError .durationPicker {
+    border-color: var(--colors-danger);
+  }
+
+  :where(&).disabled .durationPicker {
+    background-color: var(--colors-neutral200);
+    border-color: var(--colors-neutral200);
+    color: var(--colors-neutral);
+    pointer-events: none;
   }
 }

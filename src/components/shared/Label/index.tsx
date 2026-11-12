@@ -1,10 +1,12 @@
+import React from 'react'
+
 import type { CSSProperties } from 'react'
 
 import { capitalize, cx } from 'src/utils'
 
 import styles from './styles.module.scss'
 
-export type LabelProps = {
+type LabelOwnProps = {
   id?: string
   label?: string
   description?: string
@@ -15,7 +17,10 @@ export type LabelProps = {
   style?: CSSProperties
 }
 
-const Label = ({
+export type LabelProps = LabelOwnProps
+  & Omit<React.LabelHTMLAttributes<HTMLLabelElement>, keyof LabelOwnProps>
+
+const Label = React.forwardRef(({
   id,
   label,
   description,
@@ -25,8 +30,9 @@ const Label = ({
   className,
   style,
   ...props
-}: LabelProps) => (
+}: LabelProps, ref: React.Ref<HTMLLabelElement>) => (
   <label
+    ref={ref}
     htmlFor={id}
     className={cx(
       styles.label,
@@ -45,7 +51,7 @@ const Label = ({
     )}
     {description && <span>{description}</span>}
   </label>
-)
+))
 
 export const labelSelector = `.${styles.label}`
 
