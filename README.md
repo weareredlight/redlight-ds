@@ -249,12 +249,26 @@ what changes is how you set up and customize them.
     </td>
     <td style="text-align: center">
       <a href="https://github.com/samuthekid">
-        <img src="https://avatars.githubusercontent.com/u/6068533?v=4" width="100px;" alt="Samuel Nunes"/>
+        <img 
+          src="https://redlight.dev/wp-content/uploads/2024/11/working.png" 
+          width="100px;" height="100px;" 
+          style="object-fit: cover;"
+          alt="Samuel Nunes"
+        />
         <br />
         <sub><b>Samuel Nunes</b></sub>
       </a>
       <br />
       <sub>Developer & maintainer</sub>
+    </td>
+    <td style="text-align: center">
+      <a href="https://www.linkedin.com/in/margarida-souto/">
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQEcaE1XsSKlwQ/profile-displayphoto-crop_800_800/B4DZg86bqMHYAM-/0/1753368608251?e=1796256000&v=beta&t=uUhu-OXo-AAgVbYqJ-7GDltoL2ZLHA0wHQADvO_yoio" width="100px;" alt="Margarida Souto"/>
+        <br />
+        <sub><b>Margarida Souto</b></sub>
+      </a>
+      <br />
+      <sub>Designer</sub>
     </td>
   </tr>
 </table>
