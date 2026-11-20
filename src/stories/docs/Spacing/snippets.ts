@@ -21,10 +21,10 @@ export const SpacingJs = `import { Flex, theme } from '@weareredlight/design-sys
 <div style={{ padding: theme.space.xxlg, borderRadius: theme.radii.sm }} />
 // theme.space.xxlg === 'var(--space-xxlg)'`
 
-export const SpacingOverride = `setupTheme({
-  userSizes: {
-    space: { xxlg: '1.75rem' },
-    radii: { xsm: '6px', sm: '12px' },
-  },
-  userShadows: { cardShadow: '0px 1px 4px rgba(0, 0, 0, 0.12)' },
-})`
+export const SpacingOverride = `/* theme.css, imported after style.css */
+:root {
+  --space-xxlg: 1.75rem;
+  --radii-xsm: 6px;
+  --radii-sm: 12px;
+  --shadows-cardShadow: 0px 1px 4px rgba(0, 0, 0, 0.12);
+}`

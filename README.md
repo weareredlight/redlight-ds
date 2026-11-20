@@ -79,33 +79,43 @@ const App = () => (
 
 ### 4. Apply your theme (optional)
 
-The theme is a set of CSS variables, so there are two ways to change it.
-
-**With `setupTheme`**, at startup (in the browser):
-
-```jsx
-import { setupTheme } from '@weareredlight/design-system'
-
-const { className } = setupTheme({
-  userColors: { primary: '#F472B6', primary600: '#DB2777' },
-  userSizes: { radii: { xsm: '6px' } },
-  userShadows: { cardShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' },
-  fontFamily: "'Inter', sans-serif",
-})
-```
-
-The new values apply to the whole page. Each call also returns a `className` that applies that
-theme to one element only (useful to switch between several themes: add the class to `<body>`).
-
-**With plain CSS**, which also works with server-side rendering. Load it after `style.css`:
+The theme is a set of CSS variables (tokens). Put your project's tokens in one CSS file, with only
+what changes from the design system, and import it right after `style.css`:
 
 ```css
+/* theme.css */
 :root {
   --colors-primary: #F472B6;
   --colors-primary600: #DB2777;
   --radii-xsm: 6px;
 }
+
+/* The design system sets its font on every element (`*`); `html *` takes over from it */
+html * {
+  font-family: 'Inter', sans-serif;
+}
 ```
+
+```jsx
+// app/layout.tsx (Next.js) or src/main.tsx (Vite)
+import '@weareredlight/design-system/dist/style.css'
+import './theme.css'
+```
+
+That's it: components, and your own CSS when it uses the tokens, follow these values. It works with
+server-side rendering, because the values exist before the page shows. Using the dark mode too? Add
+its values to the same file (see [step 5](#5-dark-mode-optional)).
+
+To theme only part of a page, use a class instead of `:root`:
+
+```css
+.promo {
+  --colors-primary: #52BD94;
+}
+```
+
+Is the theme only known at runtime (e.g. each customer's colors come from an API)? See
+[Runtime themes](#runtime-themes).
 
 #### Available tokens
 
@@ -123,7 +133,87 @@ theme to one element only (useful to switch between several themes: add the clas
 The exact values are in [`src/theme`](src/theme) and on the Storybook's *Colors* and *Typography* pages.
 From JavaScript, `theme` holds the same references: `theme.colors.primary === 'var(--colors-primary)'`.
 
-### 5. Customize components (optional)
+### 5. Dark mode (optional)
+
+`style.css` includes a dark version of the default theme. Choose the mode with an attribute on
+`<html>`:
+
+| `data-rl-color-mode` | Mode |
+| --- | --- |
+| none, or `light` | Light (as before) |
+| `dark` | Dark |
+| `system` | Follows the operating system's setting |
+
+The simplest setup follows the system, with CSS only: no JavaScript, and it works with server-side
+rendering.
+
+```html
+<html data-rl-color-mode="system">
+```
+
+Every component follows the mode, because they all read their colors from the `--colors-*` tokens.
+Your own CSS follows it too when it uses the tokens (`color: var(--colors-neutral800)`).
+
+**A toggle that remembers the choice.** `useColorMode` gives the mode the page shows and a
+function to switch it. The choice is saved in the browser and applied again on the next visit:
+
+```jsx
+import { Toggle, useColorMode } from '@weareredlight/design-system'
+
+export const DarkModeToggle = () => {
+  const { mode, toggle } = useColorMode()
+  return <Toggle id='dark-mode' label='Dark mode' value={mode === 'dark'} onChange={toggle} />
+}
+```
+
+- **`mode`** is `'light'` or `'dark'` (`system` resolved). **`setMode`** takes `'light'`, `'dark'` or
+  `'system'`, e.g. for a Light / Dark / System select.
+- **Every component that calls `useColorMode` shows the same mode**, with no provider.
+- **The saved choice is applied when the hook mounts.** If the toggle is only on some pages (e.g.
+  settings), also call `useColorMode()` in `App`, or add the script below. On a first visit, the
+  page shows what `<html>` has: `data-rl-color-mode="system"` follows the operating system.
+- **Styles the tokens can't express:** in a CSS Module, `:global([data-rl-color-mode="dark"]) .card
+  { box-shadow: none; }`. The attribute selector stays as it is, and `.card` is still scoped to the
+  module.
+- **No flash of the light mode on load:** the hook runs after React renders. To apply the saved
+  choice before the page shows, add this to the `<head>` of your `index.html`:
+
+  ```html
+  <script>
+    try {
+      var mode = localStorage.getItem('rl-color-mode')
+      if (mode) document.documentElement.dataset.rlColorMode = mode
+    } catch (e) {}
+  </script>
+  ```
+
+- **Server-side rendering (Next.js):** call it from a Client Component (`'use client'`). `mode` is
+  `'light'` on the server and the real one right after hydration.
+
+**Your own colors in dark mode.** The built-in dark mode is the dark version of the *default*
+colors, and it overrides the colors you set on `:root`. With your own palette, add its dark values
+to your theme file. Tokens you don't set there keep the built-in dark values:
+
+```css
+/* theme.css */
+:root[data-rl-color-mode="dark"] {
+  --colors-primary: #F472B6;
+  --colors-primary600: #F9A8D4; /* in dark mode, hover shades get lighter */
+}
+
+/* Only if you use "system": the same values, for when the system is dark */
+@media (prefers-color-scheme: dark) {
+  :root[data-rl-color-mode="system"] {
+    --colors-primary: #F472B6;
+    --colors-primary600: #F9A8D4;
+  }
+}
+```
+
+The *Dark Mode* and *Colors* pages in Storybook explain how to invert a scale and choose the `on`
+colors.
+
+### 6. Customize components (optional)
 
 Every component accepts `className` and `style`:
 
@@ -139,7 +229,7 @@ import { buttonSelector } from '@weareredlight/design-system'
 // buttonSelector === '.rl-Button-button'
 ```
 
-### 6. Use the typography and breakpoints in your SCSS (optional)
+### 7. Use the typography and breakpoints in your SCSS (optional)
 
 The package ships its Sass helpers, so your own styles can match the design system:
 
@@ -156,6 +246,43 @@ The package ships its Sass helpers, so your own styles can match the design syst
   }
 }
 ```
+
+## Runtime themes
+
+When the theme is only known at runtime, and so can't be written in a CSS file, use `setupTheme`.
+For example: each customer's colors come from an API (white-label apps), users pick their own accent
+color, or a theme editor previews changes.
+
+```jsx
+import { setupTheme } from '@weareredlight/design-system'
+
+const { className } = setupTheme({
+  userColors: { primary: customer.primaryColor, primary600: customer.primaryHoverColor },
+  userSizes: { radii: { xsm: '6px' } },
+  userShadows: { cardShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' },
+  fontFamily: "'Inter', sans-serif",
+})
+```
+
+The new values apply to the whole page. Each call also returns a `className` that applies that
+theme to one element only (useful to switch between several themes: add the class to `<body>`).
+
+`setupTheme` runs in the browser: it adds a `<style>` once the JavaScript loads. For a project's
+fixed tokens, prefer the theme file of [step 4](#4-apply-your-theme-optional), which also works
+with server-side rendering.
+
+## What's new (unreleased)
+
+Dark mode. Nothing was removed or changed: these are additions. See
+[step 5](#5-dark-mode-optional).
+
+- **Dark mode in `style.css`**: `data-rl-color-mode="dark"` on `<html>` turns on the dark version
+  of the default theme (the one Storybook already used), and `data-rl-color-mode="system"` follows
+  the operating system's setting, with CSS only. Without the attribute, nothing changes.
+- **`useColorMode()`**, a hook for a dark mode toggle: the mode the page shows, `toggle()` and
+  `setMode()`. It saves the choice in the browser. Also the `ColorMode` type.
+- **Docs**: [step 4](#4-apply-your-theme-optional) now puts a project's tokens in a CSS file.
+  `setupTheme` didn't change; it's documented for [themes known at runtime](#runtime-themes).
 
 ## What changed in 0.3.0
 
@@ -223,7 +350,7 @@ what changes is how you set up and customize them.
 | `css={{ marginTop: '$lg' }}` | `style={{ marginTop: 'var(--space-lg)' }}` or `className` |
 | `extraClasses='my-class'` (Button, Modal) | `className='my-class'` |
 | `styled('div', { color: '$primary' })` | your own CSS: `color: var(--colors-primary)` |
-| `include: 'heading7'` | `@include typography.heading7;` ([step 6](#6-use-the-typography-and-breakpoints-in-your-scss-optional)) |
+| `include: 'heading7'` | `@include typography.heading7;` ([step 7](#7-use-the-typography-and-breakpoints-in-your-scss-optional)) |
 | `` [`& ${StyledButton}`]: { ... } `` | `` `${buttonSelector}` `` (or `.rl-Button-button`) in your CSS |
 | `theme.colors.primary` (Stitches token object) | `theme.colors.primary` → `'var(--colors-primary)'` |
 | `getColor('primary')` → token object | `getColor('primary')` → `'var(--colors-primary)'` |

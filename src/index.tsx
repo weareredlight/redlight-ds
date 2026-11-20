@@ -33,7 +33,7 @@ import type { TimePickerProps } from 'src/components/TimePicker'
 import type { ToggleProps } from 'src/components/Toggle'
 import type { TooltipProps } from 'src/components/Tooltip'
 import type { UploadProps } from 'src/components/Upload'
-import type { ColorType } from 'src/theme'
+import type { ColorMode, ColorType } from 'src/theme'
 
 import Accordion, { AccordionGroup, accordionSelector } from 'src/components/Accordion'
 import alert, { ToastContainer } from 'src/components/Alert'
@@ -78,6 +78,7 @@ import {
   defaultScales,
   colorOptions,
   getColor,
+  useColorMode,
 } from 'src/theme'
 
 export type {
@@ -109,6 +110,7 @@ export type {
   TooltipProps,
   UploadProps,
   ColorType,
+  ColorMode,
 }
 
 export {
@@ -118,6 +120,9 @@ export {
   colorOptions,
   getColor,
 }
+
+// Light / dark mode (the dark tokens are in style.css, behind `data-rl-color-mode`)
+export { useColorMode }
 
 export {
   // Alert imports

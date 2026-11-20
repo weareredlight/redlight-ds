@@ -2,18 +2,22 @@ import path from 'path'
 
 import type { CSSModulesOptions, CSSOptions, Plugin } from 'vite'
 
+import { darkThemeCss } from '../../src/theme/dark'
 import { defaultScales, scalesToCss } from '../../src/theme/tokens'
 
 const TOKENS_ID = 'virtual:rl-tokens.css'
 
 /**
- * Serves `virtual:rl-tokens.css`: the default theme tokens as CSS variables,
- * generated from src/theme so the TS objects stay the single source of truth.
+ * Serves `virtual:rl-tokens.css`: the default theme tokens as CSS variables, then the dark mode
+ * tokens (applied with `data-rl-color-mode="dark"` on <html>), generated from src/theme so the TS
+ * objects stay the single source of truth.
  */
 export const tokensPlugin = (): Plugin => ({
   name: 'rl-tokens',
   resolveId: id => (id === TOKENS_ID ? TOKENS_ID : null),
-  load: id => (id === TOKENS_ID ? scalesToCss(':root,.rl-theme-default', defaultScales) : null),
+  load: id => (id === TOKENS_ID
+    ? scalesToCss(':root,.rl-theme-default', defaultScales) + darkThemeCss
+    : null),
 })
 
 /**
