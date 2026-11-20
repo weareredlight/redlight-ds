@@ -25,19 +25,21 @@ export const AlertUse = `import { alert, ToastContainer } from '@weareredlight/d
 
 alert.success('Saved', 'Your changes were saved.')`
 
-export const ThemeSetup = `import { setupTheme } from '@weareredlight/design-system'
-
-const { className } = setupTheme({
-  userColors: { primary: '#F472B6', primary600: '#DB2777' },
-  userSizes: { radii: { xsm: '6px' } },
-  fontFamily: "'Inter', sans-serif",
-})`
-
-export const ThemeCss = `/* Load after style.css */
+export const ThemeCss = `/* theme.css: only what changes from the design system */
 :root {
   --colors-primary: #F472B6;
+  --colors-primary600: #DB2777;
   --radii-xsm: 6px;
+}
+
+/* The design system sets its font on every element (*); html * takes over from it */
+html * {
+  font-family: 'Inter', sans-serif;
 }`
+
+export const ThemeImport = `// app/layout.tsx (Next.js) or src/main.tsx (Vite)
+import '@weareredlight/design-system/dist/style.css'
+import './theme.css'`
 
 export const CustomizeUse = `import { buttonSelector } from '@weareredlight/design-system'
 

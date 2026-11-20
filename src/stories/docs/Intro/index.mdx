@@ -22,7 +22,7 @@ import {
   Installation,
   StylesImport,
   ThemeCss,
-  ThemeSetup,
+  ThemeImport,
 } from './snippets'
 
 <Meta title='Get Started' />
@@ -98,10 +98,11 @@ import {
     <DocCodeBlock code={AlertUse} language='tsx' />
     <br />
     <span className="sub-heading">5. Apply your theme (optional)</span>
-    <p>The theme is a set of CSS variables (see <a href="./?path=/docs/style-guides-colors--how-to-use" target="_top">Colors</a>, <a href="./?path=/docs/style-guides-typography--how-to-use" target="_top">Typography</a> and <a href="./?path=/docs/style-guides-spacing-sizes--how-to-use" target="_top">Spacing & Sizes</a>). Change them with <code>setupTheme</code>:</p>
-    <DocCodeBlock code={ThemeSetup} language='tsx' />
-    <p>Or override the variables in your own CSS, which also works with server-side rendering:</p>
+    <p>The theme is a set of CSS variables (see <a href="./?path=/docs/style-guides-colors--how-to-use" target="_top">Colors</a>, <a href="./?path=/docs/style-guides-typography--how-to-use" target="_top">Typography</a> and <a href="./?path=/docs/style-guides-spacing-sizes--how-to-use" target="_top">Spacing & Sizes</a>). Put your project's tokens in one CSS file, with only what changes:</p>
     <DocCodeBlock code={ThemeCss} language='css' />
+    <p>And import it right after <code>style.css</code>:</p>
+    <DocCodeBlock code={ThemeImport} language='tsx' />
+    <p>It works with server-side rendering, because the values exist before the page shows. For dark mode, its values go in the same file: see <a href="./?path=/docs/style-guides-dark-mode--how-to-use" target="_top">Dark Mode</a>. Only when the theme is known at runtime (e.g. each customer's colors come from an API), use <code>setupTheme</code> (README, <i>Runtime themes</i>).</p>
     <br />
     <span className="sub-heading">6. Customize components (optional)</span>
     <p>Every component accepts <code>className</code> and <code>style</code>, and exports its root selector for your own CSS:</p>
@@ -157,7 +158,7 @@ import {
     <br />
     <span className="sub-heading">6. Hand off to developers</span>
     <p>
-      Developers apply the same branding with <code>setupTheme</code> (step 5 of the developer guide above): Colors go into <code>userColors</code>; Spacing & Sizes, font weights and line heights into <code>userSizes</code>; the font family into <code>fontFamily</code>; and the effect styles into <code>userShadows</code>.
+      Developers apply the same branding in their theme file (step 5 of the developer guide above), one CSS variable per Figma variable: Colors become <code>{'--colors-*'}</code>; Spacing & Sizes <code>{'--space-*'}</code>, <code>{'--sizes-*'}</code> and <code>{'--radii-*'}</code>; font weights and line heights <code>{'--fontWeights-*'}</code> and <code>{'--lineHeights-*'}</code>; the effect styles <code>{'--shadows-*'}</code>; and the font family a <code>font-family</code> rule.
     </p>
     <br />
     <p>

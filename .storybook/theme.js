@@ -39,7 +39,7 @@ const light = create({
   brandImage: 'logo.png',
 });
 
-// Same surfaces as the dark tokens in src/stories/darkTheme.ts
+// Same surfaces as the dark tokens in src/theme/dark.ts
 const dark = create({
   ...brand,
   base: 'dark',

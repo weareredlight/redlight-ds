@@ -1,4 +1,3 @@
-/* eslint-disable quotes */
 // Code snippets shown on the Typography docs page
 
 export const TextComponent = `import { Text } from '@weareredlight/design-system'
@@ -12,4 +11,8 @@ export const TextScss = `@use '@weareredlight/design-system/src/styles/typograph
   @include typography.heading3;
 }`
 
-export const TextFont = `setupTheme({ fontFamily: "'Inter', sans-serif" })`
+export const TextFont = `/* theme.css, imported after style.css. The design system sets Roboto on
+   every element (*), and html * takes over from it */
+html * {
+  font-family: 'Inter', sans-serif;
+}`

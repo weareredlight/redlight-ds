@@ -1,8 +1,8 @@
-// Dark version of the default theme, used by Storybook in dark mode (the toggle in the toolbar).
-// Same rule as the playground's Midnight theme: every scale is inverted, so "tints" (100–500)
-// blend toward the dark surface and "shades" (600–900) toward white. The base colors (and so
-// the on* colors over them) stay the same. `white` is the card surface and `black` the text.
-import { scalesToCss } from 'src/theme/tokens'
+// Dark version of the default theme. Same rule as the playground's Midnight theme: every scale is
+// inverted, so "tints" (100–500) blend toward the dark surface and "shades" (600–900) toward
+// white. The base colors (and so the on* colors over them) stay the same. `white` is the card
+// surface and `black` the text.
+import { scalesToCss } from './tokens'
 
 const darkColors = {
   black: '#F4F4F6', // brightest text
@@ -52,8 +52,18 @@ const darkShadows = {
   cardShadow: '0px 2px 8px rgba(0, 0, 0, 0.4)',
 }
 
-// Only the tokens above change; the rest keep the default values from virtual:rl-tokens.css.
-// .storybook/preview.ts sets `data-rl-color-mode` on <html>.
-export const darkThemeCss = `${
-  scalesToCss(':root[data-rl-color-mode="dark"]', { colors: darkColors, shadows: darkShadows })
-}:root[data-rl-color-mode="dark"]{color-scheme:dark}`
+// The dark tokens, and native controls (scrollbars, form fields) in dark too
+const darkBlock = (selector: string) => `${
+  scalesToCss(selector, { colors: darkColors, shadows: darkShadows })
+}${selector}{color-scheme:dark}`
+
+/**
+ * The dark mode CSS, included in style.css after the default tokens. Set on <html>:
+ * - `data-rl-color-mode="dark"`: always dark.
+ * - `data-rl-color-mode="system"`: follows the operating system (prefers-color-scheme), CSS only.
+ * - `data-rl-color-mode="light"`, or no attribute: light, as before.
+ * Only the tokens above change; the rest keep their default values.
+ */
+export const darkThemeCss = `${darkBlock(':root[data-rl-color-mode="dark"]')}@media (prefers-color-scheme: dark){${
+  darkBlock(':root[data-rl-color-mode="system"]')
+}}`
