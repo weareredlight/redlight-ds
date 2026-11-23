@@ -213,8 +213,6 @@ const Table = <T extends object>({
   )
 }
 
-export const tableSelector = `.${styles.table}`
-
 export default Table
 export {
   defaultColumnOptions,

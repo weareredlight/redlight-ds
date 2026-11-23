@@ -47,6 +47,4 @@ const Flex = React.forwardRef(({
   />
 ))
 
-export const flexSelector = `.${styles.flex}`
-
 export default Flex

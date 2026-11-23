@@ -95,6 +95,4 @@ const Toggle = React.forwardRef(({
   )
 })
 
-export const toggleSelector = `.${styles.toggle}`
-
 export default Toggle

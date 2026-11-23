@@ -104,6 +104,4 @@ const Button = React.forwardRef(({
   )
 })
 
-export const buttonSelector = `.${styles.button}`
-
 export default Button

@@ -59,25 +59,28 @@ const Checkbox = React.forwardRef(({
     <>
       <div className={cx(styles.checkbox, disabled && styles.disabled, className)} style={style}>
         {labelPosition === 'left' && labelElement}
-        <input
-          ref={ref}
-          className={cx(
-            styles.trigger,
-            state !== 'null' && styles[`state${capitalize(state)}`],
-            disabled && styles.disabled,
-          )}
-          type='checkbox'
-          id={id}
-          value={value}
-          checked={checked}
-          disabled={disabled}
-          onChange={onChange}
-          {...ariaProps}
-          {...props}
-        />
-        <label className={styles.indicator} htmlFor={id}>
-          <CheckIcon size={ICON_SIZE} />
-        </label>
+        {/* The input is transparent, over the box: it takes the clicks, focus and keyboard */}
+        <span className={styles.control}>
+          <input
+            ref={ref}
+            className={cx(
+              styles.trigger,
+              state !== 'null' && styles[`state${capitalize(state)}`],
+              disabled && styles.disabled,
+            )}
+            type='checkbox'
+            id={id}
+            value={value}
+            checked={checked}
+            disabled={disabled}
+            onChange={onChange}
+            {...ariaProps}
+            {...props}
+          />
+          <span className={styles.indicator} aria-hidden='true'>
+            <CheckIcon size={ICON_SIZE} />
+          </span>
+        </span>
         {labelPosition !== 'left' && labelElement}
       </div>
       {state === 'error' && errorMsg && (
@@ -88,7 +91,5 @@ const Checkbox = React.forwardRef(({
     </>
   )
 })
-
-export const checkboxSelector = `.${styles.checkbox}`
 
 export default Checkbox

@@ -6,6 +6,7 @@ import type { CSSProperties } from 'react'
 import type {
   ClassNamesConfig,
   DropdownIndicatorProps,
+  InputProps,
   MultiValue,
   OptionProps,
   SelectInstance,
@@ -67,6 +68,14 @@ const classNames: ClassNamesConfig<OptionType, true> = {
     isDisabled && styles.isDisabled,
   ),
   noOptionsMessage: () => styles.noOptions,
+}
+
+// react-select keeps aria-describedby for its placeholder: the error message is added to it, so
+// screen readers read it with the field. Its id comes in as aria-errormessage
+const DescribedInput = (props: InputProps<OptionType, true>) => {
+  const errorId = props.selectProps['aria-errormessage']
+  const describedBy = [props['aria-describedby'], errorId].filter(Boolean).join(' ')
+  return <components.Input {...props} aria-describedby={describedBy || undefined} />
 }
 
 const CustomOption = (
@@ -146,6 +155,7 @@ const MultiSelect = React.forwardRef(({
           isDisabled={state === 'disabled'}
           components={{
             DropdownIndicator,
+            Input: DescribedInput,
             // Unstyled, the separator is still a 1px-wide empty column
             IndicatorSeparator: null,
             Option: props => CustomOption(props),

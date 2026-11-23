@@ -21,7 +21,7 @@ const preview: Preview = {
       storySort: {
         order: [
           'Get Started',
-          'Releases',
+          'Major Releases', ['v0.3.0', 'v0.2.0'],
           'Custom Components',
           'Playground',
           'Style Guides', ['Typography', 'Colors', 'Dark Mode', 'Spacing & Sizes', 'Icons'],

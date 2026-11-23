@@ -63,6 +63,4 @@ const Avatar = React.forwardRef(({
   )
 })
 
-export const avatarSelector = `.${styles.avatar}`
-
 export default Avatar

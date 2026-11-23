@@ -1,0 +1,135 @@
+// =============================================================================
+// v0.2.0 RELEASE PAGE
+// -----------------------------------------------------------------------------
+// The previews are .sb-unstyled, so the docs typography doesn't reach the live
+// components. Their own text (notes, controls, the table) is styled here.
+// =============================================================================
+
+@use 'styles/typography';
+@use 'styles/media';
+
+// -----------------------------------------------------------------------------
+// Preview
+// -----------------------------------------------------------------------------
+
+.preview {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+  padding: var(--space-xxlg);
+  background: var(--colors-neutral100);
+  border-radius: var(--radii-md);
+  min-width: 0;
+
+  @include media.query(sm) {
+    padding: var(--space-lg);
+  }
+}
+
+.note {
+  @include typography.microCopy;
+  font-family: Roboto, sans-serif;
+  color: var(--colors-neutral700);
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-xsm);
+}
+
+// -----------------------------------------------------------------------------
+// Tokens demo
+// -----------------------------------------------------------------------------
+
+.controls {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-xxlg);
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  gap: var(--space-xsm);
+  font-family: monospace;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-neutral800);
+
+  input[type='color'] {
+    width: 40px;
+    height: 28px;
+    padding: 0;
+    border: 1px solid var(--colors-neutral300);
+    border-radius: var(--radii-xsm);
+    background: none;
+    cursor: pointer;
+  }
+}
+
+.themed {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--space-lg);
+  padding: var(--space-lg);
+  background: var(--colors-white);
+  border-radius: var(--radii-sm);
+}
+
+// Dark in both themes, like the docs code blocks
+.markup {
+  margin: 0;
+  padding: var(--space-xsm) var(--space-lg);
+  background: #1D1E24;
+  color: #E9EAF0;
+  border-radius: var(--radii-sm);
+  font-family: monospace;
+  font-size: var(--fontSizes-xsm);
+  line-height: var(--lineHeights-lg);
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+
+// -----------------------------------------------------------------------------
+// Migration table
+// -----------------------------------------------------------------------------
+
+.tableWrap {
+  overflow-x: auto;
+  border: 1px solid var(--colors-neutral200);
+  border-radius: var(--radii-md);
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Roboto, sans-serif;
+  font-size: var(--fontSizes-xsm);
+  color: var(--colors-neutral800);
+
+  th,
+  td {
+    text-align: left;
+    vertical-align: top;
+    padding: var(--space-xxsm) var(--space-xsm);
+    border-bottom: 1px solid var(--colors-neutral200);
+  }
+
+  thead th {
+    @include typography.subHeadingSmall;
+    font-family: Roboto, sans-serif;
+    color: var(--colors-neutral700);
+    background: var(--colors-neutral100);
+  }
+
+  tbody tr:last-child td {
+    border-bottom: 0;
+  }
+
+  code {
+    font-family: monospace;
+    color: var(--colors-neutral900);
+  }
+}

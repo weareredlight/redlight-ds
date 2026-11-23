@@ -13,6 +13,15 @@ const STORAGE_KEY = 'rl-color-mode'
 const MODES: ColorMode[] = ['light', 'dark', 'system']
 const SYSTEM_DARK = '(prefers-color-scheme: dark)'
 
+// Puts a saved mode on the page. Only writes when it's a mode and differs from the page's, so
+// calling it again (another useColorMode, another listener) doesn't touch the page
+const applyMode = (mode: string | null) => {
+  const root = document.documentElement
+  if (mode && MODES.includes(mode as ColorMode) && root.getAttribute(ATTRIBUTE) !== mode) {
+    root.setAttribute(ATTRIBUTE, mode)
+  }
+}
+
 /**
  * The mode the page shows now: `'light'` or `'dark'` (`system` resolves to the operating
  * system's setting). On the server, where there's no page yet, `'light'`.
@@ -37,33 +46,33 @@ export const setColorMode = (mode: ColorMode) => {
 
 /**
  * Calls `onChange` when the mode the page shows may have changed: the attribute changed (from
- * setColorMode or any other code), or the operating system's setting did. Returns a function that
- * stops listening.
+ * setColorMode or any other code), the operating system's setting did, or another tab saved a
+ * mode (which is then applied here too). Returns a function that stops listening.
  */
 export const subscribeToColorMode = (onChange: () => void) => {
   const observer = new MutationObserver(onChange)
   observer.observe(document.documentElement, { attributes: true, attributeFilter: [ATTRIBUTE] })
   const system = window.matchMedia(SYSTEM_DARK)
   system.addEventListener('change', onChange)
+  // Another tab: the attribute changes, so the observer above calls onChange
+  const onStorage = (event: StorageEvent) => {
+    if (event.key === STORAGE_KEY) applyMode(event.newValue)
+  }
+  window.addEventListener('storage', onStorage)
 
   return () => {
     observer.disconnect()
     system.removeEventListener('change', onChange)
+    window.removeEventListener('storage', onStorage)
   }
 }
 
-// Applies the choice saved by a previous visit. Only writes when it differs, so mounting another
-// useColorMode doesn't touch the page
+// Applies the choice saved by a previous visit
 const applySavedColorMode = () => {
-  let saved: string | null = null
   try {
-    saved = localStorage.getItem(STORAGE_KEY)
+    applyMode(localStorage.getItem(STORAGE_KEY))
   } catch {
-    return
-  }
-  const root = document.documentElement
-  if (saved && MODES.includes(saved as ColorMode) && root.getAttribute(ATTRIBUTE) !== saved) {
-    root.setAttribute(ATTRIBUTE, saved)
+    // Storage unavailable: the page keeps the mode it has
   }
 }
 

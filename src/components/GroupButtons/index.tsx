@@ -37,6 +37,4 @@ const GroupButtons = ({
   </div>
 )
 
-export const groupButtonsSelector = `.${styles.groupButtons}`
-
 export default GroupButtons

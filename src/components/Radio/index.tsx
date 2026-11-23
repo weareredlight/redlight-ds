@@ -53,25 +53,25 @@ const Radio = React.forwardRef(({
       style={style}
     >
       {labelPosition === 'left' && labelElement}
-      <input
-        ref={ref}
-        className={cx(styles.trigger, disabled && styles.disabled)}
-        type='radio'
-        name={name}
-        id={id}
-        value={value}
-        checked={checked}
-        onChange={onChange}
-        disabled={disabled}
-        {...props}
-      />
-      {/* eslint-disable-next-line jsx-a11y/label-has-associated-control -- text is in <Label> */}
-      <label className={styles.indicator} htmlFor={id} />
+      {/* The input is transparent, over the circle: it takes the clicks, focus and keyboard */}
+      <span className={styles.control}>
+        <input
+          ref={ref}
+          className={cx(styles.trigger, disabled && styles.disabled)}
+          type='radio'
+          name={name}
+          id={id}
+          value={value}
+          checked={checked}
+          onChange={onChange}
+          disabled={disabled}
+          {...props}
+        />
+        <span className={styles.indicator} aria-hidden='true' />
+      </span>
       {labelPosition !== 'left' && labelElement}
     </div>
   )
 })
-
-export const radioSelector = `.${styles.radio}`
 
 export default Radio

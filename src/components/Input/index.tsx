@@ -152,6 +152,4 @@ const Input = React.forwardRef(({
   )
 })
 
-export const inputSelector = `.${styles.input}`
-
 export default Input

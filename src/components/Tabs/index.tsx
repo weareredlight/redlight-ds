@@ -43,6 +43,4 @@ const Tabs = ({
   </RadixTabs.Root>
 )
 
-export const tabsSelector = `.${styles.tabs}`
-
 export default Tabs

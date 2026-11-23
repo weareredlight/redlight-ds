@@ -91,7 +91,7 @@ import {
         <Button size="large" variant="primary">Button Text</Button>
       </Flex>
     </Flex>
-    <p>Using the Next.js App Router? Use the components inside Client Components (<code>'use client'</code>).</p>
+    <p>Using the Next.js App Router? The components are Client Components, so Server Components can render them. Props that are functions (<code>onClick</code>, <code>onChange</code>…) can't come from a Server Component: put the interactive parts in a file that starts with <code>'use client'</code>.</p>
     <br />
     <span className="sub-heading">4. Enable alerts (optional)</span>
     <p>To show alerts, render <code>ToastContainer</code> once:</p>

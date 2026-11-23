@@ -50,6 +50,4 @@ const Link = React.forwardRef(({
   </a>
 ))
 
-export const linkSelector = `.${styles.link}`
-
 export default Link

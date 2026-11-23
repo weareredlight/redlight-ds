@@ -86,6 +86,27 @@ describe('color mode', () => {
     expect(onChange).toHaveBeenCalledTimes(1)
   })
 
+  it('subscribeToColorMode applies a mode saved in another tab, and calls back', async () => {
+    const onChange = jest.fn()
+    const unsubscribe = subscribeToColorMode(onChange)
+
+    // What the browser fires here when another tab of the same site saves a mode
+    window.dispatchEvent(new StorageEvent('storage', { key: 'rl-color-mode', newValue: 'dark' }))
+    await flush()
+    expect(document.documentElement.getAttribute(ATTRIBUTE)).toBe('dark')
+    expect(onChange).toHaveBeenCalledTimes(1)
+
+    // Other keys and values that aren't a mode are ignored
+    window.dispatchEvent(new StorageEvent('storage', { key: 'other', newValue: 'light' }))
+    window.dispatchEvent(new StorageEvent('storage', { key: 'rl-color-mode', newValue: 'purple' }))
+    await flush()
+    expect(document.documentElement.getAttribute(ATTRIBUTE)).toBe('dark')
+
+    unsubscribe()
+    window.dispatchEvent(new StorageEvent('storage', { key: 'rl-color-mode', newValue: 'light' }))
+    expect(document.documentElement.getAttribute(ATTRIBUTE)).toBe('dark')
+  })
+
   describe('useColorMode', () => {
     it('shows the mode of the page', () => {
       document.documentElement.setAttribute(ATTRIBUTE, 'dark')

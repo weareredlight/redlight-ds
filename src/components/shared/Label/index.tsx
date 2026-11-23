@@ -53,6 +53,4 @@ const Label = React.forwardRef(({
   </label>
 ))
 
-export const labelSelector = `.${styles.label}`
-
 export default Label

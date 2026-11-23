@@ -138,6 +138,4 @@ const Upload = React.forwardRef(({
   )
 })
 
-export const uploadSelector = `.${styles.upload}`
-
 export default Upload
