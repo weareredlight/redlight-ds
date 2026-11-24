@@ -1,21 +1,15 @@
 import type { Preview } from "@storybook/react-vite";
 
 // Stories import components directly, so load what src/index.tsx loads for the library:
-// global styles and the default theme tokens.
+// global styles and the theme tokens (default, plus the dark mode ones).
 import 'src/styles/global.scss'
 import 'virtual:rl-tokens.css'
-
-import { darkThemeCss } from 'src/stories/darkTheme'
 
 import { getColorMode, subscribeToColorMode } from './colorMode'
 import DocsContainer from './DocsContainer'
 
-// In dark mode (toolbar toggle), stories and docs pages use the dark version of the default tokens
-const darkStyle = document.createElement('style')
-darkStyle.dataset.rlTheme = 'storybook-dark'
-darkStyle.textContent = darkThemeCss
-document.head.appendChild(darkStyle)
-
+// In dark mode (toolbar toggle), stories and docs pages use the library's dark mode: the
+// `data-rl-color-mode` attribute turns on the dark tokens from virtual:rl-tokens.css
 const applyColorMode = () => { document.documentElement.dataset.rlColorMode = getColorMode() }
 applyColorMode()
 subscribeToColorMode(applyColorMode)
@@ -27,10 +21,11 @@ const preview: Preview = {
       storySort: {
         order: [
           'Get Started',
-          'Releases',
+          'Latest Release',
+          'Major Releases', ['v0.3.0', 'v0.2.0'],
           'Custom Components',
           'Playground',
-          'Style Guides', ['Typography', 'Colors', 'Spacing & Sizes', 'Icons'],
+          'Style Guides', ['Typography', 'Colors', 'Dark Mode', 'Spacing & Sizes', 'Icons'],
           'Components'
         ],
       },

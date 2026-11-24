@@ -1,7 +1,8 @@
 // =============================================================================
 // CHECKBOX
 // -----------------------------------------------------------------------------
-// The native input is hidden; the `+ label` sibling (.indicator) is the visible box.
+// The native input sits on top of the visible box (.indicator), transparent: it keeps the focus,
+// the keyboard (Space) and screen readers, and its state drives the box through `+ .indicator`.
 // Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
@@ -33,48 +34,62 @@
 }
 
 // =============================================================================
-// HIDDEN INPUT (drives the indicator styles)
+// CONTROL: the native input over the visible box
 // =============================================================================
 
-.trigger {
-  display: none;
+.control {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
 
-  &:hover+label {
+.trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+
+  &:hover + .indicator {
     background-color: var(--colors-neutral100);
     border-color: var(--colors-neutral600);
   }
 
-  &:focus+label {
-    background-color: var(--colors-neutral200);
+  // Keyboard focus only: a click doesn't leave a ring
+  &:focus-visible + .indicator {
     border-color: var(--colors-neutral700);
+    box-shadow: 0 0 0 2px var(--colors-primary300);
   }
 
-  &:checked+label {
+  &:checked + .indicator {
     background-color: var(--colors-primary);
     border-color: var(--colors-primary);
-
-    &:hover {
-      background-color: var(--colors-primary600);
-    }
-
-    &:focus {
-      background-color: var(--colors-primary700);
-    }
 
     svg {
       visibility: visible;
     }
   }
 
+  &:checked:hover + .indicator {
+    background-color: var(--colors-primary600);
+  }
+
+  &:checked:focus-visible + .indicator {
+    background-color: var(--colors-primary700);
+  }
+
   // ===========================================================================
   // STATE
   // ===========================================================================
 
-  :where(&).stateError+label {
+  :where(&).stateError + .indicator {
     border-color: var(--colors-danger);
   }
 
-  :where(&).stateDirty+label {
+  :where(&).stateDirty + .indicator {
     border-color: var(--colors-accent);
   }
 
@@ -83,9 +98,8 @@
   // ===========================================================================
 
   :where(&).disabled {
-
-    +label,
-    &:checked+label {
+    + .indicator,
+    &:checked + .indicator {
       background-color: var(--colors-neutral300);
       border-color: var(--colors-neutral300);
     }
@@ -103,7 +117,6 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  position: relative;
   border: 1px solid var(--colors-neutral500);
   background-color: transparent;
   color: var(--colors-onPrimary);

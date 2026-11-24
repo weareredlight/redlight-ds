@@ -25,3 +25,6 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: yarn validate
       - run: yarn test
+      # The docs: the Storybook builds, and every docs page renders (headless Chrome, preinstalled)
+      - run: yarn build-storybook
+      - run: yarn test:docs

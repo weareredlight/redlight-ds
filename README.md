@@ -10,6 +10,9 @@
 
 https://weareredlight.github.io/redlight-ds
 
+What changed in each version: the [GitHub releases](https://github.com/weareredlight/redlight-ds/releases),
+and the *Latest Release* and *Major Releases* sections in Storybook.
+
 ## Requirements
 
 - React and React DOM **18 or newer** (peer dependencies).
@@ -59,53 +62,53 @@ const Example = () => (
 
 Every component's props, variants and examples are in the [Storybook](https://weareredlight.github.io/redlight-ds).
 
-> **Next.js App Router:** the components use React state and effects, so use them inside
-> Client Components (files that start with `'use client'`).
+> **Next.js App Router:** the components are Client Components, so Server Components can render
+> them. Props that are functions (`onClick`, `onChange`...) can't come from a Server Component: put
+> the interactive parts in a file that starts with `'use client'`.
 
-### 3. Enable alerts (optional)
+### 3. Apply your theme (optional)
 
-To use `alert`, render `ToastContainer` once, near the root of your app:
-
-```jsx
-import { alert, ToastContainer } from '@weareredlight/design-system'
-
-const App = () => (
-  <>
-    <ToastContainer />
-    <Button onClick={() => alert.success('Saved', 'Your changes were saved.')}>Save</Button>
-  </>
-)
-```
-
-### 4. Apply your theme (optional)
-
-The theme is a set of CSS variables, so there are two ways to change it.
-
-**With `setupTheme`**, at startup (in the browser):
-
-```jsx
-import { setupTheme } from '@weareredlight/design-system'
-
-const { className } = setupTheme({
-  userColors: { primary: '#F472B6', primary600: '#DB2777' },
-  userSizes: { radii: { xsm: '6px' } },
-  userShadows: { cardShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' },
-  fontFamily: "'Inter', sans-serif",
-})
-```
-
-The new values apply to the whole page. Each call also returns a `className` that applies that
-theme to one element only (useful to switch between several themes: add the class to `<body>`).
-
-**With plain CSS**, which also works with server-side rendering. Load it after `style.css`:
+The theme is a set of CSS variables (tokens). Put your project's tokens in one CSS file, with only
+what changes from the design system, and import it right after `style.css`:
 
 ```css
+/* theme.css */
 :root {
   --colors-primary: #F472B6;
   --colors-primary600: #DB2777;
   --radii-xsm: 6px;
 }
+
+/* The design system sets its font on every element (`*`); `html *` takes over from it */
+html * {
+  font-family: 'Inter', sans-serif;
+}
 ```
+
+```jsx
+// app/layout.tsx (Next.js) or src/main.tsx (Vite)
+import '@weareredlight/design-system/dist/style.css'
+import './theme.css'
+```
+
+That's it: components, and your own CSS when it uses the tokens, follow these values. It works with
+server-side rendering, because the values exist before the page shows.
+
+> **Dark mode:** `style.css` includes a dark version of the default theme. Turn it on with
+> `data-rl-color-mode="dark"` (or `"system"`) on `<html>`, or with the `useColorMode` hook for a
+> toggle. See [Dark Mode](https://weareredlight.github.io/redlight-ds/?path=/docs/style-guides-dark-mode--how-to-use)
+> in Storybook, which also covers dark values for your own colors.
+
+To theme only part of a page, use a class instead of `:root`:
+
+```css
+.promo {
+  --colors-primary: #52BD94;
+}
+```
+
+Is the theme only known at runtime (e.g. each customer's colors come from an API)? See
+[Runtime themes](#runtime-themes).
 
 #### Available tokens
 
@@ -123,7 +126,7 @@ theme to one element only (useful to switch between several themes: add the clas
 The exact values are in [`src/theme`](src/theme) and on the Storybook's *Colors* and *Typography* pages.
 From JavaScript, `theme` holds the same references: `theme.colors.primary === 'var(--colors-primary)'`.
 
-### 5. Customize components (optional)
+### 4. Customize components (optional)
 
 Every component accepts `className` and `style`:
 
@@ -139,7 +142,7 @@ import { buttonSelector } from '@weareredlight/design-system'
 // buttonSelector === '.rl-Button-button'
 ```
 
-### 6. Use the typography and breakpoints in your SCSS (optional)
+### 5. Use the typography and breakpoints in your SCSS (optional)
 
 The package ships its Sass helpers, so your own styles can match the design system:
 
@@ -157,79 +160,29 @@ The package ships its Sass helpers, so your own styles can match the design syst
 }
 ```
 
-## What changed in 0.3.0
+## Runtime themes
 
-Form components now work with form libraries and screen readers. Try the changes on the [0.3.0 page in Storybook](https://weareredlight.github.io/redlight-ds/?path=/docs/releases-v0-3-0--how-to-use), and see the full list in the [release notes](https://github.com/weareredlight/redlight-ds/releases/tag/0.3.0).
+When the theme is only known at runtime, and so can't be written in a CSS file, use `setupTheme`.
+For example: each customer's colors come from an API (white-label apps), users pick their own accent
+color, or a theme editor previews changes.
 
-- **Every form field takes a `ref`**, pointing to the element that takes the focus (the `<input>`,
-  the select's button, the first part of a date, ...). Form libraries use it to focus a field, e.g.
-  react-hook-form's `shouldFocusError`:
+```jsx
+import { setupTheme } from '@weareredlight/design-system'
 
-  ```jsx
-  <Controller
-    name='country'
-    control={control}
-    render={({ field, fieldState }) => (
-      <Select
-        ref={field.ref}
-        value={field.value}
-        onChange={e => field.onChange(e.target.value)}
-        state={fieldState.error ? 'error' : 'null'}
-        errorMsg={fieldState.error?.message}
-        ...
-      />
-    )}
-  />
-  ```
+const { className } = setupTheme({
+  userColors: { primary: customer.primaryColor, primary600: customer.primaryHoverColor },
+  userSizes: { radii: { xsm: '6px' } },
+  userShadows: { cardShadow: '0 2px 8px rgba(0, 0, 0, 0.1)' },
+  fontFamily: "'Inter', sans-serif",
+})
+```
 
-- **Error messages are announced.** In the error state, fields get `aria-invalid` and point to their
-  message (`aria-describedby`), so screen readers read it with the field.
-- **Native attributes pass through** on `Checkbox`, `Radio` and `Toggle` (`name`, `required`,
-  `onBlur`, `aria-*`, ...), and on `Text`, `Link`, `Label`, `Avatar`, `Tag` and `Pill`, which also take
-  a `ref`.
-- **Icons can be passed directly:** `iconComponent={PlusIcon}` works in `Button` and `Input`, without
-  a wrapper function.
+The new values apply to the whole page. Each call also returns a `className` that applies that
+theme to one element only (useful to switch between several themes: add the class to `<body>`).
 
-### Upgrading from 0.2.x
-
-| 0.2.x | 0.3.0 |
-| --- | --- |
-| `Button isLoading` still clicks with Enter or Space | ignores clicks while loading, from the mouse and the keyboard |
-| `MultiSelect state='error'` (or `dirty`, `disabled`) shows no color | the border and arrow follow the state |
-| `useRef<HTMLInputElement>` for `Toggle` | `useRef<HTMLButtonElement>` (the switch is a button) |
-| `const AddIcon = () => <PlusIcon />` for `iconComponent` | `iconComponent={PlusIcon}` (the wrapper still works) |
-| `Text` is always a `<span>` | the element follows the variant (`h1` → `<h1>`, `paragraph` → `<p>`, ...) |
-
-## What changed in 0.2.0
-
-The design system no longer uses **Stitches** (deprecated). Styles are now written in
-**SCSS Modules** and the theme is a set of **CSS variables**. Components look and behave the same;
-what changes is how you set up and customize them.
-
-- **A stylesheet to import.** Styles used to be injected by JavaScript; now they're a regular CSS
-  file (`dist/style.css`), so add the import from [step 1](#1-import-the-styles-once).
-- **No more Stitches APIs.** `styled`, `css`, the `css` prop and the `Styled*` components are gone.
-  Style your own elements with your own CSS/SCSS and the CSS variables above.
-- **`className` and `style` on every component**, replacing `css` and `extraClasses`.
-- **Theme tokens are CSS variables**, with the same names Stitches generated (`--colors-primary`, ...),
-  so existing CSS overrides keep working.
-- **Smaller runtime:** no CSS-in-JS work while rendering.
-
-### Migrating from 0.1.x
-
-| 0.1.x (Stitches) | 0.2.0 |
-| --- | --- |
-| *(nothing to import)* | `import '@weareredlight/design-system/dist/style.css'` |
-| `css={{ marginTop: '$lg' }}` | `style={{ marginTop: 'var(--space-lg)' }}` or `className` |
-| `extraClasses='my-class'` (Button, Modal) | `className='my-class'` |
-| `styled('div', { color: '$primary' })` | your own CSS: `color: var(--colors-primary)` |
-| `include: 'heading7'` | `@include typography.heading7;` ([step 6](#6-use-the-typography-and-breakpoints-in-your-scss-optional)) |
-| `` [`& ${StyledButton}`]: { ... } `` | `` `${buttonSelector}` `` (or `.rl-Button-button`) in your CSS |
-| `theme.colors.primary` (Stitches token object) | `theme.colors.primary` → `'var(--colors-primary)'` |
-| `getColor('primary')` → token object | `getColor('primary')` → `'var(--colors-primary)'` |
-| `setupTheme(...)`, then read `theme.className` | `const { className } = setupTheme(...)` |
-| `setupTheme({ userMedia, userUtils })` | removed (breakpoints live in `src/styles/_media.scss`) |
-| `fullWidth='true'` / `isLoading='true'` | booleans only: `fullWidth` / `isLoading` |
+`setupTheme` runs in the browser: it adds a `<style>` once the JavaScript loads. For a project's
+fixed tokens, prefer the theme file of [step 3](#3-apply-your-theme-optional), which also works
+with server-side rendering.
 
 ## Contributors
 
@@ -252,9 +205,12 @@ what changes is how you set up and customize them.
         <img 
           src="https://redlight.dev/wp-content/uploads/2024/11/working.png" 
           width="100px;" height="100px;" 
-          style="object-fit: cover;"
+          class="contributor-img"
           alt="Samuel Nunes"
         />
+        <style>
+          .contributor-img { object-fit: cover; }
+        </style>
         <br />
         <sub><b>Samuel Nunes</b></sub>
       </a>

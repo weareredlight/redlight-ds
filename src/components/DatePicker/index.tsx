@@ -223,6 +223,4 @@ const DatePicker = React.forwardRef(({
   )
 })
 
-export const datePickerSelector = `.${styles.datePicker}`
-
 export default DatePicker

@@ -37,11 +37,11 @@ import { TextComponent, TextFont, TextScss } from './snippets'
     <DocCodeBlock code={TextScss} language='scss' />
     <p>
       Each style is built from theme tokens (<code>{'--fontSizes-*'}</code>, <code>{'--fontWeights-*'}</code>, <code>{'--lineHeights-*'}</code>),
-      so changing a token with <code>setupTheme</code> or CSS updates every style that uses it.
+      so changing a token in your theme file updates every style that uses it.
     </p>
     <br />
     <span className="sub-heading">Font</span>
-    <p>The default font is <b>Roboto</b> (loaded by <code>style.css</code>). To use another font:</p>
-    <DocCodeBlock code={TextFont} language='tsx' />
+    <p>The default font is <b>Roboto</b> (loaded by <code>style.css</code>). To use another font, load it, then set it in your theme file:</p>
+    <DocCodeBlock code={TextFont} language='css' />
   </DocBody>
 </Doc>

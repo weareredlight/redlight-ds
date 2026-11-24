@@ -42,6 +42,4 @@ const Pill = React.forwardRef(({
   </span>
 ))
 
-export const pillSelector = `.${styles.pill}`
-
 export default Pill

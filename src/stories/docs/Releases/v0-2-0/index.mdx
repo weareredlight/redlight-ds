@@ -1,0 +1,91 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from 'src/stories/docs/document';
+
+import {
+  StylesImport,
+  StylingBefore,
+  StylingAfter,
+  TokensCss,
+  SelectorUse,
+  SassHelpers,
+  SetupThemeAfter,
+} from './snippets'
+
+import { TokensDemo, ClassNamesDemo, MigrationTable } from './Demos'
+
+{/* Same URL pattern as the other release pages: releases-v0-2-0--how-to-use */}
+<Meta title='Major Releases/v0.2.0' id='releases-v0-2-0' />
+
+<Doc>
+  <DocHeader>
+    <h2>What's new in 0.2.0</h2>
+    <p>Release 0.2.0</p>
+  </DocHeader>
+
+  <DocBody>
+    <h3>From Stitches to SCSS Modules and CSS variables</h3>
+    <p>The design system moved from <b>Stitches</b>, which is no longer maintained, to <b>SCSS Modules</b> and <b>CSS variables</b>. Components look and behave the same. What changes is how you set them up and customize them. Everything on this page is live: these are the components of the current version.</p>
+    <p>The full list of changes is in the <a href="https://github.com/weareredlight/redlight-ds/releases/tag/0.2.0" target='_blank'>release notes</a>.</p>
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Before you upgrade</span>
+    <p>This release has breaking changes for apps on 0.1.x:</p>
+    <ul>
+      <li><p><b>Import the stylesheet</b> once, at your app's entry point. Styles are no longer injected by JavaScript.</p></li>
+      <li><p><b>Stitches APIs are removed:</b> <code>styled</code>, <code>css</code>, the <code>css</code> prop and every <code>Styled*</code> export.</p></li>
+      <li><p><b><code>extraClasses</code> is removed</b> from <code>Button</code> and <code>Modal</code>. Use <code>className</code>.</p></li>
+      <li><p><b><code>theme</code> and <code>getColor()</code></b> return CSS variable strings (<code>'var(--colors-primary)'</code>) instead of Stitches token objects.</p></li>
+      <li><p><b><code>setupTheme()</code> returns <code>{'{ className }'}</code></b>. The <code>userMedia</code> and <code>userUtils</code> options were removed.</p></li>
+      <li><p><b>Boolean props only take booleans:</b> <code>fullWidth='true'</code> becomes <code>fullWidth</code>.</p></li>
+    </ul>
+    <DocCodeBlock code={StylesImport} language='tsx' title='The stylesheet' />
+    <p>Moving from 0.1.x, change each line on the left to the one on the right:</p>
+    <MigrationTable />
+    <DocCodeBlock code={SetupThemeAfter} language='tsx' title='setupTheme' />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Theme tokens are CSS variables</span>
+    <p>The tokens are CSS variables (<code>--colors-primary</code>, <code>--space-lg</code>…) with the same names Stitches generated, so existing CSS overrides keep working. Change them with <code>setupTheme()</code> or with plain CSS, which also works with server-side rendering. Pick a color and a radius:</p>
+    <TokensDemo />
+    <DocCodeBlock code={TokensCss} language='css' />
+    <br />
+
+    <span className="sub-heading">className and style on every component</span>
+    <p>They replace the <code>css</code> prop and <code>extraClasses</code>. Style your own elements with your own CSS and the tokens:</p>
+    <DocCodeBlock code={StylingBefore} language='tsx' title='Before' />
+    <DocCodeBlock code={StylingAfter} language='tsx' title='Now' />
+    <br />
+
+    <span className="sub-heading">Stable class names and exported selectors</span>
+    <p>Class names follow <code>rl-&lt;Component&gt;-&lt;class&gt;</code> and don't change between builds. Each component also exports its root selector (<code>buttonSelector</code>, <code>inputSelector</code>…):</p>
+    <ClassNamesDemo />
+    <DocCodeBlock code={SelectorUse} language='tsx' />
+    <br />
+
+    <span className="sub-heading">Sass helpers</span>
+    <p>The package ships its typography and breakpoint mixins, so your styles can match the design system:</p>
+    <DocCodeBlock code={SassHelpers} language='scss' />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Also in this release</span>
+    <ul>
+      <li><p><b>Smaller runtime:</b> styles ship as a regular stylesheet (<code>dist/style.css</code>), so nothing is injected while rendering.</p></li>
+      <li><p><b>New exports:</b> the <code>*Props</code> type of every component, and the Table helpers from TanStack Table (<code>useReactTable</code>, <code>createColumnHelper</code>, <code>flexRender</code>…).</p></li>
+      <li><p><b>Dependencies:</b> Stitches and runtime dependencies that weren't needed were removed, so installing the package pulls in much less. React and React DOM 18 or newer are still the peer dependencies.</p></li>
+      <li><p><b>Docs:</b> Storybook moved to version 10, every story was rewritten, and there's a new interactive Playground.</p></li>
+    </ul>
+  </DocBody>
+</Doc>

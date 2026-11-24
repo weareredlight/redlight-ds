@@ -323,6 +323,4 @@ const TimePicker = React.forwardRef(({
   )
 })
 
-export const timePickerSelector = `.${styles.timePicker}`
-
 export default TimePicker

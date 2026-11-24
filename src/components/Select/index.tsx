@@ -169,6 +169,4 @@ const Select = React.forwardRef(SelectInner) as (<T extends object>(
   props: SelectProps<T> & { ref?: Ref<HTMLButtonElement> },
 ) => ReactElement) & { displayName?: string }
 
-export const selectSelector = `.${styles.select}`
-
 export default Select

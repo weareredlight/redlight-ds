@@ -45,6 +45,8 @@ const Frame = ({
 
 const LANGUAGE_LABELS: Record<CodeLanguage, string> = {
   tsx: 'TSX',
+  js: 'JavaScript',
+  html: 'HTML',
   css: 'CSS',
   scss: 'SCSS',
   bash: 'Terminal',

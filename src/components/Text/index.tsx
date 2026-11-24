@@ -58,6 +58,4 @@ const Text = React.forwardRef(({
   )
 })
 
-export const textSelector = `.${styles.text}`
-
 export default Text

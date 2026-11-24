@@ -1,8 +1,9 @@
 // =============================================================================
 // RADIO
 // -----------------------------------------------------------------------------
-// The native input is hidden; the `+ label` sibling (.indicator) is the visible circle.
-// Modifiers are written as `:where(&).modifier` to keep single-class specificity.
+// The native input sits on top of the visible circle (.indicator), transparent: it keeps the focus,
+// the keyboard (arrow keys) and screen readers, and its state drives the circle through
+// `+ .indicator`. Modifiers are written as `:where(&).modifier` to keep single-class specificity.
 // =============================================================================
 
 .radio {
@@ -34,23 +35,37 @@
 }
 
 // =============================================================================
-// HIDDEN INPUT (drives the indicator styles)
+// CONTROL: the native input over the visible circle
 // =============================================================================
 
-.trigger {
-  display: none;
+.control {
+  position: relative;
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
 
-  &:hover + label {
+.trigger {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  z-index: 1;
+
+  &:hover + .indicator {
     background-color: var(--colors-neutral100);
     border-color: var(--colors-neutral600);
   }
 
-  &:focus + label {
-    background-color: var(--colors-neutral200);
+  // Keyboard focus only: a click doesn't leave a ring
+  &:focus-visible + .indicator {
     border-color: var(--colors-neutral700);
+    box-shadow: 0 0 0 2px var(--colors-primary300);
   }
 
-  &:checked + label {
+  &:checked + .indicator {
     background-color: var(--colors-primary);
     border-color: var(--colors-primary);
 
@@ -63,22 +78,18 @@
       border-radius: var(--radii-full);
       background: var(--colors-onPrimary);
     }
-
-    &:hover { background-color: var(--colors-primary600); }
-    &:focus { background-color: var(--colors-primary700); }
   }
+
+  &:checked:hover + .indicator { background-color: var(--colors-primary600); }
+  &:checked:focus-visible + .indicator { background-color: var(--colors-primary700); }
 
   // ===========================================================================
   // DISABLED
   // ===========================================================================
 
   :where(&).disabled {
-    + label {
-      background-color: var(--colors-neutral300);
-      border-color: var(--colors-neutral300);
-    }
-
-    &:checked + label {
+    + .indicator,
+    &:checked + .indicator {
       background-color: var(--colors-neutral300);
       border-color: var(--colors-neutral300);
     }

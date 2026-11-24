@@ -1,0 +1,62 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocVersion,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from 'src/stories/docs/document';
+
+import {
+  DarkModeAttribute,
+  DarkModeBrand,
+  DarkModeModuleCss,
+  DarkModeOwnCss,
+  DarkModeScript,
+  DarkModeToggle,
+} from './snippets'
+
+<Meta title='Style Guides/Dark Mode'/>
+
+<Doc>
+  <DocHeader style={{background: '#18181F'}}>
+    <h2>Dark Mode</h2>
+    <DocVersion />
+  </DocHeader>
+
+  <DocBody>
+    <p>The library includes a dark version of the default theme. It's in <code>style.css</code>, so there's nothing else to import: an attribute on <code>&lt;html&gt;</code> chooses the mode.</p>
+    <DocCodeBlock code={DarkModeAttribute} language='html' />
+    <p>The simplest setup is <code>system</code>: it follows the operating system's setting with CSS only, so there's no JavaScript, and it works with server-side rendering.</p>
+    <p>Every component follows the mode, because they all read their colors from the <code>{'--colors-*'}</code> tokens. Your own CSS follows it too when it uses the tokens. To see it on these pages, use the light / dark toggle in the Storybook toolbar: it sets the same attribute.</p>
+    <DocCodeBlock code={DarkModeOwnCss} language='css' />
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">A toggle that remembers the choice</span>
+    <p><code>useColorMode</code> gives the mode the page shows and a function to switch it. The choice is saved in the browser and applied again on the next visit:</p>
+    <DocCodeBlock code={DarkModeToggle} language='tsx' title='A dark mode toggle' />
+    <ul>
+      <li><p><b><code>mode</code></b> is <code>'light'</code> or <code>'dark'</code> (<code>system</code> resolved). <b><code>setMode</code></b> takes <code>'light'</code>, <code>'dark'</code> or <code>'system'</code>, e.g. for a Light / Dark / System select.</p></li>
+      <li><p><b>Every component that calls <code>useColorMode</code> shows the same mode</b>, with no provider.</p></li>
+      <li><p><b>The saved choice is applied when the hook mounts.</b> If the toggle is only on some pages (e.g. settings), also call <code>useColorMode()</code> in <code>App</code>, or add the script below. On a first visit, the page shows what <code>&lt;html&gt;</code> has: <code>data-rl-color-mode="system"</code> follows the operating system.</p></li>
+      <li><p><b>Styles the tokens can't express:</b> in a CSS Module, put the attribute in <code>:global(...)</code>. It stays as it is, and the class is still scoped to the module.</p></li>
+    </ul>
+    <DocCodeBlock code={DarkModeModuleCss} language='css' />
+    <ul>
+      <li><p><b>No flash of the light mode on load:</b> the hook runs after React renders. To apply the saved choice before the page shows, add this to the <code>&lt;head&gt;</code> of your <code>index.html</code>:</p></li>
+    </ul>
+    <DocCodeBlock code={DarkModeScript} language='html' />
+    <ul>
+      <li><p><b>Server-side rendering (Next.js):</b> call it from a Client Component (<code>'use client'</code>). <code>mode</code> is <code>'light'</code> on the server and the real one right after hydration.</p></li>
+    </ul>
+    <br />
+    <DocSeparator />
+    <br />
+    <span className="sub-heading">Dark mode with your own colors</span>
+    <p>The built-in dark mode is the dark version of the <b>default</b> colors, and it overrides the colors you set on <code>:root</code>. With your own palette, add its dark values to your theme file (see <a href="./?path=/docs/style-guides-colors--how-to-use" target="_top">Colors</a> for how to invert a scale and choose the <code>on</code> colors):</p>
+    <DocCodeBlock code={DarkModeBrand} language='css' />
+  </DocBody>
+</Doc>

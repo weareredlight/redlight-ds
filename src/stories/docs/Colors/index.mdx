@@ -46,12 +46,13 @@ import ColorStyles from './ColorStyles'
     <DocCodeBlock code={ColorCss} language='css' />
     <p>In components and JavaScript, use the color name (<code>Text</code>'s <code>color</code> prop) or <code>theme</code> / <code>getColor</code>:</p>
     <DocCodeBlock code={ColorJs} language='tsx' />
-    <p>To change the palette, override the colors with <code>setupTheme</code> (or redefine the variables in your CSS):</p>
-    <DocCodeBlock code={ColorOverride} language='tsx' />
+    <p>To change the palette, redefine the variables in your theme file (see <a href="./?path=/docs/get-started--how-to-use" target="_top">Get Started</a>):</p>
+    <DocCodeBlock code={ColorOverride} language='css' />
     <br />
     <DocSeparator />
     <br />
     <span className="sub-heading">Dark Themes</span>
+    <p>The library includes a dark version of the default theme, turned on with an attribute on <code>&lt;html&gt;</code>: see <a href="./?path=/docs/style-guides-dark-mode--how-to-use" target="_top">Dark Mode</a>. The rest of this section is for the dark version of your own palette, in the same theme file.</p>
     <p>A dark theme usually inverts the scales: <code>white</code> becomes the dark surface (cards, inputs, modals), <code>black</code> the brightest text, and the tints and shades swap places. In an inverted theme, <code>white</code> and <code>black</code> name the surface and text roles, not the colors themselves.</p>
     <p>Text and icons over a solid fill don't follow the surface: they follow the fill. White text on a <code>#3366FF</code> button still reads best when the page turns dark. That's why components use the <code>on</code> colors there instead of <code>white</code>:</p>
     <ul>
@@ -60,7 +61,7 @@ import ColorStyles from './ColorStyles'
       <li><code>onSuccess</code> / <code>onDanger</code>: filled success and danger buttons.</li>
     </ul>
     <p>The <code>on</code> colors are white by default and are never inverted. In a dark theme, set them for each fill: keep them light when the fill is still dark enough, make them dark when the fill is light (e.g. a pastel pink or green).</p>
-    <p>Set them as hex values, not as <code>$white</code> / <code>$black</code>: those point to the theme's own <code>white</code> and <code>black</code>, which are inverted. In a dark theme, <code>'$black'</code> is the light text color.</p>
-    <DocCodeBlock code={ColorDarkTheme} language='tsx' />
+    <p>Set them as colors, not as <code>var(--colors-white)</code> / <code>var(--colors-black)</code>: those are the theme's own <code>white</code> and <code>black</code>, which are inverted. In a dark theme, <code>var(--colors-black)</code> is the light text color.</p>
+    <DocCodeBlock code={ColorDarkTheme} language='css' />
   </DocBody>
 </Doc>

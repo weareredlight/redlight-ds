@@ -5,6 +5,14 @@ import { defineConfig } from 'vite'
 
 import { cssModules, scssOptions, tokensPlugin } from './config/vite/designSystem'
 
+// Components use state, effects and event handlers, so in React Server Components (Next.js App
+// Router) they must be Client Components. The directive goes on each component's index, not on the
+// entry or the styles: `theme`, `getColor` and the selectors (src/selectors.ts) stay plain values
+// in Server Components.
+const useClientBanner = (chunk: { fileName: string }) => (
+  /\/components\/(?:[^/]+\/)+index\.js$/.test(chunk.fileName) ? "'use client';" : ''
+)
+
 // Library build: ESM + CJS keeping the source module structure, plus one extracted CSS file.
 export default defineConfig({
   plugins: [react(), tokensPlugin()],
@@ -43,6 +51,7 @@ export default defineConfig({
           preserveModulesRoot: 'src',
           entryFileNames: 'esm/[name].js',
           assetFileNames: 'style.css',
+          banner: useClientBanner,
         },
         {
           format: 'cjs',
@@ -52,6 +61,7 @@ export default defineConfig({
           entryFileNames: 'cjs/[name].js',
           exports: 'named',
           assetFileNames: 'style.css',
+          banner: useClientBanner,
         },
       ],
     },

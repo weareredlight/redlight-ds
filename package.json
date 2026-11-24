@@ -26,10 +26,30 @@
   "name": "@weareredlight/design-system",
   "description": "RedLight's Design System is a comprehensive collection of design and development resources that aims to streamline and enhance the creation of consistent, user-centric digital experiences.",
   "homepage": "http://weareredlight.github.io/redlight-ds",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "main": "./dist/cjs/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/esm/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/esm/index.d.ts",
+      "import": "./dist/esm/index.js",
+      "require": "./dist/cjs/index.js"
+    },
+    "./dist/*": "./dist/*",
+    "./src/styles/typography": "./src/styles/_typography.scss",
+    "./src/styles/media": "./src/styles/_media.scss",
+    "./src/styles/*": "./src/styles/*",
+    "./package.json": "./package.json"
+  },
+  "files": [
+    "dist",
+    "src/styles"
+  ],
+  "sideEffects": [
+    "*.css",
+    "*.scss"
+  ],
   "resolutions": {
     "nth-check": "^2.0.1",
     "semver": "^7.5.4",
@@ -56,9 +76,10 @@
     "predeploy-storybook": "yarn build-storybook",
     "deploy-storybook": "gh-pages -d storybook-static",
     "build-storybook": "storybook build",
+    "test:docs": "node .github/scripts/check-docs-pages.mjs",
     "build": "rm -rf dist && yarn build:js && yarn build:types",
     "build:js": "vite build --config vite.lib.config.ts",
-    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json",
+    "build:types": "tsc -p tsconfig.build.json --emitDeclarationOnly && tsc-alias -p tsconfig.build.json && node config/build/stripStyleImports.mjs",
     "prepare": "yarn build"
   },
   "peerDependencies": {
@@ -95,6 +116,7 @@
     "@testing-library/react": "^16.3.3",
     "@testing-library/user-event": "^14.6.8",
     "@types/jest": "^30.0.0",
+    "@types/jest-axe": "^3.5.9",
     "@types/lodash.merge": "^4.6.7",
     "@types/node": "^22",
     "@types/react": "^18.3.31",
@@ -113,6 +135,7 @@
     "gh-pages": "^6.1.1",
     "identity-obj-proxy": "^3.0.0",
     "jest": "^30.5.2",
+    "jest-axe": "^11.0.0",
     "jest-environment-jsdom": "^30.5.2",
     "knip": "6.42.1",
     "react": "^18.3.0",

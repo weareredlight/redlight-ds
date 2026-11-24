@@ -1,5 +1,9 @@
 // Adds DOM matchers like toBeInTheDocument() and toBeDisabled() to every test
 import '@testing-library/jest-dom'
+import { toHaveNoViolations } from 'jest-axe'
+
+// toHaveNoViolations(), for the axe accessibility checks (a11y.test.tsx)
+expect.extend(toHaveNoViolations)
 
 // jsdom doesn't implement these browser APIs. Radix components (Select, PopOver, Tooltip) use them
 Element.prototype.hasPointerCapture = () => false

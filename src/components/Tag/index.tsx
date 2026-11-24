@@ -59,6 +59,4 @@ const Tag = React.forwardRef(({
   )
 })
 
-export const tagSelector = `.${styles.tag}`
-
 export default Tag

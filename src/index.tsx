@@ -33,26 +33,26 @@ import type { TimePickerProps } from 'src/components/TimePicker'
 import type { ToggleProps } from 'src/components/Toggle'
 import type { TooltipProps } from 'src/components/Tooltip'
 import type { UploadProps } from 'src/components/Upload'
-import type { ColorType } from 'src/theme'
+import type { ColorMode, ColorType } from 'src/theme'
 
-import Accordion, { AccordionGroup, accordionSelector } from 'src/components/Accordion'
+import Accordion, { AccordionGroup } from 'src/components/Accordion'
 import alert, { ToastContainer } from 'src/components/Alert'
-import Avatar, { avatarSelector } from 'src/components/Avatar'
-import Button, { buttonSelector } from 'src/components/Button'
-import Checkbox, { checkboxSelector } from 'src/components/Checkbox'
-import DatePicker, { datePickerSelector } from 'src/components/DatePicker'
+import Avatar from 'src/components/Avatar'
+import Button from 'src/components/Button'
+import Checkbox from 'src/components/Checkbox'
+import DatePicker from 'src/components/DatePicker'
 import Dialog from 'src/components/Dialog'
-import GroupButtons, { groupButtonsSelector } from 'src/components/GroupButtons'
-import Input, { inputSelector } from 'src/components/Input'
-import Link, { linkSelector } from 'src/components/Link'
+import GroupButtons from 'src/components/GroupButtons'
+import Input from 'src/components/Input'
+import Link from 'src/components/Link'
 import Modal from 'src/components/Modal'
 import MultiSelect from 'src/components/MultiSelect'
-import Pagination, { paginationSelector } from 'src/components/Pagination'
-import Pill, { pillSelector } from 'src/components/Pill'
-import PopOver, { popOverSelector } from 'src/components/PopOver'
-import Radio, { radioSelector } from 'src/components/Radio'
-import Select, { selectSelector } from 'src/components/Select'
-import Label, { labelSelector } from 'src/components/shared/Label'
+import Pagination from 'src/components/Pagination'
+import Pill from 'src/components/Pill'
+import PopOver from 'src/components/PopOver'
+import Radio from 'src/components/Radio'
+import Select from 'src/components/Select'
+import Label from 'src/components/shared/Label'
 import Table, {
   defaultColumnOptions,
   flexRender,
@@ -61,23 +61,48 @@ import Table, {
   getSortedRowModel,
   useReactTable,
   createColumnHelper,
-  tableSelector,
 } from 'src/components/Table'
-import Tabs, { tabsSelector } from 'src/components/Tabs'
-import Tag, { tagSelector } from 'src/components/Tag'
-import Text, { textSelector } from 'src/components/Text'
-import TextArea, { textAreaSelector } from 'src/components/TextArea'
-import TimePicker, { timePickerSelector } from 'src/components/TimePicker'
-import Toggle, { toggleSelector } from 'src/components/Toggle'
+import Tabs from 'src/components/Tabs'
+import Tag from 'src/components/Tag'
+import Text from 'src/components/Text'
+import TextArea from 'src/components/TextArea'
+import TimePicker from 'src/components/TimePicker'
+import Toggle from 'src/components/Toggle'
 import Tooltip from 'src/components/Tooltip'
-import Upload, { uploadSelector } from 'src/components/Upload'
-import Flex, { flexSelector } from 'src/elements/Flex'
+import Upload from 'src/components/Upload'
+import Flex from 'src/elements/Flex'
+import {
+  accordionSelector,
+  avatarSelector,
+  buttonSelector,
+  checkboxSelector,
+  datePickerSelector,
+  flexSelector,
+  groupButtonsSelector,
+  inputSelector,
+  labelSelector,
+  linkSelector,
+  paginationSelector,
+  pillSelector,
+  popOverSelector,
+  radioSelector,
+  selectSelector,
+  tableSelector,
+  tabsSelector,
+  tagSelector,
+  textAreaSelector,
+  textSelector,
+  timePickerSelector,
+  toggleSelector,
+  uploadSelector,
+} from 'src/selectors'
 import {
   setupTheme,
   theme,
   defaultScales,
   colorOptions,
   getColor,
+  useColorMode,
 } from 'src/theme'
 
 export type {
@@ -109,6 +134,7 @@ export type {
   TooltipProps,
   UploadProps,
   ColorType,
+  ColorMode,
 }
 
 export {
@@ -118,6 +144,9 @@ export {
   colorOptions,
   getColor,
 }
+
+// Light / dark mode (the dark tokens are in style.css, behind `data-rl-color-mode`)
+export { useColorMode }
 
 export {
   // Alert imports

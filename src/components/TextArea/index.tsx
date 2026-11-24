@@ -81,6 +81,4 @@ const TextArea = React.forwardRef(({
   )
 })
 
-export const textAreaSelector = `.${styles.textArea}`
-
 export default TextArea

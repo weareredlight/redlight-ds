@@ -116,6 +116,4 @@ const Accordion = ({
   )
 }
 
-export const accordionSelector = `.${styles.accordion}`
-
 export default Accordion

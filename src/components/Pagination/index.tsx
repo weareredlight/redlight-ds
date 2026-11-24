@@ -127,6 +127,4 @@ const Pagination: React.FC<PaginationProps> = ({
   )
 }
 
-export const paginationSelector = `.${styles.pagination}`
-
 export default Pagination

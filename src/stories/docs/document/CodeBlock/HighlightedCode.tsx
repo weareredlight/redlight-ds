@@ -5,7 +5,7 @@ import { createJavaScriptRegexEngine } from 'shiki/dist/engine-javascript.mjs'
 
 import styles from './styles.module.scss'
 
-export type CodeLanguage = 'tsx' | 'css' | 'scss' | 'bash'
+export type CodeLanguage = 'tsx' | 'js' | 'html' | 'css' | 'scss' | 'bash'
 
 // One highlighter for every snippet on the page, created on first use
 let highlighter: ReturnType<typeof createHighlighterCore> | undefined
@@ -14,6 +14,9 @@ const getHighlighter = () => {
     themes: [import('shiki/dist/themes/github-dark-default.mjs')],
     langs: [
       import('shiki/dist/langs/tsx.mjs'),
+      // javascript also registers the 'js' alias
+      import('shiki/dist/langs/javascript.mjs'),
+      import('shiki/dist/langs/html.mjs'),
       import('shiki/dist/langs/css.mjs'),
       import('shiki/dist/langs/scss.mjs'),
       import('shiki/dist/langs/bash.mjs'),
