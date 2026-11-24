@@ -191,7 +191,7 @@ with server-side rendering.
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td style="text-align: center">
+    <td align="center" valign="top">
       <a href="https://github.com/dbgfribeiro">
         <img src="https://avatars.githubusercontent.com/u/44748017?v=4" width="100px;" alt="Diogo Ribeiro"/>
         <br />
@@ -200,24 +200,16 @@ with server-side rendering.
       <br />
       <sub>Principal designer & developer</sub>
     </td>
-    <td style="text-align: center">
+    <td align="center" valign="top">
       <a href="https://github.com/samuthekid">
-        <img 
-          src="https://redlight.dev/wp-content/uploads/2024/11/working.png" 
-          width="100px;" height="100px;" 
-          class="contributor-img"
-          alt="Samuel Nunes"
-        />
-        <style>
-          .contributor-img { object-fit: cover; }
-        </style>
+        <img src="https://media.licdn.com/dms/image/v2/D4D03AQHWFbsB5B95Cg/profile-displayphoto-shrink_800_800/profile-displayphoto-shrink_800_800/0/1709159831611?e=1796860800&v=beta&t=AagvVZX5MpNgfOHRRRV_w6L63lx0iyU4-aLseHq6Was" width="100px;" height="100px;" alt="Samuel Nunes"/>
         <br />
         <sub><b>Samuel Nunes</b></sub>
       </a>
       <br />
       <sub>Developer & maintainer</sub>
     </td>
-    <td style="text-align: center">
+    <td align="center" valign="top">
       <a href="https://www.linkedin.com/in/margarida-souto/">
         <img src="https://media.licdn.com/dms/image/v2/D4D03AQEcaE1XsSKlwQ/profile-displayphoto-crop_800_800/B4DZg86bqMHYAM-/0/1753368608251?e=1796256000&v=beta&t=uUhu-OXo-AAgVbYqJ-7GDltoL2ZLHA0wHQADvO_yoio" width="100px;" alt="Margarida Souto"/>
         <br />
