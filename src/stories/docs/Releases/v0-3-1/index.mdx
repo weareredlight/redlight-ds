@@ -1,0 +1,92 @@
+import { Meta } from '@storybook/addon-docs/blocks';
+
+import {
+  Doc,
+  DocHeader,
+  DocBody,
+  DocCodeBlock,
+  DocSeparator
+} from 'src/stories/docs/document';
+
+import {
+  ColorModeAttribute,
+  ColorModeToggle,
+  IndicatorCss,
+  PopOverLabel,
+  ServerComponent,
+} from './snippets'
+
+import {
+  DarkModeDemo,
+  KeyboardDemo,
+  MultiSelectDemo,
+  PopOverDemo,
+} from './Demos'
+
+{/* The id keeps the page's URL (releases-v0-3-1--how-to-use), which the release notes link to.
+Don't change it when renaming the title */}
+<Meta title='Latest Release/v0.3.1' id='releases-v0-3-1' />
+
+<Doc>
+  <DocHeader>
+    <h2>What's new in 0.3.1</h2>
+    <p>Release 0.3.1</p>
+  </DocHeader>
+
+  <DocBody>
+    <h3>Dark mode, keyboard-friendly checkboxes, and Next.js App Router ready</h3>
+    <p>This release adds a dark mode, makes <code>Checkbox</code> and <code>Radio</code> usable with the keyboard and screen readers, and makes the package ready for the Next.js App Router (no change for other setups) and TypeScript 6. Everything on this page is live: these are the components of this version.</p>
+    <p>The full list of changes is in the <a href="https://github.com/weareredlight/redlight-ds/releases/tag/0.3.1" target='_blank'>release notes</a>.</p>
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Before you upgrade</span>
+    <p>No component, prop or export was removed. These changes can still affect your app:</p>
+    <ul>
+      <li><p><b>Checkbox and Radio:</b> the visible box is a <code>&lt;span&gt;</code>. If your CSS styled it as <code>.rl-Checkbox-trigger + label</code> (or <code>rl-Radio-…</code>), change it to <code>+ .rl-Checkbox-indicator</code>.</p></li>
+      <li><p><b>Only the documented paths can be imported:</b> <code>@weareredlight/design-system</code>, <code>{'/dist/*'}</code> (e.g. <code>dist/style.css</code>) and <code>{'/src/styles/*'}</code> (the Sass helpers). Imports like <code>src/components/...</code> no longer resolve.</p></li>
+    </ul>
+    <DocCodeBlock code={IndicatorCss} language='css' title='Checkbox and Radio CSS' />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Dark mode</span>
+    <p><code>style.css</code> now includes a dark version of the default theme. Every component follows it, because they all read their colors from the <code>{'--colors-*'}</code> tokens. Turn it on with an attribute on <code>&lt;html&gt;</code>:</p>
+    <DarkModeDemo />
+    <DocCodeBlock code={ColorModeAttribute} language='html' />
+    <p>For a toggle, use the new <code>useColorMode</code> hook. It saves the choice in the browser, and every component that calls it shows the same mode, also across tabs:</p>
+    <DocCodeBlock code={ColorModeToggle} language='tsx' title='A dark mode toggle' />
+    <p>To see these pages in dark mode, use the light / dark toggle in the Storybook toolbar. <a href="./?path=/docs/style-guides-dark-mode--how-to-use" target="_top">Dark Mode</a> covers your own colors in dark mode and how to avoid a flash of the light mode on load.</p>
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Checkbox and Radio work with the keyboard</span>
+    <p>The native input was hidden with <code>display: none</code>, so <kbd>Tab</kbd> skipped these components and screen readers didn't read them. The input now sits, transparent, over the box: it takes the focus, shows a focus ring from the keyboard, and toggles with <kbd>Space</kbd> (or the arrow keys for radios).</p>
+    <KeyboardDemo />
+    <br />
+
+    <span className="sub-heading">MultiSelect errors are read with the field</span>
+    <p>Like the other fields since 0.3.0, a <code>MultiSelect</code> in the error state now points to its message, so screen readers read it when the field takes the focus.</p>
+    <MultiSelectDemo />
+    <br />
+
+    <span className="sub-heading">PopOver has a name</span>
+    <p>The open popover is named after its trigger. A new optional <code>label</code> prop names it explicitly, which helps when the trigger is an icon:</p>
+    <PopOverDemo />
+    <DocCodeBlock code={PopOverLabel} language='tsx' />
+    <br />
+    <DocSeparator />
+    <br />
+
+    <span className="sub-heading">Packaging</span>
+    <ul>
+      <li><p><b>Next.js App Router ready:</b> each component starts with <code>'use client'</code> in the package, so Server Components can render them without your own wrapper. Props that are functions (<code>onClick</code>, <code>onChange</code>…) still can't come from a Server Component: put the interactive parts in a file that starts with <code>'use client'</code>. <b>No change for other setups</b> (Vite, CRA, Next.js Pages Router…): they ignore <code>'use client'</code>.</p></li>
+      <li><p><b>TypeScript 6:</b> the package's types no longer report errors in apps that type-check their dependencies (<code>skipLibCheck: false</code>).</p></li>
+      <li><p><b>Smaller install:</b> 867 kB unpacked, down from 1.5 MB. Bundlers drop the components you don't use.</p></li>
+    </ul>
+    <DocCodeBlock code={ServerComponent} language='tsx' title='A Server Component' />
+  </DocBody>
+</Doc>

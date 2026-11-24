@@ -11,7 +11,7 @@
 https://weareredlight.github.io/redlight-ds
 
 What changed in each version: the [GitHub releases](https://github.com/weareredlight/redlight-ds/releases),
-and the *Major Releases* section in Storybook.
+and the *Latest Release* and *Major Releases* sections in Storybook.
 
 ## Requirements
 
