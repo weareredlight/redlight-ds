@@ -1,0 +1,1 @@
+import{n as e}from"./rolldown-runtime-DkW27tQK.js";import{n as t,t as n}from"./javascript-DxpJoanX.js";function r(){return(r=e((()=>{n()})))()}r();export{t as default};
